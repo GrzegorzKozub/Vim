@@ -163,9 +163,9 @@
     " }
     " nerdtree {
 
-        let g:NERDChristmasTree = 0
         let g:NERDTreeChDirMode = 2
-        let g:NERDTreeDirArrows = 1
+        let g:NERDTreeDirArrowExpandable = "▸"
+        let g:NERDTreeDirArrowCollapsible = "▾"
         let g:NERDTreeHijackNetrw = 0
         let g:NERDTreeIgnore = ['\cntuser*', '\~$']
         let g:NERDTreeMinimalUI = 1
