@@ -87,10 +87,11 @@
         set guioptions-=b
         set guioptions-=r
         set guioptions-=L
+        set guioptions-=m
         set guioptions-=T
         set guitablabel=%t\ %M
         set laststatus=2
-        set lines=44
+        set lines=45
         set linespace=0
         set listchars=tab:→\ ,eol:¬,trail:·
         set noshowmode
