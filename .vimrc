@@ -158,7 +158,7 @@
     " }
     " javascript-libraries-syntax.vim {
 
-        let g:used_javascript_libs = 'underscore,angularjs,angularui,requirejs,jasmine,chai'
+        let g:used_javascript_libs = "underscore,angularjs,angularui,requirejs,jasmine,chai"
 
     " }
     " nerdtree {
@@ -202,14 +202,14 @@
     " tagbar {
 
         let g:tagbar_type_javascript = {
-            \ 'kinds' : [
-                \ 'f:functions',
-                \ 'o:objects',
-                \ 'a:arrays',
-                \ 's:strings',
-                \ 'n:numbers',
-                \ 'b:boleans',
-                \ 'v:variables',
+            \ "kinds" : [
+                \ "f:functions",
+                \ "o:objects",
+                \ "a:arrays",
+                \ "s:strings",
+                \ "n:numbers",
+                \ "b:boleans",
+                \ "v:variables",
             \ ],
         \ }
 
