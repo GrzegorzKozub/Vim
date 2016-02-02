@@ -355,6 +355,11 @@
         let g:vim_markdown_folding_disabled = 1
 
     " }
+    " vim-open-url {
+
+        let g:open_url_browser = "start"
+
+    " }
     " neocomplete.vim {
 
         set completeopt-=preview
