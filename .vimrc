@@ -88,6 +88,7 @@
         set guioptions-=r
         set guioptions-=L
         set guioptions-=m
+        set guioptions+=M
         set guioptions-=T
         set guitablabel=%t\ %M
         set laststatus=2
