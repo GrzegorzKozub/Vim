@@ -389,13 +389,6 @@
         let g:vimsize_dir = s:vim_plugin_data_dir
 
     " }
-    " YouCompleteMe {
-
-        let g:ycm_add_preview_to_completeopt = 0
-        let g:ycm_auto_start_csharp_server = 0
-        let g:ycm_auto_trigger = 0
-
-    " }
 " }
 " auto-commands {
 
