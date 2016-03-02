@@ -282,8 +282,9 @@
     " }
     " syntastic {
 
+        let g:syntastic_always_populate_loc_list = 1
         let g:syntastic_stl_format = "syntax error at %F (%t)"
-        let g:syntastic_javascript_checkers = ["jshint"]
+        let g:syntastic_javascript_checkers = ["eslint"]
 
     " }
     " vim-airline {
@@ -430,7 +431,6 @@
 
         autocmd FileType c,cpp compiler gcc
         autocmd FileType cs compiler csc
-        autocmd FileType javascript compiler jslint
 
     " }
     " automation {
@@ -466,7 +466,7 @@
         command! WrapToggle set wrap! linebreak! nolist
         nmap <silent> <Leader>w :WrapToggle<CR>
 
-        nmap <silent> <Leader>l :ListToggle<CR>
+        nmap <silent> <Leader>t :ListToggle<CR>
 
     " }
     " windows {
@@ -475,6 +475,7 @@
         nmap <silent> <F11> :FullScreenToggle<CR>
         nmap <silent> <F12> :DistractionFreeToggle 17<CR>
         nmap <silent> <Leader>q :QuickfixToggle<CR>
+        nmap <silent> <Leader>l :LocationToggle<CR>
 
     " }
     " edit {
