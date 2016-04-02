@@ -98,7 +98,8 @@
         set noshowmode
         set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
 
-        winpos 140 26
+        winpos 462 208 " 1440p
+        "winpos 140 26 " 1080p
     else
         set background=dark
         set listchars=tab:»\ ,eol:¬,trail:_
