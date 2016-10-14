@@ -415,10 +415,10 @@
         autocmd FileType xml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
         autocmd FileType autohotkey setlocal suffixesadd+=.ahk
-        autocmd FileType coffee,javascript,ts setlocal suffixesadd+=.coffee,.js,.json,.ts
+        autocmd FileType javascript,ts setlocal suffixesadd+=.js,.json,.ts
         autocmd FileType css,less,sass setlocal suffixesadd+=.css,.less,.sass
         autocmd FileType dosbatch setlocal suffixesadd+=.bat,.cmd
-        autocmd FileType erb,haml,html,jade setlocal suffixesadd+=.ascx,.aspx,.coffee,.cshtml,.css,.erb,.haml,.jade,.js,.json,.less,.sass,.ts
+        autocmd FileType erb,haml,html setlocal suffixesadd+=.ascx,.aspx,.cshtml,.css,.erb,.haml,.js,.json,.less,.sass,.ts
         autocmd FileType perl setlocal suffixesadd+=.pl,.pm
         autocmd FileType ps1 setlocal suffixesadd+=.ps1,.psd1,.psm1
         autocmd FileType python setlocal suffixesadd+=.py
