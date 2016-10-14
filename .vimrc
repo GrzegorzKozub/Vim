@@ -29,6 +29,7 @@
 
     set autoindent
     set backup
+    set belloff=all
     set conceallevel=1
     set concealcursor=nvic
     set encoding=utf-8
