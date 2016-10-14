@@ -13,6 +13,7 @@ function DistractionFreeToggle(font_size)
         call ApplyDistractionFreeSettings(a:font_size)
         let s:distraction_free = 1
     endif
+    call HideTildeOnEmptyLines()
     call FullScreenToggle()
 endfunction
 
@@ -66,6 +67,5 @@ function ConcealWindow()
     setlocal nocursorline
     setlocal nomodifiable
     setlocal norelativenumber 
-    highlight NonText guifg=bg guibg=bg gui=none
 endfunction
 
