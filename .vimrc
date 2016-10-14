@@ -165,6 +165,12 @@
         let g:used_javascript_libs = "underscore,angularjs,angularui,requirejs,jasmine,chai"
 
     " }
+    " vim-js-pretty-template {
+
+        autocmd FileType javascript,typescript JsPreTmpl markdown
+        autocmd FileType typescript syn clear foldBraces
+
+    " }
     " nerdtree {
 
         let g:NERDTreeChDirMode = 2
