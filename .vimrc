@@ -366,11 +366,6 @@
         let g:vim_markdown_folding_disabled = 1
 
     " }
-    " vim-open-url {
-
-        let g:open_url_browser = "start"
-
-    " }
     " vimpanel {
 
         let g:VimpanelStorage = s:vim_plugin_data_dir . "vimpanel"
