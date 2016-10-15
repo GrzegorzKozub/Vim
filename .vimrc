@@ -269,24 +269,10 @@
                 ToggleBG
                 AirlineRefresh
                 call HideTildeOnEmptyLines()
-                call SetBetterWhitespaceColors()
             endfunction
 
             nmap <silent> <F5> :call BackgroundToggle()<CR>
         endif
-
-    " }
-    " vim-better-whitespace {
-
-        function! SetBetterWhitespaceColors()
-            highlight ExtraWhitespace ctermbg=Red guibg=#cb4b16
-        endfunction
-
-        call SetBetterWhitespaceColors()
-
-        let g:better_whitespace_enabled = 0
-        nmap <silent> <Leader>wt :ToggleWhitespace<CR>
-        nmap <silent> <Leader>ws :StripWhitespace<CR>
 
     " }
     " syntastic {

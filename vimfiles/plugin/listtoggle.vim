@@ -8,7 +8,6 @@ function ListToggle()
         else
             colorscheme solarized
             AirlineRefresh
-            call SetBetterWhitespaceColors()
         endif
     endif
 endfunction
