@@ -252,13 +252,6 @@
         nmap <silent> <Leader>ut :UndotreeToggle<CR>
 
     " }
-    " ultisnips {
-
-        let g:UltiSnipsExpandTrigger = "<c-e>"
-        let g:UltiSnipsJumpForwardTrigger = "<c-d>"
-        let g:UltiSnipsJumpBackwardTrigger = "<c-w>"
-
-    " }
     " vim-colors-solarized {
 
         if has("gui_running")
