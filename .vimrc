@@ -247,11 +247,6 @@
         let g:typescript_compiler_options = ""
 
     " }
-    " undotree {
-
-        nmap <silent> <Leader>ut :UndotreeToggle<CR>
-
-    " }
     " vim-colors-solarized {
 
         if has("gui_running")
