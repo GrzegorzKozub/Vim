@@ -371,14 +371,6 @@
         let g:open_url_browser = "start"
 
     " }
-    " vim-nodejs-complete {
-
-        if has("autocmd")
-            " automatically open and close the popup menu/preview window
-            autocmd CursorMovedI,InsertLeave * if pumvisible() == 0 | silent! pclose | endif
-        endif
-
-    " }
     " vimpanel {
 
         let g:VimpanelStorage = s:vim_plugin_data_dir . "vimpanel"
