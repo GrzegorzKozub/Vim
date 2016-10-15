@@ -124,6 +124,13 @@
         nmap <silent> <C-k> :CtrlPMRUFiles<CR>
 
     " }
+    " ack.vim {
+
+        if executable("ag")
+            let g:ackprg = "ag --vimgrep"
+        endif
+
+    " }
     " vim-autoformat {
 
         nmap <silent> <Leader>af :Autoformat<CR>
