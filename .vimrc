@@ -148,6 +148,12 @@
         nmap <char-238> <plug>EasyClipSwapPasteBackwards " Alt + N
 
     " }
+    " emmet-vim {
+
+        let g:user_emmet_install_global = 0
+        autocmd FileType html,css EmmetInstall
+
+    " }
     " gundo.vim {
 
         let g:gundo_prefer_python3 = 0
