@@ -428,14 +428,12 @@
         autocmd BufNewFile,BufRead *.ascx,*.aspx,*.cshtml,*.master set filetype=html
         autocmd BufNewFile,BufRead *.bar set filetype=dosini
         autocmd BufNewFile,BufRead *.config,*.nuspec,*.vssettings set filetype=xml
-        autocmd BufNewFile,BufRead *.todo set filetype=taskpaper
 
     " }
     " file type specific settings {
 
         autocmd FileType vim setlocal textwidth=0
 
-        autocmd FileType taskpaper setlocal tabstop=2 softtabstop=2 shiftwidth=2 noexpandtab
         autocmd FileType xml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
         autocmd FileType autohotkey setlocal suffixesadd+=.ahk
