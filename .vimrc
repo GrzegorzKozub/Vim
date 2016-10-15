@@ -210,11 +210,6 @@
         let g:netrw_localcopycmd = "copy"
 
     " }
-    " smartpairs.vim {
-
-        let g:smartpairs_revert_key = "<c-W>"
-
-    " }
     " vim-snipmate {
 
         imap <c-s> <esc>a<plug>snipMateNextOrTrigger
