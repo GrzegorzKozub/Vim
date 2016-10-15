@@ -310,8 +310,14 @@
         let g:syntastic_always_populate_loc_list = 1
         let g:syntastic_check_on_wq = 0
         let g:syntastic_stl_format = "syntax error at %F (%t)"
+
         let g:syntastic_javascript_checkers = ["eslint"]
         let g:syntastic_typescript_checkers = ["tslint"]
+
+        let g:syntastic_error_symbol = "\u00A0●"
+        let g:syntastic_style_error_symbol = "\u00A0●"
+        let g:syntastic_warning_symbol = "\u00A0▲"
+        let g:syntastic_style_warning_symbol = "\u00A0▲"
 
     " }
     " vim-airline {
