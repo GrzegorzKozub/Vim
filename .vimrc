@@ -226,6 +226,12 @@
         nmap <silent> <Leader>tb :TagbarToggle<CR>
 
     " }
+    " typescript-vim {
+
+        let g:typescript_compiler_binary = "tsc"
+        let g:typescript_compiler_options = ""
+
+    " }
     " undotree {
 
         nmap <silent> <Leader>ut :UndotreeToggle<CR>
