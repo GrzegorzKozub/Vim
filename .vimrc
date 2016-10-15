@@ -392,16 +392,6 @@
         let g:open_url_browser = "start"
 
     " }
-    " neocomplete.vim {
-
-        set completeopt-=preview
-
-        let g:neocomplete#enable_at_startup = 0
-
-        inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-        inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-    " }
     " vim-nodejs-complete {
 
         if has("autocmd")
