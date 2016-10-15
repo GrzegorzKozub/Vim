@@ -210,15 +210,6 @@
         let g:netrw_localcopycmd = "copy"
 
     " }
-    " vim-snipmate {
-
-        imap <c-s> <esc>a<plug>snipMateNextOrTrigger
-        smap <c-s> <plug>snipMateNextOrTrigger
-        vmap <c-s> <plug>snipMateVisual
-
-        imap <Leader>sm <esc>a<plug>snipMateShow
-
-    " }
     " tagbar {
 
         let g:tagbar_autoclose = 1
