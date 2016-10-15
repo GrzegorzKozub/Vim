@@ -175,7 +175,7 @@
     " }
     " javascript-libraries-syntax.vim {
 
-        let g:used_javascript_libs = "underscore,angularjs,angularui,requirejs,jasmine,chai"
+        let g:used_javascript_libs = "underscore,angularjs,angularui,angularuirouter,react,requirejs,jasmine,chai"
 
     " }
     " vim-js-pretty-template {
