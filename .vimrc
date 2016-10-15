@@ -173,6 +173,12 @@
         let g:gruvbox_sign_column = "dark0"
 
     " }
+    " vim-javascript {
+
+        let g:javascript_plugin_jsdoc = 1
+        let g:javascript_plugin_ngdoc = 1
+
+    " }
     " javascript-libraries-syntax.vim {
 
         let g:used_javascript_libs = "underscore,angularjs,angularui,angularuirouter,react,requirejs,jasmine,chai"
