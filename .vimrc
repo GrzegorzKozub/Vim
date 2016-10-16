@@ -356,7 +356,7 @@
     " vim-fugitive {
 
         if has("autocmd")
-            " after they're used, automatically delete the buffers fugitive creates
+            " after they're used, automatically delete the buffers created by vim-fugitive
             autocmd BufReadPost fugitive://* set bufhidden=delete
         endif
 
