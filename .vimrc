@@ -1,4 +1,4 @@
-﻿" vim: set foldlevel=2 foldmarker={,} foldmethod=marker :
+﻿" vim: set foldmarker={,} foldmethod=marker :
 
 " file options {
 
