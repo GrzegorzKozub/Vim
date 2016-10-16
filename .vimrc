@@ -384,8 +384,7 @@
     " file types based on file extensions {
 
         autocmd BufNewFile,BufRead *.ascx,*.aspx,*.cshtml,*.master set filetype=html
-        autocmd BufNewFile,BufRead *.bar set filetype=dosini
-        autocmd BufNewFile,BufRead *.config,*.nuspec,*.vssettings set filetype=xml
+        autocmd BufNewFile,BufRead *.config,*.nuspec set filetype=xml
 
     " }
     " file type specific settings {
@@ -398,7 +397,7 @@
         autocmd FileType javascript,ts setlocal suffixesadd+=.js,.json,.ts
         autocmd FileType css,less,sass setlocal suffixesadd+=.css,.less,.sass
         autocmd FileType dosbatch setlocal suffixesadd+=.bat,.cmd
-        autocmd FileType erb,haml,html setlocal suffixesadd+=.ascx,.aspx,.cshtml,.css,.erb,.haml,.js,.json,.less,.sass,.ts
+        autocmd FileType html setlocal suffixesadd+=.ascx,.aspx,.cshtml,.css,.js,.json,.less,.sass,.ts
         autocmd FileType perl setlocal suffixesadd+=.pl,.pm
         autocmd FileType ps1 setlocal suffixesadd+=.ps1,.psd1,.psm1
         autocmd FileType python setlocal suffixesadd+=.py
