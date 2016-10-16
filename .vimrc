@@ -117,13 +117,6 @@
         :Helptags
 
     " }
-    " ctrlp.vim {
-
-        let g:ctrlp_cache_dir = s:vim_plugin_data_dir . "ctrlp.vim"
-        nmap <silent> <C-b> :CtrlPBuffer<CR>
-        nmap <silent> <C-k> :CtrlPMRUFiles<CR>
-
-    " }
     " ack.vim {
 
         if executable("ag")
@@ -131,33 +124,17 @@
         endif
 
     " }
-    " vim-autoformat {
+    " ctrlp.vim {
 
-        nmap <silent> <Leader>af :Autoformat<CR>
-
-    " }
-    " vim-easyclip {
-
-        let g:EasyClipUseCutDefaults = 0
-        nmap t <plug>MoveMotionPlug
-        xmap t <plug>MoveMotionXPlug
-        nmap tt <plug>MoveMotionLinePlug
-
-        let g:EasyClipUsePasteToggleDefaults = 0
-        nmap <c-n> <plug>EasyClipSwapPasteForward
-        nmap <char-238> <plug>EasyClipSwapPasteBackwards " Alt + N
+        let g:ctrlp_cache_dir = s:vim_plugin_data_dir . "ctrlp.vim"
+        nmap <silent> <C-b> :CtrlPBuffer<CR>
+        nmap <silent> <C-k> :CtrlPMRUFiles<CR>
 
     " }
     " emmet-vim {
 
         let g:user_emmet_install_global = 0
         autocmd FileType html,css EmmetInstall
-
-    " }
-    " gundo.vim {
-
-        let g:gundo_prefer_python3 = 0
-        nmap <silent> <Leader>g :GundoToggle<CR>
 
     " }
     " gruvbox {
@@ -173,21 +150,15 @@
         let g:gruvbox_sign_column = "dark0"
 
     " }
-    " vim-javascript {
+    " gundo.vim {
 
-        let g:javascript_plugin_jsdoc = 1
-        let g:javascript_plugin_ngdoc = 1
+        let g:gundo_prefer_python3 = 0
+        nmap <silent> <Leader>g :GundoToggle<CR>
 
     " }
     " javascript-libraries-syntax.vim {
 
         let g:used_javascript_libs = "underscore,angularjs,angularui,angularuirouter,react,requirejs,jasmine,chai"
-
-    " }
-    " vim-js-pretty-template {
-
-        autocmd FileType javascript,typescript JsPreTmpl markdown
-        autocmd FileType typescript syn clear foldBraces
 
     " }
     " nerdtree {
@@ -216,6 +187,21 @@
         let g:netrw_localcopycmd = "copy"
 
     " }
+    " syntastic {
+
+        let g:syntastic_always_populate_loc_list = 1
+        let g:syntastic_check_on_wq = 0
+        let g:syntastic_stl_format = "syntax error at %F (%t)"
+
+        let g:syntastic_javascript_checkers = ["eslint"]
+        let g:syntastic_typescript_checkers = ["tslint"]
+
+        let g:syntastic_error_symbol = "\u00A0●"
+        let g:syntastic_style_error_symbol = "\u00A0●"
+        let g:syntastic_warning_symbol = "\u00A0▲"
+        let g:syntastic_style_warning_symbol = "\u00A0▲"
+
+    " }
     " tagbar {
 
         let g:tagbar_autoclose = 1
@@ -242,58 +228,6 @@
 
         let g:typescript_compiler_binary = "tsc"
         let g:typescript_compiler_options = ""
-
-    " }
-    " vim-colors-solarized {
-
-        if has("gui_running")
-
-            if s:day
-                set background=light
-            else
-                set background=dark
-            endif
-
-            let g:solarized_bold = 0
-            let g:solarized_underline = 0
-            let g:solarized_italic = 0
-
-            colorscheme solarized
-
-            " https://github.com/altercation/vim-colors-solarized/issues/40
-            call togglebg#map("")
-
-            function! HideTildeOnEmptyLines()
-                highlight NonText guifg=BG
-                highlight EndOfBuffer guifg=BG
-            endfunction
-
-            call HideTildeOnEmptyLines()
-
-            function! BackgroundToggle()
-                set nolist
-                ToggleBG
-                AirlineRefresh
-                call HideTildeOnEmptyLines()
-            endfunction
-
-            nmap <silent> <F5> :call BackgroundToggle()<CR>
-        endif
-
-    " }
-    " syntastic {
-
-        let g:syntastic_always_populate_loc_list = 1
-        let g:syntastic_check_on_wq = 0
-        let g:syntastic_stl_format = "syntax error at %F (%t)"
-
-        let g:syntastic_javascript_checkers = ["eslint"]
-        let g:syntastic_typescript_checkers = ["tslint"]
-
-        let g:syntastic_error_symbol = "\u00A0●"
-        let g:syntastic_style_error_symbol = "\u00A0●"
-        let g:syntastic_warning_symbol = "\u00A0▲"
-        let g:syntastic_style_warning_symbol = "\u00A0▲"
 
     " }
     " vim-airline {
@@ -353,12 +287,41 @@
         endif
 
     " }
+    " vim-autoformat {
+
+        nmap <silent> <Leader>af :Autoformat<CR>
+
+    " }
+    " vim-easyclip {
+
+        let g:EasyClipUseCutDefaults = 0
+        nmap t <plug>MoveMotionPlug
+        xmap t <plug>MoveMotionXPlug
+        nmap tt <plug>MoveMotionLinePlug
+
+        let g:EasyClipUsePasteToggleDefaults = 0
+        nmap <c-n> <plug>EasyClipSwapPasteForward
+        nmap <char-238> <plug>EasyClipSwapPasteBackwards " Alt + N
+
+    " }
     " vim-fugitive {
 
         if has("autocmd")
             " after they're used, automatically delete the buffers created by vim-fugitive
             autocmd BufReadPost fugitive://* set bufhidden=delete
         endif
+
+    " }
+    " vim-javascript {
+
+        let g:javascript_plugin_jsdoc = 1
+        let g:javascript_plugin_ngdoc = 1
+
+    " }
+    " vim-js-pretty-template {
+
+        autocmd FileType javascript,typescript JsPreTmpl markdown
+        autocmd FileType typescript syn clear foldBraces
 
     " }
     " vim-markdown {
@@ -374,6 +337,43 @@
     " vimsize.vim {
 
         let g:vimsize_dir = s:vim_plugin_data_dir
+
+    " }
+    " vim-colors-solarized {
+
+        if has("gui_running")
+
+            if s:day
+                set background=light
+            else
+                set background=dark
+            endif
+
+            let g:solarized_bold = 0
+            let g:solarized_underline = 0
+            let g:solarized_italic = 0
+
+            colorscheme solarized
+
+            " https://github.com/altercation/vim-colors-solarized/issues/40
+            call togglebg#map("")
+
+            function! HideTildeOnEmptyLines()
+                highlight NonText guifg=BG
+                highlight EndOfBuffer guifg=BG
+            endfunction
+
+            call HideTildeOnEmptyLines()
+
+            function! BackgroundToggle()
+                set nolist
+                ToggleBG
+                AirlineRefresh
+                call HideTildeOnEmptyLines()
+            endfunction
+
+            nmap <silent> <F5> :call BackgroundToggle()<CR>
+        endif
 
     " }
 " }
