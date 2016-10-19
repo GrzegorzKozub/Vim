@@ -565,17 +565,6 @@
     " }
     " edit {
 
-        nmap <silent> <Leader>f :Format<CR>
-
-        command! FormatHtml :set filetype=html | :Format
-        nmap <silent> <Leader>fh :FormatHtml<CR>
-
-        command! FormatJson :set filetype=javascript | :Format
-        nmap <silent> <Leader>fj :FormatJson<CR>
-
-        command! FormatXml :set filetype=xml | :Format
-        nmap <silent> <Leader>fx :FormatXml<CR>
-
         command! RemoveBlankLines :g/^$/d
         command! TrimTrailingWhitepace :%s/\s\+$//e | :nohlsearch
 
