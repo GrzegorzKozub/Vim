@@ -249,7 +249,9 @@
             if &ft == "gundo"
                 return "Gundo"
             elseif &ft == "diff"
-                return "Diff"
+                return "Gundo"
+            elseif &ft == "vimfiler"
+                return "VimFiler"
             elseif &ft == "help"
                 return "Help"
             elseif &ft == "qf"
@@ -269,6 +271,8 @@
                 return "Log"
             elseif &ft == "diff"
                 return "Diff"
+            elseif &ft == "vimfiler"
+                return substitute(vimfiler#get_status_string(), '\*safe\*', "♥", "")
             elseif &ft == "qf"
                 return ""
             elseif IsCtrlP() && has_key(g:lightline, "ctrlp_item")
@@ -287,7 +291,7 @@
         endfunction
 
         function! LightLineWarning(regex, type)
-            if FileTypeIn([ "diff", "gundo", "help", "qf" ])
+            if FileTypeIn([ "diff", "gundo", "help", "qf", "vimfiler" ])
                 return ""
             endif
             let l:line = search(a:regex, "nw")
@@ -311,15 +315,15 @@
         endfunction
 
         function! LightLineFileEncoding()
-            return strlen(&fenc) > 0 && !FileTypeIn([ "diff", "gundo", "help", "qf" ]) ? &fenc : ""
+            return strlen(&fenc) > 0 && !FileTypeIn([ "diff", "gundo", "help", "qf", "vimfiler" ]) ? &fenc : ""
         endfunction
 
         function! LightLineFileFormat()
-            return strlen(&ff) > 0 && !FileTypeIn([ "diff", "gundo", "help", "qf" ]) && !IsCtrlP() ? &ff : ""
+            return strlen(&ff) > 0 && !FileTypeIn([ "diff", "gundo", "help", "qf", "vimfiler" ]) && !IsCtrlP() ? &ff : ""
         endfunction
 
         function! LightLineFileType()
-            return strlen(&ft) > 0 && !FileTypeIn([ "diff", "gundo", "help", "qf" ]) ? printf("⭢⭣ %s", &ft) : ""
+            return strlen(&ft) > 0 && !FileTypeIn([ "diff", "gundo", "help", "qf", "vimfiler" ]) ? printf("⭢⭣ %s", &ft) : ""
         endfunction
 
         " ctrlp.vim integration
@@ -433,6 +437,24 @@
     " vim-markdown {
 
         let g:vim_markdown_folding_disabled = 1
+
+    " }
+    " vimfilter.vim {
+
+        let g:vimfiler_as_default_explorer = 1
+        let g:vimfiler_data_directory = s:vim_plugin_data_dir . "vimfilter.vim"
+        let g:vimfiler_force_overwrite_statusline = 0
+        let g:vimfiler_ignore_pattern = []
+
+        let g:vimfiler_file_icon = " "
+        let g:vimfiler_marked_file_icon = "✔"
+        let g:vimfiler_readonly_file_icon = "⭤"
+        let g:vimfiler_tree_closed_icon = "▸"
+        let g:vimfiler_tree_leaf_icon = " "
+        let g:vimfiler_tree_opened_icon = "▾"
+
+        nmap <silent> <Leader>f :VimFiler -toggle<CR>
+        autocmd FileType vimfiler nmap <buffer> <Leader>f :VimFiler -toggle<CR>
 
     " }
     " vimsize.vim {
