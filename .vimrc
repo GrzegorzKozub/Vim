@@ -235,10 +235,6 @@
 
         " utilities
 
-        function! FileTypeIn(filetypes)
-            return index(a:filetypes, &ft) != -1
-        endfunction
-
         function! IsCtrlP()
             return expand("%:t") == "ControlP"
         endfunction
@@ -291,7 +287,7 @@
         endfunction
 
         function! LightLineWarning(regex, type)
-            if FileTypeIn([ "diff", "gundo", "help", "qf", "vimfiler" ])
+            if &ft =~ 'diff\|gundo\|help\|qf\|vimfiler'
                 return ""
             endif
             let l:line = search(a:regex, "nw")
@@ -307,23 +303,23 @@
         endfunction
 
         function! LightLinePercent()
-            return FileTypeIn([ "diff", "gundo" ]) ? "" : printf("%3d%%", (100 * line(".") / line("$")))
+            return &ft !~? 'diff\|gundo' ? printf("%3d%%", (100 * line(".") / line("$"))) : ""
         endfunction
 
         function! LightLineLineInfo()
-            return FileTypeIn([ "diff", "gundo" ]) ? "" : printf("⭡ %3d ₠ %3d", line("."), col("."))
+            return &ft !~? 'diff\|gundo' ? printf("⭡ %3d ₠ %3d", line("."), col(".")) : ""
         endfunction
 
         function! LightLineFileEncoding()
-            return strlen(&fenc) > 0 && !FileTypeIn([ "diff", "gundo", "help", "qf", "vimfiler" ]) ? &fenc : ""
+            return strlen(&fenc) > 0 && &ft !~? 'diff\|gundo\|help\|qf\|vimfiler' ? &fenc : ""
         endfunction
 
         function! LightLineFileFormat()
-            return strlen(&ff) > 0 && !FileTypeIn([ "diff", "gundo", "help", "qf", "vimfiler" ]) && !IsCtrlP() ? &ff : ""
+            return strlen(&ff) > 0 && &ft !~? 'diff\|gundo\|help\|qf\|vimfiler' && !IsCtrlP() ? &ff : ""
         endfunction
 
         function! LightLineFileType()
-            return strlen(&ft) > 0 && !FileTypeIn([ "diff", "gundo", "help", "qf", "vimfiler" ]) ? printf("⭢⭣ %s", &ft) : ""
+            return strlen(&ft) > 0 && &ft !~? 'diff\|gundo\|help\|qf\|vimfiler' ? printf("⭢⭣ %s", &ft) : ""
         endfunction
 
         " ctrlp.vim integration
