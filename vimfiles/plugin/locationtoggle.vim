@@ -1,11 +1,11 @@
-command -bang -nargs=? LocationToggle call LocationToggle(<bang>0)
+command LocationToggle call LocationToggle()
 
-function LocationToggle(force)
-    if exists("s:location_open") && a:force == 0
-        lopen
+function LocationToggle()
+    if exists("s:location_open")
+        lclose
         unlet s:location_open
     else
-        lclose
+        lopen
         let s:location_open = bufnr("$")
     endif
 endfunction
