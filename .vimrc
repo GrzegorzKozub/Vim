@@ -161,26 +161,6 @@
         let g:used_javascript_libs = "underscore,angularjs,angularui,angularuirouter,react,requirejs,jasmine,chai"
 
     " }
-    " nerdtree {
-
-        let g:NERDTreeChDirMode = 2
-        let g:NERDTreeDirArrowExpandable = "▸"
-        let g:NERDTreeDirArrowCollapsible = "▾"
-        let g:NERDTreeHijackNetrw = 0
-        let g:NERDTreeIgnore = ['\cntuser*', '\~$']
-        let g:NERDTreeMinimalUI = 1
-        let g:NERDTreeQuitOnOpen = 1
-        let g:NERDTreeShowHidden = 1
-        let g:NERDTreeWinSize = 40
-
-        nmap <silent> <Leader>nt :NERDTreeToggle<CR>
-
-        if has("autocmd")
-            " exit if the only remaining buffer is NERDTree
-            autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-        endif
-
-    " }
     " netrw {
 
         let g:netrw_home = s:vim_plugin_data_dir . "netrw"
