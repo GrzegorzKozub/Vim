@@ -103,7 +103,7 @@
         set background=dark
         set listchars=tab:»\ ,eol:¬,trail:_
 
-        colorscheme grzegorz
+        colorscheme default
     endif
 
 " }
