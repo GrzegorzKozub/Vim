@@ -202,28 +202,6 @@
         let g:syntastic_style_warning_symbol = "\u00A0▲"
 
     " }
-    " tagbar {
-
-        let g:tagbar_autoclose = 1
-        let g:tagbar_autofocus = 1
-        let g:tagbar_compact = 1
-        let g:tagbar_iconchars = ["▸", "▾"]
-
-        let g:tagbar_type_javascript = {
-            \ "kinds" : [
-                \ "f:functions",
-                \ "o:objects",
-                \ "a:arrays",
-                \ "s:strings",
-                \ "n:numbers",
-                \ "b:boleans",
-                \ "v:variables",
-            \ ],
-        \ }
-
-        nmap <silent> <Leader>tb :TagbarToggle<CR>
-
-    " }
     " typescript-vim {
 
         let g:typescript_compiler_binary = "tsc"
