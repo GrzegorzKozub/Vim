@@ -7,7 +7,6 @@ function ListToggle()
             call HideTildeOnEmptyLines()
         else
             colorscheme solarized
-            AirlineRefresh
         endif
     endif
 endfunction

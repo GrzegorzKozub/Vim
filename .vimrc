@@ -161,6 +161,209 @@
         let g:used_javascript_libs = "underscore,angularjs,angularui,angularuirouter,react,requirejs,jasmine,chai"
 
     " }
+    " lightline {
+
+        let g:lightline = {
+            \ "active": {
+                \ "left": [
+                    \ [ "mode", "paste" ],
+                    \ [ "fugitive" ],
+                    \ [ "filename" ]
+                \ ],
+                \ "right": [
+                    \ [ "syntastic", "trailingwhitespace", "mixedindent", "percent", "lineinfo" ],
+                    \ [ "fileencoding", "fileformat" ],
+                    \ [ "filetype" ]
+                \ ]
+            \ },
+            \ "inactive" : {
+                \ "left": [
+                    \ [ "fugitive", "filename" ]
+                \ ],
+                \ "right": [
+                    \ [ ],
+                    \ [ "filetype", "fileencoding", "fileformat", "percent", "lineinfo" ]
+                \ ]
+            \ },
+            \ "component_function": {
+                \ "fugitive": "LightLineFugitive",
+                \ "filename": "LightLineFileName",
+                \ "percent": "LightLinePercent",
+                \ "lineinfo": "LightLineLineInfo",
+                \ "fileencoding": "LightLineFileEncoding",
+                \ "fileformat": "LightLineFileFormat",
+                \ "filetype": "LightLineFileType"
+            \ },
+            \ "component_expand": {
+                \ "trailingwhitespace": "LightLineTrailingWhitespace",
+                \ "mixedindent": "LightLineMixedIndent",
+                \ "syntastic": "SyntasticStatuslineFlag"
+            \ },
+            \ "component_type": {
+                \ "trailingwhitespace": "warning",
+                \ "mixedindent": "warning",
+                \ "syntastic": "error"
+            \ },
+            \ "colorscheme": "solarized",
+            \ "mode_map": {
+                \ "n" : "NORMAL",
+                \ "i" : "INSERT",
+                \ "R" : "REPLACE",
+                \ "v" : "VISUAL",
+                \ "V" : "VISUAL LINE",
+                \ "\<C-v>": "VISUAL BLOCK",
+                \ "c" : "COMMAND",
+                \ "s" : "SELECT",
+                \ "S" : "SELECT LINE",
+                \ "\<C-s>": "SELECT BLOCK",
+                \ "t": "TERMINAL"
+            \ },
+            \ "separator": {
+                \ "left": "⮀",
+                \ "right": "⮂"
+            \ },
+            \ "subseparator": {
+                \ "left": "⮁",
+                \ "right": "⮃"
+            \ },
+            \ "enable": {
+                \ "tabline": 0
+            \ },
+        \ }
+
+        " utilities
+
+        function! FileTypeIn(filetypes)
+            return index(a:filetypes, &ft) != -1
+        endfunction
+
+        function! IsCtrlP()
+            return expand("%:t") == "ControlP"
+        endfunction
+
+        " component functions
+
+        function! LightLineFugitive()
+            if &ft == "gundo"
+                return "Gundo"
+            elseif &ft == "diff"
+                return "Diff"
+            elseif &ft == "help"
+                return "Help"
+            elseif &ft == "qf"
+                return exists("w:quickfix_title") ? "Location" : "QuickFix"
+            elseif IsCtrlP()
+                return "CtrlP"
+            endif
+            if exists("*fugitive#head")
+                let l:branch = fugitive#head()
+                return l:branch !=# "" ? "⭠ ".l:branch : ""
+            endif
+            return ""
+        endfunction
+
+        function! LightLineFileName()
+            if &ft == "gundo"
+                return "Log"
+            elseif &ft == "diff"
+                return "Diff"
+            elseif &ft == "qf"
+                return ""
+            elseif IsCtrlP() && has_key(g:lightline, "ctrlp_item")
+                if g:lightline.ctrlp_item == "files"
+                    return "Files"
+                elseif g:lightline.ctrlp_item == "mru files"
+                    return "Recent"
+                endif
+                return "Buffers"
+            endif
+            let l:filename = expand("%:t") == "" ? "[No Name]" : expand("%:t")
+            if &ft == "help"
+                return l:filename
+            endif
+            return l:filename . (&readonly ? " ⭤" : "") . (&modified ? " ✘" : " ✔")
+        endfunction
+
+        function! LightLineWarning(regex, type)
+            if FileTypeIn([ "diff", "gundo", "help", "qf" ])
+                return ""
+            endif
+            let l:line = search(a:regex, "nw")
+            return l:line != 0 ? printf("%s at %d", a:type, l:line) : ""
+        endfunction
+
+        function! LightLineTrailingWhitespace()
+            return LightLineWarning('\s$', "trailing")
+        endfunction
+
+        function! LightLineMixedIndent()
+            return LightLineWarning('\v(^\t+ +)|(^ +\t+)', "mixed")
+        endfunction
+
+        function! LightLinePercent()
+            return FileTypeIn([ "diff", "gundo" ]) ? "" : printf("%3d%%", (100 * line(".") / line("$")))
+        endfunction
+
+        function! LightLineLineInfo()
+            return FileTypeIn([ "diff", "gundo" ]) ? "" : printf("⭡ %3d ₠ %3d", line("."), col("."))
+        endfunction
+
+        function! LightLineFileEncoding()
+            return strlen(&fenc) > 0 && !FileTypeIn([ "diff", "gundo", "help", "qf" ]) ? &fenc : ""
+        endfunction
+
+        function! LightLineFileFormat()
+            return strlen(&ff) > 0 && !FileTypeIn([ "diff", "gundo", "help", "qf" ]) && !IsCtrlP() ? &ff : ""
+        endfunction
+
+        function! LightLineFileType()
+            return strlen(&ft) > 0 && !FileTypeIn([ "diff", "gundo", "help", "qf" ]) ? printf("⭢⭣ %s", &ft) : ""
+        endfunction
+
+        " ctrlp.vim integration
+
+        let g:ctrlp_status_func = {
+            \ "main": "CtrlPStatusFuncMain",
+            \ "prog": "CtrlPStatusFuncProg",
+        \ }
+
+        function! CtrlPStatusFuncMain(focus, byfname, regex, prev, item, next, marked)
+            let g:lightline.ctrlp_item = a:item
+            return lightline#statusline(0)
+        endfunction
+
+        function! CtrlPStatusFuncProg(str)
+            return lightline#statusline(0)
+        endfunction
+
+        " syntastic integration
+
+        function! SyntasticCheckHook(errors)
+            call lightline#update()
+        endfunction
+
+        " reload on colorscheme change
+
+        function! s:LightLineReload()
+            if !exists("g:loaded_lightline")
+                return
+            endif
+            for l:colorscheme_file in split(globpath($VIM . '\vimfiles\bundle\lightline.vim\autoload\lightline\colorscheme', "*.vim"), "\n")
+                execute("source ".l:colorscheme_file)
+            endfor
+            execute("source " . $VIM . '\vimfiles\plugin\solarized.vim')
+            let g:lightline.colorscheme = g:colors_name
+            call lightline#init()
+            call lightline#colorscheme()
+            call lightline#update()
+        endfunction
+
+        augroup LightLineColorscheme
+            autocmd!
+            autocmd ColorScheme * call s:LightLineReload()
+        augroup END
+
+    " }
     " netrw {
 
         let g:netrw_home = s:vim_plugin_data_dir . "netrw"
@@ -186,63 +389,6 @@
 
         let g:typescript_compiler_binary = "tsc"
         let g:typescript_compiler_options = ""
-
-    " }
-    " vim-airline {
-
-        if has("gui_running")
-            let g:airline_inactive_collapse = 1
-
-            if !exists("g:airline_symbols")
-                let g:airline_symbols = {}
-            endif
-
-            let g:airline_symbols.branch = "⭠"
-            let g:airline_symbols.linenr = "⭡"
-            let g:airline_symbols.readonly = "⭤"
-            let g:airline_symbols.whitespace = "✶"
-
-            let g:airline_left_sep = "⮀"
-            let g:airline_left_alt_sep = "⮁"
-            let g:airline_right_sep = "⮂"
-            let g:airline_right_alt_sep = "⮃"
-
-            let g:airline_mode_map = {
-                \ "__" : "      ",
-                \ "n" : "NORMAL",
-                \ "i" : "INSERT",
-                \ "R" : "REPLACE",
-                \ "v" : "VISUAL",
-                \ "V" : "VISUAL LINE",
-                \ "c" : "COMMAND",
-                \ "" : "VISUAL BLOCK",
-                \ "s" : "SELECT",
-                \ "S" : "SELECT LINE",
-                \ "" : "SELECT BLOCK"
-            \ }
-
-            let g:airline#extensions#ctrlp#color_template = "normal"
-            let g:airline#extensions#hunks#non_zero_only = 1
-
-            let g:airline#extensions#tabline#enabled = 0
-            let g:airline#extensions#tabline#show_buffers = 1
-            let g:airline#extensions#tabline#show_tab_nr = 0
-            let g:airline#extensions#tabline#fnamemod = ":t"
-
-            let g:airline#extensions#tabline#left_sep = "⮀"
-            let g:airline#extensions#tabline#left_alt_sep = "⮁"
-            let g:airline#extensions#tabline#right_sep = "⮂"
-            let g:airline#extensions#tabline#right_alt_sep = "⮃"
-
-            let g:airline#extensions#whitespace#trailing_format = "trailing at %s"
-            let g:airline#extensions#whitespace#mixed_indent_format = "mixed indent at %s"
-
-            call airline#parts#define_accent("readonly", "none")
-            let g:airline_theme_patch_func = "AirlineThemePatch"
-
-            call airline#parts#define_function("fileencodingandformat", "GetFileEncodingAndFormat")
-            let g:airline_section_y = airline#section#create_right(["fileencodingandformat"])
-        endif
 
     " }
     " vim-autoformat {
@@ -326,7 +472,6 @@
             function! BackgroundToggle()
                 set nolist
                 ToggleBG
-                AirlineRefresh
                 call HideTildeOnEmptyLines()
             endfunction
 
@@ -382,8 +527,8 @@
         " do not overwrite the backup files of the same name
         autocmd BufWritePre * let &backupext = "@" . substitute(expand("%:p:h"), ",\\=[:\\\/]", "%", "g")
 
-        " source the config files when they get saved and restore the screen size and position
-        autocmd! BufWritePost .vimrc source $MYVIMRC | if g:screen_size_restore_pos == 1 | call ScreenRestore() | endif | exe "AirlineRefresh"
+        " source .vimrc when it's saved and restore the screen size and position
+        autocmd! BufWritePost $MYVIMRC nested source $MYVIMRC | if g:screen_size_restore_pos == 1 | call ScreenRestore() | endif
 
     " }
 
