@@ -71,8 +71,6 @@
     let &undodir = s:vim_undo_dir
     let &viminfo = &viminfo . ",n" . s:vim_data_dir . ".viminfo"
 
-    let s:day = strftime("%H") > 6 && strftime("%H") < 18
-
     language English_US
     syntax on
 
@@ -446,6 +444,8 @@
     " vim-colors-solarized {
 
         if has("gui_running")
+
+            let s:day = strftime("%H") > 6 && strftime("%H") < 18
 
             if s:day
                 set background=light
