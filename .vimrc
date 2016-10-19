@@ -435,11 +435,6 @@
         let g:vim_markdown_folding_disabled = 1
 
     " }
-    " vimpanel {
-
-        let g:VimpanelStorage = s:vim_plugin_data_dir . "vimpanel"
-
-    " }
     " vimsize.vim {
 
         let g:vimsize_dir = s:vim_plugin_data_dir
