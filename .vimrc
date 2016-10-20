@@ -344,11 +344,13 @@
                     return
                 endif
 
-                "for l:colorscheme_file in split(globpath($VIM . '\vimfiles\bundle\lightline.vim\autoload\lightline\colorscheme', "*.vim"), "\n")
-                    "execute("source ".l:colorscheme_file)
+                "for l:vanila_colorscheme_file in split(globpath($VIM . '\vimfiles\bundle\lightline.vim\autoload\lightline\colorscheme', "*.vim"), "\n")
+                    "execute("source ".l:vanila_colorscheme_file)
                 "endfor
 
-                source $VIM/vimfiles/plugin/solarized.vim
+                for l:customized_colorscheme_file in split(globpath($VIM . '\vimfiles\plugin\lightline\colorscheme', "*.vim"), "\n")
+                    execute("source ".l:customized_colorscheme_file)
+                endfor
 
                 let g:lightline.colorscheme = g:colors_name
                 call lightline#init()
