@@ -579,6 +579,7 @@
     command! WrapToggle set wrap! linebreak! nolist
     nmap <silent> <Leader>w :WrapToggle<CR>
 
+    command! ListToggle set list!
     nmap <silent> <Leader>t :ListToggle<CR>
 
     command! SpellToggle set spell!
