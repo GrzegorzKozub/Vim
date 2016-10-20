@@ -399,6 +399,11 @@
         nmap <silent> <Leader>af :Autoformat<CR>
 
     " }
+    " vim-dispatch {
+
+        nmap <silent> <Leader>m :Make<CR>
+
+    " }
     " vim-easyclip {
 
         let g:EasyClipUseCutDefaults = 0
@@ -546,7 +551,7 @@
     endif
 
 " }
-" commands and mappings {
+" mappings {
 
     vmap <Down> j
     vmap <Left> h
@@ -555,62 +560,31 @@
 
     cnoremap %% <C-R>=expand('%:h') . '\'<CR>
 
-    " display {
+    command! HlsearchOff nohlsearch
+    nmap <silent> <Leader>h :HlsearchOff<CR>
 
-        command! HlsearchOff nohlsearch
-        nmap <silent> <Leader>h :HlsearchOff<CR>
+    command! WrapToggle set wrap! linebreak! nolist
+    nmap <silent> <Leader>w :WrapToggle<CR>
 
-        command! WrapToggle set wrap! linebreak! nolist
-        nmap <silent> <Leader>w :WrapToggle<CR>
+    nmap <silent> <Leader>t :ListToggle<CR>
 
-        nmap <silent> <Leader>t :ListToggle<CR>
+    command! SpellToggle set spell!
+    nmap <silent> <F7> :SpellToggle<CR>
 
-    " }
-    " windows {
+    nmap <silent> <F10> :MaximizedToggle<CR>
+    nmap <silent> <F11> :FullScreenToggle<CR>
+    nmap <silent> <F12> :DistractionFreeToggle 17<CR>
 
-        nmap <silent> <F10> :MaximizedToggle<CR>
-        nmap <silent> <F11> :FullScreenToggle<CR>
-        nmap <silent> <F12> :DistractionFreeToggle 17<CR>
-        nmap <silent> <Leader>q :QuickfixToggle<CR>
-        nmap <silent> <Leader>l :LocationToggle<CR>
+    nmap <silent> <Leader>q :QuickfixToggle<CR>
+    nmap <silent> <Leader>l :LocationToggle<CR>
 
-    " }
-    " edit {
+    command! -nargs=* DiffGet :diffget <args> | :diffupdate
+    nmap <silent> <Leader>d1 :DiffGet 1<CR>
+    nmap <silent> <Leader>d2 :DiffGet 2<CR>
+    nmap <silent> <Leader>d3 :DiffGet 3<CR>
 
-        command! RemoveBlankLines :g/^$/d
-        command! TrimTrailingWhitepace :%s/\s\+$//e | :nohlsearch
+    command! -nargs=* DiffPut :diffput <args> | :diffupdate
+    nmap <silent> <Leader>d4 :DiffPut 4<CR>
 
-    " }
-    " diff {
-
-        command! -nargs=* DiffGet :diffget <args> | :diffupdate
-        nmap <silent> <Leader>d1 :DiffGet 1<CR>
-        nmap <silent> <Leader>d2 :DiffGet 2<CR>
-        nmap <silent> <Leader>d3 :DiffGet 3<CR>
-
-        command! -nargs=* DiffPut :diffput <args> | :diffupdate
-        nmap <silent> <Leader>d4 :DiffPut 4<CR>
-
-    " }
-    " dev {
-
-        command! Ctags :call system("ctags -R .")
-        nmap <silent> <Leader>ct :Ctags<CR>
-
-        command! CtagsRuby :call system("ctagsruby")
-        nmap <silent> <Leader>ctr :CtagsRuby<CR>
-
-        command! Make :w | :make | :cw
-        nmap <silent> <Leader>m :Make<CR>
-
-        nmap <silent> <Leader>r :Run<CR>
-
-    " }
-    " reference {
-
-        command! SpellToggle set spell!
-        nmap <silent> <F7> :SpellToggle<CR>
-
-    " }
 " }
 
