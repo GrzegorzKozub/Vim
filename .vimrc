@@ -8,6 +8,8 @@
 " includes {
 
     source $VIMRUNTIME/mswin.vim
+    source $VIM/vimfiles/plugin/hidetildeonemptylines.vim
+
     runtime macros/matchit.vim
 
 " }
@@ -352,7 +354,7 @@
             for l:colorscheme_file in split(globpath($VIM . '\vimfiles\bundle\lightline.vim\autoload\lightline\colorscheme', "*.vim"), "\n")
                 execute("source ".l:colorscheme_file)
             endfor
-            execute("source " . $VIM . '\vimfiles\plugin\solarized.vim')
+            source $VIM/vimfiles/plugin/solarized.vim
             let g:lightline.colorscheme = g:colors_name
             call lightline#init()
             call lightline#colorscheme()
@@ -460,7 +462,6 @@
     " vim-colors-solarized {
 
         if has("gui_running")
-
             let s:day = strftime("%H") > 6 && strftime("%H") < 18
 
             if s:day
@@ -478,15 +479,9 @@
             " https://github.com/altercation/vim-colors-solarized/issues/40
             call togglebg#map("")
 
-            function! HideTildeOnEmptyLines()
-                highlight NonText guifg=BG
-                highlight EndOfBuffer guifg=BG
-            endfunction
-
             call HideTildeOnEmptyLines()
 
             function! BackgroundToggle()
-                set nolist
                 ToggleBG
                 call HideTildeOnEmptyLines()
             endfunction
