@@ -8,8 +8,6 @@
 " includes {
 
     source $VIMRUNTIME/mswin.vim
-    source $VIM/vimfiles/plugin/hidetildeonemptylines.vim
-
     runtime macros/matchit.vim
 
 " }
@@ -102,10 +100,7 @@
         winpos 462 208 " 1440p
         "winpos 140 26 " 1080p
     else
-        set background=dark
         set listchars=tab:»\ ,eol:¬,trail:_
-
-        colorscheme default
     endif
 
 " }
@@ -401,6 +396,24 @@
         nmap <silent> <Leader>af :Autoformat<CR>
 
     " }
+    " vim-colors-solarized {
+
+        if has("gui_running")
+            let g:solarized_bold = 0
+            let g:solarized_underline = 0
+            let g:solarized_italic = 0
+
+            " https://github.com/altercation/vim-colors-solarized/issues/40
+            call togglebg#map("")
+
+            function! BackgroundToggle()
+                ToggleBG
+            endfunction
+
+            nmap <silent> <F5> :call BackgroundToggle()<CR>
+        endif
+
+    " }
     " vim-dispatch {
 
         nmap <silent> <Leader>m :Make<CR>
@@ -466,37 +479,33 @@
         let g:vimsize_dir = s:vim_plugin_data_dir
 
     " }
-    " vim-colors-solarized {
+" }
+" color scheme {
 
-        if has("gui_running")
-            let s:day = strftime("%H") > 6 && strftime("%H") < 18
+    if has("autocmd")
 
-            if s:day
-                set background=light
-            else
-                set background=dark
-            endif
+        source $VIM/vimfiles/plugin/hidetildeonemptylines.vim
 
-            let g:solarized_bold = 0
-            let g:solarized_underline = 0
-            let g:solarized_italic = 0
+        augroup ColorSchemeHideTildeOnEmptyLines
+            autocmd!
+            autocmd ColorScheme * call HideTildeOnEmptyLines()
+        augroup END
 
-            colorscheme solarized
+    endif
 
-            " https://github.com/altercation/vim-colors-solarized/issues/40
-            call togglebg#map("")
-
-            call HideTildeOnEmptyLines()
-
-            function! BackgroundToggle()
-                ToggleBG
-                call HideTildeOnEmptyLines()
-            endfunction
-
-            nmap <silent> <F5> :call BackgroundToggle()<CR>
+    if has("gui_running")
+        if strftime("%H") > 6 && strftime("%H") < 18
+            set background=light
+        else
+            set background=dark
         endif
 
-    " }
+        colorscheme solarized
+    else
+        set background=dark
+        colorscheme default
+    endif
+
 " }
 " auto-commands {
 
@@ -537,7 +546,7 @@
         autocmd FileType cs compiler csc
 
     " }
-    " automation {
+    " other {
 
         " after a file is open, go to the last visited location
         autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
