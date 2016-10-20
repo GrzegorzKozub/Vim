@@ -234,137 +234,139 @@
             \ },
         \ }
 
-        " utilities
+        " component functions {
 
-        function! IsCtrlP()
-            return expand("%:t") == "ControlP"
-        endfunction
-
-        " component functions
-
-        function! LightLineFugitive()
-            if &ft == "gundo"
-                return "Gundo"
-            elseif &ft == "diff"
-                return "Gundo"
-            elseif &ft == "vimfiler"
-                return "VimFiler"
-            elseif &ft == "help"
-                return "Help"
-            elseif &ft == "qf"
-                return exists("w:quickfix_title") ? "Location" : "QuickFix"
-            elseif IsCtrlP()
-                return "CtrlP"
-            endif
-            if exists("*fugitive#head")
-                let l:branch = fugitive#head()
-                return l:branch !=# "" ? "⭠ ".l:branch : ""
-            endif
-            return ""
-        endfunction
-
-        function! LightLineFileName()
-            if &ft == "gundo"
-                return "Log"
-            elseif &ft == "diff"
-                return "Diff"
-            elseif &ft == "vimfiler"
-                return substitute(vimfiler#get_status_string(), '\*safe\*', "♥", "")
-            elseif &ft == "qf"
-                return ""
-            elseif IsCtrlP() && has_key(g:lightline, "ctrlp_item")
-                if g:lightline.ctrlp_item == "files"
-                    return "Files"
-                elseif g:lightline.ctrlp_item == "mru files"
-                    return "Recent"
+            function! LightLineFugitive()
+                if &ft == "gundo"
+                    return "Gundo"
+                elseif &ft == "diff"
+                    return "Gundo"
+                elseif &ft == "vimfiler"
+                    return "VimFiler"
+                elseif &ft == "help"
+                    return "Help"
+                elseif &ft == "qf"
+                    return exists("w:quickfix_title") ? "Location" : "QuickFix"
+                elseif expand("%:t") == "ControlP"
+                    return "CtrlP"
                 endif
-                return "Buffers"
-            endif
-            let l:filename = expand("%:t") == "" ? "[No Name]" : expand("%:t")
-            if &ft == "help"
-                return l:filename
-            endif
-            return l:filename . (&readonly ? " ⭤" : "") . (&modified ? " ✘" : " ✔")
-        endfunction
-
-        function! LightLineWarning(regex, type)
-            if &ft =~ 'diff\|gundo\|help\|qf\|vimfiler'
+                if exists("*fugitive#head")
+                    let l:branch = fugitive#head()
+                    return l:branch !=# "" ? "⭠ ".l:branch : ""
+                endif
                 return ""
-            endif
-            let l:line = search(a:regex, "nw")
-            return l:line != 0 ? printf("%s at %d", a:type, l:line) : ""
-        endfunction
+            endfunction
 
-        function! LightLineTrailingWhitespace()
-            return LightLineWarning('\s$', "trailing")
-        endfunction
+            function! LightLineFileName()
+                if &ft == "gundo"
+                    return "Log"
+                elseif &ft == "diff"
+                    return "Diff"
+                elseif &ft == "vimfiler"
+                    return substitute(vimfiler#get_status_string(), '\*safe\*', "♥", "")
+                elseif &ft == "qf"
+                    return ""
+                elseif expand("%:t") == "ControlP" && has_key(g:lightline, "ctrlp_item")
+                    if g:lightline.ctrlp_item == "files"
+                        return "Files"
+                    elseif g:lightline.ctrlp_item == "mru files"
+                        return "Recent"
+                    endif
+                    return "Buffers"
+                endif
+                let l:filename = expand("%:t") == "" ? "[No Name]" : expand("%:t")
+                if &ft == "help"
+                    return l:filename
+                endif
+                return l:filename . (&readonly ? " ⭤" : "") . (&modified ? " ✘" : " ✔")
+            endfunction
 
-        function! LightLineMixedIndent()
-            return LightLineWarning('\v(^\t+ +)|(^ +\t+)', "mixed")
-        endfunction
+            function! LightLineWarning(regex, type)
+                if &ft =~ 'diff\|gundo\|help\|qf\|vimfiler'
+                    return ""
+                endif
+                let l:line = search(a:regex, "nw")
+                return l:line != 0 ? printf("%s at %d", a:type, l:line) : ""
+            endfunction
 
-        function! LightLinePercent()
-            return &ft !~? 'diff\|gundo' ? printf("%3d%%", (100 * line(".") / line("$"))) : ""
-        endfunction
+            function! LightLineTrailingWhitespace()
+                return LightLineWarning('\s$', "trailing")
+            endfunction
 
-        function! LightLineLineInfo()
-            return &ft !~? 'diff\|gundo' ? printf("⭡ %3d ₠ %3d", line("."), col(".")) : ""
-        endfunction
+            function! LightLineMixedIndent()
+                return LightLineWarning('\v(^\t+ +)|(^ +\t+)', "mixed")
+            endfunction
 
-        function! LightLineFileEncoding()
-            return strlen(&fenc) > 0 && &ft !~? 'diff\|gundo\|help\|qf\|vimfiler' ? &fenc : ""
-        endfunction
+            function! LightLinePercent()
+                return &ft !~? 'diff\|gundo' ? printf("%3d%%", (100 * line(".") / line("$"))) : ""
+            endfunction
 
-        function! LightLineFileFormat()
-            return strlen(&ff) > 0 && &ft !~? 'diff\|gundo\|help\|qf\|vimfiler' && !IsCtrlP() ? &ff : ""
-        endfunction
+            function! LightLineLineInfo()
+                return &ft !~? 'diff\|gundo' ? printf("⭡ %3d ₠ %3d", line("."), col(".")) : ""
+            endfunction
 
-        function! LightLineFileType()
-            return strlen(&ft) > 0 && &ft !~? 'diff\|gundo\|help\|qf\|vimfiler' ? printf("⭢⭣ %s", &ft) : ""
-        endfunction
+            function! LightLineFileEncoding()
+                return strlen(&fenc) > 0 && &ft !~? 'diff\|gundo\|help\|qf\|vimfiler' ? &fenc : ""
+            endfunction
 
-        " ctrlp.vim integration
+            function! LightLineFileFormat()
+                return strlen(&ff) > 0 && &ft !~? 'diff\|gundo\|help\|qf\|vimfiler' && expand("%:t") != "ControlP" ? &ff : ""
+            endfunction
 
-        let g:ctrlp_status_func = {
-            \ "main": "CtrlPStatusFuncMain",
-            \ "prog": "CtrlPStatusFuncProg",
-        \ }
+            function! LightLineFileType()
+                return strlen(&ft) > 0 && &ft !~? 'diff\|gundo\|help\|qf\|vimfiler' ? printf("⭢⭣ %s", &ft) : ""
+            endfunction
 
-        function! CtrlPStatusFuncMain(focus, byfname, regex, prev, item, next, marked)
-            let g:lightline.ctrlp_item = a:item
-            return lightline#statusline(0)
-        endfunction
+        " }
+        " ctrlp.vim integration {
 
-        function! CtrlPStatusFuncProg(str)
-            return lightline#statusline(0)
-        endfunction
+            let g:ctrlp_status_func = {
+                \ "main": "CtrlPStatusFuncMain",
+                \ "prog": "CtrlPStatusFuncProg",
+            \ }
 
-        " syntastic integration
+            function! CtrlPStatusFuncMain(focus, byfname, regex, prev, item, next, marked)
+                let g:lightline.ctrlp_item = a:item
+                return lightline#statusline(0)
+            endfunction
 
-        function! SyntasticCheckHook(errors)
-            call lightline#update()
-        endfunction
+            function! CtrlPStatusFuncProg(str)
+                return lightline#statusline(0)
+            endfunction
 
-        " reload on colorscheme change
+        " }
+        " syntastic integration {
 
-        function! s:LightLineReload()
-            if !exists("g:loaded_lightline")
-                return
-            endif
-            for l:colorscheme_file in split(globpath($VIM . '\vimfiles\bundle\lightline.vim\autoload\lightline\colorscheme', "*.vim"), "\n")
-                execute("source ".l:colorscheme_file)
-            endfor
-            source $VIM/vimfiles/plugin/solarized.vim
-            let g:lightline.colorscheme = g:colors_name
-            call lightline#init()
-            call lightline#colorscheme()
-            call lightline#update()
-        endfunction
+            function! SyntasticCheckHook(errors)
+                call lightline#update()
+            endfunction
 
-        augroup LightLineColorscheme
-            autocmd!
-            autocmd ColorScheme * call s:LightLineReload()
-        augroup END
+        " }
+        " reload on colorscheme change {
+
+            function! s:LightLineReload()
+                if !exists("g:loaded_lightline")
+                    return
+                endif
+
+                "for l:colorscheme_file in split(globpath($VIM . '\vimfiles\bundle\lightline.vim\autoload\lightline\colorscheme', "*.vim"), "\n")
+                    "execute("source ".l:colorscheme_file)
+                "endfor
+
+                source $VIM/vimfiles/plugin/solarized.vim
+
+                let g:lightline.colorscheme = g:colors_name
+                call lightline#init()
+                call lightline#colorscheme()
+                call lightline#update()
+            endfunction
+
+            augroup ColorSchemeLightLineReload
+                autocmd!
+                autocmd ColorScheme * call s:LightLineReload()
+            augroup END
+
+        " }
 
     " }
     " netrw {
