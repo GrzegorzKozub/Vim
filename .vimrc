@@ -134,15 +134,21 @@
     " }
     " gruvbox {
 
-        let g:gruvbox_bold = 0
-        let g:gruvbox_italic = 0
-        let g:gruvbox_undercurl = 0
-        let g:gruvbox_underline = 0
+        if has("gui_running")
+            let g:gruvbox_contrast_dark  = "soft"
+            let g:gruvbox_contrast_light = "soft"
 
-        let g:gruvbox_invert_selection = 0
-        let g:gruvbox_italicize_comments = 0
+            let g:gruvbox_bold = 0
+            let g:gruvbox_italic = 0
+            let g:gruvbox_undercurl = 0
+            let g:gruvbox_underline = 0
 
-        let g:gruvbox_sign_column = "dark0"
+            let g:gruvbox_invert_selection = 0
+            let g:gruvbox_italicize_comments = 0
+
+            let g:gruvbox_sign_column = "bg0"
+            let g:gruvbox_vert_split = "bg0"
+        endif
 
     " }
     " gundo.vim {
@@ -202,7 +208,7 @@
                 \ "mixedindent": "warning",
                 \ "syntastic": "error"
             \ },
-            \ "colorscheme": "solarized",
+            \ "colorscheme": "" . strftime("%a") =~ 'Sat\|Sun' ? "gruvbox" : "solarized" . "",
             \ "mode_map": {
                 \ "n" : "NORMAL",
                 \ "i" : "INSERT",
@@ -502,7 +508,11 @@
             set background=dark
         endif
 
-        colorscheme solarized
+        if strftime("%a") =~ 'Sat\|Sun'
+            colorscheme gruvbox
+        else
+            colorscheme solarized
+        endif
     else
         set background=dark
         colorscheme default
