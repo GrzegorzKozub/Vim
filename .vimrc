@@ -529,6 +529,8 @@
     " }
     " file type specific settings {
 
+        autocmd FileType help wincmd L
+
         autocmd FileType vim setlocal textwidth=0
 
         autocmd FileType xml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
