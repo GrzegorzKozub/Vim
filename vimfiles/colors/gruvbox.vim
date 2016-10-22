@@ -499,7 +499,6 @@ hi! link Directory GruvboxGreenBold
 hi! link Title GruvboxGreenBold
 
 " Error messages on the command line
-"call s:HL('ErrorMsg',   s:bg0, s:red, s:bold)
 call s:HL('ErrorMsg',   s:red, s:none, s:bold)
 " More prompt: -- More --
 hi! link MoreMsg GruvboxYellowBold

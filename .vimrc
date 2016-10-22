@@ -139,7 +139,6 @@
 
             let g:gruvbox_bold = 0
             let g:gruvbox_italic = 0
-            let g:gruvbox_undercurl = 0
             let g:gruvbox_underline = 0
 
             let g:gruvbox_invert_selection = 0
