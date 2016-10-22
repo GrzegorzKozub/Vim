@@ -416,7 +416,7 @@
                 ToggleBG
             endfunction
 
-            nmap <silent> <F5> :call BackgroundToggle()<CR>
+            nmap <silent> <F6> :call BackgroundToggle()<CR>
         endif
 
     " }
@@ -510,6 +510,14 @@
         else
             colorscheme solarized
         endif
+
+        function! CycleColorSchemes()
+            let l:all = ["solarized", "gruvbox"]
+            let l:current = index(l:all, g:colors_name)
+            exe("colorscheme " . (l:current == len(l:all) - 1 ? l:all[0] : l:all[l:current + 1]))
+        endfunction
+
+        nmap <silent> <F5> :call CycleColorSchemes()<CR>
     else
         set background=dark
         colorscheme default
