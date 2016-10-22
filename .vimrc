@@ -47,7 +47,6 @@
     set noswapfile
     set nowrap
     set number
-    set pastetoggle=<F2>
     set ruler
     set scrolloff=5
     set shiftwidth=4
@@ -429,14 +428,13 @@
     " }
     " vim-easyclip {
 
+        let g:EasyClipShareYanks = 1
+        let g:EasyClipShareYanksDirectory = s:vim_plugin_data_dir
         let g:EasyClipUseCutDefaults = 0
+
         nmap t <plug>MoveMotionPlug
         xmap t <plug>MoveMotionXPlug
         nmap tt <plug>MoveMotionLinePlug
-
-        let g:EasyClipUsePasteToggleDefaults = 0
-        nmap <c-n> <plug>EasyClipSwapPasteForward
-        nmap <char-238> <plug>EasyClipSwapPasteBackwards " Alt + N
 
     " }
     " vim-fugitive {
