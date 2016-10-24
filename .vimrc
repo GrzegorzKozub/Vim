@@ -602,7 +602,7 @@
     command! SpellToggle set spell!
     nmap <silent> <F7> :SpellToggle<CR>
 
-    nmap <silent> <F10> :MaximizedToggle<CR>
+    nmap <silent> <F10> :CycleAlpha<CR>
     nmap <silent> <F11> :FullScreenToggle<CR>
     nmap <silent> <F12> :DistractionFreeToggle 17<CR>
 
