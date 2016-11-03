@@ -16,10 +16,6 @@ function ScreenFilename()
 endfunction
 
 function ScreenRestore()
-    if &diff
-        simalt ~x
-        return
-    end
     let f = ScreenFilename()
     if has("gui_running") && g:screen_size_restore_pos && filereadable(f)
         let vim_instance = (g:screen_size_by_vim_instance == 1 ? (v:servername) : "GVIM")
@@ -35,10 +31,6 @@ function ScreenRestore()
 endfunction
 
 function ScreenSave()
-    if &diff
-        simalt ~r
-        return
-    end
     if has("gui_running") && g:screen_size_restore_pos
         let vim_instance = (g:screen_size_by_vim_instance == 1 ? (v:servername) : "GVIM")
         let data = vim_instance . " " . &columns . " " . &lines . " " .

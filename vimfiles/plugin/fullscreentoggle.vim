@@ -14,5 +14,8 @@ function FullScreenToggle()
         let s:full_screen = 1
         let g:screen_size_restore_pos = 0
     endif
+    if &diff
+        wincmd =
+    endif
 endfunction
 
