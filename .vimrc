@@ -165,74 +165,79 @@
     " }
     " lightline {
 
-        let g:lightline = {
-            \ "active": {
-                \ "left": [
-                    \ [ "mode", "paste" ],
-                    \ [ "fugitive" ],
-                    \ [ "filename" ]
-                \ ],
-                \ "right": [
-                    \ [ "syntastic", "trailingwhitespace", "mixedindent", "percent", "lineinfo" ],
-                    \ [ "fileencoding", "fileformat" ],
-                    \ [ "filetype" ]
-                \ ]
-            \ },
-            \ "inactive" : {
-                \ "left": [
-                    \ [ "fugitive", "filename" ]
-                \ ],
-                \ "right": [
-                    \ [ ],
-                    \ [ "filetype", "fileencoding", "fileformat", "percent", "lineinfo" ]
-                \ ]
-            \ },
-            \ "component_function": {
-                \ "fugitive": "LightLineFugitive",
-                \ "filename": "LightLineFileName",
-                \ "percent": "LightLinePercent",
-                \ "lineinfo": "LightLineLineInfo",
-                \ "fileencoding": "LightLineFileEncoding",
-                \ "fileformat": "LightLineFileFormat",
-                \ "filetype": "LightLineFileType"
-            \ },
-            \ "component_expand": {
-                \ "trailingwhitespace": "LightLineTrailingWhitespace",
-                \ "mixedindent": "LightLineMixedIndent",
-                \ "syntastic": "SyntasticStatuslineFlag"
-            \ },
-            \ "component_type": {
-                \ "trailingwhitespace": "warning",
-                \ "mixedindent": "warning",
-                \ "syntastic": "error"
-            \ },
-            \ "colorscheme": "" . strftime("%a") =~ 'Sat\|Sun' ? "gruvbox" : "solarized" . "",
-            \ "mode_map": {
-                \ "n" : "NORMAL",
-                \ "i" : "INSERT",
-                \ "R" : "REPLACE",
-                \ "v" : "VISUAL",
-                \ "V" : "VISUAL LINE",
-                \ "\<C-v>": "VISUAL BLOCK",
-                \ "c" : "COMMAND",
-                \ "s" : "SELECT",
-                \ "S" : "SELECT LINE",
-                \ "\<C-s>": "SELECT BLOCK",
-                \ "t": "TERMINAL"
-            \ },
-            \ "separator": {
-                \ "left": "⮀",
-                \ "right": "⮂"
-            \ },
-            \ "subseparator": {
-                \ "left": "⮁",
-                \ "right": "⮃"
-            \ },
-            \ "enable": {
-                \ "tabline": 0
-            \ },
-        \ }
+        if has("gui_running")
 
+        " configuration {
+
+            let g:lightline = {
+                \ "active": {
+                    \ "left": [
+                        \ [ "mode", "paste" ],
+                        \ [ "fugitive" ],
+                        \ [ "filename" ]
+                    \ ],
+                    \ "right": [
+                        \ [ "syntastic", "trailingwhitespace", "mixedindent", "percent", "lineinfo" ],
+                        \ [ "fileencoding", "fileformat" ],
+                        \ [ "filetype" ]
+                    \ ]
+                \ },
+                \ "inactive" : {
+                    \ "left": [
+                        \ [ "fugitive", "filename" ]
+                    \ ],
+                    \ "right": [
+                        \ [ ],
+                        \ [ "filetype", "fileencoding", "fileformat", "percent", "lineinfo" ]
+                    \ ]
+                \ },
+                \ "component_function": {
+                    \ "fugitive": "LightLineFugitive",
+                    \ "filename": "LightLineFileName",
+                    \ "percent": "LightLinePercent",
+                    \ "lineinfo": "LightLineLineInfo",
+                    \ "fileencoding": "LightLineFileEncoding",
+                    \ "fileformat": "LightLineFileFormat",
+                    \ "filetype": "LightLineFileType"
+                \ },
+                \ "component_expand": {
+                    \ "trailingwhitespace": "LightLineTrailingWhitespace",
+                    \ "mixedindent": "LightLineMixedIndent",
+                    \ "syntastic": "SyntasticStatuslineFlag"
+                \ },
+                \ "component_type": {
+                    \ "trailingwhitespace": "warning",
+                    \ "mixedindent": "warning",
+                    \ "syntastic": "error"
+                \ },
+                \ "colorscheme": "" . strftime("%a") =~ 'Sat\|Sun' ? "gruvbox" : "solarized" . "",
+                \ "mode_map": {
+                    \ "n" : "NORMAL",
+                    \ "i" : "INSERT",
+                    \ "R" : "REPLACE",
+                    \ "v" : "VISUAL",
+                    \ "V" : "VISUAL LINE",
+                    \ "\<C-v>": "VISUAL BLOCK",
+                    \ "c" : "COMMAND",
+                    \ "s" : "SELECT",
+                    \ "S" : "SELECT LINE",
+                    \ "\<C-s>": "SELECT BLOCK",
+                    \ "t": "TERMINAL"
+                \ },
+                \ "separator": {
+                    \ "left": "⮀",
+                    \ "right": "⮂"
+                \ },
+                \ "subseparator": {
+                    \ "left": "⮁",
+                    \ "right": "⮃"
+                \ },
+                \ "enable": {
+                    \ "tabline": 0
+                \ },
+            \ }
+
+        " }
         " component functions {
 
             function! LightLineFugitive()
@@ -369,6 +374,8 @@
 
         " }
 
+        endif
+
     " }
     " netrw {
 
@@ -488,14 +495,12 @@
 " color scheme {
 
     if has("autocmd")
-
         source $VIM/vimfiles/plugin/hidetildeonemptylines.vim
 
         augroup ColorSchemeHideTildeOnEmptyLines
             autocmd!
             autocmd ColorScheme * call HideTildeOnEmptyLines()
         augroup END
-
     endif
 
     if has("gui_running")
