@@ -78,7 +78,6 @@
     endif
 
     if has("gui_running")
-        set columns=180
         set cursorline
         set guifont=Consolas\ for\ Powerline\ FixedD:h13:cEASTEUROPE
         set guioptions+=c
@@ -90,14 +89,20 @@
         set guioptions-=T
         set guitablabel=%t\ %M
         set laststatus=2
-        set lines=45
         set linespace=0
         set listchars=tab:→\ ,eol:¬,trail:·
         set noshowmode
         "set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
 
-        winpos 462 208 " 1440p
-        "winpos 140 26 " 1080p
+        " 2560 x 1440 at 96 dpi
+        set columns=160
+        set lines=46
+        winpos 75 320
+
+        " 2560 x 1440 at 144 dpi
+        "set columns=120
+        "set lines=33
+        "winpos 75 193
     else
         set listchars=tab:»\ ,eol:¬,trail:_
     endif
