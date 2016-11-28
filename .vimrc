@@ -103,6 +103,11 @@
         "set columns=120
         "set lines=33
         "winpos 75 193
+
+        " 3200 x 1800 at 240 dpi
+        " set columns=123
+        " set lines=28
+        " winpos 108 64
     else
         set listchars=tab:»\ ,eol:¬,trail:_
     endif
