@@ -49,7 +49,7 @@ function ApplyDistractionFreeSettings(font_size)
 endfunction
 
 function CreateMarginWindows()
-    let l:vertical_margin_width = &columns / 10
+    let l:vertical_margin_width = 5
     execute("silent leftabove " . l:vertical_margin_width . "vsplit new")
     call ConcealWindow()
     wincmd l
