@@ -148,15 +148,6 @@
         endif
 
     " }
-    " gundo.vim {
-
-        let g:gundo_help = 0
-        let g:gundo_prefer_python3 = 0
-        let g:gundo_width = 40
-
-        nmap <silent> <Leader>g :GundoToggle<CR>
-
-    " }
     " javascript-libraries-syntax.vim {
 
         let g:used_javascript_libs = "underscore,angularjs,angularui,angularuirouter,react,requirejs,jasmine,chai"
@@ -240,10 +231,10 @@
         " component functions {
 
             function! LightLineFugitive()
-                if &ft == "gundo"
-                    return "Gundo"
-                elseif &ft == "diff"
-                    return "Gundo"
+                if &ft == "Mundo"
+                    return "Mundo"
+                elseif &ft == "MundoDiff"
+                    return "Mundo"
                 elseif &ft == "vimfiler"
                     return "VimFiler"
                 elseif &ft == "help"
@@ -261,9 +252,9 @@
             endfunction
 
             function! LightLineFileName()
-                if &ft == "gundo"
-                    return "Log"
-                elseif &ft == "diff"
+                if &ft == "Mundo"
+                    return "Tree"
+                elseif &ft == "MundoDiff"
                     return "Diff"
                 elseif &ft == "vimfiler"
                     return substitute(vimfiler#get_status_string(), '\*safe\*', "♥", "")
@@ -285,7 +276,7 @@
             endfunction
 
             function! LightLineWarning(regex, type)
-                if &ft =~ 'diff\|gundo\|help\|qf\|vimfiler'
+                if &ft =~ 'help\|Mundo\|MundoDiff\|qf\|vimfiler'
                     return ""
                 endif
                 let l:line = search(a:regex, "nw")
@@ -301,23 +292,23 @@
             endfunction
 
             function! LightLinePercent()
-                return &ft !~? 'diff\|gundo' ? printf("%3d%%", (100 * line(".") / line("$"))) : ""
+                return &ft !~? 'Mundo\|MundoDiff' ? printf("%3d%%", (100 * line(".") / line("$"))) : ""
             endfunction
 
             function! LightLineLineInfo()
-                return &ft !~? 'diff\|gundo' ? printf("⭡ %3d ₠ %3d", line("."), col(".")) : ""
+                return &ft !~? 'Mundo\|MundoDiff' ? printf("⭡ %3d ₠ %3d", line("."), col(".")) : ""
             endfunction
 
             function! LightLineFileEncoding()
-                return strlen(&fenc) > 0 && &ft !~? 'diff\|gundo\|help\|qf\|vimfiler' ? &fenc : ""
+                return strlen(&fenc) > 0 && &ft !~? 'help\|Mundo\|MundoDiff\|qf\|vimfiler' ? &fenc : ""
             endfunction
 
             function! LightLineFileFormat()
-                return strlen(&ff) > 0 && &ft !~? 'diff\|gundo\|help\|qf\|vimfiler' && expand("%:t") != "ControlP" ? &ff : ""
+                return strlen(&ff) > 0 && &ft !~? 'help\|Mundo\|MundoDiff\|qf\|vimfiler' && expand("%:t") != "ControlP" ? &ff : ""
             endfunction
 
             function! LightLineFileType()
-                return strlen(&ft) > 0 && &ft !~? 'diff\|gundo\|help\|qf\|vimfiler' ? printf("⭢⭣ %s", &ft) : ""
+                return strlen(&ft) > 0 && &ft !~? 'help\|Mundo\|MundoDiff\|qf\|vimfiler' ? printf("⭢⭣ %s", &ft) : ""
             endfunction
 
         " }
@@ -465,6 +456,14 @@
     " vim-markdown {
 
         let g:vim_markdown_folding_disabled = 1
+
+    " }
+    " vim-mundo {
+
+        let g:mundo_help = 0
+        let g:mundo_width = 40
+
+        nmap <silent> <Leader>u :MundoToggle<CR>
 
     " }
     " vimfilter.vim {
