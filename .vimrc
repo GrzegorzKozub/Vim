@@ -461,6 +461,7 @@
     " vim-mundo {
 
         let g:mundo_help = 0
+        let g:mundo_prefer_python3 = 1
         let g:mundo_width = 40
 
         nmap <silent> <Leader>u :MundoToggle<CR>
