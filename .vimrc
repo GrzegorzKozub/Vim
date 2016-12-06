@@ -28,6 +28,7 @@
     set nocompatible
 
     set autoindent
+    set autoread
     set backup
     set belloff=all
     set conceallevel=1
