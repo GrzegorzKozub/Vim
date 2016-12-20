@@ -7,8 +7,8 @@
 " }
 " includes {
 
-    source $VIMRUNTIME/mswin.vim
-    runtime macros/matchit.vim
+    runtime defaults.vim
+    runtime mswin.vim
 
 " }
 " directories {
@@ -25,8 +25,6 @@
 " }
 " settings {
 
-    set nocompatible
-
     set autoindent
     set autoread
     set backup
@@ -39,20 +37,15 @@
     set foldlevelstart=99
     set foldmethod=syntax
     set hidden
-    set history=128
     set hlsearch
     set ignorecase
-    set incsearch
     set lazyredraw
     set nojoinspaces
     set noswapfile
     set nowrap
     set number
-    set ruler
-    set scrolloff=5
     set shiftwidth=4
     set shortmess+=I
-    set showcmd
     set showmatch
     set sidescroll=1
     set sidescrolloff=15
@@ -64,7 +57,6 @@
     set tabstop=4
     set undofile
     set wildignore+=*.7z,*.bmp,*.dll,*.exe,*.gif,*.ico,*.icl,*.jpeg,*.jpg,*.ldf,*.png,*.rar,*.sdf,*.sqlite,*.suo,*.zip
-    set wildmenu
     set wildmode=list:longest
 
     let &backupdir = s:vim_backup_dir
@@ -72,11 +64,6 @@
     let &viminfo = &viminfo . ",n" . s:vim_data_dir . ".viminfo"
 
     language English_US
-    syntax on
-
-    if has("autocmd")
-        filetype plugin indent on
-    endif
 
     if has("gui_running")
         set columns=160
