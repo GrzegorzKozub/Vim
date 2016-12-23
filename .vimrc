@@ -441,6 +441,11 @@
         autocmd FileType typescript syn clear foldBraces
 
     " }
+    " vim-jsx {
+
+        let g:jsx_ext_required = 0
+
+    " }
     " vim-markdown {
 
         let g:vim_markdown_folding_disabled = 1
