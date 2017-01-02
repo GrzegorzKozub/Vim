@@ -90,14 +90,59 @@
     endif
 
 " }
+" vim-plug {
+
+    call plug#begin($VIM . "/plugins")
+
+    let g:unmanaged_dir = $VIM . "/unmanaged/"
+
+    Plug g:unmanaged_dir . 'colorscheme-customizations'
+    Plug g:unmanaged_dir . 'compilers', { 'for': [ 'c', 'cpp' ] }
+    Plug g:unmanaged_dir . 'diff-and-merge', { 'on': [ 'VimDiff', 'VimMerge' ] }
+    Plug g:unmanaged_dir . 'full-screen', { 'on': [ 'FullScreenToggle', 'CycleAlpha' ] }
+    Plug g:unmanaged_dir . 'screen-size'
+    Plug g:unmanaged_dir . 'window-toggles', { 'on': [ 'LocationToggle', 'QuickfixToggle' ] }
+
+    Plug 'mileszs/ack.vim'
+    Plug 'chriskempson/base16-vim'
+    Plug 'ctrlpvim/ctrlp.vim', { 'on': [ 'CtrlP', 'CtrlPBuffer', 'CtrlPMRUFiles' ] }
+    Plug 'Raimondi/delimitMate'
+    Plug 'mattn/emmet-vim'
+    Plug 'morhetz/gruvbox'
+    Plug 'othree/html5.vim'
+    Plug 'othree/javascript-libraries-syntax.vim'
+    Plug 'itchyny/lightline.vim'
+    Plug 'scrooloose/nerdcommenter'
+    Plug 'scrooloose/syntastic'
+    Plug 'leafgarland/typescript-vim'
+    Plug 'Shougo/unite.vim', { 'on': 'VimFiler' }
+    Plug 'Chiel92/vim-autoformat', { 'on': 'Autoformat' }
+    Plug 'altercation/vim-colors-solarized'
+    Plug 'hail2u/vim-css3-syntax'
+    Plug 'tpope/vim-dispatch'
+    Plug 'svermeulen/vim-easyclip'
+    Plug 'tpope/vim-fugitive'
+    Plug 'pangloss/vim-javascript'
+    Plug 'tpope/vim-jdaddy'
+    Plug 'Quramy/vim-js-pretty-template'
+    Plug 'elzr/vim-json'
+    Plug 'mxw/vim-jsx'
+    Plug 'groenewege/vim-less'
+    Plug 'plasticboy/vim-markdown'
+    Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
+    Plug 'moll/vim-node'
+    Plug 'PProvost/vim-ps1'
+    Plug 'tpope/vim-rails'
+    Plug 'tpope/vim-repeat'
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-unimpaired'
+    Plug 'nelstrom/vim-visual-star-search'
+    Plug 'Shougo/vimfiler.vim', { 'on': 'VimFiler' }
+
+    call plug#end()
+
+" }
 " plugins {
-    " vim-pathogen {
-
-        runtime ./bundle/vim-pathogen/autoload/pathogen.vim
-        call pathogen#infect()
-        :Helptags
-
-    " }
     " ack.vim {
 
         if executable("ag")
@@ -108,6 +153,8 @@
     " ctrlp.vim {
 
         let g:ctrlp_cache_dir = s:vim_plugin_data_dir . "ctrlp.vim"
+
+        nmap <silent> <C-p> :CtrlP<CR>
         nmap <silent> <C-b> :CtrlPBuffer<CR>
         nmap <silent> <C-k> :CtrlPMRUFiles<CR>
 
@@ -219,16 +266,18 @@
         " component functions {
 
             function! LightLineFugitive()
-                if &ft == "Mundo"
+                if &ft == "help"
+                    return "Help"
+                elseif &ft == "Mundo"
                     return "Mundo"
                 elseif &ft == "MundoDiff"
                     return "Mundo"
-                elseif &ft == "vimfiler"
-                    return "VimFiler"
-                elseif &ft == "help"
-                    return "Help"
                 elseif &ft == "qf"
                     return exists("w:quickfix_title") ? "Location" : "QuickFix"
+                elseif &ft == "vim-plug"
+                    return "Plugins"
+                elseif &ft == "vimfiler"
+                    return "VimFiler"
                 elseif expand("%:t") == "ControlP"
                     return "CtrlP"
                 endif
@@ -244,10 +293,12 @@
                     return "Tree"
                 elseif &ft == "MundoDiff"
                     return "Diff"
-                elseif &ft == "vimfiler"
-                    return substitute(vimfiler#get_status_string(), '\*safe\*', "♥", "")
                 elseif &ft == "qf"
                     return ""
+                elseif &ft == "vim-plug"
+                    return ""
+                elseif &ft == "vimfiler"
+                    return substitute(vimfiler#get_status_string(), '\*safe\*', "♥", "")
                 elseif expand("%:t") == "ControlP" && has_key(g:lightline, "ctrlp_item")
                     if g:lightline.ctrlp_item == "files"
                         return "Files"
@@ -264,7 +315,7 @@
             endfunction
 
             function! LightLineWarning(regex, type)
-                if &ft =~ 'help\|Mundo\|MundoDiff\|qf\|vimfiler'
+                if &ft =~ 'help\|Mundo\|MundoDiff\|qf\|vim-plug\|vimfiler'
                     return ""
                 endif
                 let l:line = search(a:regex, "nw")
@@ -288,15 +339,15 @@
             endfunction
 
             function! LightLineFileEncoding()
-                return strlen(&fenc) > 0 && &ft !~? 'help\|Mundo\|MundoDiff\|qf\|vimfiler' ? &fenc : ""
+                return strlen(&fenc) > 0 && &ft !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug\|vimfiler' ? &fenc : ""
             endfunction
 
             function! LightLineFileFormat()
-                return strlen(&ff) > 0 && &ft !~? 'help\|Mundo\|MundoDiff\|qf\|vimfiler' && expand("%:t") != "ControlP" ? &ff : ""
+                return strlen(&ff) > 0 && &ft !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug\|vimfiler' && expand("%:t") != "ControlP" ? &ff : ""
             endfunction
 
             function! LightLineFileType()
-                return strlen(&ft) > 0 && &ft !~? 'help\|Mundo\|MundoDiff\|qf\|vimfiler' ? printf("⭢⭣ %s", &ft) : ""
+                return strlen(&ft) > 0 && &ft !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug\|vimfiler' ? printf("⭢⭣ %s", &ft) : ""
             endfunction
 
         " }
@@ -331,12 +382,12 @@
                     return
                 endif
 
-                "for l:vanila_colorscheme_file in split(globpath($VIM . '\vimfiles\bundle\lightline.vim\autoload\lightline\colorscheme', "*.vim"), "\n")
-                    "execute("source ".l:vanila_colorscheme_file)
+                "for l:vanila_colorscheme_file in split(globpath($VIM . '\plugins\lightline.vim\autoload\lightline\colorscheme', "*.vim"), "\n")
+                    "execute("source " . l:vanila_colorscheme_file)
                 "endfor
 
-                for l:customized_colorscheme_file in split(globpath($VIM . '\vimfiles\plugin\lightline\colorscheme', "*.vim"), "\n")
-                    execute("source ".l:customized_colorscheme_file)
+                for l:customized_colorscheme_file in split(globpath($VIM . '\unmanaged\colorscheme-customizations\plugin\lightline\colorscheme', "*.vim"), "\n")
+                    execute("source " . l:customized_colorscheme_file)
                 endfor
 
                 let g:lightline.colorscheme = g:colors_name
@@ -478,17 +529,40 @@
         autocmd FileType vimfiler nmap <buffer> <Leader>f :VimFiler -toggle<CR>
 
     " }
-    " vimsize.vim {
+" }
+" unmanaged {
+    " compilers {
 
-        let g:vimsize_dir = s:vim_plugin_data_dir
+        if has("autocmd")
+            autocmd FileType c,cpp compiler gcc
+        endif
+
+    " }
+    " full-screen {
+
+        nmap <silent> <F11> :FullScreenToggle<CR>
+        nmap <silent> <F12> :CycleAlpha<CR>
+
+    " }
+    " screen-size {
+
+        let g:screen_size_dir = s:vim_plugin_data_dir
+
+    " }
+    " window-toggles {
+
+        nmap <silent> <Leader>l :LocationToggle<CR>
+        nmap <silent> <Leader>q :QuickfixToggle<CR>
 
     " }
 " }
-" color scheme {
+" colorscheme {
+
+    function! HideTildeOnEmptyLines()
+        highlight EndOfBuffer guifg=BG
+    endfunction
 
     if has("autocmd")
-        source $VIM/vimfiles/plugin/hidetildeonemptylines.vim
-
         augroup ColorSchemeHideTildeOnEmptyLines
             autocmd!
             autocmd ColorScheme * call HideTildeOnEmptyLines()
@@ -556,12 +630,6 @@
         autocmd Filetype * if (exists("+omnifunc") && &omnifunc == "") | setlocal omnifunc=syntaxcomplete#Complete | endif
 
     " }
-    " compilers {
-
-        autocmd FileType c,cpp compiler gcc
-        autocmd FileType cs compiler csc
-
-    " }
     " other {
 
         " after a file is open, go to the last visited location
@@ -598,13 +666,6 @@
 
     command! SpellToggle set spell!
     nmap <silent> <F7> :SpellToggle<CR>
-
-    nmap <silent> <F10> :CycleAlpha<CR>
-    nmap <silent> <F11> :FullScreenToggle<CR>
-    nmap <silent> <F12> :DistractionFreeToggle 17<CR>
-
-    nmap <silent> <Leader>q :QuickfixToggle<CR>
-    nmap <silent> <Leader>l :LocationToggle<CR>
 
     command! -nargs=* DiffGet :diffget <args> | :diffupdate
     nmap <silent> <Leader>d1 :DiffGet 1<CR>
