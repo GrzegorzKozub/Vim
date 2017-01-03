@@ -1,6 +1,6 @@
-command! LocationToggle call LocationToggle()
+command! ToggleLocation call ToggleLocation()
 
-function! LocationToggle()
+function! ToggleLocation()
     if exists("s:location_open")
         lclose
         unlet s:location_open

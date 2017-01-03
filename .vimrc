@@ -96,12 +96,12 @@
 
     let g:unmanaged_dir = $VIM . "/unmanaged/"
 
-    Plug g:unmanaged_dir . 'colorscheme-customizations'
     Plug g:unmanaged_dir . 'compilers', { 'for': [ 'c', 'cpp' ] }
-    Plug g:unmanaged_dir . 'diff-and-merge', { 'on': [ 'VimDiff', 'VimMerge' ] }
-    Plug g:unmanaged_dir . 'full-screen', { 'on': [ 'FullScreenToggle', 'CycleAlpha' ] }
-    Plug g:unmanaged_dir . 'screen-size'
-    Plug g:unmanaged_dir . 'window-toggles', { 'on': [ 'LocationToggle', 'QuickfixToggle' ] }
+    Plug g:unmanaged_dir . 'customized_colorschemes'
+    Plug g:unmanaged_dir . 'diff_and_merge', { 'on': [ 'VimDiff', 'VimMerge' ] }
+    Plug g:unmanaged_dir . 'full_screen', { 'on': [ 'CycleAlpha', 'ToggleFullScreen' ] }
+    Plug g:unmanaged_dir . 'screen_memento'
+    Plug g:unmanaged_dir . 'window_toggles', { 'on': [ 'ToggleLocation', 'ToggleQuickfix' ] }
 
     Plug 'mileszs/ack.vim'
     Plug 'chriskempson/base16-vim'
@@ -386,7 +386,7 @@
                     "execute("source " . l:vanila_colorscheme_file)
                 "endfor
 
-                for l:customized_colorscheme_file in split(globpath($VIM . '\unmanaged\colorscheme-customizations\plugin\lightline\colorscheme', "*.vim"), "\n")
+                for l:customized_colorscheme_file in split(globpath($VIM . '\unmanaged\customized_colorschemes\plugin\lightline\colorscheme', "*.vim"), "\n")
                     execute("source " . l:customized_colorscheme_file)
                 endfor
 
@@ -511,10 +511,10 @@
         nmap <silent> <Leader>u :MundoToggle<CR>
 
     " }
-    " vimfilter.vim {
+    " vimfiler.vim {
 
         let g:vimfiler_as_default_explorer = 1
-        let g:vimfiler_data_directory = s:vim_plugin_data_dir . "vimfilter.vim"
+        let g:vimfiler_data_directory = s:vim_plugin_data_dir . "vimfiler.vim"
         let g:vimfiler_force_overwrite_statusline = 0
         let g:vimfiler_ignore_pattern = []
 
@@ -538,21 +538,25 @@
         endif
 
     " }
-    " full-screen {
+    " full_screen {
 
-        nmap <silent> <F11> :FullScreenToggle<CR>
-        nmap <silent> <F12> :CycleAlpha<CR>
-
-    " }
-    " screen-size {
-
-        let g:screen_size_dir = s:vim_plugin_data_dir
+        if has("gui_running")
+            nmap <silent> <F11> :ToggleFullScreen<CR>
+            nmap <silent> <F12> :CycleAlpha<CR>
+        endif
 
     " }
-    " window-toggles {
+    " screen_memento {
 
-        nmap <silent> <Leader>l :LocationToggle<CR>
-        nmap <silent> <Leader>q :QuickfixToggle<CR>
+        if has("gui_running")
+            let g:screen_memento_dir = s:vim_plugin_data_dir
+        endif
+
+    " }
+    " window_toggles {
+
+        nmap <silent> <Leader>l :ToggleLocation<CR>
+        nmap <silent> <Leader>q :ToggleQuickfix<CR>
 
     " }
 " }
@@ -638,8 +642,8 @@
         " do not overwrite the backup files of the same name
         autocmd BufWritePre * let &backupext = "@" . substitute(expand("%:p:h"), ",\\=[:\\\/]", "%", "g")
 
-        " source .vimrc when it's saved and restore the screen size and position
-        autocmd! BufWritePost $MYVIMRC nested source $MYVIMRC | if g:screen_size_restore_pos == 1 | call ScreenRestore() | endif
+        " source .vimrc when it's saved
+        autocmd! BufWritePost $MYVIMRC nested source $MYVIMRC
 
     " }
 
