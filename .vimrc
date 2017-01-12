@@ -112,11 +112,11 @@
     Plug 'othree/html5.vim'
     Plug 'othree/javascript-libraries-syntax.vim'
     Plug 'itchyny/lightline.vim'
+    Plug 'sbdchd/neoformat', { 'on': 'Neoformat' }
     Plug 'scrooloose/nerdcommenter'
     Plug 'scrooloose/syntastic'
     Plug 'leafgarland/typescript-vim'
     Plug 'Shougo/unite.vim', { 'on': 'VimFiler' }
-    Plug 'Chiel92/vim-autoformat', { 'on': 'Autoformat' }
     Plug 'altercation/vim-colors-solarized'
     Plug 'hail2u/vim-css3-syntax'
     Plug 'tpope/vim-dispatch'
@@ -406,6 +406,11 @@
         endif
 
     " }
+    " neoformat {
+
+        nmap <silent> <Leader>nf :Neoformat<CR>
+
+    " }
     " netrw {
 
         let g:netrw_home = s:vim_plugin_data_dir . "netrw"
@@ -431,11 +436,6 @@
 
         let g:typescript_compiler_binary = "tsc"
         let g:typescript_compiler_options = ""
-
-    " }
-    " vim-autoformat {
-
-        nmap <silent> <Leader>af :Autoformat<CR>
 
     " }
     " vim-colors-solarized {
