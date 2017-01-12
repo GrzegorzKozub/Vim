@@ -107,6 +107,7 @@
     Plug 'chriskempson/base16-vim'
     Plug 'ctrlpvim/ctrlp.vim', { 'on': [ 'CtrlP', 'CtrlPBuffer', 'CtrlPMRUFiles' ] }
     Plug 'Raimondi/delimitMate'
+    Plug 'editorconfig/editorconfig-vim'
     Plug 'mattn/emmet-vim'
     Plug 'morhetz/gruvbox'
     Plug 'othree/html5.vim'
