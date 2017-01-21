@@ -107,6 +107,7 @@
     Plug 'chriskempson/base16-vim'
     Plug 'ctrlpvim/ctrlp.vim', { 'on': [ 'CtrlP', 'CtrlPBuffer', 'CtrlPMRUFiles' ] }
     Plug 'Raimondi/delimitMate'
+    Plug 'ekalinin/Dockerfile.vim'
     Plug 'editorconfig/editorconfig-vim'
     Plug 'mattn/emmet-vim'
     Plug 'morhetz/gruvbox'
@@ -132,6 +133,7 @@
     Plug 'plasticboy/vim-markdown'
     Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
     Plug 'moll/vim-node'
+    Plug 'digitaltoad/vim-pug'
     Plug 'PProvost/vim-ps1'
     Plug 'tpope/vim-rails'
     Plug 'tpope/vim-repeat'
