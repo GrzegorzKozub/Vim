@@ -68,7 +68,7 @@
     if has("gui_running")
         set columns=160
         set cursorline
-        set guifont=Consolas\ for\ Powerline\ FixedD:h13:cEASTEUROPE
+        set guifont=Fira\ Code\ Medium:h13:cEASTEUROPE
         set guioptions+=c
         set guioptions-=b
         set guioptions-=r
@@ -253,12 +253,12 @@
                     \ "t": "TERMINAL"
                 \ },
                 \ "separator": {
-                    \ "left": "⮀",
-                    \ "right": "⮂"
+                    \ "left": "",
+                    \ "right": ""
                 \ },
                 \ "subseparator": {
-                    \ "left": "⮁",
-                    \ "right": "⮃"
+                    \ "left": "",
+                    \ "right": ""
                 \ },
                 \ "enable": {
                     \ "tabline": 0
@@ -286,7 +286,7 @@
                 endif
                 if exists("*fugitive#head")
                     let l:branch = fugitive#head()
-                    return l:branch !=# "" ? "⭠ ".l:branch : ""
+                    return l:branch !=# "" ? " ".l:branch : ""
                 endif
                 return ""
             endfunction
@@ -301,7 +301,7 @@
                 elseif &ft == "vim-plug"
                     return ""
                 elseif &ft == "vimfiler"
-                    return substitute(vimfiler#get_status_string(), '\*safe\*', "⭤", "")
+                    return substitute(vimfiler#get_status_string(), '\*safe\*', "", "")
                 elseif expand("%:t") == "ControlP" && has_key(g:lightline, "ctrlp_item")
                     if g:lightline.ctrlp_item == "files"
                         return "Files"
@@ -314,7 +314,7 @@
                 if &ft == "help"
                     return l:filename
                 endif
-                return l:filename . (&readonly ? " ⭤" : "") . (&modified ? " ●" : "")
+                return l:filename . (&readonly ? " " : "") . (&modified ? " ●" : "")
             endfunction
 
             function! LightLineWarning(regex, type)
@@ -523,10 +523,10 @@
 
         let g:vimfiler_file_icon = " "
         let g:vimfiler_marked_file_icon = "✔"
-        let g:vimfiler_readonly_file_icon = "⭤"
-        let g:vimfiler_tree_closed_icon = "▸"
+        let g:vimfiler_readonly_file_icon = ""
+        let g:vimfiler_tree_closed_icon = "▶"
         let g:vimfiler_tree_leaf_icon = " "
-        let g:vimfiler_tree_opened_icon = "▾"
+        let g:vimfiler_tree_opened_icon = "▼"
 
         nmap <silent> <Leader>f :VimFiler -toggle<CR>
         autocmd FileType vimfiler nmap <buffer> <Leader>f :VimFiler -toggle<CR>
