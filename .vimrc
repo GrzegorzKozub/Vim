@@ -301,7 +301,7 @@
                 elseif &ft == "vim-plug"
                     return ""
                 elseif &ft == "vimfiler"
-                    return substitute(vimfiler#get_status_string(), '\*safe\*', "♥", "")
+                    return substitute(vimfiler#get_status_string(), '\*safe\*', "⭤", "")
                 elseif expand("%:t") == "ControlP" && has_key(g:lightline, "ctrlp_item")
                     if g:lightline.ctrlp_item == "files"
                         return "Files"
@@ -314,7 +314,7 @@
                 if &ft == "help"
                     return l:filename
                 endif
-                return l:filename . (&readonly ? " ⭤" : "") . (&modified ? " ✘" : " ✔")
+                return l:filename . (&readonly ? " ⭤" : "") . (&modified ? " ●" : "")
             endfunction
 
             function! LightLineWarning(regex, type)
@@ -338,7 +338,7 @@
             endfunction
 
             function! LightLineLineInfo()
-                return &ft !~? 'Mundo\|MundoDiff' ? printf("⭡ %3d ₠ %3d", line("."), col(".")) : ""
+                return &ft !~? 'Mundo\|MundoDiff' ? printf("%3d %3d", line("."), col(".")) : ""
             endfunction
 
             function! LightLineFileEncoding()
@@ -350,7 +350,7 @@
             endfunction
 
             function! LightLineFileType()
-                return strlen(&ft) > 0 && &ft !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug\|vimfiler' ? printf("⭢⭣ %s", &ft) : ""
+                return strlen(&ft) > 0 && &ft !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug\|vimfiler' ? &ft : ""
             endfunction
 
         " }
