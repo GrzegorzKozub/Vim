@@ -463,12 +463,10 @@
     " }
     " vim-fugitive {
 
-        if has('autocmd')
-            augroup SetupFugitive
-                autocmd!
-                autocmd BufReadPost fugitive://* set bufhidden=delete
-            augroup END
-        endif
+        augroup SetupFugitive
+            autocmd!
+            autocmd BufReadPost fugitive://* set bufhidden=delete
+        augroup END
 
     " }
     " vim-javascript {
@@ -531,12 +529,10 @@
 " unmanaged {
     " compilers {
 
-        if has('autocmd')
-            augroup SetupCompilers
-                autocmd!
-                autocmd FileType c,cpp compiler gcc
-            augroup END
-        endif
+        augroup SetupCompilers
+            autocmd!
+            autocmd FileType c,cpp compiler gcc
+        augroup END
 
     " }
     " full_screen {
@@ -567,12 +563,10 @@
         highlight EndOfBuffer guifg=BG
     endfunction
 
-    if has('autocmd')
-        augroup HideTildeOnEmptyLinesWhenColorSchemeChanges
-            autocmd!
-            autocmd ColorScheme * call HideTildeOnEmptyLines()
-        augroup END
-    endif
+    augroup HideTildeOnEmptyLinesWhenColorSchemeChanges
+        autocmd!
+        autocmd ColorScheme * call HideTildeOnEmptyLines()
+    augroup END
 
     if has('gui_running')
         if strftime('%H') > 6 && strftime('%H') < 18
@@ -588,7 +582,7 @@
         endif
 
         function! CycleColorSchemes()
-            let l:all = ['solarized', 'gruvbox']
+            let l:all = [ 'solarized', 'gruvbox' ]
             let l:current = index(l:all, g:colors_name)
             exe('colorscheme ' . (l:current == len(l:all) - 1 ? l:all[0] : l:all[l:current + 1]))
         endfunction
@@ -602,57 +596,53 @@
 " }
 " auto-commands {
 
-    if has('autocmd')
+    augroup SetFileTypesBasedOnExtensions
+        autocmd!
+        autocmd BufNewFile,BufRead *.ascx,*.aspx,*.cshtml,*.master set filetype=html
+        autocmd BufNewFile,BufRead *.config,*.nuspec set filetype=xml
+    augroup END
 
-        augroup SetFileTypesBasedOnExtensions
-            autocmd!
-            autocmd BufNewFile,BufRead *.ascx,*.aspx,*.cshtml,*.master set filetype=html
-            autocmd BufNewFile,BufRead *.config,*.nuspec set filetype=xml
-        augroup END
+    augroup ConfigureEditorBasedOnFileTypes
+        autocmd!
+        autocmd FileType vim setlocal textwidth=0
+        autocmd FileType xml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    augroup END
 
-        augroup ConfigureEditorBasedOnFileTypes
-            autocmd!
-            autocmd FileType vim setlocal textwidth=0
-            autocmd FileType xml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-        augroup END
+    augroup AddExtensionsForFileSearching
+        autocmd!
+        autocmd FileType autohotkey setlocal suffixesadd+=.ahk
+        autocmd FileType css,less,sass setlocal suffixesadd+=.css,.less,.sass
+        autocmd FileType dosbatch setlocal suffixesadd+=.bat,.cmd
+        autocmd FileType html setlocal suffixesadd+=.ascx,.aspx,.cshtml,.css,.js,.json,.less,.sass,.ts
+        autocmd FileType javascript,ts setlocal suffixesadd+=.js,.json,.ts
+        autocmd FileType perl setlocal suffixesadd+=.pl,.pm
+        autocmd FileType ps1 setlocal suffixesadd+=.ps1,.psd1,.psm1
+        autocmd FileType python setlocal suffixesadd+=.py
+        autocmd FileType ruby setlocal suffixesadd+=.gemspec,.rake,.rb,.rbw,.rdoc
+        autocmd FileType vim setlocal suffixesadd+=.vim
+        autocmd FileType xml setlocal suffixesadd+=*.config,*.xml
+        autocmd FileType xsd setlocal suffixesadd+=*.xsd
+    augroup END
 
-        augroup AddExtensionsForFileSearching
-            autocmd!
-            autocmd FileType autohotkey setlocal suffixesadd+=.ahk
-            autocmd FileType css,less,sass setlocal suffixesadd+=.css,.less,.sass
-            autocmd FileType dosbatch setlocal suffixesadd+=.bat,.cmd
-            autocmd FileType html setlocal suffixesadd+=.ascx,.aspx,.cshtml,.css,.js,.json,.less,.sass,.ts
-            autocmd FileType javascript,ts setlocal suffixesadd+=.js,.json,.ts
-            autocmd FileType perl setlocal suffixesadd+=.pl,.pm
-            autocmd FileType ps1 setlocal suffixesadd+=.ps1,.psd1,.psm1
-            autocmd FileType python setlocal suffixesadd+=.py
-            autocmd FileType ruby setlocal suffixesadd+=.gemspec,.rake,.rb,.rbw,.rdoc
-            autocmd FileType vim setlocal suffixesadd+=.vim
-            autocmd FileType xml setlocal suffixesadd+=*.config,*.xml
-            autocmd FileType xsd setlocal suffixesadd+=*.xsd
-        augroup END
+    augroup EnableSyntaxCompleteWhenNoLanguageSpecificOmniScript
+        autocmd!
+        autocmd Filetype * if (exists('+omnifunc') && &omnifunc == '') | setlocal omnifunc=syntaxcomplete#Complete | endif
+    augroup END
 
-        augroup EnableSyntaxCompleteWhenNoLanguageSpecificOmniScript
-            autocmd!
-            autocmd Filetype * if (exists('+omnifunc') && &omnifunc == '') | setlocal omnifunc=syntaxcomplete#Complete | endif
-        augroup END
+    augroup ScrollToLastSeenLocationOnFileOpen
+        autocmd!
+        autocmd BufReadPost * if line("'\'") > 1 && line("'\'") <= line('$') | exe "normal! g`\'" | endif
+    augroup END
 
-        augroup ScrollToLastSeenLocationOnFileOpen
-            autocmd!
-            autocmd BufReadPost * if line("'\'") > 1 && line("'\'") <= line('$') | exe "normal! g`\'" | endif
-        augroup END
+    augroup DoNotOverwriteBackupFilesWithTheSameNames
+        autocmd!
+        autocmd BufWritePre * let &backupext = '@' . substitute(expand('%:p:h'), ',\\=[:\\\/]', '%', 'g')
+    augroup END
 
-        augroup DoNotOverwriteBackupFilesWithTheSameNames
-            autocmd!
-            autocmd BufWritePre * let &backupext = '@' . substitute(expand('%:p:h'), ',\\=[:\\\/]', '%', 'g')
-        augroup END
-
-        augroup SourceVimrcWhenItSaves
-            autocmd!
-            autocmd! BufWritePost $MYVIMRC nested source $MYVIMRC
-        augroup END
-
-    endif
+    augroup SourceVimrcWhenItSaves
+        autocmd!
+        autocmd! BufWritePost $MYVIMRC nested source $MYVIMRC
+    augroup END
 
 " }
 " mappings {
