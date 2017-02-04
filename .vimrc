@@ -246,7 +246,7 @@
                     \ 'aleerror': 'error',
                     \ 'alewarning': 'warning'
                 \ },
-                \ 'colorscheme': '' . strftime('%a') =~ 'Sat\|Sun' ? 'gruvbox' : 'solarized' . '',
+                \ 'colorscheme': '' . strftime('%a') =~# 'Sat\|Sun' ? 'gruvbox' : 'solarized' . '',
                 \ 'mode_map': {
                     \ 'n' : 'NORMAL',
                     \ 'i' : 'INSERT',
@@ -277,19 +277,19 @@
         " component functions {
 
             function! LightLineFugitive()
-                if &ft == 'help'
+                if &ft ==# 'help'
                     return 'Help'
-                elseif &ft == 'Mundo'
+                elseif &ft ==# 'Mundo'
                     return 'Mundo'
-                elseif &ft == 'MundoDiff'
+                elseif &ft ==# 'MundoDiff'
                     return 'Mundo'
-                elseif &ft == 'qf'
+                elseif &ft ==# 'qf'
                     return exists('w:quickfix_title') ? 'Location' : 'QuickFix'
-                elseif &ft == 'vim-plug'
+                elseif &ft ==# 'vim-plug'
                     return 'Plugins'
-                elseif &ft == 'vimfiler'
+                elseif &ft ==# 'vimfiler'
                     return 'VimFiler'
-                elseif expand('%:t') == 'ControlP'
+                elseif expand('%:t') ==# 'ControlP'
                     return 'CtrlP'
                 endif
                 if exists('*fugitive#head')
@@ -300,26 +300,26 @@
             endfunction
 
             function! LightLineFileName()
-                if &ft == 'Mundo'
+                if &ft ==# 'Mundo'
                     return 'Tree'
-                elseif &ft == 'MundoDiff'
+                elseif &ft ==# 'MundoDiff'
                     return 'Diff'
-                elseif &ft == 'qf'
+                elseif &ft ==# 'qf'
                     return ''
-                elseif &ft == 'vim-plug'
+                elseif &ft ==# 'vim-plug'
                     return ''
-                elseif &ft == 'vimfiler'
+                elseif &ft ==# 'vimfiler'
                     return substitute(vimfiler#get_status_string(), '\*safe\*', '', '')
-                elseif expand('%:t') == 'ControlP' && has_key(g:lightline, 'ctrlp_item')
-                    if g:lightline.ctrlp_item == 'files'
+                elseif expand('%:t') ==# 'ControlP' && has_key(g:lightline, 'ctrlp_item')
+                    if g:lightline.ctrlp_item ==# 'files'
                         return 'Files'
-                    elseif g:lightline.ctrlp_item == 'mru files'
+                    elseif g:lightline.ctrlp_item ==# 'mru files'
                         return 'Recent'
                     endif
                     return 'Buffers'
                 endif
-                let l:filename = expand('%:t') == '' ? '[No Name]' : expand('%:t')
-                if &ft == 'help'
+                let l:filename = expand('%:t') ==# '' ? '[No Name]' : expand('%:t')
+                if &ft ==# 'help'
                     return l:filename
                 endif
                 return l:filename . (&readonly ? ' ' : '') . (&modified ? ' ●' : '')
@@ -346,7 +346,7 @@
             endfunction
 
             function! LightLineFileFormat()
-                return strlen(&ff) > 0 && &ft !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug\|vimfiler' && expand('%:t') != 'ControlP' ? &ff : ''
+                return strlen(&ff) > 0 && &ft !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug\|vimfiler' && expand('%:t') !=# 'ControlP' ? &ff : ''
             endfunction
 
             function! LightLineFileType()
@@ -569,7 +569,7 @@
             set background=dark
         endif
 
-        if strftime('%a') =~ 'Sat\|Sun'
+        if strftime('%a') =~# 'Sat\|Sun'
             colorscheme gruvbox
         else
             colorscheme solarized
