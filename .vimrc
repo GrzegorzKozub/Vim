@@ -104,6 +104,7 @@
     Plug g:unmanaged_dir . 'window_toggles', { 'on': [ 'ToggleLocation', 'ToggleQuickfix' ] }
 
     Plug 'mileszs/ack.vim'
+    Plug 'w0rp/ale'
     Plug 'chriskempson/base16-vim'
     Plug 'ctrlpvim/ctrlp.vim', { 'on': [ 'CtrlP', 'CtrlPBuffer', 'CtrlPMRUFiles' ] }
     Plug 'Raimondi/delimitMate'
@@ -116,7 +117,6 @@
     Plug 'itchyny/lightline.vim'
     Plug 'sbdchd/neoformat', { 'on': 'Neoformat' }
     Plug 'scrooloose/nerdcommenter'
-    Plug 'scrooloose/syntastic'
     Plug 'leafgarland/typescript-vim'
     Plug 'Shougo/unite.vim', { 'on': 'VimFiler' }
     Plug 'altercation/vim-colors-solarized'
@@ -152,6 +152,16 @@
             let g:ackprg = "ag --vimgrep"
         endif
 
+    " }
+    " ALE {
+
+        let g:ale_linters = {
+            \ "vim": []
+        \ }
+
+        let g:ale_sign_error = "●"
+        let g:ale_sign_warning = "▲"
+        let g:ale_statusline_format = [ "● %d", "▲ %d", "" ]
     " }
     " ctrlp.vim {
 
@@ -205,7 +215,7 @@
                         \ [ "filename" ]
                     \ ],
                     \ "right": [
-                        \ [ "syntastic", "trailingwhitespace", "mixedindent", "percent", "lineinfo" ],
+                        \ [ "aleerror", "alewarning", "percent", "lineinfo" ],
                         \ [ "fileencoding", "fileformat" ],
                         \ [ "filetype" ]
                     \ ]
@@ -229,14 +239,12 @@
                     \ "filetype": "LightLineFileType"
                 \ },
                 \ "component_expand": {
-                    \ "trailingwhitespace": "LightLineTrailingWhitespace",
-                    \ "mixedindent": "LightLineMixedIndent",
-                    \ "syntastic": "SyntasticStatuslineFlag"
+                    \ "aleerror": "LightLineAleError",
+                    \ "alewarning": "LightLineAleWarning"
                 \ },
                 \ "component_type": {
-                    \ "trailingwhitespace": "warning",
-                    \ "mixedindent": "warning",
-                    \ "syntastic": "error"
+                    \ "aleerror": "error",
+                    \ "alewarning": "warning"
                 \ },
                 \ "colorscheme": "" . strftime("%a") =~ 'Sat\|Sun' ? "gruvbox" : "solarized" . "",
                 \ "mode_map": {
@@ -317,20 +325,12 @@
                 return l:filename . (&readonly ? " " : "") . (&modified ? " ●" : "")
             endfunction
 
-            function! LightLineWarning(regex, type)
-                if &ft =~ 'help\|Mundo\|MundoDiff\|qf\|vim-plug\|vimfiler'
-                    return ""
-                endif
-                let l:line = search(a:regex, "nw")
-                return l:line != 0 ? printf("%s at %d", a:type, l:line) : ""
+            function! LightLineAleError()
+                return matchstr(ALEGetStatusLine(), '● \d\+')
             endfunction
 
-            function! LightLineTrailingWhitespace()
-                return LightLineWarning('\s$', "trailing")
-            endfunction
-
-            function! LightLineMixedIndent()
-                return LightLineWarning('\v(^\t+ +)|(^ +\t+)', "mixed")
+            function! LightLineAleWarning()
+                return matchstr(ALEGetStatusLine(), '▲ \d\+')
             endfunction
 
             function! LightLinePercent()
@@ -354,6 +354,14 @@
             endfunction
 
         " }
+        " ALE integration {
+
+            augroup ALELightLineUpdate
+                autocmd!
+                autocmd User ALELint call lightline#update()
+            augroup END
+
+        " }
         " ctrlp.vim integration {
 
             let g:ctrlp_status_func = {
@@ -368,13 +376,6 @@
 
             function! CtrlPStatusFuncProg(str)
                 return lightline#statusline(0)
-            endfunction
-
-        " }
-        " syntastic integration {
-
-            function! SyntasticCheckHook(errors)
-                call lightline#update()
             endfunction
 
         " }
@@ -418,21 +419,6 @@
 
         let g:netrw_home = s:vim_plugin_data_dir . "netrw"
         let g:netrw_localcopycmd = "copy"
-
-    " }
-    " syntastic {
-
-        let g:syntastic_always_populate_loc_list = 1
-        let g:syntastic_check_on_wq = 0
-        let g:syntastic_stl_format = "error at %F (%t)"
-
-        let g:syntastic_javascript_checkers = ["eslint"]
-        let g:syntastic_typescript_checkers = ["tslint"]
-
-        let g:syntastic_error_symbol = "\u00A0●"
-        let g:syntastic_style_error_symbol = "\u00A0●"
-        let g:syntastic_warning_symbol = "\u00A0▲"
-        let g:syntastic_style_warning_symbol = "\u00A0▲"
 
     " }
     " typescript-vim {
