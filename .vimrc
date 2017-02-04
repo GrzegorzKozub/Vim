@@ -171,7 +171,11 @@
     " emmet-vim {
 
         let g:user_emmet_install_global = 0
-        autocmd FileType html,css EmmetInstall
+
+        augroup SetupEmmet
+            autocmd!
+            autocmd FileType html,css EmmetInstall
+        augroup END
 
     " }
     " gruvbox {
@@ -352,7 +356,7 @@
         " }
         " ALE integration {
 
-            augroup ALELightLineUpdate
+            augroup UpdateLightLineWhenALELints
                 autocmd!
                 autocmd User ALELint call lightline#update()
             augroup END
@@ -396,7 +400,7 @@
                 call lightline#update()
             endfunction
 
-            augroup ColorSchemeLightLineReload
+            augroup ReloadLightLineWhenColorSchemeChanges
                 autocmd!
                 autocmd ColorScheme * call s:LightLineReload()
             augroup END
@@ -460,8 +464,10 @@
     " vim-fugitive {
 
         if has('autocmd')
-            " after they're used, automatically delete the buffers created by vim-fugitive
-            autocmd BufReadPost fugitive://* set bufhidden=delete
+            augroup SetupFugitive
+                autocmd!
+                autocmd BufReadPost fugitive://* set bufhidden=delete
+            augroup END
         endif
 
     " }
@@ -473,8 +479,11 @@
     " }
     " vim-js-pretty-template {
 
-        autocmd FileType javascript,typescript JsPreTmpl markdown
-        autocmd FileType typescript syn clear foldBraces
+        augroup SetupJsPrettyTemplate 
+            autocmd!
+            autocmd FileType javascript,typescript JsPreTmpl markdown
+            autocmd FileType typescript syn clear foldBraces
+        augroup END
 
     " }
     " vim-jsx {
@@ -511,7 +520,11 @@
         let g:vimfiler_tree_opened_icon = '▼'
 
         nmap <silent> <Leader>f :VimFiler -toggle<CR>
-        autocmd FileType vimfiler nmap <buffer> <Leader>f :VimFiler -toggle<CR>
+
+        augroup SetupVimFiler
+            autocmd!
+            autocmd FileType vimfiler nmap <buffer> <Leader>f :VimFiler -toggle<CR>
+        augroup END
 
     " }
 " }
@@ -519,7 +532,10 @@
     " compilers {
 
         if has('autocmd')
-            autocmd FileType c,cpp compiler gcc
+            augroup SetupCompilers
+                autocmd!
+                autocmd FileType c,cpp compiler gcc
+            augroup END
         endif
 
     " }
@@ -552,7 +568,7 @@
     endfunction
 
     if has('autocmd')
-        augroup ColorSchemeHideTildeOnEmptyLines
+        augroup HideTildeOnEmptyLinesWhenColorSchemeChanges
             autocmd!
             autocmd ColorScheme * call HideTildeOnEmptyLines()
         augroup END
@@ -588,47 +604,53 @@
 
     if has('autocmd')
 
-    " file types based on file extensions {
+        augroup SetFileTypesBasedOnExtensions
+            autocmd!
+            autocmd BufNewFile,BufRead *.ascx,*.aspx,*.cshtml,*.master set filetype=html
+            autocmd BufNewFile,BufRead *.config,*.nuspec set filetype=xml
+        augroup END
 
-        autocmd BufNewFile,BufRead *.ascx,*.aspx,*.cshtml,*.master set filetype=html
-        autocmd BufNewFile,BufRead *.config,*.nuspec set filetype=xml
+        augroup ConfigureEditorBasedOnFileTypes
+            autocmd!
+            autocmd FileType vim setlocal textwidth=0
+            autocmd FileType xml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+        augroup END
 
-    " }
-    " file type specific settings {
+        augroup AddExtensionsForFileSearching
+            autocmd!
+            autocmd FileType autohotkey setlocal suffixesadd+=.ahk
+            autocmd FileType css,less,sass setlocal suffixesadd+=.css,.less,.sass
+            autocmd FileType dosbatch setlocal suffixesadd+=.bat,.cmd
+            autocmd FileType html setlocal suffixesadd+=.ascx,.aspx,.cshtml,.css,.js,.json,.less,.sass,.ts
+            autocmd FileType javascript,ts setlocal suffixesadd+=.js,.json,.ts
+            autocmd FileType perl setlocal suffixesadd+=.pl,.pm
+            autocmd FileType ps1 setlocal suffixesadd+=.ps1,.psd1,.psm1
+            autocmd FileType python setlocal suffixesadd+=.py
+            autocmd FileType ruby setlocal suffixesadd+=.gemspec,.rake,.rb,.rbw,.rdoc
+            autocmd FileType vim setlocal suffixesadd+=.vim
+            autocmd FileType xml setlocal suffixesadd+=*.config,*.xml
+            autocmd FileType xsd setlocal suffixesadd+=*.xsd
+        augroup END
 
-        autocmd FileType vim setlocal textwidth=0
+        augroup EnableSyntaxCompleteWhenNoLanguageSpecificOmniScript
+            autocmd!
+            autocmd Filetype * if (exists('+omnifunc') && &omnifunc == '') | setlocal omnifunc=syntaxcomplete#Complete | endif
+        augroup END
 
-        autocmd FileType xml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+        augroup ScrollToLastSeenLocationOnFileOpen
+            autocmd!
+            autocmd BufReadPost * if line("'\'") > 1 && line("'\'") <= line('$') | exe "normal! g`\'" | endif
+        augroup END
 
-        autocmd FileType autohotkey setlocal suffixesadd+=.ahk
-        autocmd FileType javascript,ts setlocal suffixesadd+=.js,.json,.ts
-        autocmd FileType css,less,sass setlocal suffixesadd+=.css,.less,.sass
-        autocmd FileType dosbatch setlocal suffixesadd+=.bat,.cmd
-        autocmd FileType html setlocal suffixesadd+=.ascx,.aspx,.cshtml,.css,.js,.json,.less,.sass,.ts
-        autocmd FileType perl setlocal suffixesadd+=.pl,.pm
-        autocmd FileType ps1 setlocal suffixesadd+=.ps1,.psd1,.psm1
-        autocmd FileType python setlocal suffixesadd+=.py
-        autocmd FileType ruby setlocal suffixesadd+=.gemspec,.rake,.rb,.rbw,.rdoc
-        autocmd FileType vim setlocal suffixesadd+=.vim
-        autocmd FileType xml setlocal suffixesadd+=*.config,*.xml
-        autocmd FileType xsd setlocal suffixesadd+=*.xsd
+        augroup DoNotOverwriteBackupFilesWithTheSameNames
+            autocmd!
+            autocmd BufWritePre * let &backupext = '@' . substitute(expand('%:p:h'), ',\\=[:\\\/]', '%', 'g')
+        augroup END
 
-        " enable SyntaxComplete if there's no language specific OMNI script
-        autocmd Filetype * if (exists('+omnifunc') && &omnifunc == '') | setlocal omnifunc=syntaxcomplete#Complete | endif
-
-    " }
-    " other {
-
-        " after a file is open, go to the last visited location
-        autocmd BufReadPost * if line("'\'") > 1 && line("'\'") <= line('$') | exe "normal! g`\'" | endif
-
-        " do not overwrite the backup files of the same name
-        autocmd BufWritePre * let &backupext = '@' . substitute(expand('%:p:h'), ',\\=[:\\\/]', '%', 'g')
-
-        " source .vimrc when it's saved
-        autocmd! BufWritePost $MYVIMRC nested source $MYVIMRC
-
-    " }
+        augroup SourceVimrcWhenItSaves
+            autocmd!
+            autocmd! BufWritePost $MYVIMRC nested source $MYVIMRC
+        augroup END
 
     endif
 

@@ -12,8 +12,11 @@ if !exists('g:screen_memento_by_instance')
     let g:screen_memento_by_instance = 1
 endif
 
-autocmd VimEnter * if g:screen_memento_active == 1 | call ScreenMementoRestore() | endif
-autocmd VimLeavePre * if g:screen_memento_active == 1 | call ScreenMementoSave() | endif
+augroup SetupScreenMemento
+    autocmd!
+    autocmd VimEnter * if g:screen_memento_active == 1 | call ScreenMementoRestore() | endif
+    autocmd VimLeavePre * if g:screen_memento_active == 1 | call ScreenMementoSave() | endif
+augroup END
 
 function! ScreenMementoRestore()
     let file = s:GetFilePath()
