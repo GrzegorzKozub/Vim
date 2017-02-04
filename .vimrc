@@ -2,7 +2,7 @@
 
 " file options {
 
-    scriptencoding "utf-8"
+    scriptencoding 'utf-8'
 
 " }
 " includes {
@@ -13,14 +13,14 @@
 " }
 " directories {
 
-    let s:vim_data_dir = expand("~/.vim/")
-    let s:vim_backup_dir = s:vim_data_dir . "backup/"
-    let s:vim_undo_dir = s:vim_data_dir . "undo/"
-    let s:vim_plugin_data_dir = s:vim_data_dir . "plugins/"
+    let s:vim_data_dir = expand('~/.vim/')
+    let s:vim_backup_dir = s:vim_data_dir . 'backup/'
+    let s:vim_undo_dir = s:vim_data_dir . 'undo/'
+    let s:vim_plugin_data_dir = s:vim_data_dir . 'plugins/'
 
-    silent! call mkdir(s:vim_backup_dir, "p")
-    silent! call mkdir(s:vim_undo_dir, "p")
-    silent! call mkdir(s:vim_plugin_data_dir, "p")
+    silent! call mkdir(s:vim_backup_dir, 'p')
+    silent! call mkdir(s:vim_undo_dir, 'p')
+    silent! call mkdir(s:vim_plugin_data_dir, 'p')
 
 " }
 " settings {
@@ -61,11 +61,11 @@
 
     let &backupdir = s:vim_backup_dir
     let &undodir = s:vim_undo_dir
-    let &viminfo = &viminfo . ",n" . s:vim_data_dir . ".viminfo"
+    let &viminfo = &viminfo . ',n' . s:vim_data_dir . '.viminfo'
 
     language English_US
 
-    if has("gui_running")
+    if has('gui_running')
         set columns=160
         set cursorline
         set guifont=Fira\ Code\ Medium:h13:cEASTEUROPE
@@ -92,9 +92,9 @@
 " }
 " vim-plug {
 
-    call plug#begin($VIM . "/plugins")
+    call plug#begin($VIM . '/plugins')
 
-    let g:unmanaged_dir = $VIM . "/unmanaged/"
+    let g:unmanaged_dir = $VIM . '/unmanaged/'
 
     Plug g:unmanaged_dir . 'compilers', { 'for': [ 'c', 'cpp' ] }
     Plug g:unmanaged_dir . 'customized_colorschemes'
@@ -148,24 +148,24 @@
 " plugins {
     " ack.vim {
 
-        if executable("ag")
-            let g:ackprg = "ag --vimgrep"
+        if executable('ag')
+            let g:ackprg = 'ag --vimgrep'
         endif
 
     " }
     " ALE {
 
         let g:ale_linters = {
-            \ "vim": []
+            \ 'vim': []
         \ }
 
-        let g:ale_sign_error = "●"
-        let g:ale_sign_warning = "▲"
-        let g:ale_statusline_format = [ "● %d", "▲ %d", "" ]
+        let g:ale_sign_error = '●'
+        let g:ale_sign_warning = '▲'
+        let g:ale_statusline_format = [ '● %d', '▲ %d', '' ]
     " }
     " ctrlp.vim {
 
-        let g:ctrlp_cache_dir = s:vim_plugin_data_dir . "ctrlp.vim"
+        let g:ctrlp_cache_dir = s:vim_plugin_data_dir . 'ctrlp.vim'
 
         nmap <silent> <C-p> :CtrlP<CR>
         nmap <silent> <C-b> :CtrlPBuffer<CR>
@@ -180,9 +180,9 @@
     " }
     " gruvbox {
 
-        if has("gui_running")
-            let g:gruvbox_contrast_dark  = "soft"
-            let g:gruvbox_contrast_light = "soft"
+        if has('gui_running')
+            let g:gruvbox_contrast_dark  = 'soft'
+            let g:gruvbox_contrast_light = 'soft'
 
             let g:gruvbox_bold = 0
             let g:gruvbox_italic = 0
@@ -191,85 +191,85 @@
             let g:gruvbox_invert_selection = 0
             let g:gruvbox_italicize_comments = 0
 
-            let g:gruvbox_sign_column = "bg0"
-            let g:gruvbox_vert_split = "bg0"
+            let g:gruvbox_sign_column = 'bg0'
+            let g:gruvbox_vert_split = 'bg0'
         endif
 
     " }
     " javascript-libraries-syntax.vim {
 
-        let g:used_javascript_libs = "underscore,angularjs,angularui,angularuirouter,react,requirejs,jasmine,chai"
+        let g:used_javascript_libs = 'underscore,angularjs,angularui,angularuirouter,react,requirejs,jasmine,chai'
 
     " }
     " lightline {
 
-        if has("gui_running")
+        if has('gui_running')
 
         " configuration {
 
             let g:lightline = {
-                \ "active": {
-                    \ "left": [
-                        \ [ "mode", "paste" ],
-                        \ [ "fugitive" ],
-                        \ [ "filename" ]
+                \ 'active': {
+                    \ 'left': [
+                        \ [ 'mode', 'paste' ],
+                        \ [ 'fugitive' ],
+                        \ [ 'filename' ]
                     \ ],
-                    \ "right": [
-                        \ [ "aleerror", "alewarning", "percent", "lineinfo" ],
-                        \ [ "fileencoding", "fileformat" ],
-                        \ [ "filetype" ]
+                    \ 'right': [
+                        \ [ 'aleerror', 'alewarning', 'percent', 'lineinfo' ],
+                        \ [ 'fileencoding', 'fileformat' ],
+                        \ [ 'filetype' ]
                     \ ]
                 \ },
-                \ "inactive" : {
-                    \ "left": [
-                        \ [ "fugitive", "filename" ]
+                \ 'inactive' : {
+                    \ 'left': [
+                        \ [ 'fugitive', 'filename' ]
                     \ ],
-                    \ "right": [
+                    \ 'right': [
                         \ [ ],
-                        \ [ "filetype", "fileencoding", "fileformat", "percent", "lineinfo" ]
+                        \ [ 'filetype', 'fileencoding', 'fileformat', 'percent', 'lineinfo' ]
                     \ ]
                 \ },
-                \ "component_function": {
-                    \ "fugitive": "LightLineFugitive",
-                    \ "filename": "LightLineFileName",
-                    \ "percent": "LightLinePercent",
-                    \ "lineinfo": "LightLineLineInfo",
-                    \ "fileencoding": "LightLineFileEncoding",
-                    \ "fileformat": "LightLineFileFormat",
-                    \ "filetype": "LightLineFileType"
+                \ 'component_function': {
+                    \ 'fugitive': 'LightLineFugitive',
+                    \ 'filename': 'LightLineFileName',
+                    \ 'percent': 'LightLinePercent',
+                    \ 'lineinfo': 'LightLineLineInfo',
+                    \ 'fileencoding': 'LightLineFileEncoding',
+                    \ 'fileformat': 'LightLineFileFormat',
+                    \ 'filetype': 'LightLineFileType'
                 \ },
-                \ "component_expand": {
-                    \ "aleerror": "LightLineAleError",
-                    \ "alewarning": "LightLineAleWarning"
+                \ 'component_expand': {
+                    \ 'aleerror': 'LightLineAleError',
+                    \ 'alewarning': 'LightLineAleWarning'
                 \ },
-                \ "component_type": {
-                    \ "aleerror": "error",
-                    \ "alewarning": "warning"
+                \ 'component_type': {
+                    \ 'aleerror': 'error',
+                    \ 'alewarning': 'warning'
                 \ },
-                \ "colorscheme": "" . strftime("%a") =~ 'Sat\|Sun' ? "gruvbox" : "solarized" . "",
-                \ "mode_map": {
-                    \ "n" : "NORMAL",
-                    \ "i" : "INSERT",
-                    \ "R" : "REPLACE",
-                    \ "v" : "VISUAL",
-                    \ "V" : "VISUAL LINE",
-                    \ "\<C-v>": "VISUAL BLOCK",
-                    \ "c" : "COMMAND",
-                    \ "s" : "SELECT",
-                    \ "S" : "SELECT LINE",
-                    \ "\<C-s>": "SELECT BLOCK",
-                    \ "t": "TERMINAL"
+                \ 'colorscheme': '' . strftime('%a') =~ 'Sat\|Sun' ? 'gruvbox' : 'solarized' . '',
+                \ 'mode_map': {
+                    \ 'n' : 'NORMAL',
+                    \ 'i' : 'INSERT',
+                    \ 'R' : 'REPLACE',
+                    \ 'v' : 'VISUAL',
+                    \ 'V' : 'VISUAL LINE',
+                    \ '\<C-v>': 'VISUAL BLOCK',
+                    \ 'c' : 'COMMAND',
+                    \ 's' : 'SELECT',
+                    \ 'S' : 'SELECT LINE',
+                    \ '\<C-s>': 'SELECT BLOCK',
+                    \ 't': 'TERMINAL'
                 \ },
-                \ "separator": {
-                    \ "left": "",
-                    \ "right": ""
+                \ 'separator': {
+                    \ 'left': '',
+                    \ 'right': ''
                 \ },
-                \ "subseparator": {
-                    \ "left": "",
-                    \ "right": ""
+                \ 'subseparator': {
+                    \ 'left': '',
+                    \ 'right': ''
                 \ },
-                \ "enable": {
-                    \ "tabline": 0
+                \ 'enable': {
+                    \ 'tabline': 0
                 \ },
             \ }
 
@@ -277,52 +277,52 @@
         " component functions {
 
             function! LightLineFugitive()
-                if &ft == "help"
-                    return "Help"
-                elseif &ft == "Mundo"
-                    return "Mundo"
-                elseif &ft == "MundoDiff"
-                    return "Mundo"
-                elseif &ft == "qf"
-                    return exists("w:quickfix_title") ? "Location" : "QuickFix"
-                elseif &ft == "vim-plug"
-                    return "Plugins"
-                elseif &ft == "vimfiler"
-                    return "VimFiler"
-                elseif expand("%:t") == "ControlP"
-                    return "CtrlP"
+                if &ft == 'help'
+                    return 'Help'
+                elseif &ft == 'Mundo'
+                    return 'Mundo'
+                elseif &ft == 'MundoDiff'
+                    return 'Mundo'
+                elseif &ft == 'qf'
+                    return exists('w:quickfix_title') ? 'Location' : 'QuickFix'
+                elseif &ft == 'vim-plug'
+                    return 'Plugins'
+                elseif &ft == 'vimfiler'
+                    return 'VimFiler'
+                elseif expand('%:t') == 'ControlP'
+                    return 'CtrlP'
                 endif
-                if exists("*fugitive#head")
+                if exists('*fugitive#head')
                     let l:branch = fugitive#head()
-                    return l:branch !=# "" ? " ".l:branch : ""
+                    return l:branch !=# '' ? ' '.l:branch : ''
                 endif
-                return ""
+                return ''
             endfunction
 
             function! LightLineFileName()
-                if &ft == "Mundo"
-                    return "Tree"
-                elseif &ft == "MundoDiff"
-                    return "Diff"
-                elseif &ft == "qf"
-                    return ""
-                elseif &ft == "vim-plug"
-                    return ""
-                elseif &ft == "vimfiler"
-                    return substitute(vimfiler#get_status_string(), '\*safe\*', "", "")
-                elseif expand("%:t") == "ControlP" && has_key(g:lightline, "ctrlp_item")
-                    if g:lightline.ctrlp_item == "files"
-                        return "Files"
-                    elseif g:lightline.ctrlp_item == "mru files"
-                        return "Recent"
+                if &ft == 'Mundo'
+                    return 'Tree'
+                elseif &ft == 'MundoDiff'
+                    return 'Diff'
+                elseif &ft == 'qf'
+                    return ''
+                elseif &ft == 'vim-plug'
+                    return ''
+                elseif &ft == 'vimfiler'
+                    return substitute(vimfiler#get_status_string(), '\*safe\*', '', '')
+                elseif expand('%:t') == 'ControlP' && has_key(g:lightline, 'ctrlp_item')
+                    if g:lightline.ctrlp_item == 'files'
+                        return 'Files'
+                    elseif g:lightline.ctrlp_item == 'mru files'
+                        return 'Recent'
                     endif
-                    return "Buffers"
+                    return 'Buffers'
                 endif
-                let l:filename = expand("%:t") == "" ? "[No Name]" : expand("%:t")
-                if &ft == "help"
+                let l:filename = expand('%:t') == '' ? '[No Name]' : expand('%:t')
+                if &ft == 'help'
                     return l:filename
                 endif
-                return l:filename . (&readonly ? " " : "") . (&modified ? " ●" : "")
+                return l:filename . (&readonly ? ' ' : '') . (&modified ? ' ●' : '')
             endfunction
 
             function! LightLineAleError()
@@ -334,23 +334,23 @@
             endfunction
 
             function! LightLinePercent()
-                return &ft !~? 'Mundo\|MundoDiff' ? printf("%3d%%", (100 * line(".") / line("$"))) : ""
+                return &ft !~? 'Mundo\|MundoDiff' ? printf('%3d%%', (100 * line('.') / line('$'))) : ''
             endfunction
 
             function! LightLineLineInfo()
-                return &ft !~? 'Mundo\|MundoDiff' ? printf("%3d %3d", line("."), col(".")) : ""
+                return &ft !~? 'Mundo\|MundoDiff' ? printf('%3d %3d', line('.'), col('.')) : ''
             endfunction
 
             function! LightLineFileEncoding()
-                return strlen(&fenc) > 0 && &ft !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug\|vimfiler' ? &fenc : ""
+                return strlen(&fenc) > 0 && &ft !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug\|vimfiler' ? &fenc : ''
             endfunction
 
             function! LightLineFileFormat()
-                return strlen(&ff) > 0 && &ft !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug\|vimfiler' && expand("%:t") != "ControlP" ? &ff : ""
+                return strlen(&ff) > 0 && &ft !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug\|vimfiler' && expand('%:t') != 'ControlP' ? &ff : ''
             endfunction
 
             function! LightLineFileType()
-                return strlen(&ft) > 0 && &ft !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug\|vimfiler' ? &ft : ""
+                return strlen(&ft) > 0 && &ft !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug\|vimfiler' ? &ft : ''
             endfunction
 
         " }
@@ -365,8 +365,8 @@
         " ctrlp.vim integration {
 
             let g:ctrlp_status_func = {
-                \ "main": "CtrlPStatusFuncMain",
-                \ "prog": "CtrlPStatusFuncProg",
+                \ 'main': 'CtrlPStatusFuncMain',
+                \ 'prog': 'CtrlPStatusFuncProg',
             \ }
 
             function! CtrlPStatusFuncMain(focus, byfname, regex, prev, item, next, marked)
@@ -382,16 +382,16 @@
         " reload on colorscheme change {
 
             function! s:LightLineReload()
-                if !exists("g:loaded_lightline")
+                if !exists('g:loaded_lightline')
                     return
                 endif
 
-                "for l:vanila_colorscheme_file in split(globpath($VIM . '\plugins\lightline.vim\autoload\lightline\colorscheme', "*.vim"), "\n")
-                    "execute("source " . l:vanila_colorscheme_file)
+                "for l:vanila_colorscheme_file in split(globpath($VIM . '\plugins\lightline.vim\autoload\lightline\colorscheme', '*.vim'), '\n')
+                    "execute('source ' . l:vanila_colorscheme_file)
                 "endfor
 
-                for l:customized_colorscheme_file in split(globpath($VIM . '\unmanaged\customized_colorschemes\plugin\lightline\colorscheme', "*.vim"), "\n")
-                    execute("source " . l:customized_colorscheme_file)
+                for l:customized_colorscheme_file in split(globpath($VIM . '\unmanaged\customized_colorschemes\plugin\lightline\colorscheme', '*.vim'), '\n')
+                    execute('source ' . l:customized_colorscheme_file)
                 endfor
 
                 let g:lightline.colorscheme = g:colors_name
@@ -417,25 +417,25 @@
     " }
     " netrw {
 
-        let g:netrw_home = s:vim_plugin_data_dir . "netrw"
-        let g:netrw_localcopycmd = "copy"
+        let g:netrw_home = s:vim_plugin_data_dir . 'netrw'
+        let g:netrw_localcopycmd = 'copy'
 
     " }
     " typescript-vim {
 
-        let g:typescript_compiler_binary = "tsc"
-        let g:typescript_compiler_options = ""
+        let g:typescript_compiler_binary = 'tsc'
+        let g:typescript_compiler_options = ''
 
     " }
     " vim-colors-solarized {
 
-        if has("gui_running")
+        if has('gui_running')
             let g:solarized_bold = 0
             let g:solarized_underline = 0
             let g:solarized_italic = 0
 
             " https://github.com/altercation/vim-colors-solarized/issues/40
-            call togglebg#map("")
+            call togglebg#map('')
 
             function! BackgroundToggle()
                 ToggleBG
@@ -463,7 +463,7 @@
     " }
     " vim-fugitive {
 
-        if has("autocmd")
+        if has('autocmd')
             " after they're used, automatically delete the buffers created by vim-fugitive
             autocmd BufReadPost fugitive://* set bufhidden=delete
         endif
@@ -503,16 +503,16 @@
     " vimfiler.vim {
 
         let g:vimfiler_as_default_explorer = 1
-        let g:vimfiler_data_directory = s:vim_plugin_data_dir . "vimfiler.vim"
+        let g:vimfiler_data_directory = s:vim_plugin_data_dir . 'vimfiler.vim'
         let g:vimfiler_force_overwrite_statusline = 0
         let g:vimfiler_ignore_pattern = []
 
-        let g:vimfiler_file_icon = " "
-        let g:vimfiler_marked_file_icon = "✔"
-        let g:vimfiler_readonly_file_icon = ""
-        let g:vimfiler_tree_closed_icon = "▶"
-        let g:vimfiler_tree_leaf_icon = " "
-        let g:vimfiler_tree_opened_icon = "▼"
+        let g:vimfiler_file_icon = ' '
+        let g:vimfiler_marked_file_icon = '✔'
+        let g:vimfiler_readonly_file_icon = ''
+        let g:vimfiler_tree_closed_icon = '▶'
+        let g:vimfiler_tree_leaf_icon = ' '
+        let g:vimfiler_tree_opened_icon = '▼'
 
         nmap <silent> <Leader>f :VimFiler -toggle<CR>
         autocmd FileType vimfiler nmap <buffer> <Leader>f :VimFiler -toggle<CR>
@@ -522,14 +522,14 @@
 " unmanaged {
     " compilers {
 
-        if has("autocmd")
+        if has('autocmd')
             autocmd FileType c,cpp compiler gcc
         endif
 
     " }
     " full_screen {
 
-        if has("gui_running")
+        if has('gui_running')
             nmap <silent> <F11> :ToggleFullScreen<CR>
             nmap <silent> <F12> :CycleAlpha<CR>
         endif
@@ -537,7 +537,7 @@
     " }
     " screen_memento {
 
-        if has("gui_running")
+        if has('gui_running')
             let g:screen_memento_dir = s:vim_plugin_data_dir
         endif
 
@@ -555,30 +555,30 @@
         highlight EndOfBuffer guifg=BG
     endfunction
 
-    if has("autocmd")
+    if has('autocmd')
         augroup ColorSchemeHideTildeOnEmptyLines
             autocmd!
             autocmd ColorScheme * call HideTildeOnEmptyLines()
         augroup END
     endif
 
-    if has("gui_running")
-        if strftime("%H") > 6 && strftime("%H") < 18
+    if has('gui_running')
+        if strftime('%H') > 6 && strftime('%H') < 18
             set background=light
         else
             set background=dark
         endif
 
-        if strftime("%a") =~ 'Sat\|Sun'
+        if strftime('%a') =~ 'Sat\|Sun'
             colorscheme gruvbox
         else
             colorscheme solarized
         endif
 
         function! CycleColorSchemes()
-            let l:all = ["solarized", "gruvbox"]
+            let l:all = ['solarized', 'gruvbox']
             let l:current = index(l:all, g:colors_name)
-            exe("colorscheme " . (l:current == len(l:all) - 1 ? l:all[0] : l:all[l:current + 1]))
+            exe('colorscheme ' . (l:current == len(l:all) - 1 ? l:all[0] : l:all[l:current + 1]))
         endfunction
 
         nmap <silent> <F5> :call CycleColorSchemes()<CR>
@@ -590,7 +590,7 @@
 " }
 " auto-commands {
 
-    if has("autocmd")
+    if has('autocmd')
 
     " file types based on file extensions {
 
@@ -618,16 +618,16 @@
         autocmd FileType xsd setlocal suffixesadd+=*.xsd
 
         " enable SyntaxComplete if there's no language specific OMNI script
-        autocmd Filetype * if (exists("+omnifunc") && &omnifunc == "") | setlocal omnifunc=syntaxcomplete#Complete | endif
+        autocmd Filetype * if (exists('+omnifunc') && &omnifunc == '') | setlocal omnifunc=syntaxcomplete#Complete | endif
 
     " }
     " other {
 
         " after a file is open, go to the last visited location
-        autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+        autocmd BufReadPost * if line("'\'") > 1 && line("'\'") <= line('$') | exe "normal! g`\'" | endif
 
         " do not overwrite the backup files of the same name
-        autocmd BufWritePre * let &backupext = "@" . substitute(expand("%:p:h"), ",\\=[:\\\/]", "%", "g")
+        autocmd BufWritePre * let &backupext = '@' . substitute(expand('%:p:h'), ',\\=[:\\\/]', '%', 'g')
 
         " source .vimrc when it's saved
         autocmd! BufWritePost $MYVIMRC nested source $MYVIMRC

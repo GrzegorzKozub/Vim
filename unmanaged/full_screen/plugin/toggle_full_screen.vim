@@ -1,12 +1,12 @@
-if !has("gui_running")
+if !has('gui_running')
     finish
 endif
 
 command! ToggleFullScreen call ToggleFullScreen()
 
 function! ToggleFullScreen()
-    call libcallnr($VIMRUNTIME . "/gvimfullscreen.dll", "ToggleFullScreen", 0)
-    if exists("s:full_screen")
+    call libcallnr($VIMRUNTIME . '/gvimfullscreen.dll', 'ToggleFullScreen', 0)
+    if exists('s:full_screen')
         unlet s:full_screen
         let g:screen_memento_active = 1
     else
