@@ -1,10 +1,5 @@
 ﻿" vim: set foldmarker={,} foldmethod=marker :
 
-" file options {
-
-    scriptencoding 'utf-8'
-
-" }
 " includes {
 
     runtime defaults.vim
@@ -63,6 +58,7 @@
     let &undodir = s:vim_undo_dir
     let &viminfo = &viminfo . ',n' . s:vim_data_dir . '.viminfo'
 
+    scriptencoding 'utf-8'
     language English_US
 
     if has('gui_running')

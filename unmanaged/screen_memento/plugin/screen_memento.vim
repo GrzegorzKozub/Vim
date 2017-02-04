@@ -1,4 +1,6 @@
-﻿if !has('gui_running')
+﻿scriptencoding 'utf-8'
+
+if !has('gui_running')
     finish
 endif
 
