@@ -19,14 +19,14 @@ augroup SetupScreenMemento
 augroup END
 
 function! ScreenMementoRestore()
-    let file = s:GetFilePath()
-    if has('gui_running') && g:screen_memento_active && filereadable(file)
-        let instance = s:GetInstanceName()
-        for line in readfile(file)
-            let sizepos = split(line)
-            if len(sizepos) == 5 && sizepos[0] == instance
-                silent! execute 'set columns=' . sizepos[1] . ' lines=' . sizepos[2]
-                silent! execute 'winpos ' . sizepos[3] . ' ' . sizepos[4]
+    let l:file = s:GetFilePath()
+    if has('gui_running') && g:screen_memento_active && filereadable(l:file)
+        let l:instance = s:GetInstanceName()
+        for l:line in readfile(l:file)
+            let l:sizepos = split(l:line)
+            if len(l:sizepos) == 5 && l:sizepos[0] == l:instance
+                silent! execute 'set columns=' . l:sizepos[1] . ' lines=' . l:sizepos[2]
+                silent! execute 'winpos ' . l:sizepos[3] . ' ' . l:sizepos[4]
                 return
             endif
         endfor
@@ -35,19 +35,19 @@ endfunction
 
 function! ScreenMementoSave()
     if has('gui_running') && g:screen_memento_active
-        let instance = s:GetInstanceName()
-        let data = instance . ' ' . &columns . ' ' . &lines . ' ' .
+        let l:instance = s:GetInstanceName()
+        let l:data = l:instance . ' ' . &columns . ' ' . &lines . ' ' .
             \ (getwinposx() < 0 ? 0 : getwinposx()) . ' ' .
             \ (getwinposy() < 0 ? 0 : getwinposy())
-        let file = s:GetFilePath()
-        if filereadable(file)
-            let lines = readfile(file)
-            call filter(lines, "v:val !~ '^" . instance . "\\>'")
-            call add(lines, data)
+        let l:file = s:GetFilePath()
+        if filereadable(l:file)
+            let l:lines = readfile(l:file)
+            call filter(l:lines, "v:val !~ '^" . l:instance . "\\>'")
+            call add(l:lines, l:data)
         else
-            let lines = [data]
+            let l:lines = [l:data]
         endif
-        call writefile(lines, file)
+        call writefile(l:lines, l:file)
     endif
 endfunction
 
