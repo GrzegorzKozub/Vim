@@ -273,17 +273,17 @@
         " component functions {
 
             function! LightLineFugitive()
-                if &ft ==# 'help'
+                if &filetype ==# 'help'
                     return 'Help'
-                elseif &ft ==# 'Mundo'
+                elseif &filetype ==# 'Mundo'
                     return 'Mundo'
-                elseif &ft ==# 'MundoDiff'
+                elseif &filetype ==# 'MundoDiff'
                     return 'Mundo'
-                elseif &ft ==# 'qf'
+                elseif &filetype ==# 'qf'
                     return exists('w:quickfix_title') ? 'Location' : 'QuickFix'
-                elseif &ft ==# 'vim-plug'
+                elseif &filetype ==# 'vim-plug'
                     return 'Plugins'
-                elseif &ft ==# 'vimfiler'
+                elseif &filetype ==# 'vimfiler'
                     return 'VimFiler'
                 elseif expand('%:t') ==# 'ControlP'
                     return 'CtrlP'
@@ -296,15 +296,15 @@
             endfunction
 
             function! LightLineFileName()
-                if &ft ==# 'Mundo'
+                if &filetype ==# 'Mundo'
                     return 'Tree'
-                elseif &ft ==# 'MundoDiff'
+                elseif &filetype ==# 'MundoDiff'
                     return 'Diff'
-                elseif &ft ==# 'qf'
+                elseif &filetype ==# 'qf'
                     return ''
-                elseif &ft ==# 'vim-plug'
+                elseif &filetype ==# 'vim-plug'
                     return ''
-                elseif &ft ==# 'vimfiler'
+                elseif &filetype ==# 'vimfiler'
                     return substitute(vimfiler#get_status_string(), '\*safe\*', '', '')
                 elseif expand('%:t') ==# 'ControlP' && has_key(g:lightline, 'ctrlp_item')
                     if g:lightline.ctrlp_item ==# 'files'
@@ -315,7 +315,7 @@
                     return 'Buffers'
                 endif
                 let l:filename = expand('%:t') ==# '' ? '[No Name]' : expand('%:t')
-                if &ft ==# 'help'
+                if &filetype ==# 'help'
                     return l:filename
                 endif
                 return l:filename . (&readonly ? ' ' : '') . (&modified ? ' ●' : '')
@@ -330,23 +330,23 @@
             endfunction
 
             function! LightLinePercent()
-                return &ft !~? 'Mundo\|MundoDiff' ? printf('%3d%%', (100 * line('.') / line('$'))) : ''
+                return &filetype !~? 'Mundo\|MundoDiff' ? printf('%3d%%', (100 * line('.') / line('$'))) : ''
             endfunction
 
             function! LightLineLineInfo()
-                return &ft !~? 'Mundo\|MundoDiff' ? printf('%3d %3d', line('.'), col('.')) : ''
+                return &filetype !~? 'Mundo\|MundoDiff' ? printf('%3d %3d', line('.'), col('.')) : ''
             endfunction
 
             function! LightLineFileEncoding()
-                return strlen(&fenc) > 0 && &ft !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug\|vimfiler' ? &fenc : ''
+                return strlen(&fileencoding) > 0 && &filetype !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug\|vimfiler' ? &fileencoding : ''
             endfunction
 
             function! LightLineFileFormat()
-                return strlen(&ff) > 0 && &ft !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug\|vimfiler' && expand('%:t') !=# 'ControlP' ? &ff : ''
+                return strlen(&fileformat) > 0 && &filetype !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug\|vimfiler' && expand('%:t') !=# 'ControlP' ? &fileformat : ''
             endfunction
 
             function! LightLineFileType()
-                return strlen(&ft) > 0 && &ft !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug\|vimfiler' ? &ft : ''
+                return strlen(&filetype) > 0 && &filetype !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug\|vimfiler' ? &filetype : ''
             endfunction
 
         " }
