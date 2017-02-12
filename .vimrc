@@ -64,7 +64,7 @@
     if has('gui_running')
         set columns=160
         set cursorline
-        set guifont=Fira\ Code\ Medium:h13:cEASTEUROPE
+        set guifont=Fira\ Code:h13:cEASTEUROPE
         set guioptions+=c
         set guioptions-=b
         set guioptions-=r
