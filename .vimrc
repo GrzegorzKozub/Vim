@@ -554,7 +554,11 @@
 " colorscheme {
 
     function! HideTildeOnEmptyLines()
-        highlight EndOfBuffer guifg=BG
+        if has('gui_running')
+            highlight EndOfBuffer guifg=BG
+        else
+            highlight EndOfBuffer ctermfg=BG
+        endif
     endfunction
 
     augroup HideTildeOnEmptyLinesWhenColorSchemeChanges
