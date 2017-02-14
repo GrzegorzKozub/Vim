@@ -585,13 +585,6 @@
     else
         set background=dark
         colorscheme peachpuff
-
-        highlight CursorLine ctermbg=darkgray
-        highlight Error ctermbg=BG ctermfg=darkred
-        highlight Search ctermbg=yellow
-        highlight SignColumn ctermbg=BG
-        highlight ToDo ctermbg=BG ctermfg=darkyellow
-        highlight VertSplit ctermbg=BG
     endif
 
 " }
