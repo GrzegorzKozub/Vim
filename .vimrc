@@ -34,9 +34,11 @@
     set hidden
     set hlsearch
     set ignorecase
+    set laststatus=2
     set lazyredraw
     set listchars=tab:→\ ,eol:¬,trail:·
     set nojoinspaces
+    set noshowmode
     set noswapfile
     set nowrap
     set number
@@ -74,10 +76,8 @@
         set guioptions+=M
         set guioptions-=T
         set guitablabel=%t\ %M
-        set laststatus=2
         set lines=46
         set linespace=0
-        set noshowmode
         "set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
 
         winpos 75 320
@@ -197,8 +197,6 @@
     " }
     " lightline {
 
-        if has('gui_running')
-
         " configuration {
 
             let g:lightline = {
@@ -240,7 +238,7 @@
                     \ 'aleerror': 'error',
                     \ 'alewarning': 'warning'
                 \ },
-                \ 'colorscheme': '' . strftime('%a') =~# 'Sat\|Sun' ? 'gruvbox' : 'solarized' . '',
+                \ 'colorscheme': '' . has('gui_running') ? strftime('%a') =~# 'Sat\|Sun' ? 'gruvbox' : 'solarized' : 'wombat' . '',
                 \ 'mode_map': {
                     \ 'n' : 'NORMAL',
                     \ 'i' : 'INSERT',
@@ -400,8 +398,6 @@
             augroup END
 
         " }
-
-        endif
 
     " }
     " neoformat {
