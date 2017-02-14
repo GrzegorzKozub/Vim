@@ -584,7 +584,7 @@
         nmap <silent> <F5> :call CycleColorSchemes()<CR>
     else
         set background=dark
-        colorscheme default
+        colorscheme peachpuff
     endif
 
 " }
