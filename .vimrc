@@ -238,7 +238,7 @@
                     \ 'aleerror': 'error',
                     \ 'alewarning': 'warning'
                 \ },
-                \ 'colorscheme': '' . has('gui_running') ? strftime('%a') =~# 'Sat\|Sun' ? 'gruvbox' : 'solarized' : 'wombat' . '',
+                \ 'colorscheme': '' . has('gui_running') ? strftime('%a') =~# 'Sat\|Sun' ? 'gruvbox' : 'solarized' : 'peachpuff' . '',
                 \ 'mode_map': {
                     \ 'n' : 'NORMAL',
                     \ 'i' : 'INSERT',
@@ -583,6 +583,7 @@
 
         nmap <silent> <F5> :call CycleColorSchemes()<CR>
     else
+        let &t_Co=256
         set background=dark
         colorscheme peachpuff
     endif
