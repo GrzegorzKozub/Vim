@@ -20,4 +20,4 @@ let s:palette.inactive.middle = [ [ s:darkgray, s:black ] ]
 let s:palette.normal.error = [ [ s:black, s:darkred ] ]
 let s:palette.normal.warning = [ [ s:black, s:darkyellow ] ]
 
-let g:lightline#colorscheme#peachpuff#palette = lightline#colorscheme#flatten(s:palette)
+let g:lightline#colorscheme#terminal#palette = lightline#colorscheme#flatten(s:palette)
