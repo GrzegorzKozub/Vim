@@ -127,6 +127,7 @@
     Plug 'plasticboy/vim-markdown'
     Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
     Plug 'moll/vim-node'
+    Plug 'rakr/vim-one'
     Plug 'digitaltoad/vim-pug'
     Plug 'PProvost/vim-ps1'
     Plug 'tpope/vim-rails'
@@ -576,7 +577,7 @@
         endif
 
         function! CycleColorSchemes()
-            let l:all = [ 'solarized', 'gruvbox' ]
+            let l:all = [ 'solarized', 'gruvbox', 'one' ]
             let l:current = index(l:all, g:colors_name)
             exe('colorscheme ' . (l:current == len(l:all) - 1 ? l:all[0] : l:all[l:current + 1]))
         endfunction
