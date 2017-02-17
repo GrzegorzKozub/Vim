@@ -379,10 +379,6 @@
                     return
                 endif
 
-                "for l:vanila_colorscheme_file in split(globpath($VIM . '\plugins\lightline.vim\autoload\lightline\colorscheme', '*.vim'), '\n')
-                    "execute('source ' . l:vanila_colorscheme_file)
-                "endfor
-
                 for l:customized_colorscheme_file in split(globpath($VIM . '\unmanaged\customized_colorschemes\plugin\lightline\colorscheme', '*.vim'), '\n')
                     execute('source ' . l:customized_colorscheme_file)
                 endfor
