@@ -469,7 +469,7 @@ if version >= 703
   call s:HL('Conceal', s:blue, s:none)
 
   " Line number of CursorLine
-  call s:HL('CursorLineNr', s:fg4, s:bg1)
+  call s:HL('CursorLineNr', s:yellow, s:bg1)
 endif
 
 hi! link NonText GruvboxBg2
@@ -483,11 +483,11 @@ call s:HL('IncSearch', s:hls_cursor, s:bg0, s:inverse)
 
 call s:HL('Underlined', s:blue, s:none, s:underline)
 
-call s:HL('StatusLine',   s:bg4, s:bg0, s:bold)
-call s:HL('StatusLineNC', s:bg0, s:fg4, s:bold . s:inverse)
+call s:HL('StatusLine',   s:bg4, s:bg0, s:bold . s:inverse)
+call s:HL('StatusLineNC', s:bg2, s:fg4, s:bold . s:inverse)
 
 " The column separating vertically split windows
-call s:HL('VertSplit', s:bg0, s:vert_split)
+call s:HL('VertSplit', s:fg4, s:vert_split)
 
 " Current match in wildmenu completion
 call s:HL('WildMenu', s:blue, s:bg2, s:bold)
@@ -499,7 +499,7 @@ hi! link Directory GruvboxGreenBold
 hi! link Title GruvboxGreenBold
 
 " Error messages on the command line
-call s:HL('ErrorMsg',   s:red, s:none, s:bold)
+call s:HL('ErrorMsg',   s:bg0, s:red, s:bold)
 " More prompt: -- More --
 hi! link MoreMsg GruvboxYellowBold
 " Current mode message: -- INSERT --
@@ -545,8 +545,8 @@ else
 endif
 
 call s:HL('Comment', s:gray, s:none, s:italicize_comments)
-call s:HL('Todo', s:yellow, s:vim_bg, s:bold)
-call s:HL('Error', s:red, s:vim_bg, s:bold)
+call s:HL('Todo', s:vim_fg, s:vim_bg, s:bold . s:italic)
+call s:HL('Error', s:red, s:vim_bg, s:bold . s:inverse)
 
 " Generic statement
 hi! link Statement GruvboxRed
