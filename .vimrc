@@ -106,7 +106,6 @@
     Plug 'mattn/emmet-vim'
     Plug 'morhetz/gruvbox'
     Plug 'othree/html5.vim'
-    Plug 'othree/javascript-libraries-syntax.vim'
     Plug 'itchyny/lightline.vim'
     Plug 'sbdchd/neoformat', { 'on': 'Neoformat' }
     Plug 'scrooloose/nerdcommenter'
@@ -188,11 +187,6 @@
             let g:gruvbox_sign_column = 'bg0'
             let g:gruvbox_vert_split = 'bg0'
         endif
-
-    " }
-    " javascript-libraries-syntax.vim {
-
-        let g:used_javascript_libs = 'underscore,angularjs,angularui,angularuirouter,react,requirejs,jasmine,chai'
 
     " }
     " lightline {
