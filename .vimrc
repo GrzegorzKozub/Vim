@@ -126,6 +126,7 @@
     Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
     Plug 'moll/vim-node'
     Plug 'rakr/vim-one'
+    Plug 'sheerun/vim-polyglot'
     Plug 'digitaltoad/vim-pug'
     Plug 'PProvost/vim-ps1'
     Plug 'tpope/vim-rails'
