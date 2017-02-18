@@ -54,7 +54,6 @@
     set spelllang=en_gb,pl
     set tabstop=4
     set undofile
-    set wildignore+=*.7z,*.bmp,*.dll,*.exe,*.gif,*.ico,*.icl,*.jpeg,*.jpg,*.ldf,*.png,*.rar,*.sdf,*.sqlite,*.suo,*.zip
     set wildmode=list:longest
 
     let &backupdir = s:vim_backup_dir
@@ -601,7 +600,7 @@
 
     augroup SetFileTypesBasedOnExtensions
         autocmd!
-        autocmd BufNewFile,BufRead *.ascx,*.aspx,*.cshtml,*.master set filetype=html
+        autocmd BufNewFile,BufRead *.cshtml set filetype=html
         autocmd BufNewFile,BufRead *.config,*.nuspec set filetype=xml
     augroup END
 
@@ -609,22 +608,6 @@
         autocmd!
         autocmd FileType vim setlocal textwidth=0
         autocmd FileType xml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-    augroup END
-
-    augroup AddExtensionsForFileSearching
-        autocmd!
-        autocmd FileType autohotkey setlocal suffixesadd+=.ahk
-        autocmd FileType css,less,sass setlocal suffixesadd+=.css,.less,.sass
-        autocmd FileType dosbatch setlocal suffixesadd+=.bat,.cmd
-        autocmd FileType html setlocal suffixesadd+=.ascx,.aspx,.cshtml,.css,.js,.json,.less,.sass,.ts
-        autocmd FileType javascript,ts setlocal suffixesadd+=.js,.json,.ts
-        autocmd FileType perl setlocal suffixesadd+=.pl,.pm
-        autocmd FileType ps1 setlocal suffixesadd+=.ps1,.psd1,.psm1
-        autocmd FileType python setlocal suffixesadd+=.py
-        autocmd FileType ruby setlocal suffixesadd+=.gemspec,.rake,.rb,.rbw,.rdoc
-        autocmd FileType vim setlocal suffixesadd+=.vim
-        autocmd FileType xml setlocal suffixesadd+=*.config,*.xml
-        autocmd FileType xsd setlocal suffixesadd+=*.xsd
     augroup END
 
     augroup EnableSyntaxCompleteWhenNoLanguageSpecificOmniScript
