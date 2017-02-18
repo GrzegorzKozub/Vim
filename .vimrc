@@ -379,8 +379,8 @@
                     return
                 endif
 
-                for l:customized_colorscheme_file in split(globpath($VIM . '\unmanaged\customized_colorschemes\plugin\lightline\colorscheme', '*.vim'), '\n')
-                    execute('source ' . l:customized_colorscheme_file)
+                for l:theme in split(globpath($VIM . '\unmanaged\customized_colorschemes\plugin\lightline\colorscheme', '*.vim'), '\n')
+                    execute('source ' . l:theme)
                 endfor
 
                 let g:lightline.colorscheme = g:colors_name
@@ -557,6 +557,18 @@
     augroup HideTildeOnEmptyLinesWhenColorSchemeChanges
         autocmd!
         autocmd ColorScheme * call HideTildeOnEmptyLines()
+    augroup END
+
+    function! ApplyColorSchemePatch()
+        let l:patch = $VIM . '\unmanaged\customized_colorschemes\patches\' . g:colors_name . '.vim'
+        if filereadable(l:patch)
+            execute('source ' . l:patch)
+        endif
+    endfunction
+
+    augroup ApplyColorSchemePatchWhenColorSchemeChanges
+        autocmd!
+        autocmd ColorScheme * call ApplyColorSchemePatch()
     augroup END
 
     if has('gui_running')

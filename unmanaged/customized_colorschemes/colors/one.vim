@@ -320,7 +320,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('CursorLine',   '',              s:syntax_cursor,  'none')
   call <sid>X('Directory',    s:hue_2,         '',               '')
   call <sid>X('ErrorMsg',     s:hue_5,         s:syntax_bg,      'none')
-  call <sid>X('VertSplit',    s:syntax_bg,     '',               'none')
+  call <sid>X('VertSplit',    s:vertsplit,     '',               'none')
   call <sid>X('Folded',       s:syntax_bg,     s:syntax_fold_bg, 'none')
   call <sid>X('FoldColumn',   s:mono_3,        s:syntax_cursor,  '')
   call <sid>X('IncSearch',    s:hue_6,         '',               '')
@@ -343,13 +343,13 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('TabLine',      s:mono_1,        s:syntax_bg,      '')
   call <sid>X('TabLineFill',  s:mono_3,        s:visual_grey,    'none')
   call <sid>X('TabLineSel',   s:syntax_bg,     s:hue_2,          '')
-  call <sid>X('Title',        s:syntax_fg,     '',               'none')
+  call <sid>X('Title',        s:syntax_fg,     '',               'bold')
   call <sid>X('Visual',       '',              s:visual_grey,    '')
   call <sid>X('VisualNOS',    '',              s:visual_grey,    '')
   call <sid>X('WarningMsg',   s:hue_5,         '',               '')
   call <sid>X('TooLong',      s:hue_5,         '',               '')
   call <sid>X('WildMenu',     s:syntax_fg,     s:mono_3,         '')
-  call <sid>X('SignColumn',   '',              s:syntax_bg,    '')
+  call <sid>X('SignColumn',   '',              s:special_grey,   '')
   call <sid>X('Special',      s:hue_2,         '',               '')
   " }}}
 
@@ -387,8 +387,8 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('Debug',          '',              '',          '')
   call <sid>X('Underlined',     '',              '',          '')
   call <sid>X('Ignore',         '',              '',          '')
-  call <sid>X('Error',          s:hue_5,         s:syntax_bg, 'none')
-  call <sid>X('Todo',           s:hue_6_2,       s:syntax_bg, '')
+  call <sid>X('Error',          s:hue_5,         s:syntax_bg, 'bold')
+  call <sid>X('Todo',           s:hue_3,         s:syntax_bg, '')
   " }}}
 
   " Diff highlighting -------------------------------------------------------{{{
@@ -689,7 +689,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
 
   " Vim highlighting --------------------------------------------------------{{{
   call <sid>X('vimCommand',      s:hue_3,  '', '')
-  call <sid>X('vimCommentTitle', s:mono_3, '', 'none')
+  call <sid>X('vimCommentTitle', s:mono_3, '', 'bold')
   call <sid>X('vimFunction',     s:hue_1,  '', '')
   call <sid>X('vimFuncName',     s:hue_3,  '', '')
   call <sid>X('vimHighlight',    s:hue_2,  '', '')
@@ -752,3 +752,4 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
 endif
 "}}}
 
+" vim: set fdl=0 fdm=marker:
