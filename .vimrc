@@ -644,6 +644,9 @@
     command! ListToggle set list!
     nmap <silent> <Leader>t :ListToggle<CR>
 
+    command! RelativeNumberToggle set rnu!
+    nmap <silent> <F4> :RelativeNumberToggle<CR>
+
     command! SpellToggle set spell!
     nmap <silent> <F7> :SpellToggle<CR>
 
