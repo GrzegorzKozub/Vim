@@ -85,6 +85,27 @@
     endif
 
 " }
+" functions {
+
+    function! GetCurrentColorScheme()
+        if !has('gui_running')
+            return 'terminal'
+        endif
+        let l:dayOfWeek = strftime('%a')
+        if l:dayOfWeek ==# 'Sat'
+            return 'gruvbox'
+        endif
+        if l:dayOfWeek ==# 'Sun'
+            return 'one'
+        endif
+        return 'solarized'
+    endfunction
+
+    function! GetCurrentBackground()
+        return !has('gui_running') || (strftime('%H') > 6 && strftime('%H') < 18) ? 'light' : 'dark'
+    endfunction
+
+" }
 " vim-plug {
 
     call plug#begin($VIM . '/plugins')
@@ -235,7 +256,7 @@
                     \ 'aleerror': 'error',
                     \ 'alewarning': 'warning'
                 \ },
-                \ 'colorscheme': '' . has('gui_running') ? strftime('%a') =~# 'Sat\|Sun' ? 'gruvbox' : 'solarized' : 'terminal' . '',
+                \ 'colorscheme': '' . GetCurrentColorScheme() . '',
                 \ 'mode_map': {
                     \ 'n' : 'NORMAL',
                     \ 'i' : 'INSERT',
@@ -555,30 +576,18 @@
         autocmd ColorScheme * call HideTildeOnEmptyLines()
     augroup END
 
-    function! ApplyColorSchemePatch()
-        let l:patch = $VIM . '\unmanaged\customized_colorschemes\patches\' . g:colors_name . '.vim'
-        if filereadable(l:patch)
-            execute('source ' . l:patch)
-        endif
-    endfunction
-
-    augroup ApplyColorSchemePatchWhenColorSchemeChanges
-        autocmd!
-        autocmd ColorScheme * call ApplyColorSchemePatch()
-    augroup END
-
     if has('gui_running')
-        if strftime('%H') > 6 && strftime('%H') < 18
-            set background=light
-        else
-            set background=dark
-        endif
+        function! ApplyColorSchemePatch()
+            let l:patch = $VIM . '\unmanaged\customized_colorschemes\patches\' . g:colors_name . '.vim'
+            if filereadable(l:patch)
+                execute('source ' . l:patch)
+            endif
+        endfunction
 
-        if strftime('%a') =~# 'Sat\|Sun'
-            colorscheme gruvbox
-        else
-            colorscheme solarized
-        endif
+        augroup ApplyColorSchemePatchWhenColorSchemeChanges
+            autocmd!
+            autocmd ColorScheme * call ApplyColorSchemePatch()
+        augroup END
 
         function! CycleColorSchemes()
             let l:all = [ 'solarized', 'gruvbox', 'one' ]
@@ -589,8 +598,10 @@
         nmap <silent> <F5> :call CycleColorSchemes()<CR>
     else
         let &t_Co=256
-        colorscheme terminal
     endif
+
+    exec 'set background=' . GetCurrentBackground()
+    exec 'colorscheme ' . GetCurrentColorScheme()
 
 " }
 " auto-commands {
