@@ -80,6 +80,8 @@
         "set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
 
         winpos 75 320
+    else
+        set ttyfast
     endif
 
 " }
