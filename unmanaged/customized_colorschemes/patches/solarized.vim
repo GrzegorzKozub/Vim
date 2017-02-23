@@ -44,3 +44,9 @@ hi! link rubyInterpolationDelimiter rubyConstant
 hi! link rubyStringDelimiter rubyConstant
 hi! link rubySymbol Structure
 
+" vim-gitgutter
+exec 'hi GitGutterAdd guifg=' . s:green
+exec 'hi GitGutterChange guifg=' . s:blue
+exec 'hi GitGutterChangeDelete guifg=' . s:blue
+exec 'hi GitGutterDelete guifg=' . s:red
+

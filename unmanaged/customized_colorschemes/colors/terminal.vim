@@ -19,3 +19,9 @@ hi NonText ctermfg=DarkGray
 hi SignColumn ctermbg=BG
 hi Todo ctermfg=DarkYellow ctermbg=BG
 hi VertSplit ctermbg=BG
+
+" vim-gitgutter
+hi GitGutterAdd ctermfg=DarkGreen
+hi GitGutterChange ctermfg=DarkBlue
+hi GitGutterChangeDelete ctermfg=DarkBlue
+hi GitGutterDelete ctermfg=DarkRed

@@ -119,6 +119,7 @@
     Plug g:unmanaged_dir . 'screen_memento'
     Plug g:unmanaged_dir . 'window_toggles', { 'on': [ 'ToggleLocation', 'ToggleQuickfix' ] }
 
+    Plug 'airblade/vim-gitgutter'
     Plug 'altercation/vim-colors-solarized'
     Plug 'chriskempson/base16-vim'
     Plug 'ctrlpvim/ctrlp.vim', { 'on': [ 'CtrlP', 'CtrlPBuffer', 'CtrlPMRUFiles' ] }
@@ -471,6 +472,23 @@
             autocmd!
             autocmd BufReadPost fugitive://* set bufhidden=delete
         augroup END
+
+    " }
+    " vim-gitgutter {
+
+        let g:gitgutter_eager = 0
+        let g:gitgutter_realtime = 0
+
+        let g:gitgutter_override_sign_column_highlight = 0
+
+        let g:gitgutter_sign_added = '│'
+        let g:gitgutter_sign_modified = '│'
+        let g:gitgutter_sign_modified_removed = '│'
+        let g:gitgutter_sign_removed = '│'
+        let g:gitgutter_sign_removed_first_line = '│'
+
+        nmap ]h <plug>GitGutterNextHunk
+        nmap [h <plug>GitGutterPrevHunk
 
     " }
     " vim-javascript {
