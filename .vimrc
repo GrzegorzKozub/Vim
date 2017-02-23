@@ -119,45 +119,45 @@
     Plug g:unmanaged_dir . 'screen_memento'
     Plug g:unmanaged_dir . 'window_toggles', { 'on': [ 'ToggleLocation', 'ToggleQuickfix' ] }
 
-    Plug 'mileszs/ack.vim'
-    Plug 'w0rp/ale'
+    Plug 'altercation/vim-colors-solarized'
     Plug 'chriskempson/base16-vim'
     Plug 'ctrlpvim/ctrlp.vim', { 'on': [ 'CtrlP', 'CtrlPBuffer', 'CtrlPMRUFiles' ] }
-    Plug 'Raimondi/delimitMate'
-    Plug 'ekalinin/Dockerfile.vim'
+    Plug 'digitaltoad/vim-pug'
     Plug 'editorconfig/editorconfig-vim'
-    Plug 'mattn/emmet-vim'
-    Plug 'morhetz/gruvbox'
-    Plug 'othree/html5.vim'
+    Plug 'ekalinin/Dockerfile.vim'
+    Plug 'elzr/vim-json'
+    Plug 'groenewege/vim-less'
+    Plug 'hail2u/vim-css3-syntax'
     Plug 'itchyny/lightline.vim'
+    Plug 'leafgarland/typescript-vim'
+    Plug 'mattn/emmet-vim'
+    Plug 'mileszs/ack.vim'
+    Plug 'moll/vim-node'
+    Plug 'morhetz/gruvbox'
+    Plug 'mxw/vim-jsx'
+    Plug 'nelstrom/vim-visual-star-search'
+    Plug 'othree/html5.vim'
+    Plug 'pangloss/vim-javascript'
+    Plug 'plasticboy/vim-markdown'
+    Plug 'PProvost/vim-ps1'
+    Plug 'Quramy/vim-js-pretty-template'
+    Plug 'Raimondi/delimitMate'
+    Plug 'rakr/vim-one'
     Plug 'sbdchd/neoformat', { 'on': 'Neoformat' }
     Plug 'scrooloose/nerdcommenter'
-    Plug 'leafgarland/typescript-vim'
-    Plug 'Shougo/unite.vim', { 'on': 'VimFiler' }
-    Plug 'altercation/vim-colors-solarized'
-    Plug 'hail2u/vim-css3-syntax'
-    Plug 'tpope/vim-dispatch'
-    Plug 'svermeulen/vim-easyclip'
-    Plug 'tpope/vim-fugitive'
-    Plug 'pangloss/vim-javascript'
-    Plug 'tpope/vim-jdaddy'
-    Plug 'Quramy/vim-js-pretty-template'
-    Plug 'elzr/vim-json'
-    Plug 'mxw/vim-jsx'
-    Plug 'groenewege/vim-less'
-    Plug 'plasticboy/vim-markdown'
-    Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
-    Plug 'moll/vim-node'
-    Plug 'rakr/vim-one'
     Plug 'sheerun/vim-polyglot'
-    Plug 'digitaltoad/vim-pug'
-    Plug 'PProvost/vim-ps1'
+    Plug 'Shougo/unite.vim', { 'on': 'VimFiler' }
+    Plug 'Shougo/vimfiler.vim', { 'on': 'VimFiler' }
+    Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
+    Plug 'svermeulen/vim-easyclip'
+    Plug 'tpope/vim-dispatch'
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-jdaddy'
     Plug 'tpope/vim-rails'
     Plug 'tpope/vim-repeat'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-unimpaired'
-    Plug 'nelstrom/vim-visual-star-search'
-    Plug 'Shougo/vimfiler.vim', { 'on': 'VimFiler' }
+    Plug 'w0rp/ale'
 
     call plug#end()
 
