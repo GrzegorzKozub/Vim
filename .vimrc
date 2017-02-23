@@ -122,7 +122,7 @@
     Plug 'airblade/vim-gitgutter'
     Plug 'altercation/vim-colors-solarized'
     Plug 'chriskempson/base16-vim'
-    Plug 'ctrlpvim/ctrlp.vim', { 'on': [ 'CtrlP', 'CtrlPBuffer', 'CtrlPMRUFiles' ] }
+    Plug 'ctrlpvim/ctrlp.vim'
     Plug 'digitaltoad/vim-pug'
     Plug 'editorconfig/editorconfig-vim'
     Plug 'ekalinin/Dockerfile.vim'
