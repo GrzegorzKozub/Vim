@@ -66,7 +66,7 @@
     if has('gui_running')
         set columns=160
         set cursorline
-        set guifont=Fira\ Code:h13:cEASTEUROPE:qCLEARTYPE
+        set guifont=Fira\ Code\ Retina:h13:cEASTEUROPE:qCLEARTYPE
         set guioptions+=c
         set guioptions-=b
         set guioptions-=r
