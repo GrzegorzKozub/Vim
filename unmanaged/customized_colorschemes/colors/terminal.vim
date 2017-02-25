@@ -14,7 +14,7 @@ hi ErrorMsg ctermfg=DarkRed ctermbg=NONE
 hi Folded ctermbg=Black
 hi IncSearch ctermbg=Yellow
 hi LineNr ctermfg=DarkGray
-hi MatchParen ctermbg=White
+hi MatchParen ctermfg=Gray ctermbg=DarkGray
 hi NonText ctermfg=DarkGray
 hi SignColumn ctermbg=BG
 hi Todo ctermfg=DarkYellow ctermbg=BG
