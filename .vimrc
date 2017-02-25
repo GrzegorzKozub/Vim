@@ -121,6 +121,7 @@
 
     Plug 'airblade/vim-gitgutter'
     Plug 'altercation/vim-colors-solarized'
+    Plug 'cakebaker/scss-syntax.vim'
     Plug 'chriskempson/base16-vim'
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'digitaltoad/vim-pug'
@@ -137,6 +138,7 @@
     Plug 'morhetz/gruvbox'
     Plug 'mxw/vim-jsx'
     Plug 'nelstrom/vim-visual-star-search'
+    Plug 'octol/vim-cpp-enhanced-highlight'
     Plug 'othree/html5.vim'
     Plug 'pangloss/vim-javascript'
     Plug 'plasticboy/vim-markdown'
@@ -146,18 +148,20 @@
     Plug 'rakr/vim-one'
     Plug 'sbdchd/neoformat', { 'on': 'Neoformat' }
     Plug 'scrooloose/nerdcommenter'
-    Plug 'sheerun/vim-polyglot'
     Plug 'Shougo/unite.vim', { 'on': 'VimFiler' }
     Plug 'Shougo/vimfiler.vim', { 'on': 'VimFiler' }
     Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
+    Plug 'stephpy/vim-yaml'
     Plug 'svermeulen/vim-easyclip'
     Plug 'tpope/vim-dispatch'
     Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-git'
     Plug 'tpope/vim-jdaddy'
     Plug 'tpope/vim-rails'
     Plug 'tpope/vim-repeat'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-unimpaired'
+    Plug 'vim-ruby/vim-ruby'
     Plug 'w0rp/ale'
 
     call plug#end()
