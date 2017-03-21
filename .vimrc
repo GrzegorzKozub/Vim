@@ -459,17 +459,6 @@
         nmap <silent> <Leader>m :Make<CR>
 
     " }
-    " vim-easyclip {
-
-        let g:EasyClipShareYanks = 1
-        let g:EasyClipShareYanksDirectory = s:vim_plugin_data_dir
-        let g:EasyClipUseCutDefaults = 0
-
-        nmap t <plug>MoveMotionPlug
-        xmap t <plug>MoveMotionXPlug
-        nmap tt <plug>MoveMotionLinePlug
-
-    " }
     " vim-fugitive {
 
         augroup SetupFugitive
@@ -668,7 +657,14 @@
     vmap <Right> l
     vmap <Up> k
 
-    cnoremap %% <C-R>=expand('%:h') . '\'<CR>
+    nnoremap p "0p
+    nnoremap P "0P
+
+    nnoremap t "0d
+    vnoremap t "0d
+    nnoremap T "0D
+    vnoremap T "0D
+    nnoremap tt "0dd
 
     command! HlsearchOff nohlsearch
     nmap <silent> <Leader>h :HlsearchOff<CR>
