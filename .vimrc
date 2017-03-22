@@ -152,7 +152,6 @@
     Plug 'Shougo/vimfiler.vim', { 'on': 'VimFiler' }
     Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
     Plug 'stephpy/vim-yaml'
-    Plug 'svermeulen/vim-easyclip'
     Plug 'tpope/vim-dispatch'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-git'
