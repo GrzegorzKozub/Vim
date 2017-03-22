@@ -658,12 +658,15 @@
     vmap <Up> k
 
     nnoremap p "0p
+    vnoremap p "0p
     nnoremap P "0P
+    vnoremap P "0P
 
     nnoremap t "0d
     vnoremap t "0d
     nnoremap T "0D
     vnoremap T "0D
+
     nnoremap tt "0dd
 
     command! HlsearchOff nohlsearch
