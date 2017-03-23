@@ -85,20 +85,20 @@
     endif
 
 " }
-" functions {
+" themes {
+
+    let s:themes = [ 'solarized', 'gruvbox', 'one' ]
+    let s:themeIndex = 0
+
+    if has('python3')
+python3 << EOF
+import vim, random;
+vim.command("let s:themeIndex = %s" % random.randint(0, int(vim.eval("len(s:themes)")) - 1));
+EOF
+    endif
 
     function! GetCurrentColorScheme()
-        if !has('gui_running')
-            return 'terminal'
-        endif
-        let l:dayOfWeek = strftime('%a')
-        if l:dayOfWeek ==# 'Sat'
-            return 'gruvbox'
-        endif
-        if l:dayOfWeek ==# 'Sun'
-            return 'one'
-        endif
-        return 'solarized'
+        return has('gui_running') ? s:themes[s:themeIndex] : 'terminal'
     endfunction
 
     function! GetCurrentBackground()
@@ -600,9 +600,8 @@
         augroup END
 
         function! CycleColorSchemes()
-            let l:all = [ 'solarized', 'gruvbox', 'one' ]
-            let l:current = index(l:all, g:colors_name)
-            exe('colorscheme ' . (l:current == len(l:all) - 1 ? l:all[0] : l:all[l:current + 1]))
+            let l:current = index(s:themes, g:colors_name)
+            exe('colorscheme ' . (l:current == len(s:themes) - 1 ? s:themes[0] : s:themes[l:current + 1]))
         endfunction
 
         nmap <silent> <F5> :call CycleColorSchemes()<CR>
