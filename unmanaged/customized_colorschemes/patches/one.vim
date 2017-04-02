@@ -17,6 +17,10 @@ exec 'hi Todo guifg=' . s:hue_6_2
 exec 'hi VertSplit guifg=' . s:syntax_bg
 
 hi Error gui=NONE
+hi helpHeader gui=NONE
+hi ModeMsg gui=NONE
+hi MoreMsg gui=NONE
+hi Question gui=NONE
 hi Title gui=NONE
 hi vimCommentTitle gui=NONE
 
