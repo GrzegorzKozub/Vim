@@ -169,8 +169,8 @@ EOF
 " plugins {
     " ack.vim {
 
-        if executable('ag')
-            let g:ackprg = 'ag --vimgrep'
+        if executable('rg')
+            let g:ackprg = 'rg --vimgrep'
         endif
 
     " }
