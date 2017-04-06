@@ -64,7 +64,6 @@
     language English_US
 
     if has('gui_running')
-        set columns=160
         set cursorline
         set guifont=Fira\ Code\ Retina:h13:cEASTEUROPE:qCLEARTYPE
         set guioptions+=c
@@ -75,15 +74,21 @@
         set guioptions+=M
         set guioptions-=T
         set guitablabel=%t\ %M
-        set lines=46
         set linespace=0
         "set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
-
-        winpos 75 320
     else
         set ttyfast
     endif
 
+    " screen specific {
+
+        if has('gui_running')
+            set columns=160
+            set lines=46
+            winpos 75 320
+        endif
+
+    " }
 " }
 " themes {
 
