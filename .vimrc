@@ -28,7 +28,7 @@
     set concealcursor=nvic
     set encoding=utf-8
     set expandtab
-    set fillchars+=vert:\
+    set fillchars+=vert:\  " intentional trailing whitespace
     set foldlevelstart=99
     set foldmethod=syntax
     set hidden
