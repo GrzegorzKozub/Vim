@@ -3,7 +3,10 @@
 " includes {
 
     runtime defaults.vim
-    runtime mswin.vim
+
+    if has('win32')
+        runtime mswin.vim
+    endif
 
 " }
 " directories {
@@ -184,6 +187,7 @@ EOF
         let g:ale_sign_error = '●'
         let g:ale_sign_warning = '▲'
         let g:ale_statusline_format = [ '● %d', '▲ %d', '' ]
+
     " }
     " ctrlp.vim {
 
@@ -405,7 +409,7 @@ EOF
                     return
                 endif
 
-                for l:theme in split(globpath($VIM . '\unmanaged\customized_colorschemes\plugin\lightline\colorscheme', '*.vim'), '\n')
+                for l:theme in split(globpath($VIM . '/unmanaged/customized_colorschemes/plugin/lightline/colorscheme', '*.vim'), '\n')
                     execute('source ' . l:theme)
                 endfor
 
@@ -556,7 +560,7 @@ EOF
     " }
     " full_screen {
 
-        if has('gui_running')
+        if has('win32') && has('gui_running')
             nmap <silent> <F11> :ToggleFullScreen<CR>
             nmap <silent> <F12> :CycleAlpha<CR>
         endif
@@ -593,7 +597,7 @@ EOF
 
     if has('gui_running')
         function! ApplyColorSchemePatch()
-            let l:patch = $VIM . '\unmanaged\customized_colorschemes\patches\' . g:colors_name . '.vim'
+            let l:patch = $VIM . '/unmanaged/customized_colorschemes/patches/' . g:colors_name . '.vim'
             if filereadable(l:patch)
                 execute('source ' . l:patch)
             endif

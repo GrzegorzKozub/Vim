@@ -1,4 +1,4 @@
-if !has('gui_running')
+if !has('win32') || !has('gui_running')
     finish
 endif
 
