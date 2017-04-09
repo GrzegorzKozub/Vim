@@ -29,6 +29,7 @@ exec 'hi VertSplit guifg=' . s:base03 . ' guibg=' . s:base03
 exec 'hi Visual guifg=NONE guibg=' . s:base02 . ' gui=NONE'
 
 hi ErrorMsg gui=NONE
+hi IncSearch gui=NONE
 hi SpecialKey guibg=NONE
 
 hi! link Cursor VisualNOS
