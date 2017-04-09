@@ -1,3 +1,2 @@
 plugins
-vim80
-vimfiles/autoload/plug.vim
+vim*
