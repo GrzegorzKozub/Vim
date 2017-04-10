@@ -68,3 +68,4 @@ exec 'hi GitGutterAdd guifg=' . s:green
 exec 'hi GitGutterChange guifg=' . s:blue
 exec 'hi GitGutterChangeDelete guifg=' . s:blue
 exec 'hi GitGutterDelete guifg=' . s:red
+

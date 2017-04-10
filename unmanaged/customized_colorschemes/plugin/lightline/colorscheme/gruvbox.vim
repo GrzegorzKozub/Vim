@@ -31,3 +31,4 @@ let s:p.normal.error    = [ [ s:bg0, s:red ] ]
 let s:p.normal.warning  = [ [ s:bg0, s:yellow ] ]
 
 let g:lightline#colorscheme#gruvbox#palette = lightline#colorscheme#fill(s:p)
+

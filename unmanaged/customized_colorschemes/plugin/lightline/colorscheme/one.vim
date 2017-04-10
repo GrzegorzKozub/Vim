@@ -62,3 +62,4 @@ let s:p.replace.right = s:p.normal.right
 let s:p.visual.right = s:p.normal.right
 
 let g:lightline#colorscheme#one#palette = lightline#colorscheme#fill(s:p)
+

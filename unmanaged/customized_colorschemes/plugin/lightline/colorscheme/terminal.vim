@@ -24,3 +24,4 @@ let s:p.normal.error    = [ [ s:black, s:darkred ] ]
 let s:p.normal.warning  = [ [ s:black, s:darkyellow ] ]
 
 let g:lightline#colorscheme#terminal#palette = lightline#colorscheme#flatten(s:p)
+

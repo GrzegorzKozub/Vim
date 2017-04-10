@@ -29,3 +29,4 @@ CompilerSet errorformat=
       \%DMaking\ %*\\a\ in\ %f
 
 CompilerSet makeprg=gcc\ %\ -o\ %:r
+

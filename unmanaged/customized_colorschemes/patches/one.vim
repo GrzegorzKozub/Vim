@@ -31,3 +31,4 @@ exec 'hi GitGutterAdd guifg=' . s:hue_4
 exec 'hi GitGutterChange guifg=' . s:hue_2
 exec 'hi GitGutterChangeDelete guifg=' . s:hue_2
 exec 'hi GitGutterDelete guifg=' . s:hue_5
+

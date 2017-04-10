@@ -25,3 +25,4 @@ hi GitGutterAdd ctermfg=DarkGreen
 hi GitGutterChange ctermfg=DarkBlue
 hi GitGutterChangeDelete ctermfg=DarkBlue
 hi GitGutterDelete ctermfg=DarkRed
+

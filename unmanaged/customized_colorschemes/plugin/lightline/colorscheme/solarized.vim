@@ -38,3 +38,4 @@ let s:p.normal.error    = [ [ s:base03, s:red ] ]
 let s:p.normal.warning  = [ [ s:base03, s:yellow ] ]
 
 let g:lightline#colorscheme#solarized#palette = lightline#colorscheme#fill(s:p)
+
