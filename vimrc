@@ -8,10 +8,13 @@
 " }
 " directories {
 
-    let s:user_dir = expand('~/.vim/')
-    let s:backup_dir = s:user_dir . 'backup/'
-    let s:undo_dir = s:user_dir . 'undo/'
-    let s:plugins_dir = s:user_dir . 'plugins/'
+    let s:user_dir = expand('~/vimfiles/')
+
+    let s:temp_dir = s:user_dir . 'temp/'
+
+    let s:backup_dir = s:temp_dir . 'backup/'
+    let s:undo_dir = s:temp_dir . 'undo/'
+    let s:plugins_dir = s:temp_dir . 'plugins/'
 
     silent! call mkdir(s:backup_dir, 'p')
     silent! call mkdir(s:undo_dir, 'p')
@@ -58,7 +61,7 @@
 
     let &backupdir = s:backup_dir
     let &undodir = s:undo_dir
-    let &viminfo = &viminfo . ',n' . s:user_dir . 'viminfo'
+    let &viminfo = &viminfo . ',n' . s:temp_dir . 'viminfo'
 
     scriptencoding 'utf-8'
     language English_US
@@ -113,9 +116,9 @@ EOF
 " }
 " vim-plug {
 
-    call plug#begin($VIM . '/plugins')
+    call plug#begin(s:user_dir . 'plugins')
 
-    let g:unmanaged_dir = $VIM . '/unmanaged/'
+    let g:unmanaged_dir = s:user_dir . 'unmanaged/'
 
     Plug g:unmanaged_dir . 'compilers', { 'for': [ 'c', 'cpp' ] }
     Plug g:unmanaged_dir . 'customized_colorschemes'
