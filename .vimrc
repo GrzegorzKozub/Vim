@@ -3,10 +3,7 @@
 " includes {
 
     runtime defaults.vim
-
-    if has('win32')
-        runtime mswin.vim
-    endif
+    runtime mswin.vim
 
 " }
 " directories {
