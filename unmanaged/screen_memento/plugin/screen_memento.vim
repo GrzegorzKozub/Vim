@@ -60,7 +60,7 @@ function! s:GetFilePath()
         let g:screen_memento_dir = $HOME
     endif
     if !exists('g:screen_memento_file')
-        let g:screen_memento_file = '.screenmemento'
+        let g:screen_memento_file = 'screenmemento'
     endif
     return g:screen_memento_dir . '/' . g:screen_memento_file
 endfunction

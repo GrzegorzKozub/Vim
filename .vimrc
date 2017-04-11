@@ -61,7 +61,7 @@
 
     let &backupdir = s:vim_backup_dir
     let &undodir = s:vim_undo_dir
-    let &viminfo = &viminfo . ',n' . s:vim_data_dir . '.viminfo'
+    let &viminfo = &viminfo . ',n' . s:vim_data_dir . 'viminfo'
 
     scriptencoding 'utf-8'
     language English_US
