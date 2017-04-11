@@ -8,7 +8,11 @@
 " }
 " directories {
 
-    let s:user_dir = expand('~/vimfiles/')
+    if has('win32')
+        let s:user_dir = expand('~/vimfiles/')
+    else
+        let s:user_dir = expand('~/.vim/')
+    endif
 
     let s:temp_dir = s:user_dir . 'temp/'
 
@@ -64,11 +68,15 @@
     let &viminfo = &viminfo . ',n' . s:temp_dir . 'viminfo'
 
     scriptencoding 'utf-8'
-    language English_US
+
+    if has('win32')
+        language English_US
+    else
+        language en_US.utf8
+    endif
 
     if has('gui_running')
         set cursorline
-        set guifont=Fira\ Code\ Retina:h13:cEASTEUROPE:qCLEARTYPE
         set guioptions+=c
         set guioptions-=b
         set guioptions-=r
@@ -78,20 +86,25 @@
         set guioptions-=T
         set guitablabel=%t\ %M
         set linespace=0
-        "set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
+
+        if has('win32')
+            set guifont=Fira\ Code\ Retina:h13:cEASTEUROPE:qCLEARTYPE
+            "set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
+
+            set columns=160
+            set lines=46
+            winpos 75 320
+        else
+            set guifont=Fira\ Code\ Retina\ 13
+
+            set columns=113
+            set lines=30
+            winpos 215 100
+        endif
     else
         set ttyfast
     endif
 
-    " screen specific {
-
-        if has('gui_running')
-            set columns=160
-            set lines=46
-            winpos 75 320
-        endif
-
-    " }
 " }
 " themes {
 
@@ -227,7 +240,6 @@ EOF
 
     " }
     " lightline {
-
         " configuration {
 
             let g:lightline = {
@@ -425,7 +437,6 @@ EOF
             augroup END
 
         " }
-
     " }
     " neoformat {
 
