@@ -651,11 +651,6 @@ EOF
         autocmd BufWritePre * let &backupext = '@' . substitute(expand('%:p:h'), ',\\=[:\\\/]', '%', 'g')
     augroup END
 
-    augroup SourceVimrcWhenItSaves
-        autocmd!
-        autocmd! BufWritePost $MYVIMRC nested source $MYVIMRC
-    augroup END
-
 " }
 " mappings {
 
