@@ -11,14 +11,14 @@
 " }
 " directories {
 
-    let s:vim_data_dir = expand('~/.vim/')
-    let s:vim_backup_dir = s:vim_data_dir . 'backup/'
-    let s:vim_undo_dir = s:vim_data_dir . 'undo/'
-    let s:vim_plugin_data_dir = s:vim_data_dir . 'plugins/'
+    let s:user_dir = expand('~/.vim/')
+    let s:backup_dir = s:user_dir . 'backup/'
+    let s:undo_dir = s:user_dir . 'undo/'
+    let s:plugins_dir = s:user_dir . 'plugins/'
 
-    silent! call mkdir(s:vim_backup_dir, 'p')
-    silent! call mkdir(s:vim_undo_dir, 'p')
-    silent! call mkdir(s:vim_plugin_data_dir, 'p')
+    silent! call mkdir(s:backup_dir, 'p')
+    silent! call mkdir(s:undo_dir, 'p')
+    silent! call mkdir(s:plugins_dir, 'p')
 
 " }
 " settings {
@@ -59,9 +59,9 @@
     set undofile
     set wildmode=list:longest
 
-    let &backupdir = s:vim_backup_dir
-    let &undodir = s:vim_undo_dir
-    let &viminfo = &viminfo . ',n' . s:vim_data_dir . 'viminfo'
+    let &backupdir = s:backup_dir
+    let &undodir = s:undo_dir
+    let &viminfo = &viminfo . ',n' . s:user_dir . 'viminfo'
 
     scriptencoding 'utf-8'
     language English_US
@@ -191,7 +191,7 @@ EOF
     " }
     " ctrlp.vim {
 
-        let g:ctrlp_cache_dir = s:vim_plugin_data_dir . 'ctrlp.vim'
+        let g:ctrlp_cache_dir = s:plugins_dir . 'ctrlp.vim'
 
         nmap <silent> <C-p> :CtrlP<CR>
         nmap <silent> <C-b> :CtrlPBuffer<CR>
@@ -409,7 +409,7 @@ EOF
                     return
                 endif
 
-                for l:theme in split(globpath($VIM . '/unmanaged/customized_colorschemes/plugin/lightline/colorscheme', '*.vim'), '\n')
+                for l:theme in split(globpath(g:unmanaged_dir . 'customized_colorschemes/plugin/lightline/colorscheme', '*.vim'), '\n')
                     execute('source ' . l:theme)
                 endfor
 
@@ -434,7 +434,7 @@ EOF
     " }
     " netrw {
 
-        let g:netrw_home = s:vim_plugin_data_dir . 'netrw'
+        let g:netrw_home = s:plugins_dir . 'netrw'
         let g:netrw_localcopycmd = 'copy'
 
     " }
@@ -529,7 +529,7 @@ EOF
     " vimfiler.vim {
 
         let g:vimfiler_as_default_explorer = 1
-        let g:vimfiler_data_directory = s:vim_plugin_data_dir . 'vimfiler.vim'
+        let g:vimfiler_data_directory = s:plugins_dir . 'vimfiler.vim'
         let g:vimfiler_force_overwrite_statusline = 0
         let g:vimfiler_ignore_pattern = []
 
@@ -569,7 +569,7 @@ EOF
     " screen_memento {
 
         if has('gui_running')
-            let g:screen_memento_dir = s:vim_plugin_data_dir
+            let g:screen_memento_dir = s:plugins_dir
         endif
 
     " }
@@ -597,7 +597,7 @@ EOF
 
     if has('gui_running')
         function! ApplyColorSchemePatch()
-            let l:patch = $VIM . '/unmanaged/customized_colorschemes/patches/' . g:colors_name . '.vim'
+            let l:patch = g:unmanaged_dir . 'customized_colorschemes/patches/' . g:colors_name . '.vim'
             if filereadable(l:patch)
                 execute('source ' . l:patch)
             endif
