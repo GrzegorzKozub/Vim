@@ -106,6 +106,30 @@
     endif
 
 " }
+" icons {
+
+    let s:circle_icon = '⏺'
+    let s:triangle_icon = '▲'
+
+    let s:triangle_right_icon = '►'
+    let s:triangle_down_icon = '▼'
+
+    let s:left_filled_icon = ''
+    let s:right_filled_icon = ''
+    let s:left_empty_icon = ''
+    let s:right_empty_icon = ''
+
+    let s:branch_icon = ''
+    let s:padlock_icon = ''
+
+    let s:vertical_bar_icon = '│'
+
+    let s:check_mark_icon = '✓'
+    let s:ballot_icon = '✗'
+
+    let s:use_icons = has('gui_running') || has('win32')
+
+" }
 " themes {
 
     let s:themes = [ 'solarized', 'gruvbox', 'one' ]
@@ -197,9 +221,9 @@ EOF
     " }
     " ALE {
 
-        let g:ale_sign_error = '●'
-        let g:ale_sign_warning = '▲'
-        let g:ale_statusline_format = [ '● %d', '▲ %d', '' ]
+        let g:ale_sign_error = s:circle_icon
+        let g:ale_sign_warning = s:triangle_icon
+        let g:ale_statusline_format = [ s:circle_icon . ' %d', s:triangle_icon . ' %d', '' ]
 
     " }
     " ctrlp.vim {
@@ -296,12 +320,12 @@ EOF
                     \ 't': 'TERMINAL'
                 \ },
                 \ 'separator': {
-                    \ 'left': '',
-                    \ 'right': ''
+                    \ 'left': s:use_icons ? s:left_filled_icon : '',
+                    \ 'right': s:use_icons ? s:right_filled_icon : ''
                 \ },
                 \ 'subseparator': {
-                    \ 'left': '',
-                    \ 'right': ''
+                    \ 'left': s:use_icons ? s:left_empty_icon : s:vertical_bar_icon,
+                    \ 'right': s:use_icons ? s:right_empty_icon : s:vertical_bar_icon
                 \ },
                 \ 'enable': {
                     \ 'tabline': 0
@@ -329,7 +353,10 @@ EOF
                 endif
                 if exists('*fugitive#head')
                     let l:branch = fugitive#head()
-                    return l:branch !=# '' ? ' '.l:branch : ''
+                    if l:branch !=# ''
+                        return (s:use_icons ? s:branch_icon . ' ' : '') . l:branch
+                    endif
+                    return ''
                 endif
                 return ''
             endfunction
@@ -344,7 +371,7 @@ EOF
                 elseif &filetype ==# 'vim-plug'
                     return ''
                 elseif &filetype ==# 'vimfiler'
-                    return substitute(vimfiler#get_status_string(), '\*safe\*', '', '')
+                    return substitute(vimfiler#get_status_string(), '\*safe\*', s:use_icons ? s:padlock_icon : '', '')
                 elseif expand('%:t') ==# 'ControlP' && has_key(g:lightline, 'ctrlp_item')
                     if g:lightline.ctrlp_item ==# 'files'
                         return 'Files'
@@ -357,15 +384,15 @@ EOF
                 if &filetype ==# 'help'
                     return l:filename
                 endif
-                return l:filename . (&readonly ? ' ' : '') . (&modified ? ' ●' : '')
+                return l:filename . (&readonly && s:use_icons ? ' ' . s:padlock_icon : '') . ' ' . (&modified ? s:ballot_icon : s:check_mark_icon)
             endfunction
 
             function! LightLineAleError()
-                return matchstr(ALEGetStatusLine(), '● \d\+')
+                return matchstr(ALEGetStatusLine(), s:circle_icon . ' \d\+')
             endfunction
 
             function! LightLineAleWarning()
-                return matchstr(ALEGetStatusLine(), '▲ \d\+')
+                return matchstr(ALEGetStatusLine(), s:triangle_icon . ' \d\+')
             endfunction
 
             function! LightLinePercent()
@@ -493,11 +520,11 @@ EOF
 
         let g:gitgutter_override_sign_column_highlight = 0
 
-        let g:gitgutter_sign_added = '│'
-        let g:gitgutter_sign_modified = '│'
-        let g:gitgutter_sign_modified_removed = '│'
-        let g:gitgutter_sign_removed = '│'
-        let g:gitgutter_sign_removed_first_line = '│'
+        let g:gitgutter_sign_added = s:vertical_bar_icon
+        let g:gitgutter_sign_modified = s:vertical_bar_icon
+        let g:gitgutter_sign_modified_removed = s:vertical_bar_icon
+        let g:gitgutter_sign_removed = s:vertical_bar_icon
+        let g:gitgutter_sign_removed_first_line = s:vertical_bar_icon
 
         nmap ]h <plug>GitGutterNextHunk
         nmap [h <plug>GitGutterPrevHunk
@@ -545,11 +572,11 @@ EOF
         let g:vimfiler_ignore_pattern = []
 
         let g:vimfiler_file_icon = ' '
-        let g:vimfiler_marked_file_icon = '✔'
-        let g:vimfiler_readonly_file_icon = ''
-        let g:vimfiler_tree_closed_icon = '►'
+        let g:vimfiler_marked_file_icon = s:check_mark_icon
+        let g:vimfiler_readonly_file_icon = s:use_icons ? s:padlock_icon : ''
+        let g:vimfiler_tree_closed_icon = s:triangle_right_icon
         let g:vimfiler_tree_leaf_icon = ' '
-        let g:vimfiler_tree_opened_icon = '▼'
+        let g:vimfiler_tree_opened_icon = s:triangle_down_icon
 
         nmap <silent> <Leader>f :VimFiler -toggle<CR>
 
