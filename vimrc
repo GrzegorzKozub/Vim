@@ -167,6 +167,7 @@ EOF
     Plug 'airblade/vim-gitgutter'
     Plug 'altercation/vim-colors-solarized'
     Plug 'cakebaker/scss-syntax.vim'
+    Plug 'chr4/nginx.vim'
     Plug 'chriskempson/base16-vim'
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'digitaltoad/vim-pug'
