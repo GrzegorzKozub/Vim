@@ -108,25 +108,19 @@
 " }
 " icons {
 
-    let s:circle_icon = '●'
-    let s:triangle_icon = '▲'
+    let s:icons = { 'circle': '●', 'triangle': '▲', 'greater_than': '>', 'star': '*', 'vertical_bar': '│' }
 
-    let s:greater_than_icon = '>'
-    let s:star_icon = '*'
+    let s:more_icons = &guifont =~# 'Fira'
 
-    let s:vertical_bar_icon = '│'
+    let s:icons.left_filled = s:more_icons ? '' : ''
+    let s:icons.right_filled = s:more_icons ? '' : ''
+    let s:icons.left_empty = s:more_icons ? '' : s:icons.vertical_bar
+    let s:icons.right_empty = s:more_icons ? '' : s:icons.vertical_bar
 
-    let s:use_icons = &guifont =~# 'Fira'
+    let s:icons.branch = s:more_icons ? '' : ''
+    let s:icons.padlock = s:more_icons ? '' : ''
 
-    let s:left_filled_icon = s:use_icons ? '' : ''
-    let s:right_filled_icon = s:use_icons ? '' : ''
-    let s:left_empty_icon = s:use_icons ? '' : s:vertical_bar_icon
-    let s:right_empty_icon = s:use_icons ? '' : s:vertical_bar_icon
-
-    let s:branch_icon = s:use_icons ? '' : ''
-    let s:padlock_icon = s:use_icons ? '' : ''
-
-    let s:icon_space = s:use_icons ? ' ' : ''
+    let s:icons.space = s:more_icons ? ' ' : ''
 
 " }
 " themes {
@@ -221,9 +215,9 @@ EOF
     " }
     " ALE {
 
-        let g:ale_sign_error = s:circle_icon
-        let g:ale_sign_warning = s:triangle_icon
-        let g:ale_statusline_format = [ s:circle_icon . ' %d', s:triangle_icon . ' %d', '' ]
+        let g:ale_sign_error = s:icons.circle
+        let g:ale_sign_warning = s:icons.triangle
+        let g:ale_statusline_format = [ s:icons.circle . ' %d', s:icons.triangle . ' %d', '' ]
 
     " }
     " ctrlp.vim {
@@ -320,12 +314,12 @@ EOF
                     \ 't': 'TERMINAL'
                 \ },
                 \ 'separator': {
-                    \ 'left': s:left_filled_icon,
-                    \ 'right': s:right_filled_icon
+                    \ 'left': s:icons.left_filled,
+                    \ 'right': s:icons.right_filled
                 \ },
                 \ 'subseparator': {
-                    \ 'left': s:left_empty_icon,
-                    \ 'right': s:right_empty_icon
+                    \ 'left': s:icons.left_empty,
+                    \ 'right': s:icons.right_empty
                 \ },
                 \ 'enable': {
                     \ 'tabline': 0
@@ -354,7 +348,7 @@ EOF
                 if exists('*fugitive#head')
                     let l:branch = fugitive#head()
                     if l:branch !=# ''
-                        return s:branch_icon . s:icon_space . l:branch
+                        return s:icons.branch . s:icons.space . l:branch
                     endif
                     return ''
                 endif
@@ -371,7 +365,7 @@ EOF
                 elseif &filetype ==# 'vim-plug'
                     return ''
                 elseif &filetype ==# 'vimfiler'
-                    return substitute(vimfiler#get_status_string(), '\*safe\*', s:padlock_icon, '')
+                    return substitute(vimfiler#get_status_string(), '\*safe\*', s:icons.padlock, '')
                 elseif expand('%:t') ==# 'ControlP' && has_key(g:lightline, 'ctrlp_item')
                     if g:lightline.ctrlp_item ==# 'files'
                         return 'Files'
@@ -384,15 +378,15 @@ EOF
                 if &filetype ==# 'help'
                     return l:filename
                 endif
-                return l:filename . (&readonly ? s:icon_space . s:padlock_icon : '') . (&modified ? ' ' . s:star_icon : '')
+                return l:filename . (&readonly ? s:icons.space . s:icons.padlock : '') . (&modified ? ' ' . s:icons.star : '')
             endfunction
 
             function! LightLineAleError()
-                return matchstr(ALEGetStatusLine(), s:circle_icon . ' \d\+')
+                return matchstr(ALEGetStatusLine(), s:icons.circle . ' \d\+')
             endfunction
 
             function! LightLineAleWarning()
-                return matchstr(ALEGetStatusLine(), s:triangle_icon . ' \d\+')
+                return matchstr(ALEGetStatusLine(), s:icons.triangle . ' \d\+')
             endfunction
 
             function! LightLinePercent()
@@ -520,11 +514,11 @@ EOF
 
         let g:gitgutter_override_sign_column_highlight = 0
 
-        let g:gitgutter_sign_added = s:vertical_bar_icon
-        let g:gitgutter_sign_modified = s:vertical_bar_icon
-        let g:gitgutter_sign_modified_removed = s:vertical_bar_icon
-        let g:gitgutter_sign_removed = s:vertical_bar_icon
-        let g:gitgutter_sign_removed_first_line = s:vertical_bar_icon
+        let g:gitgutter_sign_added = s:icons.vertical_bar
+        let g:gitgutter_sign_modified = s:icons.vertical_bar
+        let g:gitgutter_sign_modified_removed = s:icons.vertical_bar
+        let g:gitgutter_sign_removed = s:icons.vertical_bar
+        let g:gitgutter_sign_removed_first_line = s:icons.vertical_bar
 
         nmap ]h <plug>GitGutterNextHunk
         nmap [h <plug>GitGutterPrevHunk
@@ -572,9 +566,9 @@ EOF
         let g:vimfiler_ignore_pattern = []
 
         let g:vimfiler_file_icon = ' '
-        let g:vimfiler_marked_file_icon = s:star_icon
-        let g:vimfiler_readonly_file_icon = s:padlock_icon
-        let g:vimfiler_tree_closed_icon = s:greater_than_icon
+        let g:vimfiler_marked_file_icon = s:icons.star
+        let g:vimfiler_readonly_file_icon = s:icons.padlock
+        let g:vimfiler_tree_closed_icon = s:icons.greater_than
         let g:vimfiler_tree_leaf_icon = ' '
 
         nmap <silent> <Leader>f :VimFiler -toggle<CR>
