@@ -108,11 +108,13 @@
 " }
 " icons {
 
-    let s:circle_icon = '⏺'
+    let s:circle_icon = '●'
     let s:triangle_icon = '▲'
 
-    let s:triangle_right_icon = '►'
-    let s:triangle_down_icon = '▼'
+    let s:greater_than_icon = '>'
+    let s:star_icon = '*'
+
+    let s:vertical_bar_icon = '│'
 
     let s:left_filled_icon = ''
     let s:right_filled_icon = ''
@@ -122,12 +124,7 @@
     let s:branch_icon = ''
     let s:padlock_icon = ''
 
-    let s:vertical_bar_icon = '│'
-
-    let s:check_mark_icon = '✓'
-    let s:ballot_icon = '✗'
-
-    let s:use_icons = has('gui_running') || has('win32')
+    let s:use_icons = &guifont =~# 'Fira'
 
 " }
 " themes {
@@ -385,7 +382,7 @@ EOF
                 if &filetype ==# 'help'
                     return l:filename
                 endif
-                return l:filename . (&readonly && s:use_icons ? ' ' . s:padlock_icon : '') . ' ' . (&modified ? s:ballot_icon : s:check_mark_icon)
+                return l:filename . (&readonly && s:use_icons ? ' ' . s:padlock_icon : '') . (&modified ? ' ' . s:star_icon : '')
             endfunction
 
             function! LightLineAleError()
@@ -573,11 +570,10 @@ EOF
         let g:vimfiler_ignore_pattern = []
 
         let g:vimfiler_file_icon = ' '
-        let g:vimfiler_marked_file_icon = s:check_mark_icon
+        let g:vimfiler_marked_file_icon = s:star_icon
         let g:vimfiler_readonly_file_icon = s:use_icons ? s:padlock_icon : ''
-        let g:vimfiler_tree_closed_icon = s:triangle_right_icon
+        let g:vimfiler_tree_closed_icon = s:greater_than_icon
         let g:vimfiler_tree_leaf_icon = ' '
-        let g:vimfiler_tree_opened_icon = s:triangle_down_icon
 
         nmap <silent> <Leader>f :VimFiler -toggle<CR>
 
