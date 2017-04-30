@@ -116,15 +116,17 @@
 
     let s:vertical_bar_icon = '│'
 
-    let s:left_filled_icon = ''
-    let s:right_filled_icon = ''
-    let s:left_empty_icon = ''
-    let s:right_empty_icon = ''
-
-    let s:branch_icon = ''
-    let s:padlock_icon = ''
-
     let s:use_icons = &guifont =~# 'Fira'
+
+    let s:left_filled_icon = s:use_icons ? '' : ''
+    let s:right_filled_icon = s:use_icons ? '' : ''
+    let s:left_empty_icon = s:use_icons ? '' : s:vertical_bar_icon
+    let s:right_empty_icon = s:use_icons ? '' : s:vertical_bar_icon
+
+    let s:branch_icon = s:use_icons ? '' : ''
+    let s:padlock_icon = s:use_icons ? '' : ''
+
+    let s:icon_space = s:use_icons ? ' ' : ''
 
 " }
 " themes {
@@ -318,12 +320,12 @@ EOF
                     \ 't': 'TERMINAL'
                 \ },
                 \ 'separator': {
-                    \ 'left': s:use_icons ? s:left_filled_icon : '',
-                    \ 'right': s:use_icons ? s:right_filled_icon : ''
+                    \ 'left': s:left_filled_icon,
+                    \ 'right': s:right_filled_icon
                 \ },
                 \ 'subseparator': {
-                    \ 'left': s:use_icons ? s:left_empty_icon : s:vertical_bar_icon,
-                    \ 'right': s:use_icons ? s:right_empty_icon : s:vertical_bar_icon
+                    \ 'left': s:left_empty_icon,
+                    \ 'right': s:right_empty_icon
                 \ },
                 \ 'enable': {
                     \ 'tabline': 0
@@ -352,12 +354,12 @@ EOF
                 if exists('*fugitive#head')
                     let l:branch = fugitive#head()
                     if l:branch !=# ''
-                        return (s:use_icons ? s:branch_icon . ' ' : '') . l:branch
+                        return s:branch_icon . s:icon_space . l:branch
                     endif
                     return ''
                 endif
                 return ''
-            endfunction
+            endfunction 
 
             function! LightLineFileName()
                 if &filetype ==# 'Mundo'
@@ -369,7 +371,7 @@ EOF
                 elseif &filetype ==# 'vim-plug'
                     return ''
                 elseif &filetype ==# 'vimfiler'
-                    return substitute(vimfiler#get_status_string(), '\*safe\*', s:use_icons ? s:padlock_icon : '', '')
+                    return substitute(vimfiler#get_status_string(), '\*safe\*', s:padlock_icon, '')
                 elseif expand('%:t') ==# 'ControlP' && has_key(g:lightline, 'ctrlp_item')
                     if g:lightline.ctrlp_item ==# 'files'
                         return 'Files'
@@ -382,7 +384,7 @@ EOF
                 if &filetype ==# 'help'
                     return l:filename
                 endif
-                return l:filename . (&readonly && s:use_icons ? ' ' . s:padlock_icon : '') . (&modified ? ' ' . s:star_icon : '')
+                return l:filename . (&readonly ? s:icon_space . s:padlock_icon : '') . (&modified ? ' ' . s:star_icon : '')
             endfunction
 
             function! LightLineAleError()
@@ -571,7 +573,7 @@ EOF
 
         let g:vimfiler_file_icon = ' '
         let g:vimfiler_marked_file_icon = s:star_icon
-        let g:vimfiler_readonly_file_icon = s:use_icons ? s:padlock_icon : ''
+        let g:vimfiler_readonly_file_icon = s:padlock_icon
         let g:vimfiler_tree_closed_icon = s:greater_than_icon
         let g:vimfiler_tree_leaf_icon = ' '
 
