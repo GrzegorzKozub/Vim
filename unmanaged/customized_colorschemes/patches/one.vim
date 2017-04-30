@@ -13,6 +13,7 @@ else
 endif
 
 exec 'hi SignColumn guibg=' . s:syntax_bg
+exec 'hi StatusLineNC guifg=' . s:syntax_bg
 exec 'hi Todo guifg=' . s:hue_6_2
 exec 'hi VertSplit guifg=' . s:syntax_bg
 
