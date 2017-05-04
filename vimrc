@@ -88,15 +88,34 @@
         set linespace=0
 
         if has('win32')
-            set guifont=Fira\ Code:h14:cEASTEUROPE:qCLEARTYPE
-            "set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
+            let s:screen = eval(system('screen'))
 
-            set columns=145
-            set lines=42
-            winpos 75 320
+            if s:screen.height == 1440 && s:screen.dpi == 96
+
+                set guifont=Fira\ Code:h14:cEASTEUROPE:qCLEARTYPE
+                set columns=145
+                set lines=42
+                winpos 75 320
+
+            elseif s:screen.height == 1440 && s:screen.dpi == 192
+
+                set guifont=Fira\ Code\ Medium:h13:cEASTEUROPE:qCLEARTYPE
+                set columns=116
+                set lines=29
+                winpos 49 35
+
+            elseif s:screen.height == 1800 && s:screen.dpi == 240
+
+                set guifont=Fira\ Code\ Medium:h13:cEASTEUROPE:qCLEARTYPE
+                set columns=117
+                set lines=29
+                winpos 63 66
+
+            endif
+
+            "set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
         else
             set guifont=Fira\ Code\ Medium\ 13
-
             set columns=113
             set lines=30
             winpos 215 100
