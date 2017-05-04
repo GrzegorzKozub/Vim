@@ -88,14 +88,14 @@
         set linespace=0
 
         if has('win32')
-            set guifont=Fira\ Code\ Retina:h13:cEASTEUROPE:qCLEARTYPE
+            set guifont=Fira\ Code:h14:cEASTEUROPE:qCLEARTYPE
             "set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
 
-            set columns=160
-            set lines=46
+            set columns=145
+            set lines=42
             winpos 75 320
         else
-            set guifont=Fira\ Code\ Retina\ 13
+            set guifont=Fira\ Code\ Medium\ 13
 
             set columns=113
             set lines=30
