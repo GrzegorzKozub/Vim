@@ -70,6 +70,7 @@
     Plug 'scrooloose/nerdcommenter'
     Plug 'Shougo/unite.vim', { 'on': 'VimFiler' }
     Plug 'Shougo/vimfiler.vim', { 'on': 'VimFiler' }
+    Plug 'Shougo/vimproc.vim'
     Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
     Plug 'stephpy/vim-yaml'
     Plug 'tpope/vim-dispatch'
@@ -149,7 +150,7 @@
         set linespace=0
 
         if has('win32')
-            let s:screen = eval(system('screen'))
+            let s:screen = eval(vimproc#system('screen'))
 
             if s:screen.height == 1440 && s:screen.dpi == 96
 
