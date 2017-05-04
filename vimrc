@@ -25,6 +25,67 @@
     silent! call mkdir(s:plugins_dir, 'p')
 
 " }
+" vim-plug {
+
+    call plug#begin(s:user_dir . 'plugins')
+
+    let g:unmanaged_dir = s:user_dir . 'unmanaged/'
+
+    Plug g:unmanaged_dir . 'compilers', { 'for': [ 'c', 'cpp' ] }
+    Plug g:unmanaged_dir . 'customized_colorschemes'
+    Plug g:unmanaged_dir . 'diff_and_merge', { 'on': [ 'VimDiff', 'VimMerge' ] }
+    Plug g:unmanaged_dir . 'full_screen', { 'on': [ 'CycleAlpha', 'ToggleFullScreen' ] }
+    Plug g:unmanaged_dir . 'screen_memento'
+    Plug g:unmanaged_dir . 'window_toggles', { 'on': [ 'ToggleLocation', 'ToggleQuickfix' ] }
+
+    Plug 'airblade/vim-gitgutter'
+    Plug 'altercation/vim-colors-solarized'
+    Plug 'cakebaker/scss-syntax.vim'
+    Plug 'chr4/nginx.vim'
+    Plug 'chriskempson/base16-vim'
+    Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'digitaltoad/vim-pug'
+    Plug 'editorconfig/editorconfig-vim'
+    Plug 'ekalinin/Dockerfile.vim'
+    Plug 'elzr/vim-json'
+    Plug 'groenewege/vim-less'
+    Plug 'hail2u/vim-css3-syntax'
+    Plug 'itchyny/lightline.vim'
+    Plug 'leafgarland/typescript-vim'
+    Plug 'mattn/emmet-vim'
+    Plug 'mileszs/ack.vim'
+    Plug 'moll/vim-node'
+    Plug 'morhetz/gruvbox'
+    Plug 'mxw/vim-jsx'
+    Plug 'nelstrom/vim-visual-star-search'
+    Plug 'octol/vim-cpp-enhanced-highlight'
+    Plug 'othree/html5.vim'
+    Plug 'pangloss/vim-javascript'
+    Plug 'plasticboy/vim-markdown'
+    Plug 'PProvost/vim-ps1'
+    Plug 'Quramy/vim-js-pretty-template'
+    Plug 'Raimondi/delimitMate'
+    Plug 'rakr/vim-one'
+    Plug 'sbdchd/neoformat', { 'on': 'Neoformat' }
+    Plug 'scrooloose/nerdcommenter'
+    Plug 'Shougo/unite.vim', { 'on': 'VimFiler' }
+    Plug 'Shougo/vimfiler.vim', { 'on': 'VimFiler' }
+    Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
+    Plug 'stephpy/vim-yaml'
+    Plug 'tpope/vim-dispatch'
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-git'
+    Plug 'tpope/vim-jdaddy'
+    Plug 'tpope/vim-rails'
+    Plug 'tpope/vim-repeat'
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-unimpaired'
+    Plug 'vim-ruby/vim-ruby'
+    Plug 'w0rp/ale'
+
+    call plug#end()
+
+" }
 " settings {
 
     set autoindent
@@ -161,67 +222,6 @@ EOF
     function! GetCurrentBackground()
         return !has('gui_running') || (strftime('%H') > 6 && strftime('%H') < 18) ? 'light' : 'dark'
     endfunction
-
-" }
-" vim-plug {
-
-    call plug#begin(s:user_dir . 'plugins')
-
-    let g:unmanaged_dir = s:user_dir . 'unmanaged/'
-
-    Plug g:unmanaged_dir . 'compilers', { 'for': [ 'c', 'cpp' ] }
-    Plug g:unmanaged_dir . 'customized_colorschemes'
-    Plug g:unmanaged_dir . 'diff_and_merge', { 'on': [ 'VimDiff', 'VimMerge' ] }
-    Plug g:unmanaged_dir . 'full_screen', { 'on': [ 'CycleAlpha', 'ToggleFullScreen' ] }
-    Plug g:unmanaged_dir . 'screen_memento'
-    Plug g:unmanaged_dir . 'window_toggles', { 'on': [ 'ToggleLocation', 'ToggleQuickfix' ] }
-
-    Plug 'airblade/vim-gitgutter'
-    Plug 'altercation/vim-colors-solarized'
-    Plug 'cakebaker/scss-syntax.vim'
-    Plug 'chr4/nginx.vim'
-    Plug 'chriskempson/base16-vim'
-    Plug 'ctrlpvim/ctrlp.vim'
-    Plug 'digitaltoad/vim-pug'
-    Plug 'editorconfig/editorconfig-vim'
-    Plug 'ekalinin/Dockerfile.vim'
-    Plug 'elzr/vim-json'
-    Plug 'groenewege/vim-less'
-    Plug 'hail2u/vim-css3-syntax'
-    Plug 'itchyny/lightline.vim'
-    Plug 'leafgarland/typescript-vim'
-    Plug 'mattn/emmet-vim'
-    Plug 'mileszs/ack.vim'
-    Plug 'moll/vim-node'
-    Plug 'morhetz/gruvbox'
-    Plug 'mxw/vim-jsx'
-    Plug 'nelstrom/vim-visual-star-search'
-    Plug 'octol/vim-cpp-enhanced-highlight'
-    Plug 'othree/html5.vim'
-    Plug 'pangloss/vim-javascript'
-    Plug 'plasticboy/vim-markdown'
-    Plug 'PProvost/vim-ps1'
-    Plug 'Quramy/vim-js-pretty-template'
-    Plug 'Raimondi/delimitMate'
-    Plug 'rakr/vim-one'
-    Plug 'sbdchd/neoformat', { 'on': 'Neoformat' }
-    Plug 'scrooloose/nerdcommenter'
-    Plug 'Shougo/unite.vim', { 'on': 'VimFiler' }
-    Plug 'Shougo/vimfiler.vim', { 'on': 'VimFiler' }
-    Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
-    Plug 'stephpy/vim-yaml'
-    Plug 'tpope/vim-dispatch'
-    Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-git'
-    Plug 'tpope/vim-jdaddy'
-    Plug 'tpope/vim-rails'
-    Plug 'tpope/vim-repeat'
-    Plug 'tpope/vim-surround'
-    Plug 'tpope/vim-unimpaired'
-    Plug 'vim-ruby/vim-ruby'
-    Plug 'w0rp/ale'
-
-    call plug#end()
 
 " }
 " plugins {
