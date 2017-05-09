@@ -31,7 +31,6 @@
 
     let g:unmanaged_dir = s:user_dir . 'unmanaged/'
 
-    Plug g:unmanaged_dir . 'compilers', { 'for': [ 'c', 'cpp' ] }
     Plug g:unmanaged_dir . 'customized_colorschemes'
     Plug g:unmanaged_dir . 'diff_and_merge', { 'on': [ 'VimDiff', 'VimMerge' ] }
     Plug g:unmanaged_dir . 'full_screen', { 'on': [ 'CycleAlpha', 'ToggleFullScreen' ] }
@@ -586,14 +585,6 @@ EOF
     " }
 " }
 " unmanaged {
-    " compilers {
-
-        augroup SetupCompilers
-            autocmd!
-            autocmd FileType c,cpp compiler gcc
-        augroup END
-
-    " }
     " full_screen {
 
         if has('win32') && has('gui_running')
