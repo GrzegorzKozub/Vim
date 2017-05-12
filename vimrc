@@ -158,14 +158,14 @@
 
             elseif s:screen.height == 1440 && s:screen.dpi == 192
 
-                set guifont=Fira\ Code\ Medium:h13
+                set guifont=Fira\ Code\ Retina:h13
                 set columns=116
                 set lines=29
                 winpos 49 35
 
             elseif s:screen.height == 1800 && s:screen.dpi == 240
 
-                set guifont=Fira\ Code\ Medium:h13
+                set guifont=Fira\ Code\ Retina:h13
                 set columns=117
                 set lines=29
                 winpos 63 66
