@@ -151,21 +151,21 @@
 
             if s:screen.height == 1440 && s:screen.dpi == 96
 
-                set guifont=Fira\ Code:h14:cEASTEUROPE:qCLEARTYPE
+                set guifont=Fira\ Code:h14
                 set columns=145
                 set lines=42
                 winpos 75 320
 
             elseif s:screen.height == 1440 && s:screen.dpi == 192
 
-                set guifont=Fira\ Code\ Medium:h13:cEASTEUROPE:qCLEARTYPE
+                set guifont=Fira\ Code\ Medium:h13
                 set columns=116
                 set lines=29
                 winpos 49 35
 
             elseif s:screen.height == 1800 && s:screen.dpi == 240
 
-                set guifont=Fira\ Code\ Medium:h13:cEASTEUROPE:qCLEARTYPE
+                set guifont=Fira\ Code\ Medium:h13
                 set columns=117
                 set lines=29
                 winpos 63 66
