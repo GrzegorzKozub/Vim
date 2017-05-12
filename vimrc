@@ -170,14 +170,16 @@
                 set lines=29
                 winpos 63 66
 
-            endif
+                set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
 
-            "set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
+            endif
         else
+
             set guifont=Fira\ Code\ Medium\ 13
             set columns=113
             set lines=30
             winpos 215 100
+
         endif
     else
         set ttyfast
