@@ -594,13 +594,6 @@ EOF
         endif
 
     " }
-    " screen_memento {
-
-        if has('gui_running')
-            let g:screen_memento_dir = s:plugins_dir
-        endif
-
-    " }
     " window_toggles {
 
         nmap <silent> <Leader>l :ToggleLocation<CR>
