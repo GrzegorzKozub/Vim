@@ -165,14 +165,14 @@
 
             elseif s:screen.height == 1800 && s:screen.dpi == 240
 
-                set guifont=Fira\ Code\ Retina:h13
+                set guifont=Fira\ Code\ Retina:h13:qANTIALIASED
                 set columns=117
                 set lines=29
                 winpos 63 66
 
-                set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
-
             endif
+
+            "set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
         else
 
             set guifont=Fira\ Code\ Medium\ 13
