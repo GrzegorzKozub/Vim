@@ -34,7 +34,6 @@
     Plug g:unmanaged_dir . 'customized_colorschemes'
     Plug g:unmanaged_dir . 'diff_and_merge', { 'on': [ 'VimDiff', 'VimMerge' ] }
     Plug g:unmanaged_dir . 'full_screen', { 'on': [ 'CycleAlpha', 'ToggleFullScreen' ] }
-    Plug g:unmanaged_dir . 'screen_memento'
     Plug g:unmanaged_dir . 'window_toggles', { 'on': [ 'ToggleLocation', 'ToggleQuickfix' ] }
 
     Plug 'altercation/vim-colors-solarized'
@@ -190,6 +189,29 @@
             winpos 215 100
 
         endif
+
+        function! SaveScreen()
+            if !exists('g:SCREEN')
+                let g:SCREEN = {}
+            endif
+            let g:SCREEN[v:servername] = [ &columns, &lines, getwinposx(), getwinposy() ]
+        endfunction
+
+        function! RestoreScreen()
+            if !exists('g:SCREEN') || !exists('g:SCREEN["' . v:servername . '"]')
+                return
+            endif
+            let l:screen = g:SCREEN[v:servername]
+            silent! execute 'set columns=' . l:screen[0] . ' lines=' . l:screen[1]
+            silent! execute 'winpos ' . l:screen[2] . ' ' . l:screen[3]
+        endfunction
+
+        augroup SaveScreenWhenVimLeaves
+            autocmd!
+            autocmd VimLeavePre * call SaveScreen()
+        augroup END
+
+        call RestoreScreen()
     endif
 
 " }
