@@ -147,8 +147,17 @@
         set guioptions-=T
         set guitablabel=%t\ %M
         set linespace=0
+    else
+        set ttyfast
+    endif
+
+" }
+" gui {
+
+    if has('gui_running')
 
         if has('win32')
+            "set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
             let s:screen = eval(vimproc#system('screen'))
 
             if s:screen.height == 1440 && s:screen.dpi == 96
@@ -173,8 +182,6 @@
                 winpos 63 66
 
             endif
-
-            "set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
         else
 
             set guifont=Fira\ Code\ Medium\ 13
@@ -183,8 +190,6 @@
             winpos 215 100
 
         endif
-    else
-        set ttyfast
     endif
 
 " }
