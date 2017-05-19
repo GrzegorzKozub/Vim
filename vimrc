@@ -126,6 +126,8 @@
     let &undodir = s:undo_dir
     let &viminfo = &viminfo . ',!,n' . s:temp_dir . 'viminfo'
 
+    try | rviminfo | catch | endtry
+
     scriptencoding 'utf-8'
 
     if has('win32')
@@ -206,17 +208,20 @@
 " themes {
 
     let s:themes = [ 'solarized', 'gruvbox', 'one' ]
-    let s:themeIndex = 0
 
-    if has('python3')
+    if !exists('g:THEME_INDEX')
+        let g:THEME_INDEX = 0
+
+        if has('python3')
 python3 << EOF
 import vim, random;
-vim.command("let s:themeIndex = %s" % random.randint(0, int(vim.eval("len(s:themes)")) - 1));
+vim.command("let g:THEME_INDEX = %s" % random.randint(0, int(vim.eval("len(s:themes)")) - 1));
 EOF
+        endif
     endif
 
     function! GetCurrentColorScheme()
-        return has('gui_running') ? s:themes[s:themeIndex] : 'terminal'
+        return has('gui_running') ? s:themes[g:THEME_INDEX] : 'terminal'
     endfunction
 
     function! GetCurrentBackground()
@@ -630,8 +635,8 @@ EOF
         augroup END
 
         function! CycleColorSchemes()
-            let l:current = index(s:themes, g:colors_name)
-            exe('colorscheme ' . (l:current == len(s:themes) - 1 ? s:themes[0] : s:themes[l:current + 1]))
+            let g:THEME_INDEX = g:THEME_INDEX == len(s:themes) - 1 ? 0 : g:THEME_INDEX + 1
+            exe('colorscheme ' . s:themes[g:THEME_INDEX])
         endfunction
 
         nmap <silent> <F5> :call CycleColorSchemes()<CR>
