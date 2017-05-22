@@ -33,7 +33,6 @@
 
     Plug g:unmanaged_dir . 'customized_colorschemes'
     Plug g:unmanaged_dir . 'diff_and_merge', { 'on': [ 'VimDiff', 'VimMerge' ] }
-    Plug g:unmanaged_dir . 'full_screen', { 'on': [ 'CycleAlpha', 'ToggleFullScreen' ] }
     Plug g:unmanaged_dir . 'window_toggles', { 'on': [ 'ToggleLocation', 'ToggleQuickfix' ] }
 
     Plug 'altercation/vim-colors-solarized'
@@ -151,13 +150,42 @@
     endif
 
 " }
+" extensions {
+
+    let s:extensions_file = $VIMRUNTIME . '/extensions.dll'
+    
+    function! GetScreen()
+        return libcall(s:extensions_file, 'GetScreen', '')
+    endfunction
+
+    function! GetMaximized()
+        return libcallnr(s:extensions_file, 'GetMaximized', '')
+    endfunction
+
+    function! GetFullScreen()
+        return libcallnr(s:extensions_file, 'GetFullScreen', '')
+    endfunction
+
+    function! Maximize()
+        call libcall(s:extensions_file, 'Maximize', '')
+    endfunction
+
+    function! EnterFullScreen()
+        call libcall(s:extensions_file, 'EnterFullScreen', '')
+    endfunction
+
+    function! ExitFullScreen()
+        call libcall(s:extensions_file, 'ExitFullScreen', '')
+    endfunction
+
+" }
 " gui {
 
     if has('gui_running')
 
         if has('win32')
             "set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
-            let s:screen = eval(libcall($VIMRUNTIME . '/extensions.dll', 'GetScreen', ''))
+            let s:screen = eval(GetScreen())
 
             if s:screen.height == 1440 && s:screen.dpi == 96
 
@@ -194,16 +222,29 @@
             if !exists('g:SCREEN')
                 let g:SCREEN = {}
             endif
-            let g:SCREEN[v:servername] = [ &columns, &lines, getwinposx(), getwinposy() ]
+            let l:maximized = GetMaximized()
+            let l:fullScreen = GetFullScreen()
+            if !l:maximized && !l:fullScreen
+                let g:SCREEN[v:servername] = [ &columns, &lines, getwinposx(), getwinposy(), 0, 0 ]
+            else
+                let g:SCREEN[v:servername][4] = l:maximized
+                let g:SCREEN[v:servername][5] = l:fullScreen
+            endif
         endfunction
 
-        function! RestoreScreen()
+        function! RestoreScreen(allowFullScreen)
             if !exists('g:SCREEN') || !exists('g:SCREEN["' . v:servername . '"]')
                 return
             endif
             let l:screen = g:SCREEN[v:servername]
             silent! execute 'set columns=' . l:screen[0] . ' lines=' . l:screen[1]
             silent! execute 'winpos ' . l:screen[2] . ' ' . l:screen[3]
+            if l:screen[4]
+                call Maximize()
+            endif
+            if l:screen[5] && a:allowFullScreen
+                call EnterFullScreen()
+            endif
         endfunction
 
         augroup SaveScreenWhenVimLeaves
@@ -211,7 +252,26 @@
             autocmd VimLeavePre * call SaveScreen()
         augroup END
 
-        call RestoreScreen()
+        augroup RestoreScreenWhenGUIEnters
+            autocmd!
+            autocmd GUIEnter * call RestoreScreen(1)
+        augroup END
+
+        if has('win32')
+
+            function! ToggleFullScreen()
+                if GetFullScreen()
+                    call ExitFullScreen()
+                    call RestoreScreen(0)
+                else
+                    call SaveScreen()
+                    call EnterFullScreen()
+                endif
+            endfunction
+
+            nmap <silent> <F11> :call ToggleFullScreen()<CR>
+
+        endif
     endif
 
 " }
@@ -618,14 +678,6 @@ EOF
     " }
 " }
 " unmanaged {
-    " full_screen {
-
-        if has('win32') && has('gui_running')
-            nmap <silent> <F11> :ToggleFullScreen<CR>
-            nmap <silent> <F12> :CycleAlpha<CR>
-        endif
-
-    " }
     " window_toggles {
 
         nmap <silent> <Leader>l :ToggleLocation<CR>
@@ -697,6 +749,11 @@ EOF
     augroup ScrollToLastSeenLocationOnFileOpen
         autocmd!
         autocmd BufReadPost * if line("'\'") > 1 && line("'\'") <= line('$') | exe "normal! g`\'" | endif
+    augroup END
+
+    augroup KeepWindowSizesEqualWhenResizingInDiffMode
+        autocmd!
+        autocmd VimResized * if &diff | wincmd = | endif
     augroup END
 
     augroup DoNotOverwriteBackupFilesWithTheSameNames
