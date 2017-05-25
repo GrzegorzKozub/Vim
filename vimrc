@@ -178,6 +178,10 @@
         call libcall(s:extensions_file, 'ExitFullScreen', '')
     endfunction
 
+    function! FixBackground()
+        call libcall(s:extensions_file, 'FixBackground', strpart(synIDattr(hlID('Normal'), 'bg#'), 1))
+    endfunction
+
 " }
 " gui {
 
@@ -241,9 +245,11 @@
             silent! execute 'winpos ' . l:screen[2] . ' ' . l:screen[3]
             if l:screen[4]
                 call Maximize()
+                call FixBackground()
             endif
             if l:screen[5] && a:allowFullScreen
                 call EnterFullScreen()
+                call FixBackground()
             endif
         endfunction
 
@@ -270,6 +276,16 @@
             endfunction
 
             nmap <silent> <F11> :call ToggleFullScreen()<CR>
+
+            augroup FixBackgroundWhenColorSchemeChanges
+                autocmd!
+                autocmd ColorScheme * call FixBackground()
+            augroup END
+
+            augroup FixBackgroundWhenResizing
+                autocmd!
+                autocmd VimResized * if GetMaximized() || GetFullScreen() | call FixBackground() | endif
+            augroup END
 
         endif
     endif
