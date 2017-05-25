@@ -63,9 +63,6 @@
     Plug 'rakr/vim-one'
     Plug 'sbdchd/neoformat', { 'on': 'Neoformat' }
     Plug 'scrooloose/nerdcommenter'
-    Plug 'Shougo/unite.vim', { 'on': 'VimFiler' }
-    Plug 'Shougo/vimfiler.vim', { 'on': 'VimFiler' }
-    Plug 'Shougo/vimproc.vim'
     Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
     Plug 'stephpy/vim-yaml'
     Plug 'tpope/vim-dispatch'
@@ -293,7 +290,7 @@
 " }
 " icons {
 
-    let s:icons = { 'circle': '●', 'triangle': '▲', 'greater_than': '>', 'star': '*', 'vertical_bar': '│' }
+    let s:icons = { 'circle': '●', 'triangle': '▲', 'star': '*', 'vertical_bar': '│' }
 
     let s:more_icons = &guifont =~# 'Fira'
 
@@ -470,8 +467,6 @@ EOF
                     return exists('w:quickfix_title') ? 'Location' : 'QuickFix'
                 elseif &filetype ==# 'vim-plug'
                     return 'Plugins'
-                elseif &filetype ==# 'vimfiler'
-                    return 'VimFiler'
                 elseif expand('%:t') ==# 'ControlP'
                     return 'CtrlP'
                 endif
@@ -494,8 +489,6 @@ EOF
                     return ''
                 elseif &filetype ==# 'vim-plug'
                     return ''
-                elseif &filetype ==# 'vimfiler'
-                    return substitute(vimfiler#get_status_string(), '\*safe\*', s:icons.padlock, '')
                 elseif expand('%:t') ==# 'ControlP' && has_key(g:lightline, 'ctrlp_item')
                     if g:lightline.ctrlp_item ==# 'files'
                         return 'Files'
@@ -528,15 +521,15 @@ EOF
             endfunction
 
             function! LightLineFileEncoding()
-                return strlen(&fileencoding) > 0 && &filetype !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug\|vimfiler' ? &fileencoding : ''
+                return strlen(&fileencoding) > 0 && &filetype !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug' ? &fileencoding : ''
             endfunction
 
             function! LightLineFileFormat()
-                return strlen(&fileformat) > 0 && &filetype !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug\|vimfiler' && expand('%:t') !=# 'ControlP' ? &fileformat : ''
+                return strlen(&fileformat) > 0 && &filetype !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug' && expand('%:t') !=# 'ControlP' ? &fileformat : ''
             endfunction
 
             function! LightLineFileType()
-                return strlen(&filetype) > 0 && &filetype !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug\|vimfiler' ? &filetype : ''
+                return strlen(&filetype) > 0 && &filetype !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug' ? &filetype : ''
             endfunction
 
         " }
@@ -591,7 +584,7 @@ EOF
     " }
     " neoformat {
 
-        nmap <silent> <Leader>nf :Neoformat<CR>
+        nmap <silent> <Leader>f :Neoformat<CR>
 
     " }
     " netrw {
@@ -669,27 +662,6 @@ EOF
         let g:mundo_width = 40
 
         nmap <silent> <Leader>u :MundoToggle<CR>
-
-    " }
-    " vimfiler.vim {
-
-        let g:vimfiler_as_default_explorer = 1
-        let g:vimfiler_data_directory = s:plugins_dir . 'vimfiler.vim'
-        let g:vimfiler_force_overwrite_statusline = 0
-        let g:vimfiler_ignore_pattern = []
-
-        let g:vimfiler_file_icon = ' '
-        let g:vimfiler_marked_file_icon = s:icons.star
-        let g:vimfiler_readonly_file_icon = s:icons.padlock
-        let g:vimfiler_tree_closed_icon = s:icons.greater_than
-        let g:vimfiler_tree_leaf_icon = ' '
-
-        nmap <silent> <Leader>f :VimFiler -toggle<CR>
-
-        augroup SetupVimFiler
-            autocmd!
-            autocmd FileType vimfiler nmap <buffer> <Leader>f :VimFiler -toggle<CR>
-        augroup END
 
     " }
 " }
