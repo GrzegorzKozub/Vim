@@ -32,7 +32,6 @@
     let g:unmanaged_dir = s:user_dir . 'unmanaged/'
 
     Plug g:unmanaged_dir . 'customized_colorschemes'
-    Plug g:unmanaged_dir . 'diff_and_merge', { 'on': [ 'VimDiff', 'VimMerge' ] }
 
     Plug 'altercation/vim-colors-solarized'
     Plug 'cakebaker/scss-syntax.vim'
@@ -741,11 +740,6 @@ EOF
         autocmd BufReadPost * if line("'\'") > 1 && line("'\'") <= line('$') | exe "normal! g`\'" | endif
     augroup END
 
-    augroup KeepWindowSizesEqualWhenResizingInDiffMode
-        autocmd!
-        autocmd VimResized * if &diff | wincmd = | endif
-    augroup END
-
     augroup DoNotOverwriteBackupFilesWithTheSameNames
         autocmd!
         autocmd BufWritePre * let &backupext = '@' . substitute(expand('%:p:h'), ',\\=[:\\\/]', '%', 'g')
@@ -809,6 +803,33 @@ EOF
     endfunction
 
     nmap <silent> <Leader>q :call QuickfixToggle()<CR>
+
+" }
+" diff and merge {
+
+    augroup KeepWindowSizesEqualWhenResizingInDiffMode
+        autocmd!
+        autocmd VimResized * if &diff | wincmd = | endif
+    augroup END
+
+    function! VimDiff()
+        let s:ft = &filetype
+        windo if (winnr() != 1 && &ft == '') | :silent! exe 'set ft=' . s:ft | endif
+        wincmd =
+    endfunction 
+
+    command! VimDiff call VimDiff()
+
+    function! VimMerge()
+        let s:ft = &filetype
+        windo if (winnr() != 1 && &ft == '') | :silent! exe 'set ft=' . s:ft | endif
+        wincmd b
+        wincmd J
+        if search('') > 0 | :e ++fileformat=dos | endif
+        diffupdate
+    endfunction
+
+    command! VimMerge call VimMerge()
 
     command! -nargs=* DiffGet :diffget <args> | :diffupdate
     nmap <silent> <Leader>d1 :DiffGet 1<CR>
