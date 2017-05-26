@@ -33,7 +33,6 @@
 
     Plug g:unmanaged_dir . 'customized_colorschemes'
     Plug g:unmanaged_dir . 'diff_and_merge', { 'on': [ 'VimDiff', 'VimMerge' ] }
-    Plug g:unmanaged_dir . 'window_toggles', { 'on': [ 'ToggleLocation', 'ToggleQuickfix' ] }
 
     Plug 'altercation/vim-colors-solarized'
     Plug 'cakebaker/scss-syntax.vim'
@@ -266,14 +265,14 @@
 
         if has('win32')
 
-            function! ToggleMaximized()
+            function! MaximizedToggle()
                 if GetFullScreen() | return | endif
                 if GetMaximized() | call Restore() | else | call Maximize() | endif
             endfunction
 
-            nmap <silent> <F10> :call ToggleMaximized()<CR>
+            nmap <silent> <F10> :call MaximizedToggle()<CR>
 
-            function! ToggleFullScreen()
+            function! FullScreenToggle()
                 if GetFullScreen()
                     call ExitFullScreen()
                     call RestoreScreen(0)
@@ -283,7 +282,7 @@
                 endif
             endfunction
 
-            nmap <silent> <F11> :call ToggleFullScreen()<CR>
+            nmap <silent> <F11> :call FullScreenToggle()<CR>
 
             augroup FixBackgroundWhenColorSchemeChanges
                 autocmd!
@@ -676,14 +675,6 @@ EOF
 
     " }
 " }
-" unmanaged {
-    " window_toggles {
-
-        nmap <silent> <Leader>l :ToggleLocation<CR>
-        nmap <silent> <Leader>q :ToggleQuickfix<CR>
-
-    " }
-" }
 " colorscheme {
 
     function! HideTildeOnEmptyLines()
@@ -794,6 +785,30 @@ EOF
 
     command! SpellToggle set spell!
     nmap <silent> <F7> :SpellToggle<CR>
+
+    function! LocationToggle()
+        if exists('s:location_open')
+            lclose
+            unlet s:location_open
+        else
+            lopen
+            let s:location_open = bufnr('$')
+        endif
+    endfunction
+
+    nmap <silent> <Leader>l :call LocationToggle()<CR>
+
+    function! QuickfixToggle()
+        if exists('s:quickfix_open')
+            cclose
+            unlet s:quickfix_open
+        else
+            copen
+            let s:quickfix_open = bufnr('$')
+        endif
+    endfunction
+
+    nmap <silent> <Leader>q :call QuickfixToggle()<CR>
 
     command! -nargs=* DiffGet :diffget <args> | :diffupdate
     nmap <silent> <Leader>d1 :DiffGet 1<CR>
