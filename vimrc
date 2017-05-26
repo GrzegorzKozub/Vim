@@ -145,40 +145,40 @@
     endif
 
 " }
-" extensions {
+" vimdows {
 
-    let s:extensions_file = $VIMRUNTIME . '/extensions.dll'
+    let s:vimdows_file = $VIMRUNTIME . '/vimdows.dll'
     
     function! GetScreen()
-        return libcall(s:extensions_file, 'GetScreen', '')
+        return libcall(s:vimdows_file, 'GetScreen', '')
     endfunction
 
     function! GetMaximized()
-        return libcallnr(s:extensions_file, 'GetMaximized', '')
+        return libcallnr(s:vimdows_file, 'GetMaximized', '')
     endfunction
 
     function! GetFullScreen()
-        return libcallnr(s:extensions_file, 'GetFullScreen', '')
+        return libcallnr(s:vimdows_file, 'GetFullScreen', '')
     endfunction
 
     function! Maximize()
-        call libcall(s:extensions_file, 'Maximize', '')
+        call libcall(s:vimdows_file, 'Maximize', '')
     endfunction
 
     function! Restore()
-        call libcall(s:extensions_file, 'Restore', '')
+        call libcall(s:vimdows_file, 'Restore', '')
     endfunction
 
     function! EnterFullScreen()
-        call libcall(s:extensions_file, 'EnterFullScreen', '')
+        call libcall(s:vimdows_file, 'EnterFullScreen', '')
     endfunction
 
     function! ExitFullScreen()
-        call libcall(s:extensions_file, 'ExitFullScreen', '')
+        call libcall(s:vimdows_file, 'ExitFullScreen', '')
     endfunction
 
     function! FixBackground()
-        call libcall(s:extensions_file, 'FixBackground', strpart(synIDattr(hlID('Normal'), 'bg#'), 1))
+        call libcall(s:vimdows_file, 'FixBackground', strpart(synIDattr(hlID('Normal'), 'bg#'), 1))
     endfunction
 
 " }
