@@ -167,6 +167,10 @@
         call libcall(s:extensions_file, 'Maximize', '')
     endfunction
 
+    function! Restore()
+        call libcall(s:extensions_file, 'Restore', '')
+    endfunction
+
     function! EnterFullScreen()
         call libcall(s:extensions_file, 'EnterFullScreen', '')
     endfunction
@@ -261,6 +265,13 @@
         augroup END
 
         if has('win32')
+
+            function! ToggleMaximized()
+                if GetFullScreen() | return | endif
+                if GetMaximized() | call Restore() | else | call Maximize() | endif
+            endfunction
+
+            nmap <silent> <F10> :call ToggleMaximized()<CR>
 
             function! ToggleFullScreen()
                 if GetFullScreen()
