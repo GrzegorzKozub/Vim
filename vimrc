@@ -702,9 +702,41 @@ EOF
             autocmd ColorScheme * call ApplyColorSchemePatch()
         augroup END
 
+        let s:highlight_links = {}
+
+        function! FindHighlightLinks()
+            redir => l:listing
+            try | silent highlight | finally | redir END | endtry
+            for l:line in split(l:listing, "\n")
+                let l:tokens = split(l:line)
+                if len(l:tokens) == 5 && l:tokens[1] ==# 'xxx' && l:tokens[2] ==# 'links' && l:tokens[3] ==# 'to'
+                    let l:from = l:tokens[0]
+                    let l:to = l:tokens[4]
+                    let s:highlight_links[l:from] = l:to
+                endif
+            endfor
+        endfunction
+
+        function! RestoreHighlightLinks()
+            redir => l:listing
+            try | silent highlight | finally | redir END | endtry
+            for l:line in split(l:listing, "\n")
+                let l:tokens = split(l:line)
+                if len(l:tokens) == 3 && l:tokens[1] ==# 'xxx' && l:tokens[2] ==# 'cleared'
+                    let l:from = l:tokens[0]
+                    let l:to = get(s:highlight_links, l:from, '')
+                    if !empty(l:to)
+                        exe 'hi link' l:from l:to
+                    endif
+                endif
+            endfor
+        endfunction
+
         function! CycleColorSchemes()
+            call FindHighlightLinks()
             let g:THEME_INDEX = g:THEME_INDEX == len(s:themes) - 1 ? 0 : g:THEME_INDEX + 1
-            exe('colorscheme ' . s:themes[g:THEME_INDEX])
+            exe 'colorscheme' fnameescape(s:themes[g:THEME_INDEX])
+            call RestoreHighlightLinks()
         endfunction
 
         nmap <silent> <F5> :call CycleColorSchemes()<CR>
