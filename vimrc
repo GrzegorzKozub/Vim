@@ -240,8 +240,8 @@
                 return
             endif
             let l:screen = g:SCREEN[v:servername]
-            silent! execute 'set columns=' . l:screen[0] . ' lines=' . l:screen[1]
-            silent! execute 'winpos ' . l:screen[2] . ' ' . l:screen[3]
+            silent! exe 'set columns=' . l:screen[0] . ' lines=' . l:screen[1]
+            silent! exe 'winpos ' . l:screen[2] . ' ' . l:screen[3]
             if l:screen[4]
                 call Maximize()
                 call FixBackground()
@@ -575,7 +575,7 @@ EOF
                 endif
 
                 for l:theme in split(globpath(g:unmanaged_dir . 'customized_colorschemes/plugin/lightline/colorscheme', '*.vim'), '\n')
-                    execute('source ' . l:theme)
+                    exe 'source' fnameescape(l:theme)
                 endfor
 
                 let g:lightline.colorscheme = g:colors_name
@@ -693,7 +693,7 @@ EOF
         function! ApplyColorSchemePatch()
             let l:patch = g:unmanaged_dir . 'customized_colorschemes/patches/' . g:colors_name . '.vim'
             if filereadable(l:patch)
-                execute('source ' . l:patch)
+                exe 'source' fnameescape(l:patch)
             endif
         endfunction
 
@@ -744,8 +744,8 @@ EOF
         let &t_Co=256
     endif
 
-    exec 'set background=' . GetCurrentBackground()
-    exec 'colorscheme ' . GetCurrentColorScheme()
+    exe 'set background=' . GetCurrentBackground()
+    exe 'colorscheme' fnameescape(GetCurrentColorScheme())
 
 " }
 " auto-commands {
