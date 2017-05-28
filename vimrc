@@ -55,7 +55,6 @@
     Plug 'octol/vim-cpp-enhanced-highlight'
     Plug 'othree/html5.vim'
     Plug 'pangloss/vim-javascript'
-    Plug 'plasticboy/vim-markdown'
     Plug 'PProvost/vim-ps1'
     Plug 'Quramy/vim-js-pretty-template'
     Plug 'Raimondi/delimitMate'
@@ -547,11 +546,6 @@ EOF
     " vim-jsx {
 
         let g:jsx_ext_required = 0
-
-    " }
-    " vim-markdown {
-
-        let g:vim_markdown_folding_disabled = 1
 
     " }
     " vim-mundo {
