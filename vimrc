@@ -42,6 +42,7 @@
     Plug 'ekalinin/Dockerfile.vim'
     Plug 'elzr/vim-json'
     Plug 'groenewege/vim-less'
+    Plug 'GrzegorzKozub/vimdows'
     Plug 'hail2u/vim-css3-syntax'
     Plug 'itchyny/lightline.vim'
     Plug 'leafgarland/typescript-vim'
@@ -145,50 +146,13 @@
     endif
 
 " }
-" vimdows {
-
-    let s:vimdows_file = $VIMRUNTIME . '/vimdows.dll'
-    
-    function! GetScreen()
-        return libcall(s:vimdows_file, 'GetScreen', '')
-    endfunction
-
-    function! GetMaximized()
-        return libcallnr(s:vimdows_file, 'GetMaximized', '')
-    endfunction
-
-    function! GetFullScreen()
-        return libcallnr(s:vimdows_file, 'GetFullScreen', '')
-    endfunction
-
-    function! Maximize()
-        call libcall(s:vimdows_file, 'Maximize', '')
-    endfunction
-
-    function! Restore()
-        call libcall(s:vimdows_file, 'Restore', '')
-    endfunction
-
-    function! EnterFullScreen()
-        call libcall(s:vimdows_file, 'EnterFullScreen', '')
-    endfunction
-
-    function! ExitFullScreen()
-        call libcall(s:vimdows_file, 'ExitFullScreen', '')
-    endfunction
-
-    function! FixBackground()
-        call libcall(s:vimdows_file, 'FixBackground', strpart(synIDattr(hlID('Normal'), 'bg#'), 1))
-    endfunction
-
-" }
 " gui {
 
     if has('gui_running')
 
         if has('win32')
             "set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
-            let s:screen = eval(GetScreen())
+            let s:screen = eval(vimdows#get_screen())
 
             if s:screen.height == 1440 && s:screen.dpi == 96
 
@@ -218,80 +182,6 @@
             set columns=113
             set lines=30
             winpos 215 100
-
-        endif
-
-        function! SaveScreen()
-            if !exists('g:SCREEN')
-                let g:SCREEN = {}
-            endif
-            let l:maximized = GetMaximized()
-            let l:fullScreen = GetFullScreen()
-            if !l:maximized && !l:fullScreen
-                let g:SCREEN[v:servername] = [ &columns, &lines, getwinposx(), getwinposy(), 0, 0 ]
-            else
-                let g:SCREEN[v:servername][4] = l:maximized
-                let g:SCREEN[v:servername][5] = l:fullScreen
-            endif
-        endfunction
-
-        function! RestoreScreen(allowFullScreen)
-            if !exists('g:SCREEN') || !exists('g:SCREEN["' . v:servername . '"]')
-                return
-            endif
-            let l:screen = g:SCREEN[v:servername]
-            silent! exe 'set columns=' . l:screen[0] . ' lines=' . l:screen[1]
-            silent! exe 'winpos ' . l:screen[2] . ' ' . l:screen[3]
-            if l:screen[4]
-                call Maximize()
-                call FixBackground()
-            endif
-            if l:screen[5] && a:allowFullScreen
-                call EnterFullScreen()
-                call FixBackground()
-            endif
-        endfunction
-
-        augroup SaveScreenWhenVimLeaves
-            autocmd!
-            autocmd VimLeavePre * call SaveScreen()
-        augroup END
-
-        augroup RestoreScreenWhenGUIEnters
-            autocmd!
-            autocmd GUIEnter * call RestoreScreen(1)
-        augroup END
-
-        if has('win32')
-
-            function! MaximizedToggle()
-                if GetFullScreen() | return | endif
-                if GetMaximized() | call Restore() | else | call Maximize() | endif
-            endfunction
-
-            nmap <silent> <F10> :call MaximizedToggle()<CR>
-
-            function! FullScreenToggle()
-                if GetFullScreen()
-                    call ExitFullScreen()
-                    call RestoreScreen(0)
-                else
-                    call SaveScreen()
-                    call EnterFullScreen()
-                endif
-            endfunction
-
-            nmap <silent> <F11> :call FullScreenToggle()<CR>
-
-            augroup FixBackgroundWhenColorSchemeChanges
-                autocmd!
-                autocmd ColorScheme * call FixBackground()
-            augroup END
-
-            augroup FixBackgroundWhenResizing
-                autocmd!
-                autocmd VimResized * if GetMaximized() || GetFullScreen() | call FixBackground() | endif
-            augroup END
 
         endif
     endif
