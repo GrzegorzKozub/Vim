@@ -45,6 +45,8 @@
     Plug 'GrzegorzKozub/vimdows'
     Plug 'hail2u/vim-css3-syntax'
     Plug 'itchyny/lightline.vim'
+    Plug 'junegunn/fzf',
+    Plug 'junegunn/fzf.vim'
     Plug 'leafgarland/typescript-vim'
     Plug 'mattn/emmet-vim'
     Plug 'mileszs/ack.vim'
