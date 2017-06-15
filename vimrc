@@ -49,6 +49,7 @@
     Plug 'junegunn/fzf.vim'
     Plug 'leafgarland/typescript-vim'
     Plug 'mattn/emmet-vim'
+    Plug 'mhinz/vim-grepper'
     Plug 'mileszs/ack.vim'
     Plug 'moll/vim-node'
     Plug 'morhetz/gruvbox'
@@ -529,6 +530,12 @@ EOF
             autocmd!
             autocmd BufReadPost fugitive://* set bufhidden=delete
         augroup END
+
+    " }
+    " vim-grepper {
+
+        let g:grepper = {}
+        let g:grepper.highlight = 1
 
     " }
     " vim-javascript {
