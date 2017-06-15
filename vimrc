@@ -366,7 +366,7 @@ EOF
                 elseif &filetype ==# 'MundoDiff'
                     return 'Mundo'
                 elseif &filetype ==# 'qf'
-                    return exists('w:quickfix_title') ? 'Location' : 'QuickFix'
+                    return exists('w:quickfix_title') && w:quickfix_title ==# ':setloclist()' ? 'Location' : 'QuickFix'
                 elseif &filetype ==# 'vim-plug'
                     return 'Plugins'
                 elseif expand('%:t') ==# 'ControlP'
