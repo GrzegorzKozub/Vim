@@ -95,6 +95,7 @@
     set hidden
     set hlsearch
     set ignorecase
+    set infercase
     set laststatus=2
     set lazyredraw
     set listchars=tab:→\ ,eol:¬,trail:·
