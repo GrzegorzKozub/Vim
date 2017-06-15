@@ -31,7 +31,8 @@
 
     let g:unmanaged_dir = s:user_dir . 'unmanaged/'
 
-    Plug g:unmanaged_dir . 'customized_colorschemes'
+    let g:themes_dir = g:unmanaged_dir . 'themes'
+    Plug g:themes_dir
 
     Plug 'altercation/vim-colors-solarized'
     Plug 'cakebaker/scss-syntax.vim'
@@ -467,7 +468,7 @@ EOF
                     return
                 endif
 
-                for l:theme in split(globpath(g:unmanaged_dir . 'customized_colorschemes/plugin/lightline/colorscheme', '*.vim'), '\n')
+                for l:theme in split(globpath(g:themes_dir . '/plugin/lightline/colorscheme', '*.vim'), '\n')
                     exe 'source' fnameescape(l:theme)
                 endfor
 
@@ -585,7 +586,7 @@ EOF
 
     if has('gui_running')
         function! ApplyColorSchemePatch()
-            let l:patch = g:unmanaged_dir . 'customized_colorschemes/patches/' . g:colors_name . '.vim'
+            let l:patch = g:themes_dir . '/patches/' . g:colors_name . '.vim'
             if filereadable(l:patch)
                 exe 'source' fnameescape(l:patch)
             endif
