@@ -706,29 +706,15 @@ EOF
     command! SpellToggle set spell!
     nmap <silent> <F7> :SpellToggle<CR>
 
-    function! LocationToggle()
-        if exists('s:location_open')
-            lclose
-            unlet s:location_open
-        else
-            lopen
-            let s:location_open = bufnr('$')
-        endif
+    function! ToggleList(kind, prefix)
+        redir => l:buffers
+        silent! buffers
+        redir END
+        exe a:prefix . (l:buffers =~# '\[' . a:kind . ' List\]' ? 'close' : 'open')
     endfunction
 
-    nmap <silent> <Leader>l :call LocationToggle()<CR>
-
-    function! QuickfixToggle()
-        if exists('s:quickfix_open')
-            cclose
-            unlet s:quickfix_open
-        else
-            copen
-            let s:quickfix_open = bufnr('$')
-        endif
-    endfunction
-
-    nmap <silent> <Leader>q :call QuickfixToggle()<CR>
+    nmap <silent> <Leader>l :call ToggleList('Location', 'l')<CR>
+    nmap <silent> <Leader>q :call ToggleList('Quickfix', 'c')<CR>
 
 " }
 " diff and merge {
