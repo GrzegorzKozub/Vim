@@ -42,6 +42,7 @@
     Plug 'editorconfig/editorconfig-vim'
     Plug 'ekalinin/Dockerfile.vim'
     Plug 'elzr/vim-json'
+    Plug 'fatih/vim-go'
     Plug 'groenewege/vim-less'
     Plug 'GrzegorzKozub/vimdows'
     Plug 'hail2u/vim-css3-syntax'
