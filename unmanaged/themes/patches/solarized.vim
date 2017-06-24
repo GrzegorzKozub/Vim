@@ -22,7 +22,7 @@ endif
 
 exec 'hi CursorLineNr guifg=' . s:base0 . ' guibg=' . s:base02 . ' gui=NONE'
 exec 'hi LineNr guibg=' . s:base03
-exec 'hi StatusLine guifg=' . s:base03 . ' gui=NONE'
+exec 'hi StatusLine guibg=' . s:base03 . ' gui=NONE'
 exec 'hi StatusLineNC guifg=' . s:base03
 exec 'hi Todo guifg=' . s:yellow
 exec 'hi VertSplit guifg=' . s:base03 . ' guibg=' . s:base03
