@@ -28,9 +28,3 @@ hi Question gui=NONE
 hi Title gui=NONE
 hi vimCommentTitle gui=NONE
 
-" vim-gitgutter
-exec 'hi GitGutterAdd guifg=' . s:hue_4
-exec 'hi GitGutterChange guifg=' . s:hue_2
-exec 'hi GitGutterChangeDelete guifg=' . s:hue_2
-exec 'hi GitGutterDelete guifg=' . s:hue_5
-

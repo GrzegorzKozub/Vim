@@ -63,9 +63,3 @@ exec 'hi VertSplit guifg=' . s:bg0
 hi Error gui=NONE
 hi StatusLine gui=NONE
 
-" vim-gitgutter
-exec 'hi GitGutterAdd guifg=' . s:green
-exec 'hi GitGutterChange guifg=' . s:blue
-exec 'hi GitGutterChangeDelete guifg=' . s:blue
-exec 'hi GitGutterDelete guifg=' . s:red
-
