@@ -703,10 +703,10 @@ EOF
     nmap <silent> <Leader>t :ListToggle<CR>
 
     command! RelativeNumberToggle set rnu!
-    nmap <silent> <F4> :RelativeNumberToggle<CR>
+    nmap <silent> <Leader>n :RelativeNumberToggle<CR>
 
     command! SpellToggle set spell!
-    nmap <silent> <F7> :SpellToggle<CR>
+    nmap <silent> <Leader>s :SpellToggle<CR>
 
     function! ToggleList(kind, prefix)
         redir => l:buffers
