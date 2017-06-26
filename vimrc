@@ -283,7 +283,7 @@ EOF
             endfunction
 
             if !has_key(g:THEME.options, 'gruvbox_contrast_dark')
-                let g:THEME.options['gruvbox_contrast_dark'] = 'medium'
+                let g:THEME.options.gruvbox_contrast_dark = 'medium'
                 wviminfo
             endif
 
