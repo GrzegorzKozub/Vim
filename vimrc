@@ -213,19 +213,21 @@
 
     let s:themes = [ 'solarized', 'gruvbox', 'one' ]
 
-    if !exists('g:THEME_INDEX')
-        let g:THEME_INDEX = 0
-
+    function! InitTheme()
+        if exists('g:THEME') | return | endif
+        let g:THEME = { 'current': 0, 'options': {} }
         if has('python3')
 python3 << EOF
 import vim, random;
-vim.command("let g:THEME_INDEX = %s" % random.randint(0, int(vim.eval("len(s:themes)")) - 1));
+vim.command("let g:THEME.current = %s" % random.randint(0, int(vim.eval("len(s:themes)")) - 1));
 EOF
         endif
-    endif
+    endfunction
+
+    call InitTheme()
 
     function! GetCurrentColorScheme()
-        return has('gui_running') ? s:themes[g:THEME_INDEX] : 'terminal'
+        return has('gui_running') ? s:themes[g:THEME.current] : 'terminal'
     endfunction
 
     function! GetCurrentBackground()
@@ -273,8 +275,22 @@ EOF
     " gruvbox {
 
         if has('gui_running')
-            let g:gruvbox_contrast_dark = 'medium'
-            let g:gruvbox_contrast_light = 'medium'
+            function! s:gruvboxCycleOptions()
+                let l:values = [ 'soft', 'medium', 'hard' ]
+                let l:option = &background ==# 'dark' ? 'gruvbox_contrast_dark' : 'gruvbox_contrast_light'
+                let l:index = index(l:values, g:THEME.options[l:option])
+                let g:THEME.options[l:option] = l:index == len(l:values) - 1 ? l:values[0] : l:values[l:index + 1]
+            endfunction
+
+            if !has_key(g:THEME.options, 'gruvbox_contrast_dark')
+                let g:THEME.options['gruvbox_contrast_dark'] = 'medium'
+                wviminfo
+            endif
+
+            if !has_key(g:THEME.options, 'gruvbox_contrast_light')
+                let g:THEME.options.gruvbox_contrast_light = 'medium'
+                wviminfo
+            endif
 
             let g:gruvbox_bold = 0
             let g:gruvbox_italic = 0
@@ -585,6 +601,14 @@ EOF
         autocmd ColorScheme * call HideTildeOnEmptyLines()
     augroup END
 
+    function! ApplyBackground()
+        exe 'set background=' . GetCurrentBackground()
+    endfunction
+
+    function! ApplyColorScheme()
+        exe 'colorscheme' fnameescape(GetCurrentColorScheme())
+    endfunction
+
     if has('gui_running')
         function! ApplyColorSchemePatch()
             let l:patch = g:themes_dir . '/patches/' . g:colors_name . '.vim'
@@ -597,6 +621,14 @@ EOF
             autocmd!
             autocmd ColorScheme * call ApplyColorSchemePatch()
         augroup END
+
+        function! ApplyColorSchemeOptions()
+            for l:option in keys(g:THEME.options)
+                exe 'let g:' . l:option . ' = "' . g:THEME.options[l:option] . '"'
+            endfor
+        endfunction
+
+        call ApplyColorSchemeOptions()
 
         let s:highlight_links = {}
 
@@ -630,18 +662,28 @@ EOF
 
         function! CycleColorSchemes()
             call FindHighlightLinks()
-            let g:THEME_INDEX = g:THEME_INDEX == len(s:themes) - 1 ? 0 : g:THEME_INDEX + 1
-            exe 'colorscheme' fnameescape(s:themes[g:THEME_INDEX])
+            let g:THEME.current = g:THEME.current == len(s:themes) - 1 ? 0 : g:THEME.current + 1
+            call ApplyColorScheme()
             call RestoreHighlightLinks()
         endfunction
 
         nmap <silent> <F5> :call CycleColorSchemes()<CR>
+
+        function! CycleColorSchemeOptions()
+            let l:function = 's:' . GetCurrentColorScheme() . 'CycleOptions()'
+            if !exists('*' . l:function) | return | endif
+            exe 'call ' . l:function
+            call ApplyColorSchemeOptions()
+            call ApplyColorScheme()
+        endfunction
+
+        nmap <silent> <F7> :call CycleColorSchemeOptions()<CR>
     else
         let &t_Co=256
     endif
 
-    exe 'set background=' . GetCurrentBackground()
-    exe 'colorscheme' fnameescape(GetCurrentColorScheme())
+    call ApplyBackground()
+    call ApplyColorScheme()
 
 " }
 " auto-commands {
