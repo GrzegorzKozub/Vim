@@ -528,12 +528,6 @@ EOF
 
             " https://github.com/altercation/vim-colors-solarized/issues/40
             call togglebg#map('')
-
-            function! BackgroundToggle()
-                ToggleBG
-            endfunction
-
-            nmap <silent> <F6> :call BackgroundToggle()<CR>
         endif
 
     " }
@@ -636,6 +630,13 @@ EOF
         endfunction
 
         nmap <silent> <F5> :call CycleColorSchemes()<CR>
+
+        function! BackgroundToggle()
+            let &background = &background ==# 'dark' ? 'light' : 'dark'
+            call ApplyColorScheme()
+        endfunction
+
+        nmap <silent> <F6> :call BackgroundToggle()<CR>
 
         function! CycleColorSchemeOptions()
             let l:function = 's:' . GetCurrentColorScheme() . 'CycleOptions()'
