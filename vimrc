@@ -226,6 +226,13 @@ EOF
 
     call InitTheme()
 
+    function! SetDefaultThemeOption(option, value)
+        if !has_key(g:THEME.options, a:option)
+            let g:THEME.options[a:option] = a:value
+            wviminfo
+        endif
+    endfunction
+
     function! GetCurrentColorScheme()
         return has('gui_running') ? s:themes[g:THEME.current] : 'terminal'
     endfunction
@@ -282,15 +289,8 @@ EOF
                 let g:THEME.options[l:option] = l:index == len(l:values) - 1 ? l:values[0] : l:values[l:index + 1]
             endfunction
 
-            if !has_key(g:THEME.options, 'gruvbox_contrast_dark')
-                let g:THEME.options.gruvbox_contrast_dark = 'medium'
-                wviminfo
-            endif
-
-            if !has_key(g:THEME.options, 'gruvbox_contrast_light')
-                let g:THEME.options.gruvbox_contrast_light = 'medium'
-                wviminfo
-            endif
+            call SetDefaultThemeOption('gruvbox_contrast_dark', 'medium')
+            call SetDefaultThemeOption('gruvbox_contrast_light', 'medium')
 
             let g:gruvbox_bold = 0
             let g:gruvbox_italic = 0
