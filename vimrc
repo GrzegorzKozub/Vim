@@ -616,13 +616,13 @@ EOF
             autocmd ColorScheme * call ApplyColorSchemePatch()
         augroup END
 
-        function! ApplyColorSchemeOptions()
+        function! ApplyThemeOptions()
             for l:option in keys(g:THEME.options)
                 exe 'let g:' . l:option . ' = "' . g:THEME.options[l:option] . '"'
             endfor
         endfunction
 
-        call ApplyColorSchemeOptions()
+        call ApplyThemeOptions()
 
         function! CycleColorSchemes()
             let g:THEME.current = g:THEME.current == len(s:themes) - 1 ? 0 : g:THEME.current + 1
@@ -638,15 +638,15 @@ EOF
 
         nmap <silent> <F6> :call BackgroundToggle()<CR>
 
-        function! CycleColorSchemeOptions()
+        function! CycleThemeOptions()
             let l:function = 's:' . GetCurrentColorScheme() . 'CycleOptions()'
             if !exists('*' . l:function) | return | endif
             exe 'call ' . l:function
-            call ApplyColorSchemeOptions()
+            call ApplyThemeOptions()
             call ApplyColorScheme()
         endfunction
 
-        nmap <silent> <F7> :call CycleColorSchemeOptions()<CR>
+        nmap <silent> <F7> :call CycleThemeOptions()<CR>
     else
         let &t_Co=256
     endif
