@@ -18,6 +18,7 @@ exec 'hi StatusLineNC guifg=' . s:syntax_bg
 exec 'hi Todo guifg=' . s:hue_6_2
 exec 'hi VertSplit guifg=' . s:syntax_bg
 
+hi DiffDelete gui=NONE
 hi DiffText gui=NONE
 hi Error gui=NONE
 hi helpHeader gui=NONE
