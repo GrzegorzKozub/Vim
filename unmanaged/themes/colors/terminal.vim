@@ -18,6 +18,7 @@ hi MatchParen ctermfg=Gray ctermbg=DarkGray
 hi NonText ctermfg=DarkGray
 hi SignColumn ctermbg=BG
 hi Todo ctermfg=DarkYellow ctermbg=BG
+hi Underlined cterm=NONE
 hi VertSplit ctermbg=BG
 
 " vim-gitgutter

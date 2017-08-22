@@ -27,5 +27,6 @@ hi ModeMsg gui=NONE
 hi MoreMsg gui=NONE
 hi Question gui=NONE
 hi Title gui=NONE
+hi Underlined gui=NONE
 hi vimCommentTitle gui=NONE
 
