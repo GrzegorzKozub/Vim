@@ -64,6 +64,7 @@
     Plug 'Quramy/vim-js-pretty-template'
     Plug 'Raimondi/delimitMate'
     Plug 'rakr/vim-one'
+    Plug 'rkitover/vimpager'
     Plug 'sbdchd/neoformat', { 'on': 'Neoformat' }
     Plug 'scrooloose/nerdcommenter'
     Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
@@ -577,6 +578,12 @@ EOF
         let g:mundo_width = 40
 
         nmap <silent> <Leader>u :MundoToggle<CR>
+
+    " }
+    " vimpager {
+
+        let g:less = {}
+        let g:less.number = 0
 
     " }
 " }
