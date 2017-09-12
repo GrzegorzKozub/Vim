@@ -89,8 +89,6 @@
     set autoread
     set backup
     set belloff=all
-    set conceallevel=1
-    set concealcursor=nvic
     set encoding=utf-8
     set expandtab
     set fillchars+=vert:\  " intentional trailing whitespace
