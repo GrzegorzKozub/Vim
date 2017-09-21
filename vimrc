@@ -263,9 +263,9 @@ EOF
 
         let g:ctrlp_cache_dir = s:plugins_dir . 'ctrlp.vim'
 
-        nmap <silent> <C-p> :CtrlP<CR>
-        nmap <silent> <C-b> :CtrlPBuffer<CR>
-        nmap <silent> <C-k> :CtrlPMRUFiles<CR>
+        nnoremap <silent> <C-p> :CtrlP<CR>
+        nnoremap <silent> <C-b> :CtrlPBuffer<CR>
+        nnoremap <silent> <C-k> :CtrlPMRUFiles<CR>
 
     " }
     " emmet-vim {
@@ -503,7 +503,7 @@ EOF
     " }
     " neoformat {
 
-        nmap <silent> <Leader>f :Neoformat<CR>
+        nnoremap <silent> <Leader>f :Neoformat<CR>
 
     " }
     " netrw {
@@ -532,7 +532,7 @@ EOF
     " }
     " vim-dispatch {
 
-        nmap <silent> <Leader>m :Make<CR>
+        noremap <silent> <Leader>m :Make<CR>
 
     " }
     " vim-fugitive {
@@ -575,7 +575,7 @@ EOF
         let g:mundo_prefer_python3 = 1
         let g:mundo_width = 40
 
-        nmap <silent> <Leader>u :MundoToggle<CR>
+        noremap <silent> <Leader>u :MundoToggle<CR>
 
     " }
     " vimpager {
@@ -634,14 +634,14 @@ EOF
             call ApplyColorScheme()
         endfunction
 
-        nmap <silent> <F5> :call CycleColorSchemes()<CR>
+        nnoremap <silent> <F5> :call CycleColorSchemes()<CR>
 
         function! BackgroundToggle()
             let &background = &background ==# 'dark' ? 'light' : 'dark'
             call ApplyColorScheme()
         endfunction
 
-        nmap <silent> <F6> :call BackgroundToggle()<CR>
+        nnoremap <silent> <F6> :call BackgroundToggle()<CR>
 
         function! CycleThemeOptions()
             let l:function = 's:' . GetCurrentColorScheme() . 'CycleOptions()'
@@ -651,7 +651,7 @@ EOF
             call ApplyColorScheme()
         endfunction
 
-        nmap <silent> <F7> :call CycleThemeOptions()<CR>
+        nnoremap <silent> <F7> :call CycleThemeOptions()<CR>
     else
         let &t_Co=256
     endif
@@ -692,10 +692,10 @@ EOF
 " }
 " mappings {
 
-    vmap <Down> j
-    vmap <Left> h
-    vmap <Right> l
-    vmap <Up> k
+    vnoremap <Down> j
+    vnoremap <Left> h
+    vnoremap <Right> l
+    vnoremap <Up> k
 
     nnoremap p "0p
     vnoremap p "0p
@@ -710,19 +710,19 @@ EOF
     nnoremap tt "0dd
 
     command! HlsearchOff nohlsearch
-    nmap <silent> <Leader>h :HlsearchOff<CR>
+    nnoremap <silent> <Leader>h :HlsearchOff<CR>
 
     command! WrapToggle set wrap! linebreak! nolist
-    nmap <silent> <Leader>w :WrapToggle<CR>
+    nnoremap <silent> <Leader>w :WrapToggle<CR>
 
     command! ListToggle set list!
-    nmap <silent> <Leader>t :ListToggle<CR>
+    nnoremap <silent> <Leader>t :ListToggle<CR>
 
     command! RelativeNumberToggle set rnu!
-    nmap <silent> <Leader>n :RelativeNumberToggle<CR>
+    nnoremap <silent> <Leader>n :RelativeNumberToggle<CR>
 
     command! SpellToggle set spell!
-    nmap <silent> <Leader>s :SpellToggle<CR>
+    nnoremap <silent> <Leader>s :SpellToggle<CR>
 
     function! ToggleList(kind, prefix)
         redir => l:buffers
@@ -731,8 +731,8 @@ EOF
         exe a:prefix . (l:buffers =~# '\[' . a:kind . ' List\]' ? 'close' : 'open')
     endfunction
 
-    nmap <silent> <Leader>l :call ToggleList('Location', 'l')<CR>
-    nmap <silent> <Leader>q :call ToggleList('Quickfix', 'c')<CR>
+    nnoremap <silent> <Leader>l :call ToggleList('Location', 'l')<CR>
+    nnoremap <silent> <Leader>q :call ToggleList('Quickfix', 'c')<CR>
 
 " }
 " diff and merge {
@@ -762,12 +762,12 @@ EOF
     command! VimMerge call VimMerge()
 
     command! -nargs=* DiffGet :diffget <args> | :diffupdate
-    nmap <silent> <Leader>d1 :DiffGet 1<CR>
-    nmap <silent> <Leader>d2 :DiffGet 2<CR>
-    nmap <silent> <Leader>d3 :DiffGet 3<CR>
+    nnoremap <silent> <Leader>d1 :DiffGet 1<CR>
+    nnoremap <silent> <Leader>d2 :DiffGet 2<CR>
+    nnoremap <silent> <Leader>d3 :DiffGet 3<CR>
 
     command! -nargs=* DiffPut :diffput <args> | :diffupdate
-    nmap <silent> <Leader>d4 :DiffPut 4<CR>
+    nnoremap <silent> <Leader>d4 :DiffPut 4<CR>
 
 " }
 
