@@ -212,7 +212,7 @@
 
     let s:themes = [ 'solarized', 'gruvbox', 'one' ]
 
-    function! InitTheme()
+    function! InitTheme() abort
         if exists('g:THEME') | return | endif
         let g:THEME = { 'current': 0, 'options': {} }
         if has('python3')
@@ -225,18 +225,18 @@ EOF
 
     call InitTheme()
 
-    function! SetDefaultThemeOption(option, value)
+    function! SetDefaultThemeOption(option, value) abort
         if !has_key(g:THEME.options, a:option)
             let g:THEME.options[a:option] = a:value
             wviminfo
         endif
     endfunction
 
-    function! GetCurrentColorScheme()
+    function! GetCurrentColorScheme() abort
         return has('gui_running') ? s:themes[g:THEME.current] : 'terminal'
     endfunction
 
-    function! GetCurrentBackground()
+    function! GetCurrentBackground() abort
         return !has('gui_running') || (strftime('%H') > 6 && strftime('%H') < 18) ? 'light' : 'dark'
     endfunction
 
@@ -281,7 +281,7 @@ EOF
     " gruvbox {
 
         if has('gui_running')
-            function! s:gruvboxCycleOptions()
+            function! s:gruvboxCycleOptions() abort
                 let l:values = [ 'soft', 'medium', 'hard' ]
                 let l:option = &background ==# 'dark' ? 'gruvbox_contrast_dark' : 'gruvbox_contrast_light'
                 let l:index = index(l:values, g:THEME.options[l:option])
@@ -375,7 +375,7 @@ EOF
         " }
         " component functions {
 
-            function! LightLineFugitive()
+            function! LightLineFugitive() abort
                 if &filetype ==# 'help'
                     return 'Help'
                 elseif &filetype ==# 'Mundo'
@@ -399,7 +399,7 @@ EOF
                 return ''
             endfunction 
 
-            function! LightLineFileName()
+            function! LightLineFileName() abort
                 if &filetype ==# 'Mundo'
                     return 'Tree'
                 elseif &filetype ==# 'MundoDiff'
@@ -423,31 +423,31 @@ EOF
                 return l:filename . (&readonly ? s:icons.space . s:icons.padlock : '') . (&modified ? ' ' . s:icons.star : '')
             endfunction
 
-            function! LightLineAleError()
+            function! LightLineAleError() abort
                 return matchstr(ALEGetStatusLine(), s:icons.circle . ' \d\+')
             endfunction
 
-            function! LightLineAleWarning()
+            function! LightLineAleWarning() abort
                 return matchstr(ALEGetStatusLine(), s:icons.triangle . ' \d\+')
             endfunction
 
-            function! LightLinePercent()
+            function! LightLinePercent() abort
                 return &filetype !~? 'Mundo\|MundoDiff' ? printf('%3d%%', (100 * line('.') / line('$'))) : ''
             endfunction
 
-            function! LightLineLineInfo()
+            function! LightLineLineInfo() abort
                 return &filetype !~? 'Mundo\|MundoDiff' ? printf('%3d %3d', line('.'), col('.')) : ''
             endfunction
 
-            function! LightLineFileEncoding()
+            function! LightLineFileEncoding() abort
                 return strlen(&fileencoding) > 0 && &filetype !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug' ? &fileencoding : ''
             endfunction
 
-            function! LightLineFileFormat()
+            function! LightLineFileFormat() abort
                 return strlen(&fileformat) > 0 && &filetype !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug' && expand('%:t') !=# 'ControlP' ? &fileformat : ''
             endfunction
 
-            function! LightLineFileType()
+            function! LightLineFileType() abort
                 return strlen(&filetype) > 0 && &filetype !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug' ? &filetype : ''
             endfunction
 
@@ -467,19 +467,19 @@ EOF
                 \ 'prog': 'CtrlPStatusFuncProg',
             \ }
 
-            function! CtrlPStatusFuncMain(focus, byfname, regex, prev, item, next, marked)
+            function! CtrlPStatusFuncMain(focus, byfname, regex, prev, item, next, marked) abort
                 let g:lightline.ctrlp_item = a:item
                 return lightline#statusline(0)
             endfunction
 
-            function! CtrlPStatusFuncProg(str)
+            function! CtrlPStatusFuncProg(str) abort
                 return lightline#statusline(0)
             endfunction
 
         " }
         " reload on colorscheme change {
 
-            function! s:LightLineReload()
+            function! s:LightLineReload() abort
                 if !exists('g:loaded_lightline')
                     return
                 endif
@@ -587,7 +587,7 @@ EOF
 " }
 " colorscheme {
 
-    function! HideTildeOnEmptyLines()
+    function! HideTildeOnEmptyLines() abort
         if has('gui_running')
             highlight EndOfBuffer guifg=BG
         else
@@ -600,16 +600,16 @@ EOF
         autocmd ColorScheme * call HideTildeOnEmptyLines()
     augroup END
 
-    function! ApplyBackground()
+    function! ApplyBackground() abort
         exe 'set background=' . GetCurrentBackground()
     endfunction
 
-    function! ApplyColorScheme()
+    function! ApplyColorScheme() abort
         exe 'colorscheme' fnameescape(GetCurrentColorScheme())
     endfunction
 
     if has('gui_running')
-        function! ApplyColorSchemePatch()
+        function! ApplyColorSchemePatch() abort
             let l:patch = g:themes_dir . '/patches/' . g:colors_name . '.vim'
             if filereadable(l:patch)
                 exe 'source' fnameescape(l:patch)
@@ -621,7 +621,7 @@ EOF
             autocmd ColorScheme * call ApplyColorSchemePatch()
         augroup END
 
-        function! ApplyThemeOptions()
+        function! ApplyThemeOptions() abort
             for l:option in keys(g:THEME.options)
                 exe 'let g:' . l:option . ' = "' . g:THEME.options[l:option] . '"'
             endfor
@@ -629,21 +629,21 @@ EOF
 
         call ApplyThemeOptions()
 
-        function! CycleColorSchemes()
+        function! CycleColorSchemes() abort
             let g:THEME.current = g:THEME.current == len(s:themes) - 1 ? 0 : g:THEME.current + 1
             call ApplyColorScheme()
         endfunction
 
         nnoremap <silent> <F5> :call CycleColorSchemes()<CR>
 
-        function! BackgroundToggle()
+        function! BackgroundToggle() abort
             let &background = &background ==# 'dark' ? 'light' : 'dark'
             call ApplyColorScheme()
         endfunction
 
         nnoremap <silent> <F6> :call BackgroundToggle()<CR>
 
-        function! CycleThemeOptions()
+        function! CycleThemeOptions() abort
             let l:function = 's:' . GetCurrentColorScheme() . 'CycleOptions()'
             if !exists('*' . l:function) | return | endif
             exe 'call ' . l:function
@@ -724,7 +724,7 @@ EOF
     command! SpellToggle set spell!
     nnoremap <silent> <Leader>s :SpellToggle<CR>
 
-    function! ToggleList(kind, prefix)
+    function! ToggleList(kind, prefix) abort
         redir => l:buffers
         silent! buffers
         redir END
@@ -742,7 +742,7 @@ EOF
         autocmd VimResized * if &diff | wincmd = | endif
     augroup END
 
-    function! VimDiff()
+    function! VimDiff() abort
         let s:ft = &filetype
         windo if (winnr() != 1 && &ft == '') | :silent! exe 'set ft=' . s:ft | endif
         wincmd =
@@ -750,7 +750,7 @@ EOF
 
     command! VimDiff call VimDiff()
 
-    function! VimMerge()
+    function! VimMerge() abort
         let s:ft = &filetype
         windo if (winnr() != 1 && &ft == '') | :silent! exe 'set ft=' . s:ft | endif
         wincmd b
