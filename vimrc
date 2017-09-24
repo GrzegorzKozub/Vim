@@ -664,8 +664,9 @@ EOF
 
     augroup SetFileTypesBasedOnExtensions
         autocmd!
+        autocmd BufNewFile,BufRead *.config set filetype=xml
         autocmd BufNewFile,BufRead *.cshtml set filetype=html
-        autocmd BufNewFile,BufRead *.config,*.nuspec set filetype=xml
+        autocmd BufNewFile,BufRead *.csx set filetype=cs
     augroup END
 
     augroup ConfigureEditorBasedOnFileTypes
