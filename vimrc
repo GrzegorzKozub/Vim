@@ -710,10 +710,10 @@ EOF
     nnoremap <silent> <Leader>w :WrapToggle<CR>
 
     command! ListToggle set list!
-    nnoremap <silent> <Leader>t :ListToggle<CR>
+    nnoremap <silent> <Leader>i :ListToggle<CR>
 
-    command! RelativeNumberToggle set rnu!
-    nnoremap <silent> <Leader>n :RelativeNumberToggle<CR>
+    command! RelativeNumberToggle set relativenumber!
+    nnoremap <silent> <Leader>r :RelativeNumberToggle<CR>
 
     command! SpellToggle set spell!
     nnoremap <silent> <Leader>s :SpellToggle<CR>
