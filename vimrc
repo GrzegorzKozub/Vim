@@ -277,6 +277,16 @@ EOF
         augroup END
 
     " }
+    " fzf.vim {
+
+        let g:fzf_layout = { 'down': '~33%' }
+
+        nnoremap <silent> <C-f>f :Files<CR>
+        nnoremap <silent> <C-f>g :GFiles<CR>
+        nnoremap <silent> <C-f>b :Buffers<CR>
+        nnoremap <silent> <C-f>k :History<CR>
+
+    " }
     " gruvbox {
 
         if has('gui_running')
