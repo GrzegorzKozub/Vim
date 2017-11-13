@@ -178,6 +178,10 @@
                 set lines=29
                 winpos 63 66
 
+            else
+
+                set guifont=Fira\ Code\ Retina:h13
+
             endif
         else
 
