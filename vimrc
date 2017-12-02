@@ -706,6 +706,16 @@ EOF
 " }
 " mappings {
 
+    unmap <C-A>
+    unmap <C-Y>
+    unmap <C-S>
+    unmap <C-Z>
+
+    if has('gui')
+        unmap <C-F>
+        unmap <C-H>
+    endif
+
     vnoremap <Down> j
     vnoremap <Left> h
     vnoremap <Right> l
