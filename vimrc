@@ -35,7 +35,6 @@
     Plug g:themes_dir
 
     Plug 'altercation/vim-colors-solarized'
-    Plug 'arcticicestudio/nord-vim'
     Plug 'cakebaker/scss-syntax.vim'
     Plug 'chr4/nginx.vim'
     Plug 'ctrlpvim/ctrlp.vim'
@@ -48,7 +47,7 @@
     Plug 'GrzegorzKozub/vimdows'
     Plug 'hail2u/vim-css3-syntax'
     Plug 'itchyny/lightline.vim'
-    Plug 'junegunn/fzf',
+    Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim'
     Plug 'leafgarland/typescript-vim'
     Plug 'mattn/emmet-vim'
@@ -214,7 +213,7 @@
 " }
 " themes {
 
-    let s:themes = [ 'solarized', 'gruvbox', 'one', 'nord' ]
+    let s:themes = [ 'solarized', 'gruvbox', 'one' ]
 
     function! InitTheme() abort
         if exists('g:THEME') | return | endif
@@ -524,11 +523,6 @@ EOF
 
         let g:netrw_home = s:plugins_dir . 'netrw'
         let g:netrw_localcopycmd = 'copy'
-
-    " }
-    " nord-vim {
-
-        let g:nord_uniform_status_lines = 1
 
     " }
     " typescript-vim {
