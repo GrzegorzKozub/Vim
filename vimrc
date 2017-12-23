@@ -706,7 +706,7 @@ EOF
 " }
 " mappings {
 
-    nnoremap <C-I> <C-A>
+    nnoremap <C-C> <C-A>
 
     unmap <C-Y>
     unmap <C-S>
