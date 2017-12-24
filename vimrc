@@ -708,8 +708,8 @@ EOF
 
     nnoremap <C-C> <C-A>
 
-    unmap <C-Y>
     unmap <C-S>
+    unmap <C-Y>
     unmap <C-Z>
 
     if has('gui')
@@ -721,18 +721,6 @@ EOF
     vnoremap <Left> h
     vnoremap <Right> l
     vnoremap <Up> k
-
-    nnoremap p "0p
-    vnoremap p "0p
-    nnoremap P "0P
-    vnoremap P "0P
-
-    nnoremap t "0d
-    vnoremap t "0d
-    nnoremap T "0D
-    vnoremap T "0D
-
-    nnoremap tt "0dd
 
     command! HlsearchOff nohlsearch
     nnoremap <silent> <Leader>h :HlsearchOff<CR>
