@@ -49,7 +49,7 @@ else
 
     let s:p.normal.error   = [ [ s:syntax_bg, s:hue_5_2 ] ]
     let s:p.normal.warning = [ [ s:syntax_bg, s:hue_6 ] ]
-      
+
 endif
 
 let s:p.normal.right = s:p.normal.left
