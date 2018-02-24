@@ -22,35 +22,35 @@ let s:gb.neutral_yellow = '#d79921'
 
 if &background ==# 'dark'
 
-    let s:bg0 = s:gb.dark0
-    if g:gruvbox_contrast_dark ==# 'soft'
-        let s:bg0 = s:gb.dark0_soft
-    elseif g:gruvbox_contrast_dark ==# 'hard'
-        let s:bg0 = s:gb.dark0_hard
-    endif
+  let s:bg0 = s:gb.dark0
+  if g:gruvbox_contrast_dark ==# 'soft'
+    let s:bg0 = s:gb.dark0_soft
+  elseif g:gruvbox_contrast_dark ==# 'hard'
+    let s:bg0 = s:gb.dark0_hard
+  endif
 
-    let s:fg4    = s:gb.light4
+  let s:fg4    = s:gb.light4
 
-    let s:blue   = s:gb.bright_blue
-    let s:green  = s:gb.bright_green
-    let s:red    = s:gb.bright_red
-    let s:yellow = s:gb.bright_yellow
+  let s:blue   = s:gb.bright_blue
+  let s:green  = s:gb.bright_green
+  let s:red    = s:gb.bright_red
+  let s:yellow = s:gb.bright_yellow
 
 else
 
-    let s:bg0 = s:gb.light0
-    if g:gruvbox_contrast_light ==# 'soft'
-        let s:bg0 = s:gb.light0_soft
-    elseif g:gruvbox_contrast_light ==# 'hard'
-        let s:bg0 = s:gb.light0_hard
-    endif
+  let s:bg0 = s:gb.light0
+  if g:gruvbox_contrast_light ==# 'soft'
+    let s:bg0 = s:gb.light0_soft
+  elseif g:gruvbox_contrast_light ==# 'hard'
+    let s:bg0 = s:gb.light0_hard
+  endif
 
-    let s:fg4    = s:gb.dark4
+  let s:fg4    = s:gb.dark4
 
-    let s:blue   = s:gb.neutral_blue
-    let s:green  = s:gb.neutral_green
-    let s:red    = s:gb.neutral_red
-    let s:yellow = s:gb.neutral_yellow
+  let s:blue   = s:gb.neutral_blue
+  let s:green  = s:gb.neutral_green
+  let s:red    = s:gb.neutral_red
+  let s:yellow = s:gb.neutral_yellow
 
 endif
 

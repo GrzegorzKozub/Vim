@@ -1,7 +1,7 @@
 let s:p = { 'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {} }
 
 function! s:GetGruvboxColor(group)
-    return synIDattr(hlID(a:group), 'fg', 'gui') 
+  return synIDattr(hlID(a:group), 'fg', 'gui')
 endfunction
 
 let s:bg0    = s:GetGruvboxColor('GruvboxBg0')
