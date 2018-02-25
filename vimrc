@@ -178,10 +178,10 @@
       endif
     else
 
-      set guifont=Fira\ Code\ Medium\ 13
-      set columns=113
-      set lines=30
-      winpos 215 100
+      set guifont=Fira\ Code\ Medium\ 17
+      set columns=100
+      set lines=25
+      winpos 100 75
 
     endif
   endif
