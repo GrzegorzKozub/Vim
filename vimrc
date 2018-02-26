@@ -6,9 +6,23 @@
   runtime mswin.vim
 
 " }
+" platform {
+
+  let s:gui = has('gui_running')
+
+  let s:windows = has('win32')
+  let s:linux = !s:windows
+
+  let s:windows_gui = s:windows && s:gui
+  let s:linux_gui = s:linux && s:gui
+
+  let s:more_icons = s:gui
+  let s:more_colors = s:windows_gui || s:linux
+
+" }
 " directories {
 
-  if has('win32')
+  if s:windows
     let s:user_dir = expand('~/vimfiles/')
   else
     let s:user_dir = expand('~/.vim/')
@@ -127,13 +141,13 @@
 
   scriptencoding 'utf-8'
 
-  if has('win32')
+  if s:windows
     language English_US
   else
     language en_US.utf8
   endif
 
-  if has('gui_running')
+  if s:gui
     set cursorline
     set guioptions+=c
     set guioptions-=b
@@ -151,47 +165,44 @@
 " }
 " gui {
 
-  if has('gui_running')
+  if s:windows_gui
+    "set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
+    let s:screen = eval(vimdows#get_screen())
 
-    if has('win32')
-      "set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
-      let s:screen = eval(vimdows#get_screen())
+    if s:screen.height == 1440 && s:screen.dpi == 192
 
-      if s:screen.height == 1440 && s:screen.dpi == 192
+      set guifont=Fira\ Code\ Retina:h13
+      set columns=116
+      set lines=29
+      winpos 49 35
 
-        set guifont=Fira\ Code\ Retina:h13
-        set columns=116
-        set lines=29
-        winpos 49 35
+    elseif s:screen.height == 1800 && s:screen.dpi == 240
 
-      elseif s:screen.height == 1800 && s:screen.dpi == 240
+      set guifont=Fira\ Code\ Retina:h13:qANTIALIASED
+      set columns=117
+      set lines=29
+      winpos 63 66
 
-        set guifont=Fira\ Code\ Retina:h13:qANTIALIASED
-        set columns=117
-        set lines=29
-        winpos 63 66
-
-      else
-
-        set guifont=Fira\ Code\ Retina:h13
-
-      endif
     else
 
-      set guifont=Fira\ Code\ Medium\ 17
-      set columns=100
-      set lines=25
-      winpos 100 75
+      set guifont=Fira\ Code\ Retina:h13
 
     endif
+  endif
+
+  if s:linux_gui
+
+    set guifont=Fira\ Code\ Medium\ 17
+    set columns=100
+    set lines=25
+    winpos 100 75
+
   endif
 
 " }
 " icons {
 
   let s:icons = { 'circle': '●', 'triangle': '▲', 'star': '*', 'vertical_bar': '│' }
-
-  let s:more_icons = &guifont =~# 'Fira'
 
   let s:icons.left_filled = s:more_icons ? '' : ''
   let s:icons.right_filled = s:more_icons ? '' : ''
@@ -229,11 +240,11 @@ EOF
   endfunction
 
   function! GetCurrentColorScheme() abort
-    return has('gui_running') ? s:themes[g:THEME.current] : 'terminal'
+    return s:more_colors ? s:themes[g:THEME.current] : 'terminal'
   endfunction
 
   function! GetCurrentBackground() abort
-    return !has('gui_running') || (strftime('%H') > 6 && strftime('%H') < 18) ? 'light' : 'dark'
+    return !s:more_colors || (strftime('%H') > 6 && strftime('%H') < 18) ? 'light' : 'dark'
   endfunction
 
 " }
@@ -286,7 +297,7 @@ EOF
   " }
   " gruvbox {
 
-    if has('gui_running')
+    if s:more_colors
       function! s:gruvboxCycleOptions() abort
         let l:values = [ 'soft', 'medium', 'hard' ]
         let l:option = &background ==# 'dark' ? 'gruvbox_contrast_dark' : 'gruvbox_contrast_light'
@@ -526,7 +537,7 @@ EOF
   " }
   " vim-colors-solarized {
 
-    if has('gui_running')
+    if s:more_colors
       let g:solarized_bold = 0
       let g:solarized_underline = 0
       let g:solarized_italic = 0
@@ -588,7 +599,7 @@ EOF
 " colorscheme {
 
   function! HideTildeOnEmptyLines() abort
-    if has('gui_running')
+    if s:more_colors
       highlight EndOfBuffer guifg=BG
     else
       highlight EndOfBuffer ctermfg=BG
@@ -608,7 +619,7 @@ EOF
     exe 'colorscheme' fnameescape(GetCurrentColorScheme())
   endfunction
 
-  if has('gui_running')
+  if s:more_colors
     function! ApplyColorSchemePatch() abort
       let l:patch = g:themes_dir . '/patches/' . g:colors_name . '.vim'
       if filereadable(l:patch)
