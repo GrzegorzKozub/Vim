@@ -619,6 +619,12 @@ EOF
     exe 'colorscheme' fnameescape(GetCurrentColorScheme())
   endfunction
 
+  if s:linux
+    set termguicolors
+  else
+    let &t_Co=256
+  endif
+
   if s:more_colors
     function! ApplyColorSchemePatch() abort
       let l:patch = g:themes_dir . '/patches/' . g:colors_name . '.vim'
@@ -663,8 +669,6 @@ EOF
     endfunction
 
     nnoremap <silent> <F7> :call CycleThemeOptions()<CR>
-  else
-    let &t_Co=256
   endif
 
   call ApplyBackground()
