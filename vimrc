@@ -192,10 +192,10 @@
 
   if s:linux_gui
 
-    set guifont=Fira\ Code\ Medium\ 17
+    set guifont=Fira\ Code\ Medium\ 12
     set columns=100
     set lines=25
-    winpos 100 75
+    winpos 200 125
 
   endif
 
