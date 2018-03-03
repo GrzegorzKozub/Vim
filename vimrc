@@ -48,7 +48,6 @@
   let g:themes_dir = g:unmanaged_dir . 'themes'
   Plug g:themes_dir
 
-  Plug 'altercation/vim-colors-solarized'
   Plug 'cakebaker/scss-syntax.vim'
   Plug 'chr4/nginx.vim'
   Plug 'ctrlpvim/ctrlp.vim'
@@ -56,6 +55,7 @@
   Plug 'editorconfig/editorconfig-vim'
   Plug 'ekalinin/Dockerfile.vim'
   Plug 'elzr/vim-json'
+  Plug 'ericbn/vim-solarized'
   Plug 'fatih/vim-go'
   Plug 'groenewege/vim-less'
   Plug 'GrzegorzKozub/vimdows'
@@ -541,9 +541,6 @@ EOF
       let g:solarized_bold = 0
       let g:solarized_underline = 0
       let g:solarized_italic = 0
-
-      " https://github.com/altercation/vim-colors-solarized/issues/40
-      call togglebg#map('')
     endif
 
   " }
