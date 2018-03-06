@@ -22,23 +22,23 @@ endif
 
 exec 'hi CursorLineNr guifg=' . s:base0 . ' guibg=' . s:base02 . ' gui=NONE'
 exec 'hi LineNr guibg=' . s:base03
-exec 'hi MatchParen guifg=' . s:base00 . ' gui=NONE'
-exec 'hi NonText guifg=' . s:base01 . ' gui=NONE'
+exec 'hi MatchParen guifg=' . s:base00 . ' gui=NONE cterm=NONE'
+exec 'hi NonText guifg=' . s:base01 . ' gui=NONE cterm=NONE'
 exec 'hi Normal guibg=' . s:base03
-exec 'hi StatusLine guibg=' . s:base03 . ' gui=NONE'
+exec 'hi StatusLine guibg=' . s:base03 . ' gui=NONE cterm=NONE'
 exec 'hi StatusLineNC guifg=' . s:base03
 exec 'hi Todo guifg=' . s:yellow
 exec 'hi VertSplit guifg=' . s:base03 . ' guibg=' . s:base03
-exec 'hi Visual guifg=NONE guibg=' . s:base02 . ' gui=NONE'
+exec 'hi Visual guifg=NONE guibg=' . s:base02 . ' gui=NONE cterm=NONE'
 
 hi Comment gui=NONE
-hi ErrorMsg gui=NONE
-hi Folded gui=NONE
-hi IncSearch gui=NONE
-hi Question gui=NONE
+hi ErrorMsg gui=NONE cterm=NONE
+hi Folded gui=NONE cterm=NONE
+hi IncSearch gui=NONE cterm=NONE
+hi Question gui=NONE cterm=NONE
 hi SpecialKey gui=NONE guibg=NONE
-hi VimGroup gui=NONE
-hi WarningMsg gui=NONE
+hi VimGroup gui=NONE cterm=NONE
+hi WarningMsg gui=NONE cterm=NONE
 
 hi! link Cursor VisualNOS
 hi! link Delimiter Identifier

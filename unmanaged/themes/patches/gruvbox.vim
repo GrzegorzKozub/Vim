@@ -60,6 +60,6 @@ exec 'hi StatusLineNC guifg=' . s:bg0
 exec 'hi Todo guifg=' . s:yellow . ' gui=NONE'
 exec 'hi VertSplit guifg=' . s:bg0
 
-hi Error gui=NONE
-hi StatusLine gui=NONE
+hi Error gui=NONE cterm=NONE
+hi StatusLine gui=NONE cterm=NONE
 

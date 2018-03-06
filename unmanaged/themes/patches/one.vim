@@ -19,14 +19,14 @@ exec 'hi Todo guifg=' . s:hue_6_2
 exec 'hi VertSplit guifg=' . s:syntax_bg
 
 hi DiffDelete gui=NONE
-hi DiffText gui=NONE
-hi Error gui=NONE
-hi helpHeader gui=NONE
-hi MatchParen gui=NONE
-hi ModeMsg gui=NONE
+hi DiffText gui=NONE cterm=NONE
+hi Error gui=NONE cterm=NONE
+hi helpHeader gui=NONE cterm=NONE
+hi MatchParen gui=NONE cterm=NONE
+hi ModeMsg gui=NONE cterm=NONE
 hi MoreMsg gui=NONE
 hi Question gui=NONE
-hi Title gui=NONE
-hi Underlined gui=NONE
-hi vimCommentTitle gui=NONE
+hi Title gui=NONE cterm=NONE
+hi Underlined gui=NONE cterm=NONE
+hi vimCommentTitle gui=NONE cterm=NONE
 
