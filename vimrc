@@ -263,7 +263,9 @@ EOF
     let g:ale_sign_error = s:icons.circle
     let g:ale_sign_warning = s:icons.triangle
 
-    let g:ale_statusline_format = [ s:icons.circle . ' %d', s:icons.triangle . ' %d', '' ]
+    function! GetAleCounts() abort
+      return ale#statusline#Count(bufnr('%'))
+    endfunction
 
   " }
   " ctrlp.vim {
@@ -440,12 +442,16 @@ EOF
         return l:filename . (&readonly ? s:icons.space . s:icons.padlock : '') . (&modified ? ' ' . s:icons.star : '')
       endfunction
 
+      function! LightLineFormatAleIcon(count, icon) abort
+        return a:count > 0 ? a:icon . ' ' . a:count : ''
+      endfunction
+
       function! LightLineAleError() abort
-        return matchstr(ALEGetStatusLine(), s:icons.circle . ' \d\+')
+        return LightLineFormatAleIcon(GetAleCounts().error, s:icons.circle)
       endfunction
 
       function! LightLineAleWarning() abort
-        return matchstr(ALEGetStatusLine(), s:icons.triangle . ' \d\+')
+        return LightLineFormatAleIcon(GetAleCounts().warning, s:icons.triangle)
       endfunction
 
       function! LightLinePercent() abort
