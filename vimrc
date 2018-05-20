@@ -680,8 +680,7 @@ EOF
 " }
 " terminal {
 
-  hi Terminal guibg=#404040 guifg=#c0c0c0 ctermbg=black ctermfg=gray
-  nnoremap <Leader>t :terminal ++close<CR>
+  nnoremap <Leader>t :botright terminal ++close powershell<CR>
 
 " }
 " auto-commands {
