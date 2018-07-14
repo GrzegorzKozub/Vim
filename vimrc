@@ -169,14 +169,7 @@
     "set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
     let s:screen = eval(vimdows#get_screen())
 
-    if s:screen.height == 1440 && s:screen.dpi == 192
-
-      set guifont=Fira\ Code\ Retina:h13
-      set columns=116
-      set lines=29
-      winpos 49 35
-
-    elseif s:screen.height == 1800 && s:screen.dpi == 240
+    if s:screen.height == 1800 && s:screen.dpi == 240
 
       set guifont=Fira\ Code\ Retina:h13:qANTIALIASED
       set columns=117
