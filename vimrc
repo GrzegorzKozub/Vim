@@ -167,7 +167,9 @@
 
   if s:windows_gui
     "set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
-    let s:screen = eval(system('screen.exe'))
+
+    "let s:screen = eval(system('screen.exe'))
+    let s:screen = eval(vimdows#get_screen())
 
     if s:screen.height == 1800 && s:screen.dpi == 240
 
