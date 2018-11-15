@@ -34,11 +34,14 @@ exec 'hi Visual guifg=NONE guibg=' . s:base02 . ' gui=NONE cterm=NONE'
 hi Comment gui=NONE
 hi ErrorMsg gui=NONE cterm=NONE
 hi Folded gui=NONE cterm=NONE
+hi htmlSpecialTagName gui=NONE
+hi htmlTagName gui=NONE
 hi IncSearch gui=NONE cterm=NONE
 hi Question gui=NONE cterm=NONE
 hi SpecialKey gui=NONE guibg=NONE
 hi VimGroup gui=NONE cterm=NONE
 hi WarningMsg gui=NONE cterm=NONE
+hi Title gui=NONE
 
 hi! link Cursor VisualNOS
 hi! link Delimiter Identifier
