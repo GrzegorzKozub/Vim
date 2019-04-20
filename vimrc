@@ -54,6 +54,7 @@
   Plug 'digitaltoad/vim-pug'
   Plug 'editorconfig/editorconfig-vim'
   Plug 'ekalinin/Dockerfile.vim'
+  Plug 'elixir-editors/vim-elixir'
   Plug 'elzr/vim-json'
   Plug 'ericbn/vim-solarized'
   Plug 'fatih/vim-go'
@@ -81,6 +82,7 @@
   Plug 'sbdchd/neoformat', { 'on': 'Neoformat' }
   Plug 'scrooloose/nerdcommenter'
   Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
+  Plug 'slashmili/alchemist.vim'
   Plug 'stephpy/vim-yaml'
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-fugitive'
