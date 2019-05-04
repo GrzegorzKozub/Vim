@@ -82,7 +82,6 @@
   Plug 'sbdchd/neoformat', { 'on': 'Neoformat' }
   Plug 'scrooloose/nerdcommenter'
   Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
-  Plug 'slashmili/alchemist.vim'
   Plug 'stephpy/vim-yaml', { 'for': [ 'yaml', 'yaml.docker-compose' ] }
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-fugitive'
