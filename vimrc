@@ -261,6 +261,13 @@ EOF
   " }
   " ALE {
 
+    let g:ale_elixir_elixir_ls_release = 'D:/Apps/ElixirLS'
+    let g:ale_elixir_elixir_ls_config = { 'elixirLS': { 'dialyzerEnabled': v:false } }
+
+    let g:ale_fixers = { 'elixir': [ 'mix_format' ] }
+    let g:ale_linters = { 'elixir': [ 'credo', 'elixir-ls' ] }
+
+    let g:ale_completion_enabled = 0
     let g:ale_lint_on_enter = 0
 
     let g:ale_sign_error = s:icons.circle
@@ -269,6 +276,15 @@ EOF
     function! GetAleCounts() abort
       return ale#statusline#Count(bufnr('%'))
     endfunction
+
+    nnoremap <C-]> :ALEGoToDefinition<CR>
+    nnoremap <C-\> :ALEFindReferences<CR>
+    nnoremap <Leader>d :ALEHover<CR>
+
+    augroup SetupALE
+      " mix format doesn't work with neoformat
+      autocmd FileType elixir,eelixir nnoremap <Leader>f :ALEFix<CR>
+    augroup END
 
   " }
   " ctrlp.vim {
