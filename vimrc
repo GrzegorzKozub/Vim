@@ -48,23 +48,23 @@
   let g:themes_dir = g:unmanaged_dir . 'themes'
   Plug g:themes_dir
 
-  Plug 'cakebaker/scss-syntax.vim'
-  Plug 'chr4/nginx.vim'
+  Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
+  Plug 'chr4/nginx.vim', { 'for': 'nginx' }
   Plug 'ctrlpvim/ctrlp.vim'
-  Plug 'digitaltoad/vim-pug'
+  Plug 'digitaltoad/vim-pug', { 'for': 'pug' }
   Plug 'editorconfig/editorconfig-vim'
-  Plug 'ekalinin/Dockerfile.vim'
-  Plug 'elixir-editors/vim-elixir'
-  Plug 'elzr/vim-json'
+  Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
+  Plug 'elixir-editors/vim-elixir', { 'for': [ 'elixir', 'eelixir' ] }
+  Plug 'elzr/vim-json', { 'for': 'json' }
   Plug 'ericbn/vim-solarized'
-  Plug 'fatih/vim-go'
-  Plug 'groenewege/vim-less'
+  Plug 'fatih/vim-go', { 'for': 'go' }
+  Plug 'groenewege/vim-less', { 'for': 'less' }
   Plug 'GrzegorzKozub/vimdows'
-  Plug 'hail2u/vim-css3-syntax'
+  Plug 'hail2u/vim-css3-syntax', { 'for': [ 'css', 'less', 'scss' ] }
   Plug 'itchyny/lightline.vim'
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
-  Plug 'leafgarland/typescript-vim'
+  Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
   Plug 'mattn/emmet-vim'
   Plug 'mhinz/vim-grepper'
   Plug 'mileszs/ack.vim'
@@ -72,27 +72,27 @@
   Plug 'morhetz/gruvbox'
   Plug 'mxw/vim-jsx'
   Plug 'nelstrom/vim-visual-star-search'
-  Plug 'octol/vim-cpp-enhanced-highlight'
-  Plug 'othree/html5.vim'
-  Plug 'pangloss/vim-javascript'
-  Plug 'PProvost/vim-ps1'
-  Plug 'Quramy/vim-js-pretty-template'
+  Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
+  Plug 'othree/html5.vim', { 'for': [ 'eelixir', 'html' ] }
+  Plug 'pangloss/vim-javascript', { 'for': [ 'javascript', 'javascript.jsx' ] }
+  Plug 'PProvost/vim-ps1', { 'for': 'ps1' }
+  Plug 'Quramy/vim-js-pretty-template', { 'for': [ 'javascript', 'javascript.jsx' ] }
   Plug 'Raimondi/delimitMate'
   Plug 'rakr/vim-one'
   Plug 'sbdchd/neoformat', { 'on': 'Neoformat' }
   Plug 'scrooloose/nerdcommenter'
   Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
   Plug 'slashmili/alchemist.vim'
-  Plug 'stephpy/vim-yaml'
+  Plug 'stephpy/vim-yaml', { 'for': [ 'yaml', 'yaml.docker-compose' ] }
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-git'
-  Plug 'tpope/vim-jdaddy'
-  Plug 'tpope/vim-rails'
+  Plug 'tpope/vim-jdaddy', { 'for': 'json' }
+  Plug 'tpope/vim-rails', { 'for': 'ruby' }
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-unimpaired'
-  Plug 'vim-ruby/vim-ruby'
+  Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
   Plug 'w0rp/ale'
 
   call plug#end()
