@@ -74,9 +74,9 @@
   Plug 'nelstrom/vim-visual-star-search'
   Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
   Plug 'othree/html5.vim', { 'for': [ 'eelixir', 'html' ] }
-  Plug 'pangloss/vim-javascript', { 'for': [ 'javascript', 'javascript.jsx' ] }
+  Plug 'pangloss/vim-javascript', { 'for': [ 'javascript', 'javascript.jsx', 'typescript' ] }
   Plug 'PProvost/vim-ps1', { 'for': 'ps1' }
-  Plug 'Quramy/vim-js-pretty-template', { 'for': [ 'javascript', 'javascript.jsx' ] }
+  Plug 'Quramy/vim-js-pretty-template', { 'for': [ 'javascript', 'javascript.jsx', 'typescript' ] }
   Plug 'Raimondi/delimitMate'
   Plug 'rakr/vim-one'
   Plug 'sbdchd/neoformat', { 'on': 'Neoformat' }
@@ -582,7 +582,7 @@ EOF
 
     augroup SetupJsPrettyTemplate
       autocmd!
-      autocmd FileType javascript,typescript JsPreTmpl markdown
+      autocmd FileType javascript,javascript.jsx,typescript JsPreTmpl
       autocmd FileType typescript syn clear foldBraces
     augroup END
 
