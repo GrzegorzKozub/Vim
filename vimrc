@@ -84,6 +84,7 @@
   Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
   Plug 'stephpy/vim-yaml', { 'for': [ 'yaml', 'yaml.docker-compose' ] }
   Plug 'tpope/vim-dispatch'
+  Plug 'tpope/vim-endwise', { 'for': [ 'elixir', 'eelixir', 'ruby' ] }
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-git'
   Plug 'tpope/vim-jdaddy', { 'for': 'json' }
