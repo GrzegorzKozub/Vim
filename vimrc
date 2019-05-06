@@ -281,7 +281,12 @@ EOF
 
     " elixir {
 
-      let g:ale_elixir_elixir_ls_release = 'D:/Apps/ElixirLS'
+      if s:windows
+          let g:ale_elixir_elixir_ls_release = 'D:/Apps/ElixirLS'
+      else
+          let g:ale_elixir_elixir_ls_release = $HOME . '/Code/elixir-ls/release'
+      endif
+
       let g:ale_elixir_elixir_ls_config = { 'elixirLS': { 'dialyzerEnabled': v:false } }
 
       let g:ale_fixers.elixir = [ 'mix_format' ]
