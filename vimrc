@@ -28,20 +28,24 @@
     let s:user_dir = expand('~/.vim/')
   endif
 
+  let s:plugins_dir = s:user_dir . 'plugins/'
+
   let s:temp_dir = s:user_dir . 'temp/'
 
   let s:backup_dir = s:temp_dir . 'backup/'
   let s:undo_dir = s:temp_dir . 'undo/'
-  let s:plugins_dir = s:temp_dir . 'plugins/'
+  let s:temp_plugins_dir = s:temp_dir . 'plugins/'
+
+  silent! call mkdir(s:plugins_dir, 'p')
 
   silent! call mkdir(s:backup_dir, 'p')
   silent! call mkdir(s:undo_dir, 'p')
-  silent! call mkdir(s:plugins_dir, 'p')
+  silent! call mkdir(s:temp_plugins_dir, 'p')
 
 " }
 " vim-plug {
 
-  call plug#begin(s:user_dir . 'plugins')
+  call plug#begin(s:plugins_dir)
 
   let g:unmanaged_dir = s:user_dir . 'unmanaged/'
 
@@ -59,6 +63,7 @@
   Plug 'ericbn/vim-solarized'
   Plug 'fatih/vim-go', { 'for': 'go' }
   Plug 'groenewege/vim-less', { 'for': 'less' }
+  Plug 'GrzegorzKozub/vim-elixirls', { 'do': ':ElixirLsCompile' }
   Plug 'GrzegorzKozub/vimdows'
   Plug 'hail2u/vim-css3-syntax', { 'for': [ 'css', 'less', 'scss' ] }
   Plug 'itchyny/lightline.vim'
@@ -281,12 +286,7 @@ EOF
 
     " elixir {
 
-      if s:windows
-          let g:ale_elixir_elixir_ls_release = 'D:/Apps/ElixirLS'
-      else
-          let g:ale_elixir_elixir_ls_release = $HOME . '/Code/elixir-ls/release'
-      endif
-
+      let g:ale_elixir_elixir_ls_release = s:plugins_dir . 'vim-elixirls/elixir-ls/release'
       let g:ale_elixir_elixir_ls_config = { 'elixirLS': { 'dialyzerEnabled': v:false } }
 
       let g:ale_fixers.elixir = [ 'mix_format' ]
@@ -300,7 +300,7 @@ EOF
   " }
   " ctrlp.vim {
 
-    let g:ctrlp_cache_dir = s:plugins_dir . 'ctrlp.vim'
+    let g:ctrlp_cache_dir = s:temp_plugins_dir . 'ctrlp.vim'
 
     nnoremap <silent> <C-p> :CtrlP<CR>
     nnoremap <silent> <C-b> :CtrlPBuffer<CR>
@@ -561,7 +561,7 @@ EOF
   " }
   " netrw {
 
-    let g:netrw_home = s:plugins_dir . 'netrw'
+    let g:netrw_home = s:temp_plugins_dir . 'netrw'
     let g:netrw_localcopycmd = 'copy'
 
   " }
