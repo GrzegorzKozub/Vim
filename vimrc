@@ -63,7 +63,7 @@
   Plug 'ericbn/vim-solarized'
   Plug 'fatih/vim-go', { 'for': 'go' }
   Plug 'groenewege/vim-less', { 'for': 'less' }
-  Plug 'GrzegorzKozub/vim-elixirls', { 'do': ':ElixirLsCompile' }
+  Plug 'GrzegorzKozub/vim-elixirls', { 'do': ':ElixirLsCompileSync' }
   Plug 'GrzegorzKozub/vimdows'
   Plug 'hail2u/vim-css3-syntax', { 'for': [ 'css', 'less', 'scss' ] }
   Plug 'itchyny/lightline.vim'
