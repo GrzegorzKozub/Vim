@@ -66,6 +66,7 @@
   Plug 'GrzegorzKozub/vim-elixirls', { 'do': ':ElixirLsCompileSync' }
   Plug 'GrzegorzKozub/vimdows'
   Plug 'hail2u/vim-css3-syntax', { 'for': [ 'css', 'less', 'scss' ] }
+  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
   Plug 'itchyny/lightline.vim'
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
@@ -350,6 +351,12 @@ EOF
       let g:gruvbox_sign_column = 'bg0'
       let g:gruvbox_vert_split = 'bg0'
     endif
+
+  " }
+  " markdown-preview.nvim {
+
+    nnoremap <silent> <Leader>mp :MarkdownPreview<CR>
+    nnoremap <silent> <Leader>mps :MarkdownPreviewStop<CR>
 
   " }
   " lightline {
