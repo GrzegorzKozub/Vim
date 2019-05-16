@@ -566,6 +566,7 @@ EOF
   " }
   " netrw {
 
+    let g:netrw_banner = 0
     let g:netrw_home = s:temp_plugins_dir . 'netrw'
     let g:netrw_localcopycmd = 'copy'
 
