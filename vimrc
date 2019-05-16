@@ -281,10 +281,6 @@ EOF
       return ale#statusline#Count(bufnr('%'))
     endfunction
 
-    nnoremap <C-]> :ALEGoToDefinition<CR>
-    nnoremap <C-\> :ALEFindReferences<CR>
-    nnoremap <Leader>d :ALEHover<CR>
-
     " elixir {
 
       let g:ale_elixir_elixir_ls_release = s:plugins_dir . 'vim-elixirls/elixir-ls/release'
@@ -293,8 +289,10 @@ EOF
       let g:ale_fixers.elixir = [ 'mix_format' ]
       let g:ale_linters.elixir = [ 'credo', 'elixir-ls' ]
 
-      augroup UseALEToFormatElixirFiles
+      augroup UseALEForElixir
         autocmd FileType elixir,eelixir nnoremap <Leader>f :ALEFix<CR>
+        autocmd FileType elixir,eelixir nnoremap <C-]> :ALEGoToDefinition<CR>
+        autocmd FileType elixir,eelixir nnoremap <C-[> :ALEFindReferences<CR>
       augroup END
 
     " }
