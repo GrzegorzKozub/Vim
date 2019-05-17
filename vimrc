@@ -650,7 +650,7 @@ EOF
 " }
 " terminal {
 
-  nnoremap <Leader>t :botright terminal ++close powershell<CR>
+  nnoremap <Leader>t :botright terminal ++close pwsh --nologo<CR>
 
 " }
 " auto-commands {
