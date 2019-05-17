@@ -127,7 +127,7 @@
   set noswapfile
   set nowrap
   set number
-  set shiftwidth=4
+  set shiftwidth=2
   set shortmess+=I
   set showmatch
   set sidescroll=1
@@ -135,9 +135,9 @@
   set smartcase
   set smartindent
   set smarttab
-  set softtabstop=4
+  set softtabstop=2
   set spelllang=en_gb,pl
-  set tabstop=4
+  set tabstop=2
   set undofile
   set wildmode=list:longest
 
@@ -736,7 +736,6 @@ EOF
   augroup ConfigureEditorBasedOnFileTypes
     autocmd!
     autocmd FileType vim setlocal textwidth=0
-    autocmd FileType xml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
   augroup END
 
   augroup EnableSyntaxCompleteWhenNoLanguageSpecificOmniScript
