@@ -8,16 +8,8 @@
 " }
 " platform {
 
-  let s:gui = has('gui_running')
-
   let s:windows = has('win32')
   let s:linux = !s:windows
-
-  let s:windows_gui = s:windows && s:gui
-  let s:linux_gui = s:linux && s:gui
-
-  let s:more_icons = s:gui
-  let s:more_colors = s:windows_gui || s:linux
 
 " }
 " directories {
@@ -139,6 +131,7 @@
   set spelllang=en_gb,pl
   set tabstop=2
   set undofile
+  set ttyfast
   set wildmode=list:longest
 
   let &backupdir = s:backup_dir
@@ -155,74 +148,20 @@
     language en_US.utf8
   endif
 
-  if s:gui
-    set cursorline
-    set guioptions+=c
-    set guioptions-=b
-    set guioptions-=r
-    set guioptions-=L
-    set guioptions-=m
-    set guioptions+=M
-    set guioptions-=T
-    set guitablabel=%t\ %M
-    set linespace=0
-  else
-    set ttyfast
-  endif
-
-" }
-" gui {
-
-  if s:windows_gui
-    "set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
-
-    "let s:screen = eval(system('screen.exe'))
-    let s:screen = eval(vimdows#get_screen())
-
-    if s:screen.height == 1800 && s:screen.dpi == 240
-
-      set guifont=Fira\ Code\ Retina:h13:qANTIALIASED
-      set columns=117
-      set lines=29
-      winpos 63 66
-
-    elseif s:screen.height == 2160 && s:screen.dpi == 192
-
-      set guifont=Fira\ Code\ Retina:h13
-      set columns=120
-      set lines=33
-      winpos 50 50
-
-    else
-
-      set guifont=Fira\ Code\ Retina:h13
-
-    endif
-  endif
-
-  if s:linux_gui
-
-    set guifont=Fira\ Code\ Medium\ 12
-    set columns=100
-    set lines=25
-    winpos 200 125
-
-  endif
-
 " }
 " icons {
 
-  let s:icons = { 'circle': '●', 'triangle': '▲', 'star': '*', 'vertical_bar': '│' }
+  let g:icons = { 'circle': '●', 'triangle': '▲', 'star': '*', 'vertical_bar': '│' }
 
-  let s:icons.left_filled = s:more_icons ? '' : ''
-  let s:icons.right_filled = s:more_icons ? '' : ''
-  let s:icons.left_empty = s:more_icons ? '' : s:icons.vertical_bar
-  let s:icons.right_empty = s:more_icons ? '' : s:icons.vertical_bar
+  let g:icons.left_filled = ''
+  let g:icons.right_filled = ''
+  let g:icons.left_empty = g:icons.vertical_bar
+  let g:icons.right_empty = g:icons.vertical_bar
 
-  let s:icons.branch = s:more_icons ? '' : ''
-  let s:icons.padlock = s:more_icons ? '' : ''
+  let g:icons.branch = ''
+  let g:icons.padlock = ''
 
-  let s:icons.space = s:more_icons ? ' ' : ''
+  let g:icons.space = ''
 
 " }
 " themes {
@@ -250,11 +189,11 @@ EOF
   endfunction
 
   function! GetCurrentColorScheme() abort
-    return s:more_colors ? s:themes[g:THEME.current] : 'terminal'
+    return s:themes[g:THEME.current]
   endfunction
 
   function! GetCurrentBackground() abort
-    return !s:more_colors || (strftime('%H') > 6 && strftime('%H') < 18) ? 'light' : 'dark'
+    return (strftime('%H') > 6 && strftime('%H') < 18) ? 'light' : 'dark'
   endfunction
 
 " }
@@ -274,8 +213,8 @@ EOF
     let g:ale_completion_enabled = 0
     let g:ale_lint_on_enter = 0
 
-    let g:ale_sign_error = s:icons.circle
-    let g:ale_sign_warning = s:icons.triangle
+    let g:ale_sign_error = g:icons.circle
+    let g:ale_sign_warning = g:icons.triangle
 
     function! GetAleCounts() abort
       return ale#statusline#Count(bufnr('%'))
@@ -328,27 +267,25 @@ EOF
   " }
   " gruvbox {
 
-    if s:more_colors
-      function! s:gruvboxCycleOptions() abort
-        let l:values = [ 'soft', 'medium', 'hard' ]
-        let l:option = &background ==# 'dark' ? 'gruvbox_contrast_dark' : 'gruvbox_contrast_light'
-        let l:index = index(l:values, g:THEME.options[l:option])
-        let g:THEME.options[l:option] = l:index == len(l:values) - 1 ? l:values[0] : l:values[l:index + 1]
-      endfunction
+    function! s:gruvboxCycleOptions() abort
+      let l:values = [ 'soft', 'medium', 'hard' ]
+      let l:option = &background ==# 'dark' ? 'gruvbox_contrast_dark' : 'gruvbox_contrast_light'
+      let l:index = index(l:values, g:THEME.options[l:option])
+      let g:THEME.options[l:option] = l:index == len(l:values) - 1 ? l:values[0] : l:values[l:index + 1]
+    endfunction
 
-      call SetDefaultThemeOption('gruvbox_contrast_dark', 'medium')
-      call SetDefaultThemeOption('gruvbox_contrast_light', 'medium')
+    call SetDefaultThemeOption('gruvbox_contrast_dark', 'medium')
+    call SetDefaultThemeOption('gruvbox_contrast_light', 'medium')
 
-      let g:gruvbox_bold = 0
-      let g:gruvbox_italic = 0
-      let g:gruvbox_underline = 0
+    let g:gruvbox_bold = 0
+    let g:gruvbox_italic = 0
+    let g:gruvbox_underline = 0
 
-      let g:gruvbox_invert_selection = 0
-      let g:gruvbox_italicize_comments = 0
+    let g:gruvbox_invert_selection = 0
+    let g:gruvbox_italicize_comments = 0
 
-      let g:gruvbox_sign_column = 'bg0'
-      let g:gruvbox_vert_split = 'bg0'
-    endif
+    let g:gruvbox_sign_column = 'bg0'
+    let g:gruvbox_vert_split = 'bg0'
 
   " }
   " markdown-preview.nvim {
@@ -414,12 +351,12 @@ EOF
           \ 't': 'TERMINAL'
         \ },
         \ 'separator': {
-          \ 'left': s:icons.left_filled,
-          \ 'right': s:icons.right_filled
+          \ 'left': g:icons.left_filled,
+          \ 'right': g:icons.right_filled
         \ },
         \ 'subseparator': {
-          \ 'left': s:icons.left_empty,
-          \ 'right': s:icons.right_empty
+          \ 'left': g:icons.left_empty,
+          \ 'right': g:icons.right_empty
         \ },
         \ 'enable': {
           \ 'tabline': 0
@@ -446,7 +383,7 @@ EOF
         if exists('*fugitive#head')
           let l:branch = fugitive#head()
           if l:branch !=# ''
-            return s:icons.branch . s:icons.space . l:branch
+            return g:icons.branch . g:icons.space . l:branch
           endif
           return ''
         endif
@@ -474,7 +411,7 @@ EOF
         if &filetype ==# 'help'
           return l:filename
         endif
-        return l:filename . (&readonly ? s:icons.space . s:icons.padlock : '') . (&modified ? ' ' . s:icons.star : '')
+        return l:filename . (&readonly ? g:icons.space . g:icons.padlock : '') . (&modified ? ' ' . g:icons.star : '')
       endfunction
 
       function! LightLineFormatAleIcon(count, icon) abort
@@ -482,11 +419,11 @@ EOF
       endfunction
 
       function! LightLineAleError() abort
-        return LightLineFormatAleIcon(GetAleCounts().error, s:icons.circle)
+        return LightLineFormatAleIcon(GetAleCounts().error, g:icons.circle)
       endfunction
 
       function! LightLineAleWarning() abort
-        return LightLineFormatAleIcon(GetAleCounts().warning, s:icons.triangle)
+        return LightLineFormatAleIcon(GetAleCounts().warning, g:icons.triangle)
       endfunction
 
       function! LightLinePercent() abort
@@ -579,11 +516,9 @@ EOF
   " }
   " vim-colors-solarized {
 
-    if s:more_colors
-      let g:solarized_bold = 0
-      let g:solarized_underline = 0
-      let g:solarized_italic = 0
-    endif
+    let g:solarized_bold = 0
+    let g:solarized_underline = 0
+    let g:solarized_italic = 0
 
   " }
   " vim-dispatch {
@@ -643,11 +578,7 @@ EOF
 " colorscheme {
 
   function! HideTildeOnEmptyLines() abort
-    if s:more_colors
-      highlight EndOfBuffer guifg=BG
-    else
-      highlight EndOfBuffer ctermfg=BG
-    endif
+    highlight EndOfBuffer guifg=BG ctermfg=BG
   endfunction
 
   augroup HideTildeOnEmptyLinesWhenColorSchemeChanges
@@ -669,51 +600,49 @@ EOF
     let &t_Co=256
   endif
 
-  if s:more_colors
-    function! ApplyColorSchemePatch() abort
-      let l:patch = g:themes_dir . '/patches/' . g:colors_name . '.vim'
-      if filereadable(l:patch)
-        exe 'source' fnameescape(l:patch)
-      endif
-    endfunction
+  function! ApplyColorSchemePatch() abort
+    let l:patch = g:themes_dir . '/patches/' . g:colors_name . '.vim'
+    if filereadable(l:patch)
+      exe 'source' fnameescape(l:patch)
+    endif
+  endfunction
 
-    augroup ApplyColorSchemePatchWhenColorSchemeChanges
-      autocmd!
-      autocmd ColorScheme * call ApplyColorSchemePatch()
-    augroup END
+  augroup ApplyColorSchemePatchWhenColorSchemeChanges
+    autocmd!
+    autocmd ColorScheme * call ApplyColorSchemePatch()
+  augroup END
 
-    function! ApplyThemeOptions() abort
-      for l:option in keys(g:THEME.options)
-        exe 'let g:' . l:option . ' = "' . g:THEME.options[l:option] . '"'
-      endfor
-    endfunction
+  function! ApplyThemeOptions() abort
+    for l:option in keys(g:THEME.options)
+      exe 'let g:' . l:option . ' = "' . g:THEME.options[l:option] . '"'
+    endfor
+  endfunction
 
+  call ApplyThemeOptions()
+
+  function! CycleColorSchemes() abort
+    let g:THEME.current = g:THEME.current == len(s:themes) - 1 ? 0 : g:THEME.current + 1
+    call ApplyColorScheme()
+  endfunction
+
+  nnoremap <silent> <F5> :call CycleColorSchemes()<CR>
+
+  function! BackgroundToggle() abort
+    let &background = &background ==# 'dark' ? 'light' : 'dark'
+    call ApplyColorScheme()
+  endfunction
+
+  nnoremap <silent> <F6> :call BackgroundToggle()<CR>
+
+  function! CycleThemeOptions() abort
+    let l:function = 's:' . GetCurrentColorScheme() . 'CycleOptions()'
+    if !exists('*' . l:function) | return | endif
+    exe 'call ' . l:function
     call ApplyThemeOptions()
+    call ApplyColorScheme()
+  endfunction
 
-    function! CycleColorSchemes() abort
-      let g:THEME.current = g:THEME.current == len(s:themes) - 1 ? 0 : g:THEME.current + 1
-      call ApplyColorScheme()
-    endfunction
-
-    nnoremap <silent> <F5> :call CycleColorSchemes()<CR>
-
-    function! BackgroundToggle() abort
-      let &background = &background ==# 'dark' ? 'light' : 'dark'
-      call ApplyColorScheme()
-    endfunction
-
-    nnoremap <silent> <F6> :call BackgroundToggle()<CR>
-
-    function! CycleThemeOptions() abort
-      let l:function = 's:' . GetCurrentColorScheme() . 'CycleOptions()'
-      if !exists('*' . l:function) | return | endif
-      exe 'call ' . l:function
-      call ApplyThemeOptions()
-      call ApplyColorScheme()
-    endfunction
-
-    nnoremap <silent> <F7> :call CycleThemeOptions()<CR>
-  endif
+  nnoremap <silent> <F7> :call CycleThemeOptions()<CR>
 
   call ApplyBackground()
   call ApplyColorScheme()
