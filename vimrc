@@ -649,7 +649,9 @@ EOF
 " }
 " terminal {
 
-  nnoremap <Leader>t :botright terminal ++close pwsh --nologo<CR>
+  if s:windows
+    nnoremap <Leader>t :botright terminal ++close pwsh --nologo<CR>
+  endif
 
 " }
 " auto-commands {
