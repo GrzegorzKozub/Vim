@@ -5,31 +5,38 @@
   let s:windows = has('win32')
   let s:linux = !s:windows
 
+  let s:neovim = has('nvim')
+  let s:vim = !s:neovim
+
 " }
 " includes {
 
-  runtime defaults.vim
+  if s:vim | runtime defaults.vim | endif
   runtime mswin.vim
 
 " }
 " directories {
 
-  if s:windows
-    let s:user_dir = expand('~/vimfiles/')
+  if s:neovim
+      let s:user_dir = stdpath('config') . '/'
+      let s:temp_dir = stdpath('data') . '/'
   else
-    let s:user_dir = expand('~/.vim/')
+    if s:windows
+      let s:user_dir = expand('~/vimfiles/')
+    else
+      let s:user_dir = expand('~/.vim/')
+    endif
+    let s:temp_dir = s:user_dir . 'temp/'
   endif
 
   let s:plugins_dir = s:user_dir . 'plugins/'
   let s:unmanaged_dir = s:user_dir . 'unmanaged/'
 
-  let s:temp_dir = s:user_dir . 'temp/'
+  silent! call mkdir(s:plugins_dir, 'p')
 
   let s:backup_dir = s:temp_dir . 'backup/'
   let s:undo_dir = s:temp_dir . 'undo/'
   let s:temp_plugins_dir = s:temp_dir . 'plugins/'
-
-  silent! call mkdir(s:plugins_dir, 'p')
 
   silent! call mkdir(s:backup_dir, 'p')
   silent! call mkdir(s:undo_dir, 'p')
@@ -55,7 +62,6 @@
   Plug 'fatih/vim-go', { 'for': 'go' }
   Plug 'groenewege/vim-less', { 'for': 'less' }
   Plug 'GrzegorzKozub/vim-elixirls', { 'do': ':ElixirLsCompileSync' }
-  Plug 'GrzegorzKozub/vimdows'
   Plug 'hail2u/vim-css3-syntax', { 'for': [ 'css', 'less', 'scss' ] }
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
   Plug 'itchyny/lightline.vim'
@@ -91,6 +97,10 @@
   Plug 'tpope/vim-unimpaired'
   Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
   Plug 'w0rp/ale'
+
+  if s:vim && s:windows
+    Plug 'GrzegorzKozub/vimdows'
+  endif
 
   call plug#end()
 
@@ -130,22 +140,29 @@
   set spelllang=en_gb,pl
   set tabstop=2
   set undofile
-  set ttyfast
   set wildmode=list:longest
 
   let &backupdir = s:backup_dir
   let &undodir = s:undo_dir
-  let &viminfo = &viminfo . ',!,n' . s:temp_dir . 'viminfo'
 
-  try | rviminfo | catch | endtry
+  if s:vim
+    set ttyfast
+    let &viminfo = &viminfo . ',!,n' . s:temp_dir . 'viminfo'
+  endif
+
+  if s:neovim
+    if s:windows
+      let g:node_host_prog = substitute($LOCALAPPDATA, '\', '/', 'g') . '/Yarn/Data/global/node_modules/neovim/bin/cli.js'
+    else
+      " todo: configure for linux
+    endif
+  endif
+
+  try | rviminfo | catch | endtry " todo: replace with rshada for neovim
 
   scriptencoding 'utf-8'
 
-  if s:windows
-    language English_US
-  else
-    language en_US.utf8
-  endif
+  if s:windows | language English_US | else | language en_US.utf8 | endif
 
 " }
 " icons {
@@ -183,7 +200,7 @@ EOF
   function! SetDefaultThemeOption(option, value) abort
     if !has_key(g:THEME.options, a:option)
       let g:THEME.options[a:option] = a:value
-      wviminfo
+      wviminfo " todo: replace with wshada for neovim
     endif
   endfunction
 
@@ -230,7 +247,7 @@ EOF
       augroup UseALEForElixir
         autocmd FileType elixir,eelixir nnoremap <Leader>f :ALEFix<CR>
         autocmd FileType elixir,eelixir nnoremap <C-]> :ALEGoToDefinition<CR>
-        autocmd FileType elixir,eelixir nnoremap <C-[> :ALEFindReferences<CR>
+        autocmd FileType elixir,eelixir nnoremap <C-\> :ALEFindReferences<CR>
       augroup END
 
     " }
@@ -483,9 +500,7 @@ EOF
         endfor
 
         let g:lightline.colorscheme = g:colors_name
-        call lightline#init()
-        call lightline#colorscheme()
-        call lightline#update()
+        call lightline#enable()
       endfunction
 
       augroup ReloadLightLineWhenColorSchemeChanges
@@ -593,11 +608,7 @@ EOF
     exe 'colorscheme' fnameescape(GetCurrentColorScheme())
   endfunction
 
-  if s:windows
-    let &t_Co=256
-  else
-    set termguicolors
-  endif
+  if s:vim && s:windows | let &t_Co=256 | else | set termguicolors | endif
 
   function! ApplyColorSchemePatch() abort
     let l:patch = g:themes_dir . '/patches/' . g:colors_name . '.vim'
@@ -649,7 +660,7 @@ EOF
 " }
 " terminal {
 
-  if s:windows
+  if s:vim && s:windows
     nnoremap <Leader>t :botright terminal ++close pwsh --nologo<CR>
   endif
 
@@ -675,7 +686,7 @@ EOF
 
   augroup ScrollToLastSeenLocationOnFileOpen
     autocmd!
-    autocmd BufReadPost * if line("'\'") > 1 && line("'\'") <= line('$') | exe "normal! g`\'" | endif
+    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line('$') && &filetype !=# 'commit' | exe "normal! g`\"" | endif
   augroup END
 
   augroup DoNotOverwriteBackupFilesWithTheSameNames

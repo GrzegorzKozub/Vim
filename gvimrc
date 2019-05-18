@@ -5,6 +5,9 @@
   let s:windows = has('win32')
   let s:linux = !s:windows
 
+  let s:neovim = has('nvim')
+  let s:vim = !s:neovim
+
 " }
 " settings {
 
@@ -24,40 +27,37 @@
 " }
 " gui {
 
-  if s:windows
+  if s:vim && s:windows
     "set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
-
-    "let s:screen = eval(system('screen.exe'))
     let s:screen = eval(vimdows#get_screen())
-
     if s:screen.height == 1800 && s:screen.dpi == 240
-
       set guifont=Fira\ Code\ Retina:h13:qANTIALIASED
       set columns=117
       set lines=29
       winpos 63 66
-
     elseif s:screen.height == 2160 && s:screen.dpi == 192
-
       set guifont=Fira\ Code\ Retina:h13
       set columns=120
       set lines=33
       winpos 50 50
-
     else
-
       set guifont=Fira\ Code\ Retina:h13
-
     endif
   endif
 
-  if s:linux
-
+  if s:vim && s:linux
     set guifont=Fira\ Code\ Medium\ 12
     set columns=100
     set lines=25
     winpos 200 125
+  endif
 
+  if s:neovim && s:windows
+    set guifont=Fira\ Code\ Retina:h12
+  endif
+
+  if s:neovim && s:linux
+    " todo: configure for neovim and linux
   endif
 
 " }
@@ -88,13 +88,17 @@
         \ 'right': g:icons.right_empty
       \ }
 
+      if s:neovim | call lightline#enable() | endif
+
     " }
   " }
 " }
 " mappings {
 
-  unmap <C-F>
-  unmap <C-H>
+  if s:vim
+    unmap <C-F>
+    unmap <C-H>
+  endif
 
 " }
 
