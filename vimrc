@@ -21,6 +21,7 @@
   endif
 
   let s:plugins_dir = s:user_dir . 'plugins/'
+  let s:unmanaged_dir = s:user_dir . 'unmanaged/'
 
   let s:temp_dir = s:user_dir . 'temp/'
 
@@ -39,9 +40,7 @@
 
   call plug#begin(s:plugins_dir)
 
-  let g:unmanaged_dir = s:user_dir . 'unmanaged/'
-
-  let g:themes_dir = g:unmanaged_dir . 'themes'
+  let g:themes_dir = s:unmanaged_dir . 'themes'
   Plug g:themes_dir
 
   Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
