@@ -593,10 +593,10 @@ EOF
     exe 'colorscheme' fnameescape(GetCurrentColorScheme())
   endfunction
 
-  if s:linux
-    set termguicolors
-  else
+  if s:windows
     let &t_Co=256
+  else
+    set termguicolors
   endif
 
   function! ApplyColorSchemePatch() abort
