@@ -1,15 +1,15 @@
 " vim: set foldmarker={,} foldmethod=marker :
 
-" includes {
-
-  runtime defaults.vim
-  runtime mswin.vim
-
-" }
 " platform {
 
   let s:windows = has('win32')
   let s:linux = !s:windows
+
+" }
+" includes {
+
+  runtime defaults.vim
+  runtime mswin.vim
 
 " }
 " directories {
