@@ -91,4 +91,10 @@
     " }
   " }
 " }
+" mappings {
+
+  unmap <C-F>
+  unmap <C-H>
+
+" }
 
