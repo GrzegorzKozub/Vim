@@ -294,7 +294,7 @@ EOF
     nnoremap <silent> <Leader>mps :MarkdownPreviewStop<CR>
 
   " }
-  " lightline {
+  " lightline.vim {
     " configuration {
 
       let g:lightline = {

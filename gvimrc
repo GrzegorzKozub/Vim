@@ -75,7 +75,7 @@
 
 " }
 " plugins {
-  " lightline {
+  " lightline.vim {
     " configuration {
 
       let g:lightline.separator = {
