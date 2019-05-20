@@ -1,2 +1,2 @@
-source vimrc
+exe 'source ' . stdpath('config') . '/vimrc'
 

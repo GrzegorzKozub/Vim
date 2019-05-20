@@ -1,2 +1,2 @@
-source gvimrc
+exe 'source ' . stdpath('config') . '/gvimrc'
 
