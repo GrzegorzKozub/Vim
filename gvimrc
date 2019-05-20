@@ -29,26 +29,20 @@
 
   if s:vim && s:windows
     "set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
+    set guifont=Fira\ Code\ Retina:h12
     let s:screen = eval(vimdows#get_screen())
     if s:screen.height == 1800 && s:screen.dpi == 240
-      set guifont=Fira\ Code\ Retina:h13:qANTIALIASED
-      set columns=117
-      set lines=29
-      winpos 63 66
+      set columns=127 lines=31
+      winpos 60 62
     elseif s:screen.height == 2160 && s:screen.dpi == 192
-      set guifont=Fira\ Code\ Retina:h13
-      set columns=120
-      set lines=33
+      set columns=120 lines=33
       winpos 50 50
-    else
-      set guifont=Fira\ Code\ Retina:h13
     endif
   endif
 
   if s:vim && s:linux
     set guifont=Fira\ Code\ Medium\ 12
-    set columns=100
-    set lines=25
+    set columns=100 lines=25
     winpos 200 125
   endif
 
