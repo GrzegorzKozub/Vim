@@ -19,14 +19,14 @@
 
   if s:neovim
       let s:user_dir = stdpath('config') . '/'
-      let s:temp_dir = stdpath('data') . '/'
+      let s:data_dir = stdpath('data') . '/'
   else
     if s:windows
       let s:user_dir = expand('~/vimfiles/')
     else
       let s:user_dir = expand('~/.vim/')
     endif
-    let s:temp_dir = s:user_dir . 'temp/'
+    let s:data_dir = s:user_dir . 'data/'
   endif
 
   let s:plugins_dir = s:user_dir . 'plugins/'
@@ -34,13 +34,13 @@
 
   silent! call mkdir(s:plugins_dir, 'p')
 
-  let s:backup_dir = s:temp_dir . 'backup/'
-  let s:undo_dir = s:temp_dir . 'undo/'
-  let s:temp_plugins_dir = s:temp_dir . 'plugins/'
+  let s:backup_dir = s:data_dir . 'backup/'
+  let s:state_dir = s:data_dir . 'state/'
+  let s:undo_dir = s:data_dir . 'undo/'
 
   silent! call mkdir(s:backup_dir, 'p')
+  silent! call mkdir(s:state_dir, 'p')
   silent! call mkdir(s:undo_dir, 'p')
-  silent! call mkdir(s:temp_plugins_dir, 'p')
 
 " }
 " vim-plug {
@@ -147,7 +147,7 @@
 
   if s:vim
     set ttyfast
-    let &viminfo = &viminfo . ',!,n' . s:temp_dir . 'viminfo'
+    let &viminfo = &viminfo . ',!,n' . s:data_dir . 'viminfo'
   endif
 
   if s:neovim
@@ -254,7 +254,7 @@ EOF
   " }
   " ctrlp.vim {
 
-    let g:ctrlp_cache_dir = s:temp_plugins_dir . 'ctrlp.vim'
+    let g:ctrlp_cache_dir = s:state_dir . 'ctrlp.vim'
 
     nnoremap <silent> <C-p> :CtrlP<CR>
     nnoremap <silent> <C-b> :CtrlPBuffer<CR>
@@ -520,7 +520,7 @@ EOF
   " netrw {
 
     let g:netrw_banner = 0
-    let g:netrw_home = s:temp_plugins_dir . 'netrw'
+    let g:netrw_home = s:state_dir . 'netrw'
     let g:netrw_localcopycmd = 'copy'
 
   " }
