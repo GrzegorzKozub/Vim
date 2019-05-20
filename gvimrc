@@ -35,7 +35,7 @@
       set columns=127 lines=31
       winpos 60 62
     elseif s:screen.height == 2160 && s:screen.dpi == 192
-      set columns=120 lines=33
+      set columns=131 lines=36
       winpos 50 50
     endif
   endif
