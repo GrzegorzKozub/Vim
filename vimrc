@@ -98,7 +98,7 @@
   Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
   Plug 'w0rp/ale'
 
-  if s:vim && s:windows
+  if s:windows
     Plug 'GrzegorzKozub/vimdows'
   endif
 
