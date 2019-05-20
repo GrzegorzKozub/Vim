@@ -158,7 +158,13 @@
     endif
   endif
 
-  try | rviminfo | catch | endtry " todo: replace with rshada for neovim
+  try
+    if s:neovim
+      rshada
+    else
+      rviminfo
+    endif
+  catch | endtry
 
   scriptencoding 'utf-8'
 
@@ -200,7 +206,11 @@ EOF
   function! SetDefaultThemeOption(option, value) abort
     if !has_key(g:THEME.options, a:option)
       let g:THEME.options[a:option] = a:value
-      wviminfo " todo: replace with wshada for neovim
+      if s:neovim
+        wshada
+      else
+        wviminfo
+      endif
     endif
   endfunction
 
