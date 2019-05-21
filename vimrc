@@ -191,7 +191,7 @@
 
   let s:themes = [ 'solarized', 'gruvbox', 'one' ]
 
-  function! InitTheme() abort
+  function! s:init_theme() abort
     if exists('g:THEME') | return | endif
     let g:THEME = { 'current': 0, 'options': {} }
     if has('python3')
@@ -202,9 +202,9 @@ EOF
     endif
   endfunction
 
-  call InitTheme()
+  call <sid>init_theme()
 
-  function! SetDefaultThemeOption(option, value) abort
+  function! s:set_default_theme_option(option, value) abort
     if !has_key(g:THEME.options, a:option)
       let g:THEME.options[a:option] = a:value
       if s:neovim
@@ -215,11 +215,11 @@ EOF
     endif
   endfunction
 
-  function! GetCurrentColorScheme() abort
+  function! s:get_current_color_scheme() abort
     return s:themes[g:THEME.current]
   endfunction
 
-  function! GetCurrentBackground() abort
+  function! s:get_current_background() abort
     return (strftime('%H') > 6 && strftime('%H') < 18) ? 'light' : 'dark'
   endfunction
 
@@ -301,8 +301,8 @@ EOF
       let g:THEME.options[l:option] = l:index == len(l:values) - 1 ? l:values[0] : l:values[l:index + 1]
     endfunction
 
-    call SetDefaultThemeOption('gruvbox_contrast_dark', 'medium')
-    call SetDefaultThemeOption('gruvbox_contrast_light', 'medium')
+    call <sid>set_default_theme_option('gruvbox_contrast_dark', 'medium')
+    call <sid>set_default_theme_option('gruvbox_contrast_light', 'medium')
 
     let g:gruvbox_bold = 0
     let g:gruvbox_italic = 0
@@ -363,7 +363,7 @@ EOF
           \ 'aleerror': 'error',
           \ 'alewarning': 'warning'
         \ },
-        \ 'colorscheme': '' . GetCurrentColorScheme() . '',
+        \ 'colorscheme': '' . s:get_current_color_scheme() . '',
         \ 'mode_map': {
           \ 'n' : 'NORMAL',
           \ 'i' : 'INSERT',
@@ -614,11 +614,11 @@ EOF
   augroup END
 
   function! ApplyBackground() abort
-    exe 'set background=' . GetCurrentBackground()
+    exe 'set background=' . s:get_current_background()
   endfunction
 
   function! ApplyColorScheme() abort
-    exe 'colorscheme' fnameescape(GetCurrentColorScheme())
+    exe 'colorscheme' fnameescape(s:get_current_color_scheme())
   endfunction
 
   if s:vim && s:windows | let &t_Co=256 | else | set termguicolors | endif
@@ -635,33 +635,33 @@ EOF
     autocmd ColorScheme * call ApplyColorSchemePatch()
   augroup END
 
-  function! ApplyThemeOptions() abort
+  function! s:apply_theme_options() abort
     for l:option in keys(g:THEME.options)
       exe 'let g:' . l:option . ' = "' . g:THEME.options[l:option] . '"'
     endfor
   endfunction
 
-  call ApplyThemeOptions()
+  call <sid>apply_theme_options()
 
-  function! CycleColorSchemes() abort
+  function! s:cycle_color_schemes() abort
     let g:THEME.current = g:THEME.current == len(s:themes) - 1 ? 0 : g:THEME.current + 1
     call ApplyColorScheme()
   endfunction
 
-  nnoremap <silent> <F5> :call CycleColorSchemes()<CR>
+  nnoremap <silent> <F5> :call <sid>cycle_color_schemes()<CR>
 
-  function! BackgroundToggle() abort
+  function! s:toggle_background() abort
     let &background = &background ==# 'dark' ? 'light' : 'dark'
     call ApplyColorScheme()
   endfunction
 
-  nnoremap <silent> <F6> :call BackgroundToggle()<CR>
+  nnoremap <silent> <F6> :call <sid>toggle_background()<CR>
 
   function! CycleThemeOptions() abort
-    let l:function = 's:' . GetCurrentColorScheme() . 'CycleOptions()'
+    let l:function = 's:' . s:get_current_color_scheme() . 'CycleOptions()'
     if !exists('*' . l:function) | return | endif
     exe 'call ' . l:function
-    call ApplyThemeOptions()
+    call <sid>apply_theme_options()
     call ApplyColorScheme()
   endfunction
 
