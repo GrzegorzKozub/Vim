@@ -73,7 +73,7 @@ EOF
         set columns=131 lines=36
         winpos 50 50
       else
-        " todo: configure for neovim
+        call s:set_window_position(50, 50, 2515, 1439)
       endif
     endif
   else
