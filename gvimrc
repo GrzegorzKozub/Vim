@@ -48,13 +48,15 @@
   if s:windows
 
     function! s:set_window_position(left, top, width, height) abort
+      if has('python3')
 python3 << EOF
 import vim;
 from ctypes import *;
 user32 = WinDLL('user32.dll');
 user32.SetWindowPos(user32.GetForegroundWindow(), 0, int(vim.eval('a:left')), int(vim.eval('a:top')), int(vim.eval('a:width')), int(vim.eval('a:height')), 0);
 EOF
-      sleep 1m
+        sleep 1m
+      endif
     endfunction
 
     set guifont=Fira\ Code\ Retina:h12
