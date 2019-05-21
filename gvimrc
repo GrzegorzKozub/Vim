@@ -78,14 +78,18 @@ EOF
         call s:set_window_position(50, 50, 2515, 1439)
       endif
     endif
+
   else
+
     set guifont=Fira\ Code\ Medium\ 12
-      if s:vim
-        set columns=100 lines=25
-        winpos 200 125
-      else
-        " todo: configure for neovim
-      endif
+
+    if s:vim
+      set columns=100 lines=25
+      winpos 200 125
+    else
+      " todo: configure for neovim
+    endif
+
   endif
 
 " }
