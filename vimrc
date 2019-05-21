@@ -146,6 +146,7 @@
   let &undodir = s:undo_dir
 
   if s:vim
+    set cursorline " not for neovim until https://github.com/neovim/neovim/issues/9019 is fixed
     set ttyfast
     let &viminfo = &viminfo . ',!,n' . s:data_dir . 'viminfo'
   endif

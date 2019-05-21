@@ -11,7 +11,6 @@
 " }
 " settings {
 
-  set cursorline
   set guioptions+=c
   set guioptions-=b
   set guioptions-=r
