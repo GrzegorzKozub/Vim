@@ -27,31 +27,36 @@
 " }
 " gui {
 
-  if s:vim && s:windows
+  "if s:vim && s:windows
     "set renderoptions=type:directx,gamma:1.8,contrast:0.5,level:0.5,geom:1,renmode:5,taamode:1
+  "endif
+
+  if s:windows
     set guifont=Fira\ Code\ Retina:h12
     let s:screen = eval(vimdows#get_screen())
     if s:screen.height == 1800 && s:screen.dpi == 240
-      set columns=127 lines=31
-      winpos 60 62
+      if s:vim
+        set columns=127 lines=31
+        winpos 60 62
+      else
+        " todo: configure for neovim
+      endif
     elseif s:screen.height == 2160 && s:screen.dpi == 192
-      set columns=131 lines=36
-      winpos 50 50
+      if s:vim
+        set columns=131 lines=36
+        winpos 50 50
+      else
+        " todo: configure for neovim
+      endif
     endif
-  endif
-
-  if s:vim && s:linux
+  else
     set guifont=Fira\ Code\ Medium\ 12
-    set columns=100 lines=25
-    winpos 200 125
-  endif
-
-  if s:neovim && s:windows
-    set guifont=Fira\ Code\ Retina:h12
-  endif
-
-  if s:neovim && s:linux
-    " todo: configure for neovim and linux
+      if s:vim
+        set columns=100 lines=25
+        winpos 200 125
+      else
+        " todo: configure for neovim
+      endif
   endif
 
 " }
@@ -92,6 +97,11 @@
   if s:vim
     unmap <C-F>
     unmap <C-H>
+  endif
+
+  if s:neovim
+    nnoremap <silent> <F10> :call GuiWindowMaximized(!g:GuiWindowMaximized)<CR>
+    nnoremap <silent> <F11> :call GuiWindowFullScreen(!g:GuiWindowFullScreen)<CR>
   endif
 
 " }
