@@ -139,6 +139,7 @@
   set softtabstop=2
   set spelllang=en_gb,pl
   set tabstop=2
+  set termguicolors
   set undofile
   set wildmode=list:longest
 
@@ -620,8 +621,6 @@ EOF
   function! ApplyColorScheme() abort
     exe 'colorscheme' fnameescape(s:get_current_color_scheme())
   endfunction
-
-  if s:vim && s:windows | let &t_Co=256 | else | set termguicolors | endif
 
   function! ApplyColorSchemePatch() abort
     let l:patch = g:themes_dir . '/patches/' . g:colors_name . '.vim'
