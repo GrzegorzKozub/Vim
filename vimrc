@@ -179,6 +179,18 @@
 
   let g:icons.space = ''
 
+  if s:linux
+    let g:icons.left_filled = ''
+    let g:icons.right_filled = ''
+    let g:icons.left_empty = ''
+    let g:icons.right_empty = ''
+
+    let g:icons.branch = ''
+    let g:icons.padlock = ''
+
+    let g:icons.space = ' '
+  endif
+
 " }
 " themes {
 
