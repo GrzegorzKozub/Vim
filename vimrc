@@ -157,11 +157,7 @@
   endif
 
   try
-    if s:neovim
-      rshada
-    else
-      rviminfo
-    endif
+    rviminfo " using rshada locks the g:THEME variable making it read-only
   catch | endtry
 
   scriptencoding 'utf-8'
