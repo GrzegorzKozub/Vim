@@ -79,17 +79,6 @@ EOF
       endif
     endif
 
-  else
-
-    set guifont=Fira\ Code\ Medium\ 12
-
-    if s:vim
-      set columns=100 lines=25
-      winpos 200 125
-    else
-      " todo: configure for neovim
-    endif
-
   endif
 
 " }
