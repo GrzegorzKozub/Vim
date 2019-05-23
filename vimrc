@@ -165,33 +165,6 @@
   if s:windows | language English_US | else | language en_US.utf8 | endif
 
 " }
-" icons {
-
-  let g:icons = { 'circle': '●', 'triangle': '▲', 'star': '*', 'vertical_bar': '│' }
-
-  let g:icons.left_filled = ''
-  let g:icons.right_filled = ''
-  let g:icons.left_empty = g:icons.vertical_bar
-  let g:icons.right_empty = g:icons.vertical_bar
-
-  let g:icons.branch = ''
-  let g:icons.padlock = ''
-
-  let g:icons.space = ''
-
-  if s:linux
-    let g:icons.left_filled = ''
-    let g:icons.right_filled = ''
-    let g:icons.left_empty = ''
-    let g:icons.right_empty = ''
-
-    let g:icons.branch = ''
-    let g:icons.padlock = ''
-
-    let g:icons.space = ' '
-  endif
-
-" }
 " themes {
 
   let s:themes = [ 'solarized', 'gruvbox', 'one' ]
@@ -245,8 +218,10 @@ EOF
     let g:ale_completion_enabled = 0
     let g:ale_lint_on_enter = 0
 
-    let g:ale_sign_error = g:icons.circle
-    let g:ale_sign_warning = g:icons.triangle
+    let g:ale_icons = { 'circle': '●', 'triangle': '▲' }
+
+    let g:ale_sign_error = g:ale_icons.circle
+    let g:ale_sign_warning = g:ale_icons.triangle
 
     function! GetAleCounts() abort
       return ale#statusline#Count(bufnr('%'))
@@ -329,6 +304,32 @@ EOF
   " lightline.vim {
     " configuration {
 
+      let g:lightline_icons = {
+        \ 'modified': '*',
+        \ 'left_filled': '',
+        \ 'right_filled': '',
+        \ 'left_empty': '│',
+        \ 'right_empty': '│',
+        \ 'branch': '',
+        \ 'padlock': '',
+        \ 'space': ''
+      \ }
+
+      let g:lightline_rich_icons = {
+        \ 'modified': '*',
+        \ 'left_filled': '',
+        \ 'right_filled': '',
+        \ 'left_empty': '',
+        \ 'right_empty': '',
+        \ 'branch': '',
+        \ 'padlock': '',
+        \ 'space': ' '
+      \ }
+
+      if s:linux
+        let g:lightline_icons = g:lightline_rich_icons
+      endif
+
       let g:lightline = {
         \ 'active': {
           \ 'left': [
@@ -383,12 +384,12 @@ EOF
           \ 't': 'TERMINAL'
         \ },
         \ 'separator': {
-          \ 'left': g:icons.left_filled,
-          \ 'right': g:icons.right_filled
+          \ 'left': g:lightline_icons.left_filled,
+          \ 'right': g:lightline_icons.right_filled
         \ },
         \ 'subseparator': {
-          \ 'left': g:icons.left_empty,
-          \ 'right': g:icons.right_empty
+          \ 'left': g:lightline_icons.left_empty,
+          \ 'right': g:lightline_icons.right_empty
         \ },
         \ 'enable': {
           \ 'tabline': 0
@@ -415,7 +416,7 @@ EOF
         if exists('*fugitive#head')
           let l:branch = fugitive#head()
           if l:branch !=# ''
-            return g:icons.branch . g:icons.space . l:branch
+            return g:lightline_icons.branch . g:lightline_icons.space . l:branch
           endif
           return ''
         endif
@@ -443,7 +444,7 @@ EOF
         if &filetype ==# 'help'
           return l:filename
         endif
-        return l:filename . (&readonly ? g:icons.space . g:icons.padlock : '') . (&modified ? ' ' . g:icons.star : '')
+        return l:filename . (&readonly ? g:lightline_icons.space . g:lightline_icons.padlock : '') . (&modified ? ' ' . g:lightline_icons.modified : '')
       endfunction
 
       function! LightLineFormatAleIcon(count, icon) abort
@@ -451,11 +452,11 @@ EOF
       endfunction
 
       function! LightLineAleError() abort
-        return LightLineFormatAleIcon(GetAleCounts().error, g:icons.circle)
+        return LightLineFormatAleIcon(GetAleCounts().error, g:ale_icons.circle)
       endfunction
 
       function! LightLineAleWarning() abort
-        return LightLineFormatAleIcon(GetAleCounts().warning, g:icons.triangle)
+        return LightLineFormatAleIcon(GetAleCounts().warning, g:ale_icons.triangle)
       endfunction
 
       function! LightLinePercent() abort

@@ -82,31 +82,20 @@ EOF
   endif
 
 " }
-" icons {
-
-  let g:icons.left_filled = ''
-  let g:icons.right_filled = ''
-  let g:icons.left_empty = ''
-  let g:icons.right_empty = ''
-
-  let g:icons.branch = ''
-  let g:icons.padlock = ''
-
-  let g:icons.space = ' '
-
-" }
 " plugins {
   " lightline.vim {
     " configuration {
 
+      let g:lightline_icons = g:lightline_rich_icons
+
       let g:lightline.separator = {
-        \ 'left': g:icons.left_filled,
-        \ 'right': g:icons.right_filled
+        \ 'left': g:lightline_icons.left_filled,
+        \ 'right': g:lightline_icons.right_filled
       \ }
 
       let g:lightline.subseparator = {
-        \ 'left': g:icons.left_empty,
-        \ 'right': g:icons.right_empty
+        \ 'left': g:lightline_icons.left_empty,
+        \ 'right': g:lightline_icons.right_empty
       \ }
 
       if s:neovim | call lightline#enable() | endif
