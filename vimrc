@@ -152,12 +152,8 @@
     let &viminfo = &viminfo . ',!,n' . s:data_dir . 'viminfo'
   endif
 
-  if s:neovim
-    if s:windows
-      let g:node_host_prog = substitute($LOCALAPPDATA, '\', '/', 'g') . '/Yarn/Data/global/node_modules/neovim/bin/cli.js'
-    else
-      " todo: configure for linux
-    endif
+  if s:neovim && s:windows
+    let g:node_host_prog = substitute($LOCALAPPDATA, '\', '/', 'g') . '/Yarn/Data/global/node_modules/neovim/bin/cli.js'
   endif
 
   try
