@@ -180,7 +180,7 @@ EOF
     endif
   endfunction
 
-  call <sid>init_theme()
+  call s:init_theme()
 
   function! s:set_default_theme_option(option, value) abort
     if !has_key(g:THEME.options, a:option)
@@ -223,7 +223,7 @@ EOF
     let g:ale_sign_error = g:ale_icons.circle
     let g:ale_sign_warning = g:ale_icons.triangle
 
-    function! GetAleCounts() abort
+    function! s:get_ale_counts() abort
       return ale#statusline#Count(bufnr('%'))
     endfunction
 
@@ -274,15 +274,15 @@ EOF
   " }
   " gruvbox {
 
-    function! s:gruvboxCycleOptions() abort
+    function! s:gruvbox_cycle_options() abort
       let l:values = [ 'soft', 'medium', 'hard' ]
       let l:option = &background ==# 'dark' ? 'gruvbox_contrast_dark' : 'gruvbox_contrast_light'
       let l:index = index(l:values, g:THEME.options[l:option])
       let g:THEME.options[l:option] = l:index == len(l:values) - 1 ? l:values[0] : l:values[l:index + 1]
     endfunction
 
-    call <sid>set_default_theme_option('gruvbox_contrast_dark', 'medium')
-    call <sid>set_default_theme_option('gruvbox_contrast_light', 'medium')
+    call s:set_default_theme_option('gruvbox_contrast_dark', 'medium')
+    call s:set_default_theme_option('gruvbox_contrast_light', 'medium')
 
     let g:gruvbox_bold = 0
     let g:gruvbox_italic = 0
@@ -353,13 +353,13 @@ EOF
           \ ]
         \ },
         \ 'component_function': {
-          \ 'fugitive': 'LightLineFugitive',
-          \ 'filename': 'LightLineFileName',
-          \ 'percent': 'LightLinePercent',
-          \ 'lineinfo': 'LightLineLineInfo',
-          \ 'fileencoding': 'LightLineFileEncoding',
-          \ 'fileformat': 'LightLineFileFormat',
-          \ 'filetype': 'LightLineFileType'
+          \ 'fugitive': 'g:LightLineFugitive',
+          \ 'filename': 'g:LightLineFileName',
+          \ 'percent': 'g:LightLinePercent',
+          \ 'lineinfo': 'g:LightLineLineInfo',
+          \ 'fileencoding': 'g:LightLineFileEncoding',
+          \ 'fileformat': 'g:LightLineFileFormat',
+          \ 'filetype': 'g:LightLineFileType'
         \ },
         \ 'component_expand': {
           \ 'aleerror': 'LightLineAleError',
@@ -399,7 +399,7 @@ EOF
     " }
     " component functions {
 
-      function! LightLineFugitive() abort
+      function! g:LightLineFugitive() abort
         if &filetype ==# 'help'
           return 'Help'
         elseif &filetype ==# 'Mundo'
@@ -423,7 +423,7 @@ EOF
         return ''
       endfunction
 
-      function! LightLineFileName() abort
+      function! g:LightLineFileName() abort
         if &filetype ==# 'Mundo'
           return 'Tree'
         elseif &filetype ==# 'MundoDiff'
@@ -447,35 +447,35 @@ EOF
         return l:filename . (&readonly ? g:lightline_icons.space . g:lightline_icons.padlock : '') . (&modified ? ' ' . g:lightline_icons.modified : '')
       endfunction
 
-      function! LightLineFormatAleIcon(count, icon) abort
+      function! g:LightLineFormatAleIcon(count, icon) abort
         return a:count > 0 ? a:icon . ' ' . a:count : ''
       endfunction
 
-      function! LightLineAleError() abort
-        return LightLineFormatAleIcon(GetAleCounts().error, g:ale_icons.circle)
+      function! g:LightLineAleError() abort
+        return LightLineFormatAleIcon(s:get_ale_counts().error, g:ale_icons.circle)
       endfunction
 
-      function! LightLineAleWarning() abort
-        return LightLineFormatAleIcon(GetAleCounts().warning, g:ale_icons.triangle)
+      function! g:LightLineAleWarning() abort
+        return LightLineFormatAleIcon(s:get_ale_counts().warning, g:ale_icons.triangle)
       endfunction
 
-      function! LightLinePercent() abort
+      function! g:LightLinePercent() abort
         return &filetype !~? 'Mundo\|MundoDiff' ? printf('%3d%%', (100 * line('.') / line('$'))) : ''
       endfunction
 
-      function! LightLineLineInfo() abort
+      function! g:LightLineLineInfo() abort
         return &filetype !~? 'Mundo\|MundoDiff' ? printf('%3d %3d', line('.'), col('.')) : ''
       endfunction
 
-      function! LightLineFileEncoding() abort
+      function! g:LightLineFileEncoding() abort
         return strlen(&fileencoding) > 0 && &filetype !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug' ? &fileencoding : ''
       endfunction
 
-      function! LightLineFileFormat() abort
+      function! g:LightLineFileFormat() abort
         return strlen(&fileformat) > 0 && &filetype !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug' && expand('%:t') !=# 'ControlP' ? &fileformat : ''
       endfunction
 
-      function! LightLineFileType() abort
+      function! g:LightLineFileType() abort
         return strlen(&filetype) > 0 && &filetype !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug' ? &filetype : ''
       endfunction
 
@@ -493,23 +493,23 @@ EOF
     " ctrlp.vim integration {
 
       let g:ctrlp_status_func = {
-        \ 'main': 'CtrlPStatusFuncMain',
-        \ 'prog': 'CtrlPStatusFuncProg',
+        \ 'main': 'g:CtrlPStatusFuncMain',
+        \ 'prog': 'g:CtrlPStatusFuncProg',
       \ }
 
-      function! CtrlPStatusFuncMain(focus, byfname, regex, prev, item, next, marked) abort
+      function! g:CtrlPStatusFuncMain(focus, byfname, regex, prev, item, next, marked) abort
         let g:lightline.ctrlp_item = a:item
         return lightline#statusline(0)
       endfunction
 
-      function! CtrlPStatusFuncProg(str) abort
+      function! g:CtrlPStatusFuncProg(str) abort
         return lightline#statusline(0)
       endfunction
 
     " }
     " reload on colorscheme change {
 
-      function! s:LightLineReload() abort
+      function! s:reload_lightline() abort
         if !exists('g:loaded_lightline')
           return
         endif
@@ -524,7 +524,7 @@ EOF
 
       augroup ReloadLightLineWhenColorSchemeChanges
         autocmd!
-        autocmd ColorScheme * call s:LightLineReload()
+        autocmd ColorScheme * call s:reload_lightline()
       augroup END
 
     " }
@@ -610,20 +610,20 @@ EOF
 " }
 " colorscheme {
 
-  function! HideTildeOnEmptyLines() abort
+  function! s:hide_tilde_on_empty_lines() abort
     highlight EndOfBuffer guifg=BG ctermfg=BG
   endfunction
 
   augroup HideTildeOnEmptyLinesWhenColorSchemeChanges
     autocmd!
-    autocmd ColorScheme * call HideTildeOnEmptyLines()
+    autocmd ColorScheme * call s:hide_tilde_on_empty_lines()
   augroup END
 
-  function! ApplyBackground() abort
+  function! s:apply_background() abort
     exe 'set background=' . s:get_current_background()
   endfunction
 
-  function! ApplyColorScheme() abort
+  function! s:apply_colorscheme() abort
     exe 'colorscheme' fnameescape(s:get_current_color_scheme())
   endfunction
 
@@ -645,34 +645,34 @@ EOF
     endfor
   endfunction
 
-  call <sid>apply_theme_options()
+  call s:apply_theme_options()
 
   function! s:cycle_color_schemes() abort
     let g:THEME.current = g:THEME.current == len(s:themes) - 1 ? 0 : g:THEME.current + 1
-    call ApplyColorScheme()
+    call s:apply_colorscheme()
   endfunction
 
   nnoremap <silent> <F5> :call <sid>cycle_color_schemes()<CR>
 
   function! s:toggle_background() abort
     let &background = &background ==# 'dark' ? 'light' : 'dark'
-    call ApplyColorScheme()
+    call s:apply_colorscheme()
   endfunction
 
   nnoremap <silent> <F6> :call <sid>toggle_background()<CR>
 
-  function! CycleThemeOptions() abort
-    let l:function = 's:' . s:get_current_color_scheme() . 'CycleOptions()'
+  function! s:cycle_theme_options() abort
+    let l:function = 's:' . s:get_current_color_scheme() . '_cycle_options()'
     if !exists('*' . l:function) | return | endif
     exe 'call ' . l:function
-    call <sid>apply_theme_options()
-    call ApplyColorScheme()
+    call s:apply_theme_options()
+    call s:apply_colorscheme()
   endfunction
 
-  nnoremap <silent> <F7> :call CycleThemeOptions()<CR>
+  nnoremap <silent> <F7> :call <sid>cycle_theme_options()<CR>
 
-  call ApplyBackground()
-  call ApplyColorScheme()
+  call s:apply_background()
+  call s:apply_colorscheme()
 
 " }
 " terminal {
@@ -740,15 +740,15 @@ EOF
   command! SpellToggle set spell!
   nnoremap <silent> <Leader>s :SpellToggle<CR>
 
-  function! ToggleList(kind, prefix) abort
+  function! s:toggle_list(kind, prefix) abort
     redir => l:buffers
     silent! buffers
     redir END
     exe a:prefix . (l:buffers =~# '\[' . a:kind . ' List\]' ? 'close' : 'open')
   endfunction
 
-  nnoremap <silent> <Leader>l :call ToggleList('Location', 'l')<CR>
-  nnoremap <silent> <Leader>q :call ToggleList('Quickfix', 'c')<CR>
+  nnoremap <silent> <Leader>l :call <sid>toggle_list('Location', 'l')<CR>
+  nnoremap <silent> <Leader>q :call <sid>toggle_list('Quickfix', 'c')<CR>
 
 " }
 " diff and merge {
@@ -758,15 +758,15 @@ EOF
     autocmd VimResized * if &diff | wincmd = | endif
   augroup END
 
-  function! VimDiff() abort
+  function! s:vim_diff() abort
     let s:ft = &filetype
     windo if (winnr() != 1 && &ft == '') | :silent! exe 'set ft=' . s:ft | endif
     wincmd =
   endfunction
 
-  command! VimDiff call VimDiff()
+  command! VimDiff call <sid>vim_diff()
 
-  function! VimMerge() abort
+  function! s:vim_merge() abort
     let s:ft = &filetype
     windo if (winnr() != 1 && &ft == '') | :silent! exe 'set ft=' . s:ft | endif
     wincmd b
@@ -775,7 +775,7 @@ EOF
     diffupdate
   endfunction
 
-  command! VimMerge call VimMerge()
+  command! VimMerge call <sid>vim_merge()
 
   command! -nargs=* DiffGet :diffget <args> | :diffupdate
   nnoremap <silent> <Leader>d1 :DiffGet 1<CR>
