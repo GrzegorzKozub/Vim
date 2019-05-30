@@ -138,10 +138,13 @@
   set smarttab
   set softtabstop=2
   set spelllang=en_gb,pl
+  set splitbelow
+  set splitright
   set tabstop=2
   set termguicolors
+  set ttimeoutlen=50
   set undofile
-  set wildmode=list:longest
+  set wildmode=longest:full,full
 
   let &backupdir = s:backup_dir
   let &undodir = s:undo_dir
@@ -537,8 +540,12 @@ EOF
   " netrw {
 
     let g:netrw_banner = 0
+    let g:netrw_browse_split = 4
     let g:netrw_home = s:state_dir . 'netrw'
     let g:netrw_localcopycmd = 'copy'
+    let g:netrw_winsize = 30
+
+    noremap <silent> <Leader>e :Lexplore<CR>
 
   " }
   " typescript-vim {
