@@ -68,7 +68,7 @@
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
   Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
-  Plug 'mattn/emmet-vim'
+  Plug 'mattn/emmet-vim', { 'for': [ 'css', 'html' ] }
   Plug 'mhinz/vim-grepper'
   Plug 'mileszs/ack.vim'
   Plug 'moll/vim-node'
