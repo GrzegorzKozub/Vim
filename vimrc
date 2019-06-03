@@ -50,6 +50,7 @@
   let g:themes_dir = s:unmanaged_dir . 'themes'
   Plug g:themes_dir
 
+  Plug 'romainl/flattened'
   Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
   Plug 'chr4/nginx.vim', { 'for': 'nginx' }
   Plug 'ctrlpvim/ctrlp.vim'
@@ -540,12 +541,10 @@ EOF
   " netrw {
 
     let g:netrw_banner = 0
-    let g:netrw_browse_split = 4
     let g:netrw_home = s:state_dir . 'netrw'
     let g:netrw_localcopycmd = 'copy'
-    let g:netrw_winsize = 30
 
-    noremap <silent> <Leader>e :Lexplore<CR>
+    noremap <silent> <Leader>e :Explore<CR>
 
   " }
   " typescript-vim {
