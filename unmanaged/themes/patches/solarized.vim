@@ -27,7 +27,7 @@ exec 'hi NonText guifg=' . s:base01 . ' gui=NONE cterm=NONE'
 exec 'hi Normal guibg=' . s:base03
 exec 'hi StatusLine guibg=' . s:base03 . ' gui=NONE cterm=NONE'
 exec 'hi StatusLineNC guifg=' . s:base03
-exec 'hi Todo guifg=' . s:yellow
+exec 'hi Todo guifg=' . s:base01 . ' gui=NONE cterm=NONE'
 exec 'hi VertSplit guifg=' . s:base03 . ' guibg=' . s:base03
 exec 'hi Visual guifg=NONE guibg=' . s:base02 . ' gui=NONE cterm=NONE'
 

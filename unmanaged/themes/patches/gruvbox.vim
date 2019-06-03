@@ -10,6 +10,9 @@ let s:gb.light0_hard    = '#f9f5d7'
 let s:gb.light0_soft    = '#f2e5bc'
 let s:gb.light4         = '#a89984'
 
+let s:gb.gray_245       = '#928374'
+let s:gb.gray_244       = '#928374'
+
 let s:gb.bright_blue    = '#83a598'
 let s:gb.bright_green   = '#b8bb26'
 let s:gb.bright_red     = '#fb4934'
@@ -31,6 +34,8 @@ if &background ==# 'dark'
 
   let s:fg4    = s:gb.light4
 
+  let s:gray   = s:gb.gray_245
+
   let s:blue   = s:gb.bright_blue
   let s:green  = s:gb.bright_green
   let s:red    = s:gb.bright_red
@@ -47,6 +52,8 @@ else
 
   let s:fg4    = s:gb.dark4
 
+  let s:gray   = s:gb.gray_244
+
   let s:blue   = s:gb.neutral_blue
   let s:green  = s:gb.neutral_green
   let s:red    = s:gb.neutral_red
@@ -57,7 +64,7 @@ endif
 exec 'hi CursorLineNr guifg=' . s:fg4
 exec 'hi ErrorMsg guifg=' . s:red . ' guibg=NONE'
 exec 'hi StatusLineNC guifg=' . s:bg0
-exec 'hi Todo guifg=' . s:yellow . ' gui=NONE'
+exec 'hi Todo guifg=' . s:gray . ' gui=NONE'
 exec 'hi VertSplit guifg=' . s:bg0
 
 hi Error gui=NONE cterm=NONE
