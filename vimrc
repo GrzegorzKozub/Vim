@@ -189,11 +189,7 @@ EOF
   function! s:set_default_theme_option(option, value) abort
     if !has_key(g:THEME.options, a:option)
       let g:THEME.options[a:option] = a:value
-      if s:neovim
-        wshada
-      else
-        wviminfo
-      endif
+      wviminfo " wshada is reported as error by vim-vimlparser
     endif
   endfunction
 
