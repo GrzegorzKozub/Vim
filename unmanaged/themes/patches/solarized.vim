@@ -32,6 +32,7 @@ exec 'hi VertSplit guifg=' . s:base03 . ' guibg=' . s:base03
 exec 'hi Visual guifg=NONE guibg=' . s:base02 . ' gui=NONE cterm=NONE'
 
 hi Comment gui=NONE
+hi Error gui=NONE cterm=NONE
 hi ErrorMsg gui=NONE cterm=NONE
 hi Folded gui=NONE cterm=NONE
 hi htmlSpecialTagName gui=NONE
