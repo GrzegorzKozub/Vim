@@ -50,6 +50,7 @@
   let g:themes_dir = s:unmanaged_dir . 'themes'
   Plug g:themes_dir
 
+  Plug 'arcticicestudio/nord-vim'
   Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
   Plug 'chr4/nginx.vim', { 'for': 'nginx' }
   Plug 'ctrlpvim/ctrlp.vim'
@@ -170,7 +171,7 @@
 " }
 " themes {
 
-  let s:themes = [ 'solarized', 'gruvbox', 'one' ]
+  let s:themes = [ 'solarized', 'gruvbox', 'nord', 'one' ]
 
   function! s:init_theme() abort
     if exists('g:THEME') | return | endif
@@ -298,6 +299,15 @@ EOF
 
     nnoremap <silent> <Leader>mp :MarkdownPreview<CR>
     nnoremap <silent> <Leader>mps :MarkdownPreviewStop<CR>
+
+  " }
+  " nord-vim {
+
+    let g:nord_bold = 0
+    let g:nord_italic = 0
+    let g:nord_underline = 0
+
+    let g:nord_cursor_line_number_background = 1
 
   " }
   " lightline.vim {
