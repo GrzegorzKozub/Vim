@@ -50,7 +50,6 @@
   let g:themes_dir = s:unmanaged_dir . 'themes'
   Plug g:themes_dir
 
-  Plug 'romainl/flattened'
   Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
   Plug 'chr4/nginx.vim', { 'for': 'nginx' }
   Plug 'ctrlpvim/ctrlp.vim'
