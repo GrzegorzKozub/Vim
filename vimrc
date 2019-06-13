@@ -612,7 +612,7 @@ EOF
 " colorscheme {
 
   function! s:hide_tilde_on_empty_lines() abort
-    highlight EndOfBuffer guifg=BG ctermfg=BG
+    highlight EndOfBuffer guifg=BG
   endfunction
 
   augroup HideTildeOnEmptyLinesWhenColorSchemeChanges
