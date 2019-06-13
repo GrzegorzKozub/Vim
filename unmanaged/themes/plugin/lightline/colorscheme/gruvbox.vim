@@ -16,10 +16,10 @@ let s:red    = s:GetGruvboxColor('GruvboxRed')
 let s:yellow = s:GetGruvboxColor('GruvboxYellow')
 
 let s:p.normal.left     = [ [ s:bg0, s:gray ], [ s:bg0, s:bg3 ] ]
-let s:p.normal.middle   = [ [ s:gray, s:bg1 ] ]
+let s:p.normal.middle   = [ [ s:bg3, s:bg0 ] ]
 let s:p.normal.right    = s:p.normal.left
 
-let s:p.inactive.left   = [ [ s:bg3, s:bg1 ], [ s:bg3, s:bg1 ] ]
+let s:p.inactive.left   = [ [ s:bg3, s:bg0 ], [ s:bg3, s:bg0 ] ]
 let s:p.inactive.middle = s:p.inactive.left
 let s:p.inactive.right  = s:p.inactive.left
 

@@ -23,10 +23,10 @@ if &background ==# 'light'
 endif
 
 let s:p.normal.left     = [ [ s:base03, s:base00 ], [ s:base03, s:base01 ] ]
-let s:p.normal.middle   = [ [ s:base00, s:base02 ] ]
+let s:p.normal.middle   = [ [ s:base01, s:base03 ] ]
 let s:p.normal.right    = s:p.normal.left
 
-let s:p.inactive.left   = [ [ s:base01, s:base02 ], [ s:base01, s:base02 ] ]
+let s:p.inactive.left   = [ [ s:base01, s:base03 ], [ s:base01, s:base03 ] ]
 let s:p.inactive.middle = s:p.inactive.left
 let s:p.inactive.right  = s:p.inactive.left
 

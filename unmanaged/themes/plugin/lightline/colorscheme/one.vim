@@ -14,9 +14,9 @@ if &background ==# 'light'
     let s:syntax_cursor = '#f0f0f0'
 
     let s:p.normal.left    = [ [ s:syntax_bg, s:mono_3 ], [ s:syntax_bg, s:mono_4 ] ]
-    let s:p.normal.middle  = [ [ s:mono_3, s:syntax_cursor ] ]
+    let s:p.normal.middle  = [ [ s:mono_3, s:syntax_bg ] ]
 
-    let s:p.inactive.left  = [ [ s:mono_4, s:syntax_cursor ], [ s:mono_4, s:syntax_cursor ] ]
+    let s:p.inactive.left  = [ [ s:mono_4, s:syntax_bg ], [ s:mono_4, s:syntax_bg ] ]
 
     let s:p.insert.left    = [ [ s:syntax_bg, s:hue_1 ], [ s:syntax_bg, s:mono_4 ] ]
     let s:p.replace.left   = [ [ s:syntax_bg, s:hue_5 ], [ s:syntax_bg, s:mono_4 ] ]
@@ -39,9 +39,9 @@ else
     let s:syntax_cursor = '#2c323c'
 
     let s:p.normal.left    = [ [ s:syntax_bg, s:mono_2 ], [ s:syntax_bg, s:mono_3 ] ]
-    let s:p.normal.middle  = [ [ s:mono_2, s:syntax_cursor ] ]
+    let s:p.normal.middle  = [ [ s:mono_3, s:syntax_bg ] ]
 
-    let s:p.inactive.left  = [ [ s:mono_3, s:syntax_cursor ], [ s:mono_3, s:syntax_cursor ] ]
+    let s:p.inactive.left  = [ [ s:mono_3, s:syntax_bg ], [ s:mono_3, s:syntax_bg ] ]
 
     let s:p.insert.left    = [ [ s:syntax_bg, s:hue_1 ], [ s:syntax_bg, s:mono_3 ] ]
     let s:p.replace.left   = [ [ s:syntax_bg, s:hue_5_2 ], [ s:syntax_bg, s:mono_3 ] ]
