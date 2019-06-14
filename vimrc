@@ -173,7 +173,7 @@
 
   function! s:init_theme() abort
     if exists('g:THEME') | return | endif
-    let g:THEME = { 'colorscheme': 0, 'background': 'light', 'options': {} }
+    let g:THEME = { 'colorscheme': 0, 'background': 'light' }
     if has('python3')
 python3 << EOF
 import vim, random;
@@ -183,13 +183,6 @@ EOF
   endfunction
 
   call s:init_theme()
-
-  function! s:set_default_theme_option(option, value) abort
-    if !has_key(g:THEME.options, a:option)
-      let g:THEME.options[a:option] = a:value
-      wviminfo " wshada is reported as error by vim-vimlparser
-    endif
-  endfunction
 
   function! s:get_current_color_scheme() abort
     return s:themes[g:THEME.colorscheme]
@@ -271,16 +264,6 @@ EOF
 
   " }
   " gruvbox {
-
-    function! s:gruvbox_cycle_options() abort
-      let l:values = [ 'soft', 'medium', 'hard' ]
-      let l:option = &background ==# 'dark' ? 'gruvbox_contrast_dark' : 'gruvbox_contrast_light'
-      let l:index = index(l:values, g:THEME.options[l:option])
-      let g:THEME.options[l:option] = l:index == len(l:values) - 1 ? l:values[0] : l:values[l:index + 1]
-    endfunction
-
-    call s:set_default_theme_option('gruvbox_contrast_dark', 'medium')
-    call s:set_default_theme_option('gruvbox_contrast_light', 'medium')
 
     let g:gruvbox_bold = 0
     let g:gruvbox_italic = 0
@@ -637,14 +620,6 @@ EOF
     autocmd ColorScheme * call ApplyColorSchemePatch()
   augroup END
 
-  function! s:apply_theme_options() abort
-    for l:option in keys(g:THEME.options)
-      exe 'let g:' . l:option . ' = "' . g:THEME.options[l:option] . '"'
-    endfor
-  endfunction
-
-  call s:apply_theme_options()
-
   function! s:cycle_color_schemes() abort
     let g:THEME.colorscheme = g:THEME.colorscheme == len(s:themes) - 1 ? 0 : g:THEME.colorscheme + 1
     call s:apply_colorscheme()
@@ -658,16 +633,6 @@ EOF
   endfunction
 
   nnoremap <silent> <F6> :call <sid>toggle_background()<CR>
-
-  function! s:cycle_theme_options() abort
-    let l:function = 's:' . s:get_current_color_scheme() . '_cycle_options()'
-    if !exists('*' . l:function) | return | endif
-    exe 'call ' . l:function
-    call s:apply_theme_options()
-    call s:apply_colorscheme()
-  endfunction
-
-  nnoremap <silent> <F7> :call <sid>cycle_theme_options()<CR>
 
   call s:apply_background()
   call s:apply_colorscheme()
