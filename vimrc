@@ -58,7 +58,6 @@
   Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
   Plug 'elixir-editors/vim-elixir', { 'for': [ 'elixir', 'eelixir' ] }
   Plug 'elzr/vim-json', { 'for': 'json' }
-  Plug 'ericbn/vim-solarized'
   Plug 'fatih/vim-go', { 'for': 'go' }
   Plug 'groenewege/vim-less', { 'for': 'less' }
   Plug 'GrzegorzKozub/vim-elixirls', { 'do': ':ElixirLsCompileSync' }
@@ -68,6 +67,7 @@
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
   Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+  Plug 'lifepillar/vim-solarized8'
   Plug 'mattn/emmet-vim', { 'for': [ 'css', 'html' ] }
   Plug 'mhinz/vim-grepper'
   Plug 'mileszs/ack.vim'
@@ -169,7 +169,7 @@
 " }
 " themes {
 
-  let s:themes = [ 'solarized', 'gruvbox' ]
+  let s:themes = [ 'solarized8', 'gruvbox' ]
 
   function! s:init_theme() abort
     if exists('g:THEME') | return | endif
@@ -547,13 +547,6 @@ EOF
     let g:typescript_compiler_options = ''
 
   " }
-  " vim-colors-solarized {
-
-    let g:solarized_bold = 0
-    let g:solarized_underline = 0
-    let g:solarized_italic = 0
-
-  " }
   " vim-dispatch {
 
     noremap <silent> <Leader>m :Make<CR>
@@ -605,6 +598,11 @@ EOF
     let g:mundo_width = 40
 
     noremap <silent> <Leader>u :MundoToggle<CR>
+
+  " }
+  " vim-solarized8 {
+
+    let g:solarized_italics = 0
 
   " }
 " }
