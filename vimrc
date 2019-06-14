@@ -67,12 +67,12 @@
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
   Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+  Plug 'lifepillar/vim-gruvbox8'
   Plug 'lifepillar/vim-solarized8'
   Plug 'mattn/emmet-vim', { 'for': [ 'css', 'html' ] }
   Plug 'mhinz/vim-grepper'
   Plug 'mileszs/ack.vim'
   Plug 'moll/vim-node'
-  Plug 'morhetz/gruvbox'
   Plug 'mxw/vim-jsx'
   Plug 'nelstrom/vim-visual-star-search'
   Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
@@ -169,7 +169,7 @@
 " }
 " themes {
 
-  let s:themes = [ 'solarized8', 'gruvbox' ]
+  let s:themes = [ 'solarized8', 'gruvbox8_soft' ]
 
   function! s:init_theme() abort
     if exists('g:THEME') | return | endif
@@ -261,19 +261,6 @@ EOF
     nnoremap <silent> <C-f>g :GFiles<CR>
     nnoremap <silent> <C-f>b :Buffers<CR>
     nnoremap <silent> <C-f>k :History<CR>
-
-  " }
-  " gruvbox {
-
-    let g:gruvbox_bold = 0
-    let g:gruvbox_italic = 0
-    let g:gruvbox_underline = 0
-
-    let g:gruvbox_invert_selection = 0
-    let g:gruvbox_italicize_comments = 0
-
-    let g:gruvbox_sign_column = 'bg0'
-    let g:gruvbox_vert_split = 'bg0'
 
   " }
   " markdown-preview.nvim {
@@ -547,6 +534,12 @@ EOF
 
     let g:grepper = {}
     let g:grepper.highlight = 1
+
+  " }
+  " vim-gruvbox8 {
+
+    let g:gruvbox_italics = 0
+    let g:gruvbox_italicize_strings = 0
 
   " }
   " vim-javascript {
