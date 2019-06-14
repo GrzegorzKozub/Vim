@@ -173,11 +173,11 @@
 
   function! s:init_theme() abort
     if exists('g:THEME') | return | endif
-    let g:THEME = { 'current': 0, 'options': {} }
+    let g:THEME = { 'colorscheme': 0, 'background': 'light', 'options': {} }
     if has('python3')
 python3 << EOF
 import vim, random;
-vim.command("let g:THEME.current = %s" % random.randint(0, int(vim.eval("len(s:themes)")) - 1));
+vim.command("let g:THEME.colorscheme = %s" % random.randint(0, int(vim.eval("len(s:themes)")) - 1));
 EOF
     endif
   endfunction
@@ -192,11 +192,11 @@ EOF
   endfunction
 
   function! s:get_current_color_scheme() abort
-    return s:themes[g:THEME.current]
+    return s:themes[g:THEME.colorscheme]
   endfunction
 
   function! s:get_current_background() abort
-    return (strftime('%H') > 6 && strftime('%H') < 18) ? 'light' : 'dark'
+    return g:THEME.background
   endfunction
 
 " }
@@ -646,15 +646,15 @@ EOF
   call s:apply_theme_options()
 
   function! s:cycle_color_schemes() abort
-    let g:THEME.current = g:THEME.current == len(s:themes) - 1 ? 0 : g:THEME.current + 1
+    let g:THEME.colorscheme = g:THEME.colorscheme == len(s:themes) - 1 ? 0 : g:THEME.colorscheme + 1
     call s:apply_colorscheme()
   endfunction
 
   nnoremap <silent> <F5> :call <sid>cycle_color_schemes()<CR>
 
   function! s:toggle_background() abort
-    let &background = &background ==# 'dark' ? 'light' : 'dark'
-    call s:apply_colorscheme()
+    let g:THEME.background = g:THEME.background ==# 'dark' ? 'light' : 'dark'
+    call s:apply_background()
   endfunction
 
   nnoremap <silent> <F6> :call <sid>toggle_background()<CR>
