@@ -29,11 +29,12 @@ exec 'hi Folded guifg=' . s:base00 . ' guibg=' . s:base03 . ' gui=NONE cterm=NON
 exec 'hi LineNr guibg=' . s:base03
 exec 'hi SignColumn guibg=' . s:base03
 exec 'hi SpecialKey guifg=' . s:cyan . ' gui=NONE cterm=NONE'
-exec 'hi StatusLine guibg=' . s:base03 . ' gui=NONE cterm=NONE'
+exec 'hi StatusLine guifg=' . s:base01 . ' guibg=' . s:base03 . ' gui=NONE cterm=NONE'
 exec 'hi StatusLineNC guifg=' . s:base03
 exec 'hi Todo guifg=' . s:base01 . ' gui=NONE cterm=NONE'
 exec 'hi VertSplit guifg=' . s:base03 . ' guibg=' . s:base03
 exec 'hi Visual guifg=NONE guibg=' . s:base02 . ' gui=NONE cterm=NONE'
+exec 'hi WildMenu guifg=' . s:base0 . ' guibg=' . s:base03 . ' gui=NONE cterm=NONE'
 
 hi Error gui=NONE cterm=NONE
 hi ErrorMsg gui=NONE cterm=NONE
