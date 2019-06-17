@@ -169,7 +169,7 @@
 " }
 " themes {
 
-  let s:themes = [ 'solarized8', 'gruvbox8_soft' ]
+  let s:themes = [ 'solarized8', 'gruvbox8' ]
 
   function! s:init_theme() abort
     if exists('g:THEME') | return | endif
