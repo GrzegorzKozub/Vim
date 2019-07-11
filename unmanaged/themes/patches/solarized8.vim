@@ -24,6 +24,7 @@ if &background ==# 'light'
   let [ s:base00, s:base0 ] = [ s:base0, s:base00 ]
 endif
 
+exec 'hi ALEWarningSign guifg=' . s:yellow
 exec 'hi CursorLineNr guifg=' . s:base0 . ' guibg=' . s:base02 . ' gui=NONE cterm=NONE'
 exec 'hi Folded guifg=' . s:base00 . ' guibg=' . s:base03 . ' gui=NONE cterm=NONE'
 exec 'hi LineNr guibg=' . s:base03

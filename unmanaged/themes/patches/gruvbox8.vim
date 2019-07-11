@@ -46,6 +46,7 @@ else
   let s:orange = '#AF3A03'
 endif
 
+exec 'hi ALEWarningSign guifg=' . s:yellow
 exec 'hi CursorLineNr guifg=' . s:bg4
 exec 'hi ErrorMsg guifg=' . s:red . ' guibg=' . s:bg0 . ' gui=NONE cterm=NONE'
 exec 'hi Folded guifg=' . s:bg4 . ' guibg=' . s:bg0
