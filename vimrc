@@ -110,6 +110,7 @@
   set autoread
   set backup
   set belloff=all
+  set diffopt+=algorithm:histogram,indent-heuristic,context:3
   set encoding=utf-8
   set expandtab
   set fillchars+=vert:\  " intentional trailing whitespace
