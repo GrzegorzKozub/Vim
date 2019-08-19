@@ -64,8 +64,6 @@
   Plug 'hail2u/vim-css3-syntax', { 'for': [ 'css', 'less', 'scss' ] }
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
   Plug 'itchyny/lightline.vim'
-  Plug 'junegunn/fzf'
-  Plug 'junegunn/fzf.vim'
   Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
   Plug 'lifepillar/vim-gruvbox8'
   Plug 'lifepillar/vim-solarized8'
@@ -252,16 +250,6 @@ EOF
       autocmd!
       autocmd FileType html,css EmmetInstall
     augroup END
-
-  " }
-  " fzf.vim {
-
-    let g:fzf_layout = { 'down': '~33%' }
-
-    nnoremap <silent> <C-f>f :Files<CR>
-    nnoremap <silent> <C-f>g :GFiles<CR>
-    nnoremap <silent> <C-f>b :Buffers<CR>
-    nnoremap <silent> <C-f>k :History<CR>
 
   " }
   " markdown-preview.nvim {
