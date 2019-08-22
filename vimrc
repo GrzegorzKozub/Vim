@@ -108,7 +108,11 @@
   set autoread
   set backup
   set belloff=all
-  set diffopt+=algorithm:histogram,indent-heuristic,context:3
+
+  if has('nvim-0.3.2') || has('patch-8.1.0360')
+    set diffopt+=algorithm:histogram,indent-heuristic,context:3
+  endif
+
   set encoding=utf-8
   set expandtab
   set fillchars+=vert:\  " intentional trailing whitespace
