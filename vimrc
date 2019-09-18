@@ -161,6 +161,14 @@
     let g:node_host_prog = substitute($LOCALAPPDATA, '\', '/', 'g') . '/Yarn/Data/global/node_modules/neovim/bin/cli.js'
   endif
 
+  if s:linux
+    " https://github.com/mintty/mintty/wiki/Tips#mode-dependent-cursor-in-vim
+    let &t_ti .= '\e[1 q'
+    let &t_si .= '\e[5 q'
+    let &t_ei .= '\e[1 q'
+    let &t_te .= '\e[0 q'
+  endif
+
   try
     rviminfo " using rshada locks the g:THEME variable making it read-only
   catch | endtry
