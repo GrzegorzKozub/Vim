@@ -158,7 +158,7 @@
   endif
 
   if s:neovim && s:windows
-    let g:node_host_prog = substitute($LOCALAPPDATA, '\', '/', 'g') . '/Yarn/Data/global/node_modules/neovim/bin/cli.js'
+    let g:node_host_prog = substitute($APPDATA, '\', '/', 'g') . '/npm/node_modules/neovim/bin/cli.js'
   endif
 
   if s:linux
