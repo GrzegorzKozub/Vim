@@ -25,10 +25,12 @@ if &background ==# 'light'
 endif
 
 exec 'hi ALEWarningSign guifg=' . s:yellow
+exec 'hi Cursor guifg=' . s:base03 . ' guibg=' . s:orange
 exec 'hi CursorLineNr guifg=' . s:base0 . ' guibg=' . s:base02 . ' gui=NONE cterm=NONE'
 exec 'hi Folded guifg=' . s:base00 . ' guibg=' . s:base03 . ' gui=NONE cterm=NONE'
 exec 'hi LineNr guibg=' . s:base03
 exec 'hi SignColumn guibg=' . s:base03
+exec 'hi MatchParen guifg=' . s:orange . ' gui=NONE cterm=NONE'
 exec 'hi SpecialKey guifg=' . s:cyan . ' gui=NONE cterm=NONE'
 exec 'hi StatusLine guifg=' . s:base01 . ' guibg=' . s:base03 . ' gui=NONE cterm=NONE'
 exec 'hi StatusLineNC guifg=' . s:base03
@@ -37,9 +39,8 @@ exec 'hi VertSplit guifg=' . s:base03 . ' guibg=' . s:base03
 exec 'hi Visual guifg=NONE guibg=' . s:base02 . ' gui=NONE cterm=NONE'
 exec 'hi WildMenu guifg=' . s:base0 . ' guibg=' . s:base03 . ' gui=NONE cterm=NONE'
 
-hi Error gui=NONE cterm=NONE
-hi ErrorMsg gui=NONE cterm=NONE
-hi MatchParen gui=NONE cterm=NONE
+hi Error gui=NONE cterm=NONE guibg=NONE
+hi ErrorMsg gui=NONE cterm=NONE guibg=NONE
 hi NonText gui=NONE cterm=NONE
 hi Question gui=NONE cterm=NONE
 hi WarningMsg gui=NONE cterm=NONE
