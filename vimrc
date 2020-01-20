@@ -162,11 +162,18 @@
   endif
 
   if s:linux
+
     " https://github.com/mintty/mintty/wiki/Tips#mode-dependent-cursor-in-vim
     let &t_EI .= "\e[1 q"
     let &t_SI .= "\e[5 q"
     let &t_te .= "\e[0 q"
     let &t_ti .= "\e[1 q"
+
+    if &term ==# 'tmux-256color'
+      let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+      let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    endif
+
   endif
 
   try
