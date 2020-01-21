@@ -170,8 +170,17 @@
     let &t_ti .= "\e[1 q"
 
     if &term ==# 'tmux-256color'
+
+      " unbreak termguicolors under tmux
       let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
       let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+      " unbreak ctrl+arrows under tmux
+      exe "set <xUp>=\e[1;*A"
+      exe "set <xDown>=\e[1;*B"
+      exe "set <xRight>=\e[1;*C"
+      exe "set <xLeft>=\e[1;*D"
+
     endif
 
   endif
