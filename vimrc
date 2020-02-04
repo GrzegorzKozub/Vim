@@ -52,7 +52,6 @@
 
   Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
   Plug 'chr4/nginx.vim', { 'for': 'nginx' }
-  Plug 'ctrlpvim/ctrlp.vim'
   Plug 'digitaltoad/vim-pug', { 'for': 'pug' }
   Plug 'editorconfig/editorconfig-vim'
   Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
@@ -64,6 +63,7 @@
   Plug 'hail2u/vim-css3-syntax', { 'for': [ 'css', 'less', 'scss' ] }
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
   Plug 'itchyny/lightline.vim'
+  Plug 'junegunn/fzf.vim'
   Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
   Plug 'lifepillar/vim-gruvbox8'
   Plug 'lifepillar/vim-solarized8'
@@ -261,15 +261,6 @@ EOF
 
     " }
   " }
-  " ctrlp.vim {
-
-    let g:ctrlp_cache_dir = s:state_dir . 'ctrlp.vim'
-
-    nnoremap <silent> <C-p> :CtrlP<CR>
-    nnoremap <silent> <C-b> :CtrlPBuffer<CR>
-    nnoremap <silent> <C-k> :CtrlPMRUFiles<CR>
-
-  " }
   " emmet-vim {
 
     let g:user_emmet_install_global = 0
@@ -278,6 +269,48 @@ EOF
       autocmd!
       autocmd FileType html,css EmmetInstall
     augroup END
+
+  " }
+  " fzf-vim {
+
+    let g:fzf_colors = {
+      \ 'bg':      [ 'bg', 'Normal' ],
+      \ 'bg+':     [ 'bg', 'Normal' ],
+      \ 'fg':      [ 'fg', 'Comment' ],
+      \ 'fg+':     [ 'fg', 'Normal' ],
+      \ 'header':  [ 'fg', 'Keyword' ],
+      \ 'hl':      [ 'fg', 'IncSearch' ],
+      \ 'hl+':     [ 'fg', 'IncSearch' ],
+      \ 'info':    [ 'fg', 'Comment' ],
+      \ 'marker':  [ 'fg', 'Identifier' ],
+      \ 'pointer': [ 'fg', 'Identifier' ],
+      \ 'prompt':  [ 'fg', 'Comment' ]
+    \ }
+
+    let s:fzf_options = [ '--no-info', '--prompt' ]
+
+    command! -bang -nargs=? -complete=dir Buffers
+      \ call fzf#vim#buffers(<q-args>, { 'options': s:fzf_options + [ 'BUFFERS  ' ] }, <bang>0)
+    nnoremap <silent> <Leader>fb :Buffers<CR>
+    nnoremap <silent> <C-b> :Buffers<CR>
+
+    command! -bang -nargs=? -complete=dir Files
+      \ call fzf#vim#files(<q-args>, { 'options': s:fzf_options + [ 'FILES  ' ] }, <bang>0)
+    nnoremap <silent> <Leader>ff :Files<CR>
+    nnoremap <silent> <C-p> :Files<CR>
+
+    command! -bang -nargs=? -complete=dir History
+      \ call fzf#vim#history({ 'options': s:fzf_options + [ 'HISTORY  ' ] }, <bang>0)
+    nnoremap <silent> <Leader>fh :History<CR>
+    nnoremap <silent> <C-k> :History<CR>
+
+    command! -bang -nargs=? -complete=dir Commands
+      \ call fzf#vim#command_history({ 'options': s:fzf_options + [ 'COMMANDS  ' ] }, <bang>0)
+    nnoremap <silent> <Leader>fc :Commands<CR>
+
+    command! -bang -nargs=? -complete=dir Searches
+      \ call fzf#vim#search_history({ 'options': s:fzf_options + [ 'SEARCHES  ' ] }, <bang>0)
+    nnoremap <silent> <Leader>fs :Searches<CR>
 
   " }
   " markdown-preview.nvim {
@@ -395,8 +428,6 @@ EOF
           return exists('w:quickfix_title') && w:quickfix_title ==# ':setloclist()' ? 'Location' : 'QuickFix'
         elseif &filetype ==# 'vim-plug'
           return 'Plugins'
-        elseif expand('%:t') ==# 'ControlP'
-          return 'CtrlP'
         endif
         if exists('*fugitive#head')
           let l:branch = fugitive#head()
@@ -417,13 +448,6 @@ EOF
           return ''
         elseif &filetype ==# 'vim-plug'
           return ''
-        elseif expand('%:t') ==# 'ControlP' && has_key(g:lightline, 'ctrlp_item')
-          if g:lightline.ctrlp_item ==# 'files'
-            return 'Files'
-          elseif g:lightline.ctrlp_item ==# 'mru files'
-            return 'Recent'
-          endif
-          return 'Buffers'
         endif
         let l:filename = expand('%:t') ==# '' ? '[No Name]' : expand('%:t')
         if &filetype ==# 'help'
@@ -473,23 +497,6 @@ EOF
         autocmd User ALEJobStarted call lightline#update()
         autocmd User ALELintPost call lightline#update()
       augroup END
-
-    " }
-    " ctrlp.vim integration {
-
-      let g:ctrlp_status_func = {
-        \ 'main': 'g:CtrlPStatusFuncMain',
-        \ 'prog': 'g:CtrlPStatusFuncProg',
-      \ }
-
-      function! g:CtrlPStatusFuncMain(focus, byfname, regex, prev, item, next, marked) abort
-        let g:lightline.ctrlp_item = a:item
-        return lightline#statusline(0)
-      endfunction
-
-      function! g:CtrlPStatusFuncProg(str) abort
-        return lightline#statusline(0)
-      endfunction
 
     " }
     " reload on colorscheme change {
