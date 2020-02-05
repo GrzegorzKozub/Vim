@@ -290,7 +290,8 @@ EOF
       \ }
     endif
 
-    if s:windows
+    if s:windows || s:neovim
+      " https://github.com/junegunn/fzf/blob/master/README-VIM.md#fzf-inside-terminal-buffer
       augroup HideFzfStatusLine
         autocmd!
         autocmd FileType fzf set laststatus=0 noshowmode noruler
