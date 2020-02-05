@@ -63,6 +63,7 @@
   Plug 'hail2u/vim-css3-syntax', { 'for': [ 'css', 'less', 'scss' ] }
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
   Plug 'itchyny/lightline.vim'
+  Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
   Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
   Plug 'lifepillar/vim-gruvbox8'
@@ -273,43 +274,53 @@ EOF
   " }
   " fzf-vim {
 
-    let g:fzf_colors = {
-      \ 'bg':      [ 'bg', 'Normal' ],
-      \ 'bg+':     [ 'bg', 'Normal' ],
-      \ 'fg':      [ 'fg', 'Comment' ],
-      \ 'fg+':     [ 'fg', 'Normal' ],
-      \ 'header':  [ 'fg', 'Keyword' ],
-      \ 'hl':      [ 'fg', 'IncSearch' ],
-      \ 'hl+':     [ 'fg', 'IncSearch' ],
-      \ 'info':    [ 'fg', 'Comment' ],
-      \ 'marker':  [ 'fg', 'Identifier' ],
-      \ 'pointer': [ 'fg', 'Identifier' ],
-      \ 'prompt':  [ 'fg', 'Comment' ]
-    \ }
+    if s:linux
+      let g:fzf_colors = {
+        \ 'bg':      [ 'bg', 'Normal' ],
+        \ 'bg+':     [ 'bg', 'Normal' ],
+        \ 'fg':      [ 'fg', 'Comment' ],
+        \ 'fg+':     [ 'fg', 'Normal' ],
+        \ 'header':  [ 'fg', 'Keyword' ],
+        \ 'hl':      [ 'fg', 'IncSearch' ],
+        \ 'hl+':     [ 'fg', 'IncSearch' ],
+        \ 'info':    [ 'fg', 'Comment' ],
+        \ 'marker':  [ 'fg', 'Identifier' ],
+        \ 'pointer': [ 'fg', 'Identifier' ],
+        \ 'prompt':  [ 'fg', 'Comment' ]
+      \ }
+    endif
 
-    let s:fzf_options = [ '--no-info', '--prompt' ]
+    if s:windows
+      augroup HideFzfStatusLine
+        autocmd!
+        autocmd FileType fzf set laststatus=0 noshowmode noruler
+          \ | autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+      augroup END
+    endif
+
+    let s:fzf_options = [ '--no-bold', '--no-info', '--prompt' ]
 
     command! -bang -nargs=? -complete=dir Buffers
-      \ call fzf#vim#buffers(<q-args>, { 'options': s:fzf_options + [ 'BUFFERS  ' ] }, <bang>0)
+      \ call fzf#vim#buffers(<q-args>, { 'options': s:fzf_options + [ 'BUFFERS > ' ] }, <bang>0)
     nnoremap <silent> <Leader>fb :Buffers<CR>
     nnoremap <silent> <C-b> :Buffers<CR>
 
     command! -bang -nargs=? -complete=dir Files
-      \ call fzf#vim#files(<q-args>, { 'options': s:fzf_options + [ 'FILES  ' ] }, <bang>0)
+      \ call fzf#vim#files(<q-args>, { 'options': s:fzf_options + [ 'FILES > ' ] }, <bang>0)
     nnoremap <silent> <Leader>ff :Files<CR>
     nnoremap <silent> <C-p> :Files<CR>
 
     command! -bang -nargs=? -complete=dir History
-      \ call fzf#vim#history({ 'options': s:fzf_options + [ 'HISTORY  ' ] }, <bang>0)
+      \ call fzf#vim#history({ 'options': s:fzf_options + [ 'HISTORY > ' ] }, <bang>0)
     nnoremap <silent> <Leader>fh :History<CR>
     nnoremap <silent> <C-k> :History<CR>
 
     command! -bang -nargs=? -complete=dir Commands
-      \ call fzf#vim#command_history({ 'options': s:fzf_options + [ 'COMMANDS  ' ] }, <bang>0)
+      \ call fzf#vim#command_history({ 'options': s:fzf_options + [ 'COMMANDS > ' ] }, <bang>0)
     nnoremap <silent> <Leader>fc :Commands<CR>
 
     command! -bang -nargs=? -complete=dir Searches
-      \ call fzf#vim#search_history({ 'options': s:fzf_options + [ 'SEARCHES  ' ] }, <bang>0)
+      \ call fzf#vim#search_history({ 'options': s:fzf_options + [ 'SEARCHES > ' ] }, <bang>0)
     nnoremap <silent> <Leader>fs :Searches<CR>
 
   " }
