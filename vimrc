@@ -4,6 +4,7 @@
 
   let s:windows = has('win32')
   let s:linux = !s:windows
+  let s:mac = s:linux && system('uname -s') =~# 'Darwin'
 
   let s:neovim = has('nvim')
   let s:vim = !s:neovim
@@ -192,7 +193,7 @@
 
   scriptencoding 'utf-8'
 
-  if s:windows | language English_US | else | language en_US.utf8 | endif
+  if s:windows | language English_US | elseif s:mac | language en_US.UTF-8 | else | language en_US.utf8 | endif
 
 " }
 " themes {
