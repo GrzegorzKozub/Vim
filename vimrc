@@ -655,14 +655,14 @@ EOF
     call s:apply_colorscheme()
   endfunction
 
-  nnoremap <silent> <F5> :call <sid>cycle_color_schemes()<CR>
+  nnoremap <silent> <Leader>c :call <sid>cycle_color_schemes()<CR>
 
   function! s:toggle_background() abort
     let g:THEME.background = g:THEME.background ==# 'dark' ? 'light' : 'dark'
     call s:apply_background()
   endfunction
 
-  nnoremap <silent> <F6> :call <sid>toggle_background()<CR>
+  nnoremap <silent> <Leader>b :call <sid>toggle_background()<CR>
 
   call s:apply_background()
   call s:apply_colorscheme()
