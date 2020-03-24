@@ -171,7 +171,7 @@
     let &t_te .= "\e[0 q"
     let &t_ti .= "\e[1 q"
 
-    if &term ==# 'tmux-256color'
+    if &term ==# 'screen-256color'
 
       " unbreak termguicolors under tmux
       let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
