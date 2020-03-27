@@ -1,6 +1,6 @@
 " vim: set foldmarker={,} foldmethod=marker :
 
-" platform {
+" os {
 
   let s:windows = has('win32')
   let s:linux = !s:windows
@@ -16,28 +16,48 @@
   runtime mswin.vim
 
 " }
-" directories {
+" dirs {
 
   if s:neovim
-      let s:user_dir = stdpath('config') . '/'
-      let s:data_dir = stdpath('data') . '/'
+
+    let s:config_dir = stdpath('config')
+    let s:data_dir = stdpath('data')
+
   else
+
     if s:windows
-      let s:user_dir = expand('~/vimfiles/')
+
+      let s:config_dir = expand('~/vimfiles')
+      let s:data_dir = s:config_dir . '/data'
+
     else
-      let s:user_dir = expand('~/.vim/')
+
+      if empty($XDG_CONFIG_HOME)
+        let s:config_dir = expand('~/.config/vim')
+        set runtimepath=~/.config/vim,$VIMRUNTIME,~/.config/vim/after
+      else
+        let s:config_dir = expand($XDG_CONFIG_HOME . '/vim')
+        set runtimepath=$XDG_CONFIG_HOME/vim,$VIMRUNTIME,$XDG_CONFIG_HOME/vim/after
+      endif
+
+      if empty($XDG_DATA_HOME)
+        let s:data_dir = expand('~/.local/share/vim')
+      else
+        let s:data_dir = expand($XDG_DATA_HOME . '/vim')
+      endif
+
     endif
-    let s:data_dir = s:user_dir . 'data/'
+
   endif
 
-  let s:plugins_dir = s:user_dir . 'plugins/'
-  let s:unmanaged_dir = s:user_dir . 'unmanaged/'
+  let s:plugins_dir = s:config_dir . '/plugins'
+  let s:unmanaged_dir = s:config_dir . '/unmanaged'
 
   silent! call mkdir(s:plugins_dir, 'p')
 
-  let s:backup_dir = s:data_dir . 'backup/'
-  let s:state_dir = s:data_dir . 'state/'
-  let s:undo_dir = s:data_dir . 'undo/'
+  let s:backup_dir = s:data_dir . '/backup'
+  let s:state_dir = s:data_dir . '/state'
+  let s:undo_dir = s:data_dir . '/undo'
 
   silent! call mkdir(s:backup_dir, 'p')
   silent! call mkdir(s:state_dir, 'p')
@@ -48,7 +68,7 @@
 
   call plug#begin(s:plugins_dir)
 
-  let g:themes_dir = s:unmanaged_dir . 'themes'
+  let g:themes_dir = s:unmanaged_dir . '/themes'
   Plug g:themes_dir
 
   Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
@@ -156,7 +176,7 @@
   if s:vim
     set cursorline " not for neovim until https://github.com/neovim/neovim/issues/9019 is fixed
     set ttyfast
-    let &viminfo = &viminfo . ',!,n' . s:data_dir . 'viminfo'
+    let &viminfo = &viminfo . ',!,n' . s:data_dir . '/viminfo'
   endif
 
   if s:neovim && s:windows
@@ -249,7 +269,7 @@ EOF
 
     " elixir {
 
-      let g:ale_elixir_elixir_ls_release = s:plugins_dir . 'vim-elixirls/elixir-ls/release'
+      let g:ale_elixir_elixir_ls_release = s:plugins_dir . '/vim-elixirls/elixir-ls/release'
       let g:ale_elixir_elixir_ls_config = { 'elixirLS': { 'dialyzerEnabled': v:false } }
 
       let g:ale_fixers.elixir = [ 'mix_format' ]
@@ -542,7 +562,7 @@ EOF
   " netrw {
 
     let g:netrw_banner = 0
-    let g:netrw_home = s:state_dir . 'netrw'
+    let g:netrw_home = s:state_dir . '/netrw'
     let g:netrw_localcopycmd = 'copy'
 
     noremap <silent> <Leader>e :Explore<CR>
