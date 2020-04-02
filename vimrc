@@ -13,7 +13,6 @@
 " includes {
 
   if s:vim | runtime defaults.vim | endif
-  runtime mswin.vim
 
 " }
 " dirs {
@@ -168,6 +167,7 @@
   set termguicolors
   set ttimeoutlen=50
   set undofile
+  set whichwrap+=<,>,[,]
   set wildmode=longest:full,full
 
   let &backupdir = s:backup_dir
@@ -727,16 +727,23 @@ EOF
 " }
 " mappings {
 
-  nnoremap <C-C> <C-A>
-
-  unmap <C-S>
-  unmap <C-Y>
-  unmap <C-Z>
-
   vnoremap <Down> j
   vnoremap <Left> h
   vnoremap <Right> l
   vnoremap <Up> k
+
+  vnoremap <BS> d
+
+  noremap <C-A> ggVG
+
+  if has('clipboard')
+    vnoremap <C-C> "+y
+    vnoremap <C-X> "+x
+    map <C-V> "+gP
+    cmap <C-V> <C-R>+
+  endif
+
+  noremap <C-Q> <C-V>
 
   command! HlsearchOff nohlsearch
   nnoremap <silent> <Leader>h :HlsearchOff<CR>

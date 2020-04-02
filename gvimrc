@@ -11,6 +11,10 @@
 " }
 " settings {
 
+  if s:windows
+    set guioptions-=a
+  endif
+
   set guioptions+=c
   set guioptions-=b
   set guioptions-=r
