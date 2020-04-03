@@ -10,11 +10,6 @@
   let s:vim = !s:neovim
 
 " }
-" includes {
-
-  if s:vim | runtime defaults.vim | endif
-
-" }
 " dirs {
 
   if s:neovim
@@ -134,25 +129,33 @@
     set diffopt+=algorithm:histogram,indent-heuristic,context:3
   endif
 
+  set display+=lastline
   set encoding=utf-8
   set expandtab
   set fillchars+=vert:\  " intentional trailing whitespace
   set foldlevelstart=99
   set foldmethod=syntax
   set hidden
+  set history=1000
   set hlsearch
   set ignorecase
   set infercase
+  set incsearch
   set laststatus=2
   set lazyredraw
   set listchars=tab:→\ ,eol:¬,trail:·
+  set mouse=a
   set nojoinspaces
+  set nolangremap
   set noshowmode
   set noswapfile
   set nowrap
+  set nrformats-=octal
   set number
+  set scrolloff=3
   set shiftwidth=2
   set shortmess+=I
+  set showcmd
   set showmatch
   set sidescroll=1
   set sidescrolloff=15
@@ -165,9 +168,11 @@
   set splitright
   set tabstop=2
   set termguicolors
+  set ttimeout
   set ttimeoutlen=50
   set undofile
   set whichwrap+=<,>,[,]
+  set wildmenu
   set wildmode=longest:full,full
 
   let &backupdir = s:backup_dir
@@ -211,7 +216,9 @@
     rviminfo " using rshada locks the g:THEME variable making it read-only
   catch | endtry
 
+  filetype plugin indent on
   scriptencoding 'utf-8'
+  syntax on
 
   if s:windows | language English_US | elseif s:mac | language en_US.UTF-8 | else | language en_US.utf8 | endif
 
@@ -716,7 +723,7 @@ EOF
 
   augroup ScrollToLastSeenLocationOnFileOpen
     autocmd!
-    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line('$') && &filetype !=# 'commit' | exe "normal! g`\"" | endif
+    autocmd BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$") && &filetype !~# 'commit' | exe "normal! g`\"" | endif
   augroup END
 
   augroup DoNotOverwriteBackupFilesWithTheSameNames

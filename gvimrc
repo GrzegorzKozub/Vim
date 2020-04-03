@@ -13,6 +13,7 @@
 
   if s:windows
     set guioptions-=a
+    set guioptions-=t
   endif
 
   set guioptions+=c
