@@ -470,8 +470,8 @@ EOF
         elseif &filetype ==# 'vim-plug'
           return 'Plugins'
         endif
-        if exists('*fugitive#head')
-          let l:branch = fugitive#head()
+        if exists('*FugitiveHead')
+          let l:branch = FugitiveHead()
           if l:branch !=# ''
             return g:lightline_icons.branch . g:lightline_icons.space . l:branch
           endif
