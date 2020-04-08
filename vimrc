@@ -314,7 +314,7 @@ EOF
         \ 'hl+':     [ 'fg', 'IncSearch' ],
         \ 'info':    [ 'fg', 'Comment' ],
         \ 'marker':  [ 'fg', 'Comment' ],
-        \ 'pointer': [ 'fg', 'Identifier' ],
+        \ 'pointer': [ 'fg', 'Normal' ],
         \ 'prompt':  [ 'fg', 'Comment' ]
       \ }
     endif
