@@ -313,7 +313,7 @@ EOF
         \ 'hl':      [ 'fg', 'IncSearch' ],
         \ 'hl+':     [ 'fg', 'IncSearch' ],
         \ 'info':    [ 'fg', 'Comment' ],
-        \ 'marker':  [ 'fg', 'Identifier' ],
+        \ 'marker':  [ 'fg', 'Comment' ],
         \ 'pointer': [ 'fg', 'Identifier' ],
         \ 'prompt':  [ 'fg', 'Comment' ]
       \ }
@@ -328,29 +328,30 @@ EOF
       augroup END
     endif
 
-    let s:fzf_options = [ '--marker', '✓', '--no-bold', '--no-info', '--pointer', '»', '--prompt' ]
+    let s:fzf_options = [ '--marker', '◆', '--no-bold', '--no-info', '--pointer', '►', '--prompt' ]
+    let s:fzf_prompt = ' ●• '
 
     command! -bang -nargs=? -complete=dir Buffers
-      \ call fzf#vim#buffers(<q-args>, { 'options': s:fzf_options + [ 'BUFFERS  ' ] }, <bang>0)
+      \ call fzf#vim#buffers(<q-args>, { 'options': s:fzf_options + [ 'BUFFERS' . s:fzf_prompt ] }, <bang>0)
     nnoremap <silent> <Leader>fb :Buffers<CR>
     nnoremap <silent> <C-b> :Buffers<CR>
 
     command! -bang -nargs=? -complete=dir Files
-      \ call fzf#vim#files(<q-args>, { 'options': s:fzf_options + [ 'FILES  ' ] }, <bang>0)
+      \ call fzf#vim#files(<q-args>, { 'options': s:fzf_options + [ 'FILES' . s:fzf_prompt ] }, <bang>0)
     nnoremap <silent> <Leader>ff :Files<CR>
     nnoremap <silent> <C-p> :Files<CR>
 
     command! -bang -nargs=? -complete=dir History
-      \ call fzf#vim#history({ 'options': s:fzf_options + [ 'HISTORY  ' ] }, <bang>0)
+      \ call fzf#vim#history({ 'options': s:fzf_options + [ 'HISTORY' . s:fzf_prompt ] }, <bang>0)
     nnoremap <silent> <Leader>fh :History<CR>
     nnoremap <silent> <C-k> :History<CR>
 
     command! -bang -nargs=? -complete=dir Commands
-      \ call fzf#vim#command_history({ 'options': s:fzf_options + [ 'COMMANDS  ' ] }, <bang>0)
+      \ call fzf#vim#command_history({ 'options': s:fzf_options + [ 'COMMANDS' . s:fzf_prompt ] }, <bang>0)
     nnoremap <silent> <Leader>fc :Commands<CR>
 
     command! -bang -nargs=? -complete=dir Searches
-      \ call fzf#vim#search_history({ 'options': s:fzf_options + [ 'SEARCHES  ' ] }, <bang>0)
+      \ call fzf#vim#search_history({ 'options': s:fzf_options + [ 'SEARCHES ●• ' ] }, <bang>0)
     nnoremap <silent> <Leader>fs :Searches<CR>
 
   " }
