@@ -315,7 +315,7 @@ EOF
         \ 'info':    [ 'fg', 'Comment' ],
         \ 'marker':  [ 'fg', 'Comment' ],
         \ 'pointer': [ 'fg', 'Normal' ],
-        \ 'prompt':  [ 'fg', 'Comment' ]
+        \ 'prompt':  [ 'fg', 'Underlined' ]
       \ }
     endif
 
