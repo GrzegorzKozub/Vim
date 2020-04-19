@@ -108,12 +108,4 @@ EOF
     " }
   " }
 " }
-" mappings {
-
-  if s:vim
-    unmap <C-F>
-    unmap <C-H>
-  endif
-
-" }
 
