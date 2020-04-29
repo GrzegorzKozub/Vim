@@ -314,7 +314,7 @@ EOF
         \ 'hl+':     [ 'fg', 'IncSearch' ],
         \ 'info':    [ 'fg', 'Comment' ],
         \ 'marker':  [ 'fg', 'Comment' ],
-        \ 'pointer': [ 'fg', 'Normal' ],
+        \ 'pointer': [ 'fg', 'Comment' ],
         \ 'prompt':  [ 'fg', 'Underlined' ]
       \ }
     endif
@@ -328,7 +328,7 @@ EOF
       augroup END
     endif
 
-    let s:fzf_options = [ '--marker', '◆', '--no-bold', '--no-info', '--pointer', '►', '--prompt' ]
+    let s:fzf_options = [ '--marker', '•', '--no-bold', '--no-info', '--pointer', '●', '--prompt' ]
     let s:fzf_prompt = ' ●• '
 
     command! -bang -nargs=? -complete=dir Buffers
