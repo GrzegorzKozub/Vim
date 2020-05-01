@@ -313,8 +313,8 @@ EOF
         \ 'hl':      [ 'fg', 'IncSearch' ],
         \ 'hl+':     [ 'fg', 'IncSearch' ],
         \ 'info':    [ 'fg', 'Comment' ],
-        \ 'marker':  [ 'fg', 'Comment' ],
-        \ 'pointer': [ 'fg', 'Comment' ],
+        \ 'marker':  [ 'fg', 'Normal' ],
+        \ 'pointer': [ 'fg', 'Normal' ],
         \ 'prompt':  [ 'fg', 'Underlined' ]
       \ }
     endif
