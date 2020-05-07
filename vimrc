@@ -435,12 +435,12 @@ EOF
           \ 'i' : 'INSERT',
           \ 'R' : 'REPLACE',
           \ 'v' : 'VISUAL',
-          \ 'V' : 'VISUAL LINE',
-          \ '\<C-v>': 'VISUAL BLOCK',
+          \ 'V' : 'VISUAL',
+          \ "\<C-v>": 'VISUAL',
           \ 'c' : 'COMMAND',
           \ 's' : 'SELECT',
-          \ 'S' : 'SELECT LINE',
-          \ '\<C-s>': 'SELECT BLOCK',
+          \ 'S' : 'SELECT',
+          \ "\<C-s>": 'SELECT',
           \ 't': 'TERMINAL'
         \ },
         \ 'separator': {
