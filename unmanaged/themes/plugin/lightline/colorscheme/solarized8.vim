@@ -24,7 +24,7 @@ if &background ==# 'light'
   let [ s:base00, s:base0 ] = [ s:base0, s:base00 ]
 endif
 
-let s:p = { 'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {} }
+let s:p = { 'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'command': {} }
 
 let s:p.normal.left     = [ [ s:base03, s:base00 ], [ s:base03, s:base01 ] ]
 let s:p.normal.middle   = [ [ s:base01, s:base03 ] ]
@@ -37,6 +37,7 @@ let s:p.inactive.right  = s:p.inactive.left
 let s:p.insert.left     = [ [ s:p.normal.left[0][0], s:blue ], s:p.normal.left[1] ]
 let s:p.replace.left    = [ [ s:p.normal.left[0][0], s:orange ], s:p.normal.left[1] ]
 let s:p.visual.left     = [ [ s:p.normal.left[0][0], s:green ], s:p.normal.left[1] ]
+let s:p.command.left    = [ [ s:p.normal.left[0][0], s:cyan ], s:p.normal.left[1] ]
 
 let s:p.normal.error    = [ [ s:p.normal.left[0][0], s:red ] ]
 let s:p.normal.warning  = [ [ s:p.normal.left[0][0], s:yellow ] ]

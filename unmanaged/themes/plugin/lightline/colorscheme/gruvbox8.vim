@@ -46,7 +46,7 @@ else
   let s:orange = '#AF3A03'
 endif
 
-let s:p = { 'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {} }
+let s:p = { 'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'command': {} }
 
 let s:p.normal.left     = [ [ s:bg0, s:bg4 ], [ s:bg0, s:bg2 ] ]
 let s:p.normal.middle   = [ [ s:bg4, s:bg0 ] ]
@@ -59,6 +59,7 @@ let s:p.inactive.right  = s:p.inactive.left
 let s:p.insert.left     = [ [ s:p.normal.left[0][0], s:blue ], s:p.normal.left[1] ]
 let s:p.replace.left    = [ [ s:p.normal.left[0][0], s:orange ], s:p.normal.left[1] ]
 let s:p.visual.left     = [ [ s:p.normal.left[0][0], s:green ], s:p.normal.left[1] ]
+let s:p.command.left    = [ [ s:p.normal.left[0][0], s:aqua ], s:p.normal.left[1] ]
 
 let s:p.normal.error    = [ [ s:p.normal.left[0][0], s:red ] ]
 let s:p.normal.warning  = [ [ s:p.normal.left[0][0], s:yellow ] ]
