@@ -431,17 +431,17 @@ EOF
         \ },
         \ 'colorscheme': '' . s:get_current_color_scheme() . '',
         \ 'mode_map': {
-          \ 'n' : 'NORMAL',
-          \ 'i' : 'INSERT',
-          \ 'R' : 'REPLACE',
-          \ 'v' : 'VISUAL',
-          \ 'V' : 'VISUAL',
-          \ "\<C-v>": 'VISUAL',
-          \ 'c' : 'COMMAND',
-          \ 's' : 'SELECT',
-          \ 'S' : 'SELECT',
-          \ "\<C-s>": 'SELECT',
-          \ 't': 'TERMINAL'
+          \ 'n' : 'NRL',
+          \ 'i' : 'INS',
+          \ 'R' : 'RPL',
+          \ 'v' : 'VSL',
+          \ 'V' : 'VLN',
+          \ "\<C-v>": 'VBL',
+          \ 'c' : 'CMD',
+          \ 's' : 'SEL',
+          \ 'S' : 'SLN',
+          \ "\<C-s>": 'SBL',
+          \ 't': 'TRM'
         \ },
         \ 'separator': {
           \ 'left': g:lightline_icons.left_filled,
@@ -511,23 +511,31 @@ EOF
       endfunction
 
       function! g:LightLinePercent() abort
-        return &filetype !~? 'Mundo\|MundoDiff' ? printf('%3d%%', (100 * line('.') / line('$'))) : ''
+        return s:file_position_viewable() ? printf('%d%%', (100 * line('.') / line('$'))) : ''
       endfunction
 
       function! g:LightLineLineInfo() abort
-        return &filetype !~? 'Mundo\|MundoDiff' ? printf('%3d %3d', line('.'), col('.')) : ''
+        return s:file_position_viewable() ? printf('%d %d', line('.'), col('.')) : ''
       endfunction
 
       function! g:LightLineFileEncoding() abort
-        return strlen(&fileencoding) > 0 && &filetype !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug' ? &fileencoding : ''
+        return s:file_property_viewable(&fileencoding) ? &fileencoding : ''
       endfunction
 
       function! g:LightLineFileFormat() abort
-        return strlen(&fileformat) > 0 && &filetype !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug' && expand('%:t') !=# 'ControlP' ? &fileformat : ''
+        return s:file_property_viewable(&filetype) ? (&fileformat ==# 'unix' ? 'lf' : 'crlf') : ''
       endfunction
 
       function! g:LightLineFileType() abort
-        return strlen(&filetype) > 0 && &filetype !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug' ? &filetype : ''
+        return s:file_property_viewable(&filetype) ? &filetype : ''
+      endfunction
+
+      function! s:file_position_viewable() abort
+        return &filetype !~? 'Mundo\|MundoDiff'
+      endfunction
+
+      function! s:file_property_viewable(property) abort
+        return strlen(a:property) > 0 && &filetype !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug'
       endfunction
 
     " }
@@ -544,14 +552,10 @@ EOF
     " reload on colorscheme change {
 
       function! s:reload_lightline() abort
-        if !exists('g:loaded_lightline')
-          return
-        endif
-
+        if !exists('g:loaded_lightline') | return | endif
         for l:theme in split(globpath(g:themes_dir . '/plugin/lightline/colorscheme', '*.vim'), '\n')
           exe 'source' fnameescape(l:theme)
         endfor
-
         let g:lightline.colorscheme = g:colors_name
         call lightline#enable()
       endfunction
