@@ -97,7 +97,6 @@
   Plug 'Raimondi/delimitMate'
   Plug 'sbdchd/neoformat', { 'on': 'Neoformat' }
   Plug 'scrooloose/nerdcommenter'
-  Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
   Plug 'stephpy/vim-yaml', { 'for': [ 'yaml', 'yaml.docker-compose' ] }
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-endwise', { 'for': [ 'elixir', 'eelixir', 'ruby' ] }
@@ -462,10 +461,6 @@ EOF
       function! g:LightLineFugitive() abort
         if &filetype ==# 'help'
           return 'Help'
-        elseif &filetype ==# 'Mundo'
-          return 'Mundo'
-        elseif &filetype ==# 'MundoDiff'
-          return 'Mundo'
         elseif &filetype ==# 'qf'
           return exists('w:quickfix_title') && w:quickfix_title ==# ':setloclist()' ? 'Location' : 'QuickFix'
         elseif &filetype ==# 'vim-plug'
@@ -482,19 +477,9 @@ EOF
       endfunction
 
       function! g:LightLineFileName() abort
-        if &filetype ==# 'Mundo'
-          return 'Tree'
-        elseif &filetype ==# 'MundoDiff'
-          return 'Diff'
-        elseif &filetype ==# 'qf'
-          return ''
-        elseif &filetype ==# 'vim-plug'
-          return ''
-        endif
+        if &filetype ==# 'qf' || &filetype ==# 'vim-plug' | return '' | endif
         let l:filename = expand('%:t') ==# '' ? '[No Name]' : expand('%:t')
-        if &filetype ==# 'help'
-          return l:filename
-        endif
+        if &filetype ==# 'help' | return l:filename | endif
         return l:filename . (&readonly ? g:lightline_icons.space . g:lightline_icons.padlock : '') . (&modified ? ' ' . g:lightline_icons.modified : '')
       endfunction
 
@@ -511,11 +496,11 @@ EOF
       endfunction
 
       function! g:LightLinePercent() abort
-        return s:file_position_viewable() ? printf('%d%%', (100 * line('.') / line('$'))) : ''
+        return printf('%d%%', (100 * line('.') / line('$')))
       endfunction
 
       function! g:LightLineLineInfo() abort
-        return s:file_position_viewable() ? printf('%d %d', line('.'), col('.')) : ''
+        return printf('%d %d', line('.'), col('.'))
       endfunction
 
       function! g:LightLineFileEncoding() abort
@@ -530,12 +515,8 @@ EOF
         return s:file_property_viewable(&filetype) ? &filetype : ''
       endfunction
 
-      function! s:file_position_viewable() abort
-        return &filetype !~? 'Mundo\|MundoDiff'
-      endfunction
-
       function! s:file_property_viewable(property) abort
-        return strlen(a:property) > 0 && &filetype !~? 'help\|Mundo\|MundoDiff\|qf\|vim-plug'
+        return strlen(a:property) > 0 && &filetype !~? 'help\|qf\|vim-plug'
       endfunction
 
     " }
@@ -635,15 +616,6 @@ EOF
   " vim-jsx {
 
     let g:jsx_ext_required = 0
-
-  " }
-  " vim-mundo {
-
-    let g:mundo_help = 0
-    let g:mundo_prefer_python3 = 1
-    let g:mundo_width = 40
-
-    noremap <silent> <Leader>u :MundoToggle<CR>
 
   " }
   " vim-solarized8 {
