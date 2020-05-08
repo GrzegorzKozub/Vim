@@ -87,25 +87,4 @@ EOF
   endif
 
 " }
-" plugins {
-  " lightline.vim {
-    " configuration {
-
-      let g:lightline_icons = g:lightline_rich_icons
-
-      let g:lightline.separator = {
-        \ 'left': g:lightline_icons.left_filled,
-        \ 'right': g:lightline_icons.right_filled
-      \ }
-
-      let g:lightline.subseparator = {
-        \ 'left': g:lightline_icons.left_empty,
-        \ 'right': g:lightline_icons.right_empty
-      \ }
-
-      if s:neovim | call lightline#enable() | endif
-
-    " }
-  " }
-" }
 

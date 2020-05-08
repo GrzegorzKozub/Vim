@@ -363,32 +363,6 @@ EOF
   " lightline.vim {
     " configuration {
 
-      let g:lightline_icons = {
-        \ 'modified': '*',
-        \ 'left_filled': '',
-        \ 'right_filled': '',
-        \ 'left_empty': '│',
-        \ 'right_empty': '│',
-        \ 'branch': '',
-        \ 'padlock': '',
-        \ 'space': ''
-      \ }
-
-      let g:lightline_rich_icons = {
-        \ 'modified': '*',
-        \ 'left_filled': '',
-        \ 'right_filled': '',
-        \ 'left_empty': '',
-        \ 'right_empty': '',
-        \ 'branch': '',
-        \ 'padlock': '',
-        \ 'space': ' '
-      \ }
-
-      if s:linux
-        let g:lightline_icons = g:lightline_rich_icons
-      endif
-
       let g:lightline = {
         \ 'active': {
           \ 'left': [
@@ -442,17 +416,9 @@ EOF
           \ "\<C-s>": 'SBL',
           \ 't': 'TRM'
         \ },
-        \ 'separator': {
-          \ 'left': g:lightline_icons.left_filled,
-          \ 'right': g:lightline_icons.right_filled
-        \ },
-        \ 'subseparator': {
-          \ 'left': g:lightline_icons.left_empty,
-          \ 'right': g:lightline_icons.right_empty
-        \ },
-        \ 'enable': {
-          \ 'tabline': 0
-        \ },
+        \ 'separator': { 'left': '', 'right': '' },
+        \ 'subseparator': { 'left': '│', 'right': '│' },
+        \ 'enable': { 'tabline': 0 },
       \ }
 
     " }
@@ -468,10 +434,7 @@ EOF
         endif
         if exists('*FugitiveHead')
           let l:branch = FugitiveHead()
-          if l:branch !=# ''
-            return g:lightline_icons.branch . g:lightline_icons.space . l:branch
-          endif
-          return ''
+          return l:branch !=# '' ? l:branch : ''
         endif
         return ''
       endfunction
@@ -480,7 +443,7 @@ EOF
         if &filetype ==# 'qf' || &filetype ==# 'vim-plug' | return '' | endif
         let l:filename = expand('%:t') ==# '' ? '[No Name]' : expand('%:t')
         if &filetype ==# 'help' | return l:filename | endif
-        return l:filename . (&readonly ? g:lightline_icons.space . g:lightline_icons.padlock : '') . (&modified ? ' ' . g:lightline_icons.modified : '')
+        return l:filename . (&modified ? ' *' : '')
       endfunction
 
       function! g:LightLineFormatAleIcon(count, icon) abort
