@@ -100,7 +100,6 @@
   Plug 'stephpy/vim-yaml', { 'for': [ 'yaml', 'yaml.docker-compose' ] }
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-endwise', { 'for': [ 'elixir', 'eelixir', 'ruby' ] }
-  Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-git'
   Plug 'tpope/vim-jdaddy', { 'for': 'json' }
   Plug 'tpope/vim-rails', { 'for': 'ruby' }
@@ -367,119 +366,80 @@ EOF
         \ 'active': {
           \ 'left': [
             \ [ 'mode', 'paste' ],
-            \ [ 'fugitive' ],
+            \ [ 'buffer' ],
             \ [ 'filename' ]
           \ ],
           \ 'right': [
-            \ [ 'aleerror', 'alewarning', 'percent', 'lineinfo' ],
-            \ [ 'fileencoding', 'fileformat' ],
+            \ [ 'aleerror', 'alewarning', 'fileposition' ],
+            \ [ 'fileencodingandformat' ],
             \ [ 'filetype' ]
           \ ]
         \ },
-        \ 'inactive' : {
-          \ 'left': [
-            \ [ 'fugitive', 'filename' ]
-          \ ],
-          \ 'right': [
-            \ [ ],
-            \ [ 'filetype', 'fileencoding', 'fileformat', 'percent', 'lineinfo' ]
-          \ ]
-        \ },
+        \ 'inactive' : { 'left': [ [ 'filename' ] ], 'right': [ [ 'filetype' ] ] },
         \ 'component_function': {
-          \ 'fugitive': 'g:LightLineFugitive',
+          \ 'buffer': 'g:LightLineBuffer',
           \ 'filename': 'g:LightLineFileName',
-          \ 'percent': 'g:LightLinePercent',
-          \ 'lineinfo': 'g:LightLineLineInfo',
-          \ 'fileencoding': 'g:LightLineFileEncoding',
-          \ 'fileformat': 'g:LightLineFileFormat',
-          \ 'filetype': 'g:LightLineFileType'
+          \ 'filetype': 'g:LightLineFileType',
+          \ 'fileencodingandformat': 'g:LightLineFileEncodingAndFormat',
+          \ 'fileposition': 'g:LightLineFilePosition'
         \ },
         \ 'component_expand': {
           \ 'aleerror': 'LightLineAleError',
           \ 'alewarning': 'LightLineAleWarning'
         \ },
-        \ 'component_type': {
-          \ 'aleerror': 'error',
-          \ 'alewarning': 'warning'
-        \ },
+        \ 'component_type': { 'aleerror': 'error', 'alewarning': 'warning' },
         \ 'colorscheme': '' . s:get_current_color_scheme() . '',
         \ 'mode_map': {
-          \ 'n' : 'NRL',
-          \ 'i' : 'INS',
-          \ 'R' : 'RPL',
-          \ 'v' : 'VSL',
-          \ 'V' : 'VLN',
-          \ "\<C-v>": 'VBL',
-          \ 'c' : 'CMD',
-          \ 's' : 'SEL',
-          \ 'S' : 'SLN',
-          \ "\<C-s>": 'SBL',
-          \ 't': 'TRM'
+          \ 'n' : 'N',
+          \ 'i' : 'I',
+          \ 'c' : 'C',
+          \ 'v' : 'V', 'V' : 'V', "\<C-v>": 'V',
+          \ 's' : 'S', 'S' : 'S', "\<C-s>": 'S',
+          \ 'R' : 'R',
+          \ 't': 'T'
         \ },
         \ 'separator': { 'left': '', 'right': '' },
-        \ 'subseparator': { 'left': '│', 'right': '│' },
+        \ 'subseparator': { 'left': '|', 'right': '|' },
         \ 'enable': { 'tabline': 0 },
       \ }
 
     " }
     " component functions {
 
-      function! g:LightLineFugitive() abort
-        if &filetype ==# 'help'
-          return 'Help'
-        elseif &filetype ==# 'qf'
-          return exists('w:quickfix_title') && w:quickfix_title ==# ':setloclist()' ? 'Location' : 'QuickFix'
-        elseif &filetype ==# 'vim-plug'
-          return 'Plugins'
-        endif
-        if exists('*FugitiveHead')
-          let l:branch = FugitiveHead()
-          return l:branch !=# '' ? l:branch : ''
-        endif
-        return ''
+      function! g:LightLineBuffer() abort
+        if &filetype =~? 'help\|netrw\|qf\|vim-plug' | return '' | endif
+        return bufnr('%')
       endfunction
 
       function! g:LightLineFileName() abort
-        if &filetype ==# 'qf' || &filetype ==# 'vim-plug' | return '' | endif
+        if &filetype =~? 'qf\|vim-plug' | return '' | endif
         let l:filename = expand('%:t') ==# '' ? '[No Name]' : expand('%:t')
-        if &filetype ==# 'help' | return l:filename | endif
-        return l:filename . (&modified ? ' *' : '')
+        return l:filename . (&modified ? ' ⚫' : '')
       endfunction
 
-      function! g:LightLineFormatAleIcon(count, icon) abort
+      function! g:LightLineFileType() abort
+        return &filetype
+      endfunction
+
+      function! g:LightLineFileEncodingAndFormat() abort
+        if &filetype =~? 'help\|netrw\|qf\|vim-plug' | return '' | endif
+        return &fileencoding . (strlen(&fileencoding) > 0 ? ' ' : '') . (&fileformat ==# 'unix' ? 'lf' : 'crlf')
+      endfunction
+
+      function! g:LightLineFilePosition() abort
+        return printf('%d%% %d %d', (100 * line('.') / line('$')), line('.'), col('.'))
+      endfunction
+
+      function! s:lightline_format_ale_icon(count, icon) abort
         return a:count > 0 ? a:icon . ' ' . a:count : ''
       endfunction
 
       function! g:LightLineAleError() abort
-        return LightLineFormatAleIcon(s:get_ale_counts().error, g:ale_icons.circle)
+        return s:lightline_format_ale_icon(s:get_ale_counts().error, g:ale_icons.circle)
       endfunction
 
       function! g:LightLineAleWarning() abort
-        return LightLineFormatAleIcon(s:get_ale_counts().warning, g:ale_icons.triangle)
-      endfunction
-
-      function! g:LightLinePercent() abort
-        return printf('%d%%', (100 * line('.') / line('$')))
-      endfunction
-
-      function! g:LightLineLineInfo() abort
-        return printf('%d %d', line('.'), col('.'))
-      endfunction
-
-      function! g:LightLineFileEncoding() abort
-        return s:file_property_viewable(&fileencoding) ? &fileencoding : ''
-      endfunction
-
-      function! g:LightLineFileFormat() abort
-        return s:file_property_viewable(&filetype) ? (&fileformat ==# 'unix' ? 'lf' : 'crlf') : ''
-      endfunction
-
-      function! g:LightLineFileType() abort
-        return s:file_property_viewable(&filetype) ? &filetype : ''
-      endfunction
-
-      function! s:file_property_viewable(property) abort
-        return strlen(a:property) > 0 && &filetype !~? 'help\|qf\|vim-plug'
+        return s:lightline_format_ale_icon(s:get_ale_counts().warning, g:ale_icons.triangle)
       endfunction
 
     " }
@@ -534,14 +494,6 @@ EOF
   " vim-dispatch {
 
     noremap <silent> <Leader>m :Make<CR>
-
-  " }
-  " vim-fugitive {
-
-    augroup SetupFugitive
-      autocmd!
-      autocmd BufReadPost fugitive://* set bufhidden=delete
-    augroup END
 
   " }
   " vim-grepper {
