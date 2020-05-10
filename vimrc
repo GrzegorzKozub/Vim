@@ -95,6 +95,7 @@
   Plug 'PProvost/vim-ps1', { 'for': 'ps1' }
   Plug 'Quramy/vim-js-pretty-template', { 'for': [ 'javascript', 'javascript.jsx', 'typescript' ] }
   Plug 'Raimondi/delimitMate'
+  Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
   Plug 'sbdchd/neoformat', { 'on': 'Neoformat' }
   Plug 'scrooloose/nerdcommenter'
   Plug 'stephpy/vim-yaml', { 'for': [ 'yaml', 'yaml.docker-compose' ] }
@@ -493,6 +494,11 @@
 
     let g:gruvbox_italics = 0
     let g:gruvbox_italicize_strings = 0
+
+  " }
+  " vim-hexokinase {
+
+    let g:Hexokinase_optInPatterns = 'full_hex,tripple_hex,rgb,rgba,hsl,hsla'
 
   " }
   " vim-javascript {

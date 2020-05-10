@@ -13,7 +13,6 @@ let s:green   = '#859900'
 let s:magenta = '#d33682'
 let s:orange  = '#cb4b16'
 let s:red     = '#dc322f'
-let s:orange  = '#cb4b16'
 let s:violet  = '#6c71c4'
 let s:yellow  = '#b58900'
 
