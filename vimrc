@@ -211,16 +211,6 @@
 
   endif
 
-  if s:neovim
-    try
-      rshada
-    catch | endtry
-  else
-    try
-      rviminfo
-    catch | endtry
-  endif
-
   filetype plugin indent on
   scriptencoding 'utf-8'
   syntax on
