@@ -211,9 +211,15 @@
 
   endif
 
-  try
-    rviminfo " using rshada locks the g:THEME variable making it read-only
-  catch | endtry
+  if s:neovim
+    try
+      rshada
+    catch | endtry
+  else
+    try
+      rviminfo
+    catch | endtry
+  endif
 
   filetype plugin indent on
   scriptencoding 'utf-8'
@@ -224,27 +230,18 @@
 " }
 " themes {
 
-  let s:themes = [ 'solarized8', 'gruvbox8' ]
-
-  function! s:init_theme() abort
-    if exists('g:THEME') | return | endif
-    let g:THEME = { 'colorscheme': 0, 'background': 'light' }
-    if has('python3')
-python3 << EOF
-import vim, random;
-vim.command("let g:THEME.colorscheme = %s" % random.randint(0, int(vim.eval("len(s:themes)")) - 1));
-EOF
-    endif
-  endfunction
-
-  call s:init_theme()
-
   function! s:get_current_color_scheme() abort
-    return s:themes[g:THEME.colorscheme]
+    for l:theme in [ [ 'solarized', 'solarized8' ], [ 'gruvbox', 'gruvbox8' ] ]
+      if $MY_THEME =~ l:theme[0] | return l:theme[1] | endif
+    endfor
+    return 'solarized8'
   endfunction
 
   function! s:get_current_background() abort
-    return g:THEME.background
+    for l:background in [ 'light', 'dark' ]
+      if $MY_THEME =~ l:background | return l:background | endif
+    endfor
+    return 'light'
   endfunction
 
 " }
@@ -570,29 +567,8 @@ EOF
     autocmd ColorScheme * call ApplyColorSchemePatch()
   augroup END
 
-  function! s:cycle_color_schemes() abort
-    let g:THEME.colorscheme = g:THEME.colorscheme == len(s:themes) - 1 ? 0 : g:THEME.colorscheme + 1
-    call s:apply_colorscheme()
-  endfunction
-
-  nnoremap <silent> <Leader>c :call <sid>cycle_color_schemes()<CR>
-
-  function! s:toggle_background() abort
-    let g:THEME.background = g:THEME.background ==# 'dark' ? 'light' : 'dark'
-    call s:apply_background()
-  endfunction
-
-  nnoremap <silent> <Leader>b :call <sid>toggle_background()<CR>
-
   call s:apply_background()
   call s:apply_colorscheme()
-
-" }
-" terminal {
-
-  if s:vim && s:windows
-    nnoremap <Leader>t :botright terminal ++close pwsh --nologo<CR>
-  endif
 
 " }
 " auto-commands {
