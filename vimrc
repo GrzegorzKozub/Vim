@@ -401,7 +401,7 @@
 
       function! g:LightLineFileName() abort
         if &filetype =~? 'qf\|vim-plug' | return '' | endif
-        let l:filename = expand('%:t') ==# '' ? '[No Name]' : expand('%:t')
+        let l:filename = expand('%:t') ==# '' ? 'untitled' : expand('%:t')
         return l:filename . (&modified ? ' ●' : '')
       endfunction
 
