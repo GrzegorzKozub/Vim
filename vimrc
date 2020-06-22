@@ -531,6 +531,11 @@
     let g:solarized_italics = 0
 
   " }
+  " vimdows {
+
+    if s:vim && s:windows | try | rviminfo | catch | endtry | endif
+
+  " }
 " }
 " colorscheme {
 
