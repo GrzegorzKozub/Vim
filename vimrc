@@ -72,7 +72,7 @@
   Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
   Plug 'elixir-editors/vim-elixir', { 'for': [ 'elixir', 'eelixir' ] }
   Plug 'elzr/vim-json', { 'for': 'json' }
-  Plug 'fatih/vim-go', { 'for': 'go' }
+  Plug 'fatih/vim-go'
   Plug 'groenewege/vim-less', { 'for': 'less' }
   Plug 'GrzegorzKozub/vim-elixirls', { 'do': ':ElixirLsCompileSync' }
   Plug 'hail2u/vim-css3-syntax', { 'for': [ 'css', 'less', 'scss' ] }
