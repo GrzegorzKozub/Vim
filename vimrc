@@ -314,8 +314,17 @@
       augroup END
     endif
 
-    let s:fzf_options = [ '--marker', '•', '--no-bold', '--no-info', '--pointer', '●', '--prompt' ]
-    let s:fzf_prompt = ' ●• '
+    if s:windows
+      let s:fzf_marker = '>'
+      let s:fzf_pointer = '>'
+      let s:fzf_prompt = ' > '
+    else
+      let s:fzf_marker = '•'
+      let s:fzf_pointer = '●'
+      let s:fzf_prompt = ' ●• '
+    endif
+
+    let s:fzf_options = [ '--marker', s:fzf_marker, '--no-bold', '--no-info', '--pointer', s:fzf_pointer, '--prompt' ]
 
     command! -bang -nargs=? -complete=dir Buffers
       \ call fzf#vim#buffers(<q-args>, { 'options': s:fzf_options + [ 'BUFFERS' . s:fzf_prompt ] }, <bang>0)
