@@ -337,7 +337,7 @@
     nnoremap <silent> <Leader>fc :Commands<CR>
 
     command! -bang -nargs=? -complete=dir Searches
-      \ call fzf#vim#search_history({ 'options': s:fzf_options + [ 'SEARCHES ●• ' ] }, <bang>0)
+      \ call fzf#vim#search_history({ 'options': s:fzf_options + [ 'SEARCHES' . s:fzf_prompt ] }, <bang>0)
     nnoremap <silent> <Leader>fs :Searches<CR>
 
   " }
