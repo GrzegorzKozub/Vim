@@ -95,7 +95,6 @@
   Plug 'PProvost/vim-ps1', { 'for': 'ps1' }
   Plug 'Quramy/vim-js-pretty-template', { 'for': [ 'javascript', 'javascript.jsx', 'typescript' ] }
   Plug 'Raimondi/delimitMate'
-  Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
   Plug 'sbdchd/neoformat', { 'on': 'Neoformat' }
   Plug 'scrooloose/nerdcommenter'
   Plug 'stephpy/vim-yaml', { 'for': [ 'yaml', 'yaml.docker-compose' ] }
@@ -112,6 +111,8 @@
 
   if s:windows
     Plug 'GrzegorzKozub/vimdows'
+  else
+    Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
   endif
 
   call plug#end()
