@@ -89,6 +89,13 @@ EOF
         call s:set_window_position(60, 62, 3080, 1576)
         call s:toggle_window_maximized()
       endif
+    elseif s:screen.height == 1800 && s:screen.dpi == 192
+      if s:vim
+        set columns=123 lines=30
+        winpos 614 349
+      else
+        call s:set_window_position(614, 349, 2486, 1271)
+      endif
     endif
 
   endif
