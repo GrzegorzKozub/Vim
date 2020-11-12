@@ -294,6 +294,7 @@
       let g:fzf_colors = {
         \ 'bg':      [ 'bg', 'Normal' ],
         \ 'bg+':     [ 'bg', 'Normal' ],
+        \ 'border':  [ 'fg', 'Comment' ],
         \ 'fg':      [ 'fg', 'Comment' ],
         \ 'fg+':     [ 'fg', 'Normal' ],
         \ 'header':  [ 'fg', 'Keyword' ],
