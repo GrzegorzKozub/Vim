@@ -307,15 +307,6 @@
       \ }
     endif
 
-    if s:windows || s:neovim
-      " https://github.com/junegunn/fzf/blob/master/README-VIM.md#fzf-inside-terminal-buffer
-      augroup HideFzfStatusLine
-        autocmd!
-        autocmd FileType fzf set laststatus=0 noruler
-          \ | autocmd BufLeave <buffer> set laststatus=2 ruler
-      augroup END
-    endif
-
     if s:windows
       let s:fzf_marker = '>'
       let s:fzf_pointer = '>'

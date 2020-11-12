@@ -41,6 +41,7 @@ exec 'hi WildMenu guifg=' . s:base0 . ' guibg=' . s:base03 . ' gui=NONE cterm=NO
 
 hi Error gui=NONE cterm=NONE guibg=NONE
 hi ErrorMsg gui=NONE cterm=NONE guibg=NONE
+hi IncSearch gui=reverse cterm=reverse
 hi NonText gui=NONE cterm=NONE
 hi Question gui=NONE cterm=NONE
 hi WarningMsg gui=NONE cterm=NONE
