@@ -308,6 +308,10 @@
     endif
 
     if s:windows
+      let $FZF_DEFAULT_OPTS = '--color bg:-1,bg+:-1,border:-1,fg:-1,fg+:2,header:8,hl:1,hl+:1,info:-1,marker:2,pointer:2,prompt:10'
+    endif
+
+    if s:windows
       let s:fzf_marker = '>'
       let s:fzf_pointer = '>'
       let s:fzf_prompt = ' > '
