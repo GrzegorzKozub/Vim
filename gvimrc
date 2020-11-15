@@ -64,7 +64,12 @@ EOF
       endif
     endfunction
 
-    set guifont=Fira\ Code\ Retina:h12
+    if s:neovim
+      GuiFont Fira\ Code\ Retina:h12
+    else
+      set guifont=Fira\ Code\ Retina:h12
+    endif
+
     let s:screen = eval(vimdows#get_screen())
 
     if s:screen.height == 2160 && s:screen.dpi == 192
