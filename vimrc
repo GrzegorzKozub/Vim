@@ -291,6 +291,7 @@
   " fzf-vim {
 
     if s:linux
+
       let g:fzf_colors = {
         \ 'bg':      [ 'bg', 'Normal' ],
         \ 'bg+':     [ 'bg', 'Normal' ],
@@ -305,10 +306,34 @@
         \ 'pointer': [ 'fg', 'Normal' ],
         \ 'prompt':  [ 'fg', 'Underlined' ]
       \ }
-    endif
 
-    if s:windows
-      let $FZF_DEFAULT_OPTS = '--color bg:-1,bg+:-1,border:-1,fg:-1,fg+:2,header:8,hl:1,hl+:1,info:-1,marker:2,pointer:2,prompt:10'
+    elseif s:windows
+
+      if s:neovim
+
+        function! s:get_hi(group, key) abort
+          return matchstr(execute('hi ' . a:group), a:key . '=\zs\S*')
+        endfunction
+
+        function! s:set_fzf_defaults() abort
+          let l:comment_fg = s:get_hi('Comment', 'guifg')
+          let l:inc_search_fg = s:get_hi('IncSearch', 'guifg')
+          let l:keyword_fg = s:get_hi('Keyword', 'guifg')
+          let l:normal_fg = s:get_hi('Normal', 'guifg')
+          let l:normal_bg = s:get_hi('Normal', 'guibg')
+          let l:underlined_fg = s:get_hi('Underlined', 'guifg')
+          let $FZF_DEFAULT_OPTS = '--color bg:' . l:normal_bg . ',bg+:' . l:normal_bg . ',border:' . l:comment_fg . ',fg:' . l:comment_fg . ',fg+:' . l:normal_fg . ',header:' . l:keyword_fg . ',hl:' . l:inc_search_fg . ',hl+:' . l:inc_search_fg . ',info:' . l:comment_fg . ',marker:' . l:normal_fg . ',pointer:' . l:normal_fg . ',prompt:' . l:underlined_fg
+        endfunction
+
+        augroup SetFzfDefaultsWhenColorSchemeChanges
+          autocmd!
+          autocmd ColorScheme * call s:set_fzf_defaults()
+        augroup END
+
+      else
+        let $FZF_DEFAULT_OPTS = '--color bg:-1,bg+:-1,border:-1,fg:-1,fg+:2,header:8,hl:1,hl+:1,info:-1,marker:2,pointer:2,prompt:10'
+      endif
+
     endif
 
     if s:windows
