@@ -223,7 +223,7 @@
 " themes {
 
   function! s:get_current_color_scheme() abort
-    for l:theme in [ [ 'solarized', 'solarized8' ], [ 'gruvbox', 'gruvbox8' ] ]
+    for l:theme in [ [ 'solarized', 'solarized8' ], [ 'gruvbox', 'gruvbox8_soft' ] ]
       if $MY_THEME =~ l:theme[0] | return l:theme[1] | endif
     endfor
     return 'solarized8'
