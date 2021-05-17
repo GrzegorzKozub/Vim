@@ -1,68 +1,103 @@
-let s:neutralred    = '#CC241D'
-let s:neutralgreen  = '#98971A'
-let s:neutralyellow = '#D79921'
-let s:neutralblue   = '#458588'
-let s:neutralpurple = '#B16286'
-let s:neutralaqua   = '#689D6A'
-let s:neutralorange = '#D65D0E'
+" https://github.com/morhetz/gruvbox
+
+let s:neutral_red    = '#cc241d' " 01
+let s:neutral_green  = '#98971a' " 02
+let s:neutral_yellow = '#d79921' " 03
+let s:neutral_blue   = '#458588' " 04
+let s:neutral_purple = '#b16286' " 05
+let s:neutral_aqua   = '#689d6a' " 06
+
+let s:neutral_gray   = '#928374' " 08
+
+let s:neutral_orange = '#d65d0e'
 
 if &background ==# 'dark'
+
+  let s:bg0_h  = '#1d2021'
   let s:bg0    = '#282828'
-  let s:bg1    = '#3C3836'
+  let s:bg0_s  = '#32302f'
+
+  let s:bg1    = '#3c3836'
   let s:bg2    = '#514945'
-  let s:bg3    = '#665C54'
-  let s:bg4    = '#7C6F64'
-  let s:fg0    = '#FBF1C7'
-  let s:fg1    = '#EBDBB2'
-  let s:fg2    = '#D5C4A1'
-  let s:fg3    = '#BDAE93'
-  let s:fg4    = '#A89984'
-  let s:grey   = '#928374'
-  let s:red    = '#FB4934'
-  let s:green  = '#B8BB26'
-  let s:yellow = '#FABD2F'
-  let s:blue   = '#83A598'
-  let s:purple = '#D3869B'
-  let s:aqua   = '#8EC07C'
-  let s:orange = '#FE8019'
+  let s:bg3    = '#665c54'
+  let s:bg4    = '#7c6f64'
+
+  let s:fg0    = '#fbf1c7'
+  let s:fg1    = '#ebdbb2'
+  let s:fg2    = '#d5c4a1'
+  let s:fg3    = '#bdae93'
+  let s:fg4    = '#a89984'
+
+  let s:bg     = '#282828' " 00
+
+  let s:gray   = '#a89984' " 07
+
+  let s:red    = '#fb4934' " 09
+  let s:green  = '#b8bb26' " 10
+  let s:yellow = '#fabd2f' " 11
+  let s:blue   = '#83a598' " 12
+  let s:purple = '#d3869b' " 13
+  let s:aqua   = '#8ec07c' " 14
+  let s:fg     = '#ebdbb2' " 15
+
+  let s:orange = '#fe8019'
+
 else
-  let s:bg0    = '#FBF1C7'
-  let s:bg1    = '#EBDBB2'
-  let s:bg2    = '#D5C4A1'
-  let s:bg3    = '#BDAE93'
-  let s:bg4    = '#A89984'
+
+  let s:bg0_h  = '#f9f5d7'
+  let s:bg0    = '#fbf1c7'
+  let s:bg0_s  = '#f2e5bc'
+
+  let s:bg1    = '#ebdbb2'
+  let s:bg2    = '#d5c4a1'
+  let s:bg3    = '#bdae93'
+  let s:bg4    = '#a89984'
+
   let s:fg0    = '#282828'
-  let s:fg1    = '#3C3836'
+  let s:fg1    = '#3c3836'
   let s:fg2    = '#503836'
-  let s:fg3    = '#665C54'
-  let s:fg4    = '#7C6F64'
-  let s:grey   = '#928374'
-  let s:red    = '#9D0006'
-  let s:green  = '#79740E'
-  let s:yellow = '#B57614'
-  let s:blue   = '#076678'
-  let s:purple = '#8F3F71'
-  let s:aqua   = '#427B58'
-  let s:orange = '#AF3A03'
+  let s:fg3    = '#665c54'
+  let s:fg4    = '#7c6f64'
+
+  let s:bg     = '#fbf1c7' " 00
+
+  let s:gray   = '#7c6f64' " 07
+
+  let s:red    = '#9d0006' " 09
+  let s:green  = '#79740e' " 10
+  let s:yellow = '#b57614' " 11
+  let s:blue   = '#076678' " 12
+  let s:purple = '#8f3f71' " 13
+  let s:aqua   = '#427b58' " 14
+  let s:fg     = '#3c3836' " 15
+
+  let s:orange = '#af3a03'
+
 endif
 
-let s:p = { 'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'command': {} }
+function! s:create_palette(bg) abort
+  let l:p = { 'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'command': {} }
 
-let s:p.normal.left     = [ [ s:bg0, s:bg4 ], [ s:bg0, s:bg2 ] ]
-let s:p.normal.middle   = [ [ s:bg4, s:bg0 ] ]
-let s:p.normal.right    = s:p.normal.left
+  let l:p.normal.left   = [ [ a:bg, s:bg4 ], [ a:bg, s:bg2 ] ]
+  let l:p.normal.middle = [ [ s:bg4, a:bg ] ]
+  let l:p.normal.right    = l:p.normal.left
 
-let s:p.inactive.left   = [ s:p.normal.middle[0], s:p.normal.middle[0] ]
-let s:p.inactive.middle = s:p.inactive.left
-let s:p.inactive.right  = s:p.inactive.left
+  let l:p.inactive.left   = [ l:p.normal.middle[0], l:p.normal.middle[0] ]
+  let l:p.inactive.middle = l:p.inactive.left
+  let l:p.inactive.right  = l:p.inactive.left
 
-let s:p.insert.left     = [ [ s:p.normal.left[0][0], s:blue ], s:p.normal.left[1] ]
-let s:p.replace.left    = [ [ s:p.normal.left[0][0], s:orange ], s:p.normal.left[1] ]
-let s:p.visual.left     = [ [ s:p.normal.left[0][0], s:green ], s:p.normal.left[1] ]
-let s:p.command.left    = [ [ s:p.normal.left[0][0], s:aqua ], s:p.normal.left[1] ]
+  let l:p.insert.left     = [ [ l:p.normal.left[0][0], s:blue ], l:p.normal.left[1] ]
+  let l:p.replace.left    = [ [ l:p.normal.left[0][0], s:orange ], l:p.normal.left[1] ]
+  let l:p.visual.left     = [ [ l:p.normal.left[0][0], s:green ], l:p.normal.left[1] ]
+  let l:p.command.left    = [ [ l:p.normal.left[0][0], s:aqua ], l:p.normal.left[1] ]
 
-let s:p.normal.error    = [ [ s:p.normal.left[0][0], s:red ] ]
-let s:p.normal.warning  = [ [ s:p.normal.left[0][0], s:yellow ] ]
+  let l:p.normal.error    = [ [ l:p.normal.left[0][0], s:red ] ]
+  let l:p.normal.warning  = [ [ l:p.normal.left[0][0], s:yellow ] ]
 
-let g:lightline#colorscheme#gruvbox8#palette = lightline#colorscheme#fill(s:p)
+  return l:p
+endfunction
+
+let g:lightline#colorscheme#gruvbox8_hard#palette = lightline#colorscheme#fill(s:create_palette(s:bg0_h))
+let g:lightline#colorscheme#gruvbox8#palette      = lightline#colorscheme#fill(s:create_palette(s:bg0))
+let g:lightline#colorscheme#gruvbox8_soft#palette = lightline#colorscheme#fill(s:create_palette(s:bg0_s))
 

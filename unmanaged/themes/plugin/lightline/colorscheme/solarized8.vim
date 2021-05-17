@@ -1,3 +1,5 @@
+" https://ethanschoonover.com/solarized
+
 let s:base03  = '#002b36'
 let s:base02  = '#073642'
 let s:base01  = '#586e75'
@@ -23,23 +25,27 @@ if &background ==# 'light'
   let [ s:base00, s:base0 ] = [ s:base0, s:base00 ]
 endif
 
-let s:p = { 'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'command': {} }
+function! s:create_palette() abort
+  let l:p = { 'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'command': {} }
 
-let s:p.normal.left     = [ [ s:base03, s:base00 ], [ s:base03, s:base01 ] ]
-let s:p.normal.middle   = [ [ s:base01, s:base03 ] ]
-let s:p.normal.right    = s:p.normal.left
+  let l:p.normal.left     = [ [ s:base03, s:base00 ], [ s:base03, s:base01 ] ]
+  let l:p.normal.middle   = [ [ s:base01, s:base03 ] ]
+  let l:p.normal.right    = l:p.normal.left
 
-let s:p.inactive.left   = [ s:p.normal.middle[0], s:p.normal.middle[0] ]
-let s:p.inactive.middle = s:p.inactive.left
-let s:p.inactive.right  = s:p.inactive.left
+  let l:p.inactive.left   = [ l:p.normal.middle[0], l:p.normal.middle[0] ]
+  let l:p.inactive.middle = l:p.inactive.left
+  let l:p.inactive.right  = l:p.inactive.left
 
-let s:p.insert.left     = [ [ s:p.normal.left[0][0], s:blue ], s:p.normal.left[1] ]
-let s:p.replace.left    = [ [ s:p.normal.left[0][0], s:orange ], s:p.normal.left[1] ]
-let s:p.visual.left     = [ [ s:p.normal.left[0][0], s:green ], s:p.normal.left[1] ]
-let s:p.command.left    = [ [ s:p.normal.left[0][0], s:cyan ], s:p.normal.left[1] ]
+  let l:p.insert.left     = [ [ l:p.normal.left[0][0], s:blue ], l:p.normal.left[1] ]
+  let l:p.replace.left    = [ [ l:p.normal.left[0][0], s:orange ], l:p.normal.left[1] ]
+  let l:p.visual.left     = [ [ l:p.normal.left[0][0], s:green ], l:p.normal.left[1] ]
+  let l:p.command.left    = [ [ l:p.normal.left[0][0], s:cyan ], l:p.normal.left[1] ]
 
-let s:p.normal.error    = [ [ s:p.normal.left[0][0], s:red ] ]
-let s:p.normal.warning  = [ [ s:p.normal.left[0][0], s:yellow ] ]
+  let l:p.normal.error    = [ [ l:p.normal.left[0][0], s:red ] ]
+  let l:p.normal.warning  = [ [ l:p.normal.left[0][0], s:yellow ] ]
 
-let g:lightline#colorscheme#solarized8#palette = lightline#colorscheme#fill(s:p)
+  return l:p
+endfunction
+
+let g:lightline#colorscheme#solarized8#palette = lightline#colorscheme#fill(s:create_palette())
 

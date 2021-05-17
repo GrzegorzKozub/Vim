@@ -1,3 +1,5 @@
+" https://ethanschoonover.com/solarized
+
 let s:base03  = '#002b36'
 let s:base02  = '#073642'
 let s:base01  = '#586e75'
