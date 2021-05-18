@@ -79,13 +79,14 @@ exec 'hi ALEWarningSign guifg=' . s:yellow
 exec 'hi CursorLineNr guifg=' . s:bg4
 exec 'hi ErrorMsg guifg=' . s:red . ' guibg=' . s:bg0_h . ' gui=NONE cterm=NONE'
 exec 'hi Folded guifg=' . s:bg4 . ' guibg=' . s:bg0_h
+exec 'hi Normal guifg=' . s:fg2 . ' guibg=' . s:bg0_h
 exec 'hi SignColumn guibg=' . s:bg0_h
 exec 'hi SpecialKey guifg=' . s:green . ' gui=NONE cterm=NONE'
 exec 'hi StatusLine guifg=' . s:bg4 . ' guibg=' . s:bg0 . ' gui=NONE cterm=NONE'
 exec 'hi StatusLineNC guifg=' . s:bg0_h
 exec 'hi Todo guifg=' . s:neutral_gray . ' gui=NONE cterm=NONE'
 exec 'hi Visual guifg=NONE guibg=' . s:bg1 . ' gui=NONE cterm=NONE'
-exec 'hi WildMenu guifg=' . s:fg1 . ' guibg=' . s:bg0_h . ' gui=NONE cterm=NONE'
+exec 'hi WildMenu guifg=' . s:fg2 . ' guibg=' . s:bg0_h . ' gui=NONE cterm=NONE'
 
 hi Error gui=NONE cterm=NONE
 hi Function gui=NONE cterm=NONE
