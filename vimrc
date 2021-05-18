@@ -409,13 +409,13 @@
         \ 'component_type': { 'aleerror': 'error', 'alewarning': 'warning' },
         \ 'colorscheme': '' . s:get_current_color_scheme() . '',
         \ 'mode_map': {
-          \ 'n' : 'N',
-          \ 'i' : 'I',
-          \ 'c' : 'C',
-          \ 'v' : 'V', 'V' : 'V', "\<C-v>": 'V',
-          \ 's' : 'S', 'S' : 'S', "\<C-s>": 'S',
-          \ 'R' : 'R',
-          \ 't': 'T'
+          \ 'n' : 'n',
+          \ 'i' : 'i',
+          \ 'c' : 'c',
+          \ 'v' : 'v', 'V' : 'v', "\<C-v>": 'v',
+          \ 's' : 's', 'S' : 's', "\<C-s>": 's',
+          \ 'R' : 'r',
+          \ 't': 't'
         \ },
         \ 'separator': { 'left': '', 'right': '' },
         \ 'subseparator': { 'left': '|', 'right': '|' },
