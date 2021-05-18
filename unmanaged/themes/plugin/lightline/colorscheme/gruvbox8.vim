@@ -86,13 +86,13 @@ function! s:create_palette(bg) abort
   let l:p.inactive.middle = l:p.inactive.left
   let l:p.inactive.right  = l:p.inactive.left
 
-  let l:p.insert.left     = [ [ l:p.normal.left[0][0], s:blue ], l:p.normal.left[1] ]
-  let l:p.replace.left    = [ [ l:p.normal.left[0][0], s:orange ], l:p.normal.left[1] ]
-  let l:p.visual.left     = [ [ l:p.normal.left[0][0], s:green ], l:p.normal.left[1] ]
-  let l:p.command.left    = [ [ l:p.normal.left[0][0], s:aqua ], l:p.normal.left[1] ]
+  let l:p.insert.left     = [ [ l:p.normal.left[0][0], s:neutral_blue ], l:p.normal.left[1] ]
+  let l:p.replace.left    = [ [ l:p.normal.left[0][0], s:neutral_orange ], l:p.normal.left[1] ]
+  let l:p.visual.left     = [ [ l:p.normal.left[0][0], s:neutral_green ], l:p.normal.left[1] ]
+  let l:p.command.left    = [ [ l:p.normal.left[0][0], s:neutral_aqua ], l:p.normal.left[1] ]
 
-  let l:p.normal.error    = [ [ l:p.normal.left[0][0], s:red ] ]
-  let l:p.normal.warning  = [ [ l:p.normal.left[0][0], s:yellow ] ]
+  let l:p.normal.error    = [ [ l:p.normal.left[0][0], s:neutral_red ] ]
+  let l:p.normal.warning  = [ [ l:p.normal.left[0][0], s:neutral_yellow ] ]
 
   return l:p
 endfunction
