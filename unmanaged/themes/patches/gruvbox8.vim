@@ -55,7 +55,7 @@ else
 
   let s:fg0    = '#282828'
   let s:fg1    = '#3c3836'
-  let s:fg2    = '#503836'
+  let s:fg2    = '#504945'
   let s:fg3    = '#665c54'
   let s:fg4    = '#7c6f64'
 
