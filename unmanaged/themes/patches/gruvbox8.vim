@@ -91,6 +91,8 @@ exec 'hi WildMenu guifg=' . s:fg2 . ' guibg=' . s:bg0 . ' gui=NONE cterm=NONE'
 hi Error gui=NONE cterm=NONE
 hi Function gui=NONE cterm=NONE
 hi MatchParen gui=NONE cterm=NONE
+hi ModeMsg gui=NONE cterm=NONE
+hi MoreMsg gui=NONE cterm=NONE
 hi NonText gui=NONE cterm=NONE
 hi Question gui=NONE cterm=NONE
 hi WarningMsg gui=NONE cterm=NONE
