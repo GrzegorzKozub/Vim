@@ -111,6 +111,7 @@
 
   if s:windows
     Plug 'GrzegorzKozub/vimdows'
+    Plug 'rrethy/vim-hexokinase', { 'do': 'git submodule init && git submodule update && cd hexokinase && go build' }
   else
     Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
   endif
