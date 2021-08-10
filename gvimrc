@@ -79,34 +79,19 @@ EOF
 
     let s:screen = eval(vimdows#get_screen())
 
-    if s:screen.height == 2160 && s:screen.dpi == 192
-      if s:vim
-        set columns=124 lines=34
-        winpos 1234 549
-      else
-        call s:set_window_position(1234, 549, 2506, 1431)
-      endif
-    elseif s:screen.height == 2160 && s:screen.dpi == 144
+    if s:screen.height == 2160 && s:screen.dpi == 144
       if s:vim
         set columns=165 lines=48
         winpos 1143 452
       else
         call s:set_window_position(1143, 452, 2497, 1448)
       endif
-    elseif s:screen.height == 1800 && s:screen.dpi == 240
+    elseif s:screen.height == 2400 && s:screen.dpi == 240
       if s:vim
-        set columns=122 lines=31
-        winpos 59 46
+        set columns=103 lines=32
+        winpos 1133 444
       else
-        call s:set_window_position(60, 62, 3080, 1576)
-        call s:toggle_window_maximized()
-      endif
-    elseif s:screen.height == 1800 && s:screen.dpi == 192
-      if s:vim
-        set columns=123 lines=30
-        winpos 614 349
-      else
-        call s:set_window_position(614, 349, 2486, 1271)
+        call s:set_window_position(1133, 444, 2607, 1656)
       endif
     endif
 
