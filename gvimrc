@@ -88,10 +88,10 @@ EOF
       endif
     elseif s:screen.height == 2400 && s:screen.dpi == 240
       if s:vim
-        set columns=103 lines=32
-        winpos 1133 444
+        set columns=100 lines=35
+        winpos 1208 249
       else
-        call s:set_window_position(1133, 444, 2607, 1656)
+        call s:set_window_position(1208, 249, 2532, 1803)
       endif
     endif
 
