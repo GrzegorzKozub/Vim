@@ -76,7 +76,7 @@
   Plug 'groenewege/vim-less', { 'for': 'less' }
   Plug 'GrzegorzKozub/vim-elixirls', { 'do': ':ElixirLsCompileSync' }
   Plug 'hail2u/vim-css3-syntax', { 'for': [ 'css', 'less', 'scss' ] }
-  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() } }
   Plug 'itchyny/lightline.vim'
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
