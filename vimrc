@@ -251,6 +251,9 @@
     let g:ale_fixers = {}
     let g:ale_linters = {}
 
+    let g:ale_linters.json = [ 'jq' ]
+    let g:ale_linters.yaml = [ 'yamllint' ]
+
     let g:ale_completion_enabled = 0
     let g:ale_lint_on_enter = 0
 
