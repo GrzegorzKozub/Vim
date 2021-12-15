@@ -84,6 +84,7 @@ exec 'hi SignColumn guibg=' . s:bg0
 exec 'hi SpecialKey guifg=' . s:green . ' gui=NONE cterm=NONE'
 exec 'hi StatusLine guifg=' . s:bg4 . ' guibg=' . s:bg0 . ' gui=NONE cterm=NONE'
 exec 'hi StatusLineNC guifg=' . s:bg0
+exec 'hi Terminal guifg=' . s:fg2 . ' guibg=' . s:bg0 . ' gui=NONE cterm=NONE'
 exec 'hi Todo guifg=' . s:neutral_gray . ' gui=NONE cterm=NONE'
 exec 'hi Visual guifg=NONE guibg=' . s:bg1 . ' gui=NONE cterm=NONE'
 exec 'hi WildMenu guifg=' . s:fg2 . ' guibg=' . s:bg0 . ' gui=NONE cterm=NONE'

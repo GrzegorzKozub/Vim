@@ -323,11 +323,11 @@
         function! s:set_fzf_defaults() abort
           let l:comment_fg = s:get_hi('Comment', 'guifg')
           let l:inc_search_fg = s:get_hi('IncSearch', 'guifg')
-          let l:statement_fg = s:get_hi('Statement', 'guifg')
+          let l:string_fg = s:get_hi('String', 'guifg')
           let l:normal_fg = s:get_hi('Normal', 'guifg')
           let l:normal_bg = s:get_hi('Normal', 'guibg')
           let l:underlined_fg = s:get_hi('Underlined', 'guifg')
-          let $FZF_DEFAULT_OPTS = '--color bg:' . l:normal_bg . ',bg+:' . l:normal_bg . ',border:' . l:comment_fg . ',fg:' . l:comment_fg . ',fg+:' . l:normal_fg . ',header:' . l:statement_fg . ',hl:' . l:inc_search_fg . ',hl+:' . l:inc_search_fg . ',info:' . l:comment_fg . ',marker:' . l:normal_fg . ',pointer:' . l:normal_fg . ',prompt:' . l:underlined_fg
+          let $FZF_DEFAULT_OPTS = '--color bg:' . l:normal_bg . ',bg+:' . l:normal_bg . ',border:' . l:comment_fg . ',fg:' . l:comment_fg . ',fg+:' . l:normal_fg . ',header:' . l:string_fg . ',hl:' . l:inc_search_fg . ',hl+:' . l:inc_search_fg . ',info:' . l:comment_fg . ',marker:' . l:normal_fg . ',pointer:' . l:normal_fg . ',prompt:' . l:underlined_fg
         endfunction
 
         augroup SetFzfDefaultsWhenColorSchemeChanges
@@ -336,7 +336,7 @@
         augroup END
 
       else
-        let $FZF_DEFAULT_OPTS = '--color bg:-1,bg+:-1,border:-1,fg:-1,fg+:4,header:2,hl:1,hl+:1,info:-1,marker:4,pointer:4,prompt:12' " gruvbox dark
+        let $FZF_DEFAULT_OPTS = '--color bg:-1,bg+:-1,border:8,fg:8,fg+:7,header:2,hl:1,hl+:1,info:-1,marker:7,pointer:7,prompt:12'
       endif
 
     endif
