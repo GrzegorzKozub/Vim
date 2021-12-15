@@ -177,6 +177,7 @@
   set whichwrap+=<,>,[,]
   set wildmenu
   set wildmode=longest:full,full
+  set wildoptions=tagfile
 
   let &backupdir = s:backup_dir
   let &undodir = s:undo_dir
@@ -227,14 +228,14 @@
     for l:theme in [ [ 'solarized', 'solarized8' ], [ 'gruvbox', 'gruvbox8_soft' ] ]
       if $MY_THEME =~ l:theme[0] | return l:theme[1] | endif
     endfor
-    return 'solarized8'
+    return 'gruvbox8_soft'
   endfunction
 
   function! s:get_current_background() abort
     for l:background in [ 'light', 'dark' ]
       if $MY_THEME =~ l:background | return l:background | endif
     endfor
-    return 'light'
+    return 'dark'
   endfunction
 
 " }
@@ -335,8 +336,7 @@
         augroup END
 
       else
-        "let $FZF_DEFAULT_OPTS = '--color bg:-1,bg+:-1,border:-1,fg:-1,fg+:2,header:12,hl:1,hl+:1,info:-1,marker:2,pointer:2,prompt:4'
-        let $FZF_DEFAULT_OPTS = '--color bg:-1,bg+:-1,border:-1,fg:-1,fg+:4,header:2,hl:1,hl+:1,info:-1,marker:4,pointer:4,prompt:12'
+        let $FZF_DEFAULT_OPTS = '--color bg:-1,bg+:-1,border:-1,fg:-1,fg+:4,header:2,hl:1,hl+:1,info:-1,marker:4,pointer:4,prompt:12' " gruvbox dark
       endif
 
     endif
