@@ -632,11 +632,6 @@
     autocmd BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$") && &filetype !~# 'commit' | exe "normal! g`\"" | endif
   augroup END
 
-  augroup DoNotOverwriteBackupFilesWithTheSameNames
-    autocmd!
-    autocmd BufWritePre * let &backupext = '@' . substitute(expand('%:p:h'), ',\\=[:\\\/]', '%', 'g')
-  augroup END
-
 " }
 " mappings {
 
