@@ -658,6 +658,9 @@
 
   noremap <C-Q> <C-V>
 
+  command! W w
+  command! Q q
+
   command! HlsearchOff nohlsearch
   nnoremap <silent> <Leader>h :HlsearchOff<CR>
 
