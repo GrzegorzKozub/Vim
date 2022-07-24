@@ -98,6 +98,6 @@ hi MoreMsg gui=NONE cterm=NONE
 hi NonText gui=NONE cterm=NONE
 hi Question gui=NONE cterm=NONE
 hi WarningMsg gui=NONE cterm=NONE
-hi Title gui=NONE cterm=NONE
+"hi Title gui=NONE cterm=NONE
 hi Underlined gui=NONE cterm=NONE
 
