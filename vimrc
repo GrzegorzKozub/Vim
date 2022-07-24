@@ -107,6 +107,7 @@
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-unimpaired'
   Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+  Plug 'vimwiki/vimwiki'
   Plug 'w0rp/ale'
 
   if s:windows
@@ -570,6 +571,19 @@
   " vimdows {
 
     if s:vim && s:windows | try | rviminfo | catch | endtry | endif
+
+  " }
+  " vimwiki {
+
+    let g:vimwiki_hl_cb_checked = 2
+    let g:vimwiki_list = [ { 'path': '~/code/notes/', 'path_html': '~/Downloads/notes_html/' } ]
+    let g:vimwiki_listsym_rejected = '✗'
+    let g:vimwiki_listsyms = ' ✓'
+
+    augroup FixVimWikiCheckedItemsHighlight
+      autocmd!
+      autocmd BufEnter *.wiki :syntax sync fromstart
+    augroup END
 
   " }
 " }
