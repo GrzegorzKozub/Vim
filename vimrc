@@ -576,7 +576,7 @@
   " vimwiki {
 
     let g:vimwiki_hl_cb_checked = 2
-    let g:vimwiki_list = [ { 'path': '~/code/notes/', 'path_html': '~/Downloads/notes_html/' } ]
+    let g:vimwiki_list = [ { 'path': '~/code/apsis/', 'path_html': '~/Downloads/apsis_html/' } ]
     let g:vimwiki_listsym_rejected = '✗'
     let g:vimwiki_listsyms = ' ✓'
 
