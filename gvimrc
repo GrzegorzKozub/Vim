@@ -73,6 +73,7 @@ EOF
 
     if s:neovim
       GuiFont Fira\ Code\ Retina:h12
+      GuiRenderLigatures 1
     else
       set guifont=Fira\ Code\ Retina:h12
     endif
