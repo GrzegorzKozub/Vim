@@ -46,15 +46,13 @@ else
 
 endif
 
-let s:plugins_dir = s:config_dir . '/plugins'
-
-silent! call mkdir(s:plugins_dir, 'p')
-
 let s:backup_dir = s:data_dir . '/backup'
+let s:plugins_dir = s:data_dir . '/plugins'
 let s:state_dir = s:data_dir . '/state'
 let s:undo_dir = s:data_dir . '/undo'
 
 silent! call mkdir(s:backup_dir, 'p')
+silent! call mkdir(s:plugins_dir, 'p')
 silent! call mkdir(s:state_dir, 'p')
 silent! call mkdir(s:undo_dir, 'p')
 
@@ -215,7 +213,7 @@ syntax on
 if s:windows | language English_US | elseif s:mac | language en_US.UTF-8 | else | language en_US.utf8 | endif
 
 " }
-" themes {
+" theme {
 
 function! s:get_current_color_scheme() abort
   for l:theme in [ [ 'solarized', 'solarized8' ], [ 'gruvbox', 'gruvbox8_soft' ] ]
@@ -596,7 +594,7 @@ function! s:apply_colorscheme() abort
 endfunction
 
 function! ApplyColorSchemePatch() abort
-  let l:patch = s:config_dir . '/theme/' . g:colors_name . '.vim'
+  let l:patch = s:config_dir . '/custom/theme/' . g:colors_name . '.vim'
   if filereadable(l:patch)
     exe 'source' fnameescape(l:patch)
   endif
