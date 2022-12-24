@@ -600,17 +600,13 @@ vnoremap <Up> k
 
 vnoremap <BS> d
 
-noremap <C-Q> <C-V>
-
 noremap <C-A> ggVG
 
 vnoremap <C-C> "+y
 vnoremap <C-X> "+x
-
 map <C-V> "+gP
 cmap <C-V> <C-R>+
-exe 'inoremap <script> <C-V> <C-G>u' . paste#paste_cmd['i']
-exe 'vnoremap <script> <C-V> ' . paste#paste_cmd['v']
+imap <C-V> <C-R>+
 
 command! W w
 command! Q q
