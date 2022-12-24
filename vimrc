@@ -600,21 +600,17 @@ vnoremap <Up> k
 
 vnoremap <BS> d
 
+noremap <C-Q> <C-V>
+
 noremap <C-A> ggVG
 
-if has('clipboard')
+vnoremap <C-C> "+y
+vnoremap <C-X> "+x
 
-  vnoremap <C-C> "+y
-  vnoremap <C-X> "+x
-
-  map <C-V> "+gP
-  cmap <C-V> <C-R>+
-  exe 'inoremap <script> <C-V> <C-G>u' . paste#paste_cmd['i']
-  exe 'vnoremap <script> <C-V> ' . paste#paste_cmd['v']
-
-endif
-
-noremap <C-Q> <C-V>
+map <C-V> "+gP
+cmap <C-V> <C-R>+
+exe 'inoremap <script> <C-V> <C-G>u' . paste#paste_cmd['i']
+exe 'vnoremap <script> <C-V> ' . paste#paste_cmd['v']
 
 command! W w
 command! Q q
@@ -670,14 +666,6 @@ function! s:vim_merge() abort
 endfunction
 
 command! VimMerge call <sid>vim_merge()
-
-command! -nargs=* DiffGet :diffget <args> | :diffupdate
-nnoremap <silent> <Leader>d1 :DiffGet 1<CR>
-nnoremap <silent> <Leader>d2 :DiffGet 2<CR>
-nnoremap <silent> <Leader>d3 :DiffGet 3<CR>
-
-command! -nargs=* DiffPut :diffput <args> | :diffupdate
-nnoremap <silent> <Leader>d4 :DiffPut 4<CR>
 
 " }
 
