@@ -82,7 +82,6 @@ Plug 'lifepillar/vim-solarized8'
 Plug 'mhinz/vim-grepper'
 Plug 'moll/vim-node'
 Plug 'mxw/vim-jsx'
-Plug 'nelstrom/vim-visual-star-search'
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'othree/html5.vim', { 'for': [ 'eelixir', 'html' ] }
 Plug 'pangloss/vim-javascript', { 'for': [ 'javascript', 'javascript.jsx', 'typescript' ] }
