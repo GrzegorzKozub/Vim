@@ -79,7 +79,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'lifepillar/vim-gruvbox8'
 Plug 'lifepillar/vim-solarized8'
-Plug 'mhinz/vim-grepper'
 Plug 'moll/vim-node'
 Plug 'mxw/vim-jsx'
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
@@ -350,8 +349,7 @@ endfunction
   " }
   " markdown-preview.nvim {
 
-  nnoremap <silent> <Leader>mp :MarkdownPreview<CR>
-  nnoremap <silent> <Leader>mps :MarkdownPreviewStop<CR>
+  nnoremap <silent> <Leader>mp :MarkdownPreviewToggle<CR>
 
   " }
   " lightline.vim {
@@ -486,12 +484,6 @@ endfunction
   " vim-dispatch {
 
   noremap <silent> <Leader>m :Make<CR>
-
-  " }
-  " vim-grepper {
-
-  let g:grepper = {}
-  let g:grepper.highlight = 1
 
   " }
   " vim-gruvbox8 {
