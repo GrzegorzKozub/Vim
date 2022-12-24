@@ -81,7 +81,6 @@ Plug 'lifepillar/vim-gruvbox8'
 Plug 'lifepillar/vim-solarized8'
 Plug 'mattn/emmet-vim', { 'for': [ 'css', 'html' ] }
 Plug 'mhinz/vim-grepper'
-Plug 'mileszs/ack.vim'
 Plug 'moll/vim-node'
 Plug 'mxw/vim-jsx'
 Plug 'nelstrom/vim-visual-star-search'
@@ -231,13 +230,6 @@ endfunction
 
 " }
 " plugins {
-  " ack.vim {
-
-  if executable('rg')
-    let g:ackprg = 'rg --vimgrep'
-  endif
-
-  " }
   " ALE {
 
   let g:ale_fixers = {}
