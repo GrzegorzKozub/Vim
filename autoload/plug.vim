@@ -1031,6 +1031,7 @@ function! s:is_updated(dir)
 endfunction
 
 function! s:do(pull, force, todo)
+  let &rtp = &rtp " https://github.com/junegunn/vim-plug/issues/1148
   for [name, spec] in items(a:todo)
     if !isdirectory(spec.dir)
       continue
