@@ -79,7 +79,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'lifepillar/vim-gruvbox8'
 Plug 'lifepillar/vim-solarized8'
-Plug 'mattn/emmet-vim', { 'for': [ 'css', 'html' ] }
 Plug 'mhinz/vim-grepper'
 Plug 'moll/vim-node'
 Plug 'mxw/vim-jsx'
@@ -265,16 +264,6 @@ endfunction
     augroup END
 
     " }
-  " }
-  " emmet-vim {
-
-  let g:user_emmet_install_global = 0
-
-  augroup SetupEmmet
-    autocmd!
-    autocmd FileType html,css EmmetInstall
-  augroup END
-
   " }
   " fzf-vim {
 
