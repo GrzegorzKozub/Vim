@@ -80,12 +80,11 @@ Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'lifepillar/vim-gruvbox8'
 Plug 'lifepillar/vim-solarized8'
 Plug 'moll/vim-node'
-Plug 'mxw/vim-jsx'
+Plug 'MaxMEllon/vim-jsx-pretty', { 'for': [ 'javascript', 'javascript.jsx', 'typescript' ] }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 Plug 'othree/html5.vim', { 'for': [ 'eelixir', 'html' ] }
 Plug 'pangloss/vim-javascript', { 'for': [ 'javascript', 'javascript.jsx', 'typescript' ] }
 Plug 'PProvost/vim-ps1', { 'for': 'ps1' }
-Plug 'Quramy/vim-js-pretty-template', { 'for': [ 'javascript', 'javascript.jsx', 'typescript' ] }
 Plug 'Raimondi/delimitMate'
 Plug 'sbdchd/neoformat', { 'on': 'Neoformat' }
 Plug 'scrooloose/nerdcommenter'
@@ -503,23 +502,9 @@ endfunction
   let g:javascript_plugin_ngdoc = 1
 
   " }
-  " vim-js-pretty-template {
-
-  augroup SetupJsPrettyTemplate
-    autocmd!
-    autocmd FileType javascript,javascript.jsx,typescript JsPreTmpl
-    autocmd FileType typescript syn clear foldBraces
-  augroup END
-
-  " }
   " vim-json {
 
   let g:vim_json_syntax_conceal = 0
-
-  " }
-  " vim-jsx {
-
-  let g:jsx_ext_required = 0
 
   " }
   " vim-solarized8 {
