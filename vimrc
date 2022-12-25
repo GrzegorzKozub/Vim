@@ -71,7 +71,6 @@ Plug 'GrzegorzKozub/vim-elixirls', { 'do': ':ElixirLsCompileSync' }
 Plug 'hail2u/vim-css3-syntax', { 'for': [ 'css', 'less', 'scss' ] }
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() } }
 Plug 'itchyny/lightline.vim'
-Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
@@ -84,8 +83,8 @@ Plug 'othree/html5.vim', { 'for': [ 'eelixir', 'html' ] }
 Plug 'pangloss/vim-javascript', { 'for': [ 'javascript', 'javascript.jsx', 'typescript' ] }
 Plug 'PProvost/vim-ps1', { 'for': 'ps1' }
 Plug 'sbdchd/neoformat', { 'on': 'Neoformat' }
-Plug 'scrooloose/nerdcommenter'
 Plug 'stephpy/vim-yaml', { 'for': [ 'yaml', 'yaml.docker-compose' ] }
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise', { 'for': [ 'elixir', 'eelixir', 'ruby' ] }
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
@@ -237,25 +236,11 @@ endfunction
   let g:ale_sign_error = g:ale_icons.circle
   let g:ale_sign_warning = g:ale_icons.triangle
 
-  function! s:get_ale_counts() abort
-    return ale#statusline#Count(bufnr('%'))
-  endfunction
+  let g:ale_elixir_elixir_ls_config = { 'elixirLS': { 'dialyzerEnabled': v:false } }
+  let g:ale_elixir_elixir_ls_release = s:plugins_dir . '/vim-elixirls/elixir-ls/release'
+  let g:ale_fixers.elixir = [ 'mix_format' ]
+  let g:ale_linters.elixir = [ 'elixir-ls' ]
 
-    " elixir {
-
-    let g:ale_elixir_elixir_ls_release = s:plugins_dir . '/vim-elixirls/elixir-ls/release'
-    let g:ale_elixir_elixir_ls_config = { 'elixirLS': { 'dialyzerEnabled': v:false } }
-
-    let g:ale_fixers.elixir = [ 'mix_format' ]
-    let g:ale_linters.elixir = [ 'elixir-ls' ]
-
-    augroup UseALEForElixir
-      autocmd FileType elixir,eelixir nnoremap <Leader>f :ALEFix<CR>
-      autocmd FileType elixir,eelixir nnoremap <C-]> :ALEGoToDefinition<CR>
-      autocmd FileType elixir,eelixir nnoremap <C-\> :ALEFindReferences<CR>
-    augroup END
-
-    " }
   " }
   " fzf-vim {
 
@@ -419,6 +404,10 @@ endfunction
 
     function! s:lightline_format_ale_icon(count, icon) abort
       return a:count > 0 ? a:icon . ' ' . a:count : ''
+    endfunction
+
+    function! s:get_ale_counts() abort
+      return ale#statusline#Count(bufnr('%'))
     endfunction
 
     function! g:LightLineAleError() abort
