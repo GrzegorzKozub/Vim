@@ -223,19 +223,23 @@ endfunction
 " plugins {
   " ALE {
 
-  let g:ale_fixers = {}
-  let g:ale_linters = {}
-
-  let g:ale_linters.json = [ 'jq' ]
-  let g:ale_linters.yaml = [ 'yamllint' ]
-
   let g:ale_completion_enabled = 0
   let g:ale_lint_on_enter = 0
+
+  let g:ale_set_loclist = 0
+  let g:ale_set_quickfix = 1
+  let g:ale_virtualtext_cursor = 0
 
   let g:ale_icons = { 'circle': '●', 'triangle': '▲' }
 
   let g:ale_sign_error = g:ale_icons.circle
   let g:ale_sign_warning = g:ale_icons.triangle
+
+  let g:ale_fixers = {}
+  let g:ale_linters = {}
+
+  let g:ale_linters.json = [ 'jq' ]
+  let g:ale_linters.yaml = [ 'yamllint' ]
 
   let g:ale_elixir_elixir_ls_config = { 'elixirLS': { 'dialyzerEnabled': v:false } }
   let g:ale_elixir_elixir_ls_release = s:plugins_dir . '/vim-elixirls/elixir-ls/release'
