@@ -72,7 +72,7 @@ EOF
   endif
 
   if s:neovim
-    GuiFont Fira\ Code\ Retina:h12
+    Guifont Fira\ Code\ Retina:h12
     GuiRenderLigatures 1
   else
     set guifont=Fira\ Code\ Retina:h12
