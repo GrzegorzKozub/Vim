@@ -23,8 +23,9 @@ else
 
   if s:windows
 
-    let s:config_dir = expand('~/vimfiles')
-    let s:data_dir = s:config_dir . '/data'
+    let s:config_dir = $LOCALAPPDATA . '/vim'
+    let s:data_dir = $LOCALAPPDATA . '/vim-data'
+    exe 'set runtimepath=' . s:config_dir . ',$VIMRUNTIME,' . s:config_dir . '/after'
 
   else
 
