@@ -25,16 +25,13 @@ else
 
     let s:config_dir = $LOCALAPPDATA . '/vim'
     let s:data_dir = $LOCALAPPDATA . '/vim-data'
-    exe 'set runtimepath=' . s:config_dir . ',$VIMRUNTIME,' . s:config_dir . '/after'
 
   else
 
     if empty($XDG_CONFIG_HOME)
       let s:config_dir = expand('~/.config/vim')
-      set runtimepath=~/.config/vim,$VIMRUNTIME,~/.config/vim/after
     else
       let s:config_dir = expand($XDG_CONFIG_HOME . '/vim')
-      set runtimepath=$XDG_CONFIG_HOME/vim,$VIMRUNTIME,$XDG_CONFIG_HOME/vim/after
     endif
 
     if empty($XDG_DATA_HOME)
@@ -44,6 +41,8 @@ else
     endif
 
   endif
+
+  exe 'set runtimepath=' . s:config_dir . ',$VIMRUNTIME,' . s:config_dir . '/after'
 
 endif
 
