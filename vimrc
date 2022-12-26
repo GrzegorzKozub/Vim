@@ -129,6 +129,7 @@ set laststatus=2
 set lazyredraw
 set listchars=tab:→\ ,eol:¬,trail:·
 set mouse=a
+set mousemodel=extend
 set nojoinspaces
 set nolangremap
 set noshowmode
