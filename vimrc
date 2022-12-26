@@ -289,7 +289,7 @@ endfunction
       augroup END
 
     else
-      let $FZF_DEFAULT_OPTS = '--color bg:-1,bg+:-1,border:8,fg:8,fg+:7,header:2,hl:1,hl+:1,info:-1,marker:7,pointer:7,prompt:12'
+      let $FZF_DEFAULT_OPTS = '--color bg:-1,bg+:-1,border:8,fg:8,fg+:7,header:2,hl:3,hl+:3,info:-1,marker:7,pointer:7,prompt:12'
     endif
 
   endif
