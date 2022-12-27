@@ -287,6 +287,7 @@ endfunction
       augroup SetFzfDefaultsWhenColorSchemeChanges
         autocmd!
         autocmd ColorScheme * call s:set_fzf_defaults()
+        autocmd OptionSet background call s:set_fzf_defaults()
       augroup END
 
     else
@@ -438,6 +439,7 @@ endfunction
 
     function! s:reload_lightline() abort
       if !exists('g:loaded_lightline') | return | endif
+      exe 'source ' . s:config_dir . '/plugin/lightline/colorscheme/' . substitute(g:colors_name, '_.*', '', '') . '.vim'
       let g:lightline.colorscheme = g:colors_name
       call lightline#enable()
     endfunction
@@ -445,6 +447,7 @@ endfunction
     augroup ReloadLightLineWhenColorSchemeChanges
       autocmd!
       autocmd ColorScheme * call s:reload_lightline()
+      autocmd OptionSet background call s:reload_lightline()
     augroup END
 
     " }
@@ -530,6 +533,7 @@ endfunction
 augroup HideTildeOnEmptyLinesWhenColorSchemeChanges
   autocmd!
   autocmd ColorScheme * call s:hide_tilde_on_empty_lines()
+  autocmd OptionSet background call s:hide_tilde_on_empty_lines()
 augroup END
 
 function! s:apply_background() abort
@@ -550,6 +554,7 @@ endfunction
 augroup ApplyColorSchemePatchWhenColorSchemeChanges
   autocmd!
   autocmd ColorScheme * call ApplyColorSchemePatch()
+  autocmd OptionSet background call ApplyColorSchemePatch()
 augroup END
 
 call s:apply_background()
