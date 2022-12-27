@@ -8,43 +8,31 @@ let s:windows = has('win32')
 let s:linux = !s:windows
 let s:mac = s:linux && system('uname -s') =~# 'Darwin'
 
-let s:neovim = has('nvim')
-let s:vim = !s:neovim
-
 " }
 " dirs {
 
-if s:neovim
+if s:windows
 
-  let s:config_dir = stdpath('config')
-  let s:data_dir = stdpath('data')
+  let s:config_dir = $LOCALAPPDATA . '/vim'
+  let s:data_dir = $LOCALAPPDATA . '/vim-data'
 
 else
 
-  if s:windows
-
-    let s:config_dir = $LOCALAPPDATA . '/vim'
-    let s:data_dir = $LOCALAPPDATA . '/vim-data'
-
+  if empty($XDG_CONFIG_HOME)
+    let s:config_dir = expand('~/.config/vim')
   else
-
-    if empty($XDG_CONFIG_HOME)
-      let s:config_dir = expand('~/.config/vim')
-    else
-      let s:config_dir = expand($XDG_CONFIG_HOME . '/vim')
-    endif
-
-    if empty($XDG_DATA_HOME)
-      let s:data_dir = expand('~/.local/share/vim')
-    else
-      let s:data_dir = expand($XDG_DATA_HOME . '/vim')
-    endif
-
+    let s:config_dir = expand($XDG_CONFIG_HOME . '/vim')
   endif
 
-  exe 'set runtimepath=' . s:config_dir . ',$VIMRUNTIME,' . s:config_dir . '/after'
+  if empty($XDG_DATA_HOME)
+    let s:data_dir = expand('~/.local/share/vim')
+  else
+    let s:data_dir = expand($XDG_DATA_HOME . '/vim')
+  endif
 
 endif
+
+exe 'set runtimepath=' . s:config_dir . ',$VIMRUNTIME,' . s:config_dir . '/after'
 
 let s:backup_dir = s:data_dir . '/backup'
 let s:plugins_dir = s:data_dir . '/plugins'
@@ -112,7 +100,7 @@ set autoread
 set backspace=indent,eol,start
 set backup
 set belloff=all
-set cursorline " can break in neovim per https://github.com/neovim/neovim/issues/9019
+set cursorline
 set diffopt+=algorithm:histogram,indent-heuristic,context:3
 set display+=lastline
 set expandtab
@@ -164,14 +152,8 @@ set wildoptions=tagfile
 let &backupdir = s:backup_dir
 let &undodir = s:undo_dir
 
-if s:vim
-  set ttyfast
-  let &viminfo = &viminfo . ',!,n' . s:data_dir . '/viminfo'
-endif
-
-if s:neovim && s:windows
-  let g:node_host_prog = substitute($APPDATA, '\', '/', 'g') . '/npm/node_modules/neovim/bin/cli.js'
-endif
+set ttyfast
+let &viminfo = &viminfo . ',!,n' . s:data_dir . '/viminfo'
 
 if s:linux
 
@@ -267,33 +249,7 @@ endfunction
     \ }
 
   elseif s:windows
-
-    if s:neovim
-
-      function! s:get_hi(group, key) abort
-        return matchstr(execute('hi ' . a:group), a:key . '=\zs\S*')
-      endfunction
-
-      function! s:set_fzf_defaults() abort
-        let l:comment_fg = s:get_hi('Comment', 'guifg')
-        let l:inc_search_fg = s:get_hi('IncSearch', 'guifg')
-        let l:string_fg = s:get_hi('String', 'guifg')
-        let l:normal_fg = s:get_hi('Normal', 'guifg')
-        let l:normal_bg = s:get_hi('Normal', 'guibg')
-        let l:underlined_fg = s:get_hi('Underlined', 'guifg')
-        let $FZF_DEFAULT_OPTS = '--color bg:' . l:normal_bg . ',bg+:' . l:normal_bg . ',border:' . l:comment_fg . ',fg:' . l:comment_fg . ',fg+:' . l:normal_fg . ',header:' . l:string_fg . ',hl:' . l:inc_search_fg . ',hl+:' . l:inc_search_fg . ',info:' . l:comment_fg . ',marker:' . l:normal_fg . ',pointer:' . l:normal_fg . ',prompt:' . l:underlined_fg
-      endfunction
-
-      augroup SetFzfDefaultsWhenColorSchemeChanges
-        autocmd!
-        autocmd ColorScheme * call s:set_fzf_defaults()
-        autocmd OptionSet background call s:set_fzf_defaults()
-      augroup END
-
-    else
-      let $FZF_DEFAULT_OPTS = '--color bg:-1,bg+:-1,border:8,fg:8,fg+:7,header:2,hl:3,hl+:3,info:-1,marker:7,pointer:7,prompt:12'
-    endif
-
+    let $FZF_DEFAULT_OPTS = '--color bg:-1,bg+:-1,border:8,fg:8,fg+:7,header:2,hl:3,hl+:3,info:-1,marker:7,pointer:7,prompt:12'
   endif
 
   if s:windows
@@ -506,7 +462,7 @@ endfunction
   " }
   " vimdows {
 
-  if s:vim && s:windows | try | rviminfo | catch | endtry | endif
+  if s:windows | try | rviminfo | catch | endtry | endif
 
   " }
   " vimwiki {
