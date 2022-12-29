@@ -210,7 +210,7 @@ endfunction
 
   let g:ale_set_loclist = 0
   let g:ale_set_quickfix = 1
-  let g:ale_virtualtext_cursor = 0
+  let g:ale_virtualtext_prefix = '%comment% '
 
   let g:ale_icons = { 'circle': '●', 'triangle': '▲' }
 
